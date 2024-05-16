@@ -34,7 +34,7 @@ const RegisterPage = () => {
     setLoading(true);
     try {
       console.log('formData', formData);
-      const response = await axios.post('https://alumni-backend-chi.vercel.app/alumni/register', formData);
+      const response = await axios.post('http://localhost:5000/alumni/register', formData);
 
       console.log('Registration successful!', response.data);
       toast.success("User Registered successfully!");

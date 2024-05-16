@@ -73,7 +73,7 @@ function MyVerticallyCenteredModal(props) {
     };
     console.log('eventData', eventData)
 
-    fetch("https://alumni-backend-chi.vercel.app/events/createEvent", {
+    fetch("http://localhost:5000/events/createEvent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -122,7 +122,7 @@ function MyVerticallyCenteredModal(props) {
 
       const jsonEventData = JSON.stringify(updatedEvent);
 
-      fetch(`https://alumni-backend-chi.vercel.app/events/${eventId}`, {
+      fetch(`http://localhost:5000/events/${eventId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -396,7 +396,7 @@ function Events() {
   }, []);
 
   const fetchEvents = () => {
-    fetch("https://alumni-backend-chi.vercel.app/events")
+    fetch("http://localhost:5000/events")
       .then((response) => response.json())
       .then((data) => {
         // Convert start and end dates to JavaScript Date objects
@@ -453,7 +453,7 @@ function Events() {
   const handleDeleteEvent = (e) => {
     const eventId = selectedEvent._id;
     console.log("id", eventId);
-    fetch(`https://alumni-backend-chi.vercel.app/events/${eventId}`, {
+    fetch(`http://localhost:5000/events/${eventId}`, {
       method: 'DELETE',
     })
       .then(() => {

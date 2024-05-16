@@ -47,7 +47,7 @@ const Donations = () => {
     }
     try {
       const response = await axios.get(
-        `https://alumni-backend-chi.vercel.app/donations?page=${page}&size=${LIMIT}`
+        `http://localhost:5000/donations?page=${page}&size=${LIMIT}`
       );
       const postsData = response.data.records;
       setDonations((prevItems) => [...prevItems, ...postsData]);
@@ -72,7 +72,7 @@ const Donations = () => {
   const getUserDonations = async () => {
     try {
       const response = await axios.get(
-        `https://alumni-backend-chi.vercel.app/donations/user/${profile._id}`
+        `http://localhost:5000/donations/user/${profile._id}`
       );
       setUserDonations(response.data.donations);
     } catch (error) {

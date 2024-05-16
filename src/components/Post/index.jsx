@@ -83,7 +83,7 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`https://alumni-backend-chi.vercel.app/posts/${postId}/comments`);
+      const response = await axios.get(`http://localhost:5000/posts/${postId}/comments`);
       const fetchedComments = response.data.comments;
       setComments(fetchedComments);
     } catch (error) {
@@ -97,7 +97,7 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
     try {
 
       const response = await axios.patch(
-        `https://alumni-backend-chi.vercel.app/posts/${postId}/likes`,
+        `http://localhost:5000/posts/${postId}/likes`,
         {
           userId: loggedInUserId,
           userName: username,
@@ -118,7 +118,6 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
 
 
   const handleDeletePost = async (userId) => {
-<<<<<<< HEAD
     if (userId === profile._id) {
       try {
         await axios.delete(`http://localhost:5000/${entityType}/${postId}`);
@@ -126,14 +125,6 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
       } catch (error) {
         console.error('Error deleting post:', error);
       }
-=======
-    if( userId === profile._id){
-    try {
-      await axios.delete(`https://alumni-backend-chi.vercel.app/${entityType}/${postId}`);
-      onDeletePost(postId); 
-    } catch (error) {
-      console.error('Error deleting post:', error);
->>>>>>> a1050d42ea873636c54120bf46877e0dab6406ef
     }
     else {
       console.log("Cannot Delete")

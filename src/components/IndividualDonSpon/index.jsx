@@ -24,7 +24,7 @@ const IndividualDonSpon = () => {
     useEffect(() => {
         setIsLoading(true); // Set loading to true while fetching data
         if (location.pathname.includes('/sponsorships')) {
-            fetch(`https://alumni-backend-chi.vercel.app/sponsorships/${_id}`)
+            fetch(`http://localhost:5000/sponsorships/${_id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setDonations([data]);
@@ -36,7 +36,7 @@ const IndividualDonSpon = () => {
                 });
         }
         if (location.pathname.includes('/donations')) {
-            fetch(`https://alumni-backend-chi.vercel.app/donations/${_id}`)
+            fetch(`http://localhost:5000/donations/${_id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setDonations([data]);

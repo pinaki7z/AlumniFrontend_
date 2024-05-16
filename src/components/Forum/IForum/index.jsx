@@ -28,7 +28,7 @@ const IForum = () => {
 
   const getRequest = async () => {
     try {
-      const response = await axios.get(`https://alumni-backend-chi.vercel.app/groups/requests/req`);
+      const response = await axios.get(`http://localhost:5000/groups/requests/req`);
       setNotificationList(response.data);
     } catch (error) {
       console.error("Error fetching request:", error);
@@ -53,7 +53,7 @@ const IForum = () => {
 
   const refreshComments = async () => {
     try {
-      const response = await axios.get(`https://alumni-backend-chi.vercel.app/forums/${id}`);
+      const response = await axios.get(`http://localhost:5000/forums/${id}`);
       setForum(response.data);
     } catch (error) {
       console.error('Error fetching forum data:', error);
@@ -62,7 +62,7 @@ const IForum = () => {
 
   const getForumMembers = async () => {
     try {
-      const response = await axios.get(`https://alumni-backend-chi.vercel.app/forums/${id}/members`);
+      const response = await axios.get(`http://localhost:5000/forums/${id}/members`);
       setMembers(response.data.members);
     } catch (error) {
       console.error('Error fetching forum members:', error);
@@ -93,7 +93,7 @@ const IForum = () => {
 
   const handleDeletePost = async (forumId) => {
     try {
-      await axios.delete(`https://alumni-backend-chi.vercel.app/forums/${forumId}`);
+      await axios.delete(`http://localhost:5000/forums/${forumId}`);
       toast.success('Deleted successfully!');
       navigateTo('/forums');
     } catch (error) {
@@ -113,7 +113,7 @@ const IForum = () => {
     console.log('body', body);
     setRequestStatus('Loading...');
     try {
-      const response = await axios.post(`https://alumni-backend-chi.vercel.app/forums/createRequest`, body);
+      const response = await axios.post(`http://localhost:5000/forums/createRequest`, body);
       console.log('body', response.data);
       if (response.data.requested === true) setRequestStatus('Requested');
       else setRequestStatus('Request');

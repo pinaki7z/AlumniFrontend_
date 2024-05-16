@@ -28,7 +28,7 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
 
   const getRequest = async () => {
     try {
-      const response = await axios.get(`https://alumni-backend-chi.vercel.app/groups/requests/req`);
+      const response = await axios.get(`http://localhost:5000/groups/requests/req`);
       setNotificationList(response.data);
     } catch (error) {
       console.error("Error fetching request:", error);
@@ -126,7 +126,6 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
       
       setRequestStatus('Loading...');
       try {
-<<<<<<< HEAD
         const requestedUserName = `${firstName} ${lastName}`;
         const body = {
           ownerId,
@@ -136,9 +135,6 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
           requestedUserName
         };
         const response = await axios.post(`http://localhost:5000/groups/createRequest`, body);
-=======
-        const response = await axios.post(`https://alumni-backend-chi.vercel.app/groups/createRequest`, body);
->>>>>>> a1050d42ea873636c54120bf46877e0dab6406ef
         console.log('body', response.data);
         if (response.data.requested === true) setRequestStatus('Requested');
         else setRequestStatus('Request');
@@ -152,7 +148,7 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
       console.log('adding member', groupId)
       //setLoading(true)
       try {
-        const response = await axios.put(`https://alumni-backend-chi.vercel.app/groups/members/${groupId}`, {
+        const response = await axios.put(`http://localhost:5000/groups/members/${groupId}`, {
           userId: profile._id,
         });
 

@@ -30,7 +30,7 @@ const IndividualGroup = () => {
     const getGroup = async () => {
         try {
             const response = await axios.get(
-                `https://alumni-backend-chi.vercel.app/groups/${_id}`
+                `http://localhost:5000/groups/${_id}`
             );
             setGroup([response.data])
         } catch (error) {

@@ -191,20 +191,6 @@ const IntJobs = (props) => {
                     for (const locationKey in formData.locationType) {
                         formDataToSend.append(`locationType[${locationKey}]`, formData.locationType[locationKey]);
                     }
-<<<<<<< HEAD
-=======
-                }
-                console.log('formData', formDataToSend)
-                const response = await fetch('https://alumni-backend-chi.vercel.app/jobs/create', {
-                    method: 'POST',
-                    body: formDataToSend,
-                });
-                if (response.ok) {
-                    console.log('Data saved successfully');
-                    const successMessage = formData.type === 'Internship' ? 'The internship post is being validated by the admin' : 'The job post is being validated by the admin';
-                    toast.success(successMessage);
-                    props.onHide();
->>>>>>> a1050d42ea873636c54120bf46877e0dab6406ef
                 } else {
                     formDataToSend.append(key, formData[key]);
                 }

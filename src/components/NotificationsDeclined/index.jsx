@@ -22,11 +22,11 @@ export const NotificationsDeclined = () => {
     try {
       let url = '';
       if (type === 'forum') {
-        url = `https://alumni-backend-chi.vercel.app/forums/members/${groupId}`;
+        url = `http://localhost:5000/forums/members/${groupId}`;
       } else if (type === 'group') {
-        url = `https://alumni-backend-chi.vercel.app/groups/members/${groupId}`;
+        url = `http://localhost:5000/groups/members/${groupId}`;
       } else if (type === 'ID') {
-        url = `https://alumni-backend-chi.vercel.app/alumni/alumni/validateId`;
+        url = `http://localhost:5000/alumni/alumni/validateId`;
       } else {
         throw new Error('Invalid type provided');
       }
@@ -53,7 +53,7 @@ export const NotificationsDeclined = () => {
   const handleDeleteNotification = async (notificationId) => {
     console.log('notificationId for delete:', notificationId);
     try {
-      const response = await axios.delete("https://alumni-backend-chi.vercel.app/alumni/alumni/deleteNotification", {
+      const response = await axios.delete("http://localhost:5000/alumni/alumni/deleteNotification", {
         data: { notificationId }
       });
       console.log(response.data);
@@ -67,7 +67,7 @@ export const NotificationsDeclined = () => {
   const getRequest = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://alumni-backend-chi.vercel.app/groups/requests/req`);
+      const response = await axios.get(`http://localhost:5000/groups/requests/req`);
       const filteredData = response.data.filter(notification => notification.status === true);
       setNotificationList(filteredData);
       setLoading(false);
