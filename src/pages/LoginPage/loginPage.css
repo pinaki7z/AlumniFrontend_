@@ -1,0 +1,720 @@
+.design-element {
+    align-self: stretch;
+    width: 92px;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--background-medium);
+  }
+  .logo {
+    margin: 0;
+    position: relative;
+    font-size: inherit;
+    font-weight: 700;
+    font-family: inherit;
+    display: inline-block;
+    min-width: 127px;
+  }
+  .logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 19px 0 0;
+  }
+  .content-area,
+  .main-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .content-area {
+    align-self: stretch;
+    justify-content: flex-start;
+    gap: 34px;
+  }
+  .main-container {
+    width: 1128px;
+    height: 92px;
+    justify-content: center;
+    padding: 0 0 0 1px;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .login-panel-child,
+  .welcome-message-child {
+    position: relative;
+    display: none;
+    max-width: 100%;
+  }
+  .login-panel-child {
+    align-self: stretch;
+    width: 1128px;
+    border-radius: var(--br-5xl);
+    background-color: var(--background-light);
+  }
+  .welcome-message-child {
+    width: 552px;
+    height: 799px;
+    border-radius: var(--br-xs) var(--br-5xl) var(--br-5xl) var(--br-xs);
+    background-color: var(--background-medium);
+  }
+  .rediscover-reconnect-reignite,
+  .your-alumni-journey {
+    margin: 0;
+    position: relative;
+    font-family: inherit;
+    z-index: 2;
+  }
+  .rediscover-reconnect-reignite {
+    align-self: stretch;
+    font-size: inherit;
+    line-height: 108.4%;
+    font-weight: 700;
+    color: #F8F8FF;
+  }
+  .your-alumni-journey {
+    font-size: 30px;
+    font-weight: 400;
+    display: inline-block;
+    max-width: 100%;
+    color: #F8F8FF;
+    
+  }
+  .login-fields,
+  .welcome-message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  .welcome-message {
+    width: 552px;
+    border-radius: var(--br-xs) var(--br-5xl) var(--br-5xl) var(--br-xs);
+    background-color:#136175;
+
+    padding: var(--padding-265xl) 18px var(--padding-265xl) var(--padding-21xl);
+    gap: 12px;
+    min-width: 552px;
+    z-index: 1;
+  }
+  .login-fields {
+    width: 456px;
+    padding: 0 0 62px;
+    min-width: 456px;
+    min-height: 729px;
+  }
+  .landing-page-1,
+  .login-panel {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    color: #3A3A3A;
+    font-family: var(--body);
+  }
+  .login-panel {
+    width: 1128px;
+    border-radius: var(--br-5xl);
+    background-color: var(--background-light);
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 24px;
+    max-width: 100%;
+    font-size: 56px;
+  }
+  .landing-page-1 {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px var(--padding-xl) 69px;
+    box-sizing: border-box;
+    gap: 32px;
+    background-image: url(/src/images/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    line-height: normal;
+    letter-spacing: normal;
+    font-size: 44px;
+  }
+  @media screen and (max-width: 1025px) {
+    .login-fields,
+    .welcome-message {
+      flex: 1;
+    }
+    .login-panel {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  @media screen and (max-width: 975px) {
+    .logo {
+      font-size: 35px;
+    }
+    .rediscover-reconnect-reignite {
+      font-size: 45px;
+      line-height: 49px;
+    }
+    .your-alumni-journey {
+      font-size: 24px;
+    }
+    .welcome-message {
+      padding-top: var(--padding-166xl);
+      padding-bottom: var(--padding-166xl);
+      box-sizing: border-box;
+    }
+    .login-fields {
+      padding-bottom: var(--padding-21xl);
+      box-sizing: border-box;
+    }
+  }
+  @media screen and (max-width: 725px) {
+    .login-fields,
+    .welcome-message {
+      min-width: 100%;
+    }
+    .landing-page-1 {
+      gap: var(--gap-base);
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .logo {
+      font-size: var(--font-size-7xl);
+    }
+    .content-area {
+      gap: 17px;
+    }
+    .rediscover-reconnect-reignite {
+      font-size: 34px;
+      line-height: 36px;
+    }
+    .your-alumni-journey {
+      font-size: var(--input-text-title-size);
+    }
+    .welcome-message {
+      padding-top: var(--padding-101xl);
+      padding-bottom: var(--padding-101xl);
+      box-sizing: border-box;
+    }
+  }
+  
+  .welcome-back {
+    margin: 0;
+    position: relative;
+    font-size: var(--font-size-13xl);
+    font-weight: 400;
+    font-family: var(--body);
+    color: #3A3A3A;
+    text-align: left;
+    z-index: 1;
+  }
+  .bhu1 {
+    font-size: var(--font-size-49xl);
+  }
+  .alumni-association1,
+  .b,
+  .bhu {
+    font-family: var(--body);
+  }
+  .alumni-association1 {
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .alumni-association {
+    font-size: var(--font-size-17xl);
+  }
+  .bhu-alumni-association-container {
+    height: 163px;
+    flex: 1;
+    position: relative;
+    color: #3A3A3A;
+    text-align: left;
+    display: inline-block;
+    z-index: 1;
+  }
+  .university-affiliation {
+    width: 264px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-mini);
+    box-sizing: border-box;
+  }
+  .email {
+    position: relative;
+    font-size: var(--input-text-title-size);
+    line-height: 140%;
+    font-weight: 500;
+    font-family: var(--body);
+    color: #3A3A3A;
+    text-align: left;
+    display: inline-block;
+    min-width: 46px;
+    z-index: 1;
+  }
+  .selected-shape {
+    height: 54px;
+    width: 462px;
+    position: relative;
+    border-radius: var(--br-9xs);
+    border: 3px solid var(--outline-box);
+    box-sizing: border-box;
+    display: none;
+    max-width: 100%;
+  }
+  .exclamation-icon {
+    height: 13px;
+    width: 13px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: none;
+  }
+  .message1 {
+    align-self: stretch;
+    position: relative;
+    font-size: var(--label-size);
+    line-height: 120%;
+    font-family: var(--body);
+    color: var(--black-60);
+    text-align: left;
+  }
+  .message {
+    height: 14px;
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-base) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-10xs);
+  }
+  .email-mail-icon {
+    height: 18px;
+    width: 18px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .icon-left {
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-5xs) 0 0;
+  }
+  .email-address,
+  .indicator {
+    height: 22px;
+    position: relative;
+  }
+  .indicator {
+    width: 1px;
+    border-radius: var(--br-12xs);
+    background-color: var(--black1);
+    display: none;
+  }
+  .email-address {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    font-family: var(--body);
+    font-size: var(--body-size);
+    background-color: transparent;
+    line-height: 140%;
+    color: var(--black-60);
+    text-align: left;
+    display: inline-block;
+    padding: 0;
+  }
+  .indicator-right,
+  .spacer {
+    height: 22px;
+    position: relative;
+    border-radius: var(--br-12xs);
+  }
+  .indicator-right {
+    width: 1px;
+    background-color: var(--black1);
+    display: none;
+  }
+  .spacer {
+    flex: 1;
+    min-width: 207px;
+  }
+  .arrow-down-icon {
+    height: 18px;
+    width: 18px;
+    position: relative;
+    display: none;
+  }
+  .account-details,
+  .email1,
+  .field {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .field {
+    flex: 1;
+    border-radius: var(--br-9xs);
+    border: 1px solid var(--outline-box);
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-direction: row;
+    padding: var(--padding-2xs) var(--padding-mini);
+    row-gap: 20px;
+  }
+  .account-details,
+  .email1 {
+    align-self: stretch;
+  }
+  .email1 {
+    flex-direction: row;
+    z-index: 1;
+  }
+  .account-details {
+    flex-direction: column;
+    gap: var(--gap-5xs);
+  }
+  .password {
+    position: relative;
+    font-size: var(--input-text-title-size);
+    line-height: 140%;
+    font-weight: 500;
+    font-family: var(--body);
+    color: #3A3A3A;
+    text-align: left;
+    display: inline-block;
+    min-width: 85px;
+    z-index: 1;
+  }
+  .selected-shape1 {
+    height: 54px;
+    width: 462px;
+    position: relative;
+    border-radius: var(--br-9xs);
+    border: 3px solid var(--outline-box);
+    box-sizing: border-box;
+    display: none;
+    max-width: 100%;
+  }
+  .exclamation-icon1 {
+    height: 13px;
+    width: 13px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: none;
+  }
+  .message3 {
+    align-self: stretch;
+    position: relative;
+    font-size: var(--label-size);
+    line-height: 120%;
+    font-family: var(--body);
+    color: var(--black-60);
+    text-align: left;
+  }
+  .message2 {
+    height: 14px;
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-base) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-10xs);
+  }
+  .email-mail-icon1 {
+    height: 18px;
+    width: 18px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .icon-left1 {
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-5xs) 0 0;
+  }
+  .email-address1,
+  .indicator1 {
+    height: 22px;
+    position: relative;
+  }
+  .indicator1 {
+    width: 1px;
+    border-radius: var(--br-12xs);
+    background-color: var(--black1);
+    display: none;
+  }
+  .email-address1 {
+    width: 74px;
+    border: 0;
+    outline: 0;
+    font-family: var(--body);
+    font-size: var(--body-size);
+    background-color: transparent;
+    line-height: 140%;
+    color: var(--black-60);
+    text-align: left;
+    display: inline-block;
+    padding: 0;
+  }
+  .indicator-right1,
+  .spacer1 {
+    height: 22px;
+    position: relative;
+    border-radius: var(--br-12xs);
+  }
+  .indicator-right1 {
+    width: 1px;
+    background-color: var(--black1);
+    display: none;
+  }
+  .spacer1 {
+    flex: 1;
+    min-width: 227px;
+    max-width: 100%;
+  }
+  .arrow-down-icon1 {
+    height: 18px;
+    width: 18px;
+    position: relative;
+    display: none;
+  }
+  .field1 {
+    flex: 1;
+    border-radius: var(--br-9xs);
+    border: 1px solid var(--outline-box);
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-2xs) var(--padding-mini);
+    max-width: 100%;
+    row-gap: 20px;
+  }
+  .input1,
+  .password-visible-icon {
+    position: absolute;
+    max-width: 100%;
+  }
+  .input1 {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .password-visible-icon {
+    height: 50%;
+    width: 5.26%;
+    top: 25%;
+    right: 3.51%;
+    bottom: 25%;
+    left: 91.23%;
+    overflow: hidden;
+    max-height: 100%;
+    z-index: 1;
+  }
+  .input {
+    align-self: stretch;
+    height: 48px;
+    position: relative;
+    max-width: 100%;
+    z-index: 1;
+  }
+  .union-icon {
+    width: 9.9px;
+    height: 7.8px;
+    position: relative;
+  }
+  .checkmark,
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkmark {
+    width: 16px;
+    border: 1px solid var(--outline-box);
+    box-sizing: border-box;
+    flex-direction: column;
+    padding: var(--padding-10xs) var(--padding-11xs);
+    height: 16px;
+  }
+  .controls {
+    flex-direction: row;
+    padding: var(--padding-11xs);
+  }
+  .remember-this-device1 {
+    position: relative;
+    font-size: var(--font-size-sm);
+    line-height: 20px;
+    font-family: var(--body);
+    color: var(--text-grey);
+    text-align: left;
+  }
+  .remember-this-device {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-5xs);
+  }
+  .forgot-password {
+    position: relative;
+    font-size: var(--font-size-sm);
+    line-height: 20px;
+    font-family: var(--body);
+    color: #3A3A3A;
+    text-align: left;
+    display: inline-block;
+    min-width: 119px;
+  }
+  .remember-this-device-forgot {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+    z-index: 1;
+  }
+  .account-details-parent,
+  .input-area {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-5xs);
+    max-width: 100%;
+  }
+  .account-details-parent {
+    padding: 0 0 var(--padding-9xs);
+    box-sizing: border-box;
+    gap: var(--gap-base);
+  }
+  .button1 {
+    position: relative;
+    font-size: var(--font-size-xl);
+    letter-spacing: 0.5px;
+    line-height: 100%;
+    font-weight: 500;
+    font-family: var(--body);
+    color: #3A3A3A;
+    text-align: left;
+    display: inline-block;
+    min-width: 56px;
+  }
+  .button {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-sm) var(--padding-xl);
+    background-color: var(--background-dark);
+    align-self: stretch;
+    border-radius: var(--br-5xs);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 1;
+  }
+  .button:hover {
+    background-color: var(--color-gray-100);
+  }
+  .dont-have-an,
+  .register {
+    position: relative;
+    font-size: var(--font-size-sm);
+    line-height: 20px;
+    font-family: var(--body);
+    color: var(--text-grey);
+    text-align: left;
+    z-index: 1;
+  }
+  .register {
+    color: #3A3A3A;
+    display: inline-block;
+    min-width: 55px;
+  }
+  .signup-link,
+  .signup-link-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .signup-link {
+    justify-content: flex-start;
+    gap: var(--gap-9xs);
+  }
+  .signup-link-wrapper {
+    align-self: stretch;
+    justify-content: center;
+    padding: 0 var(--padding-xl);
+  }
+  .action-buttons,
+  .credentials-input {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-5xs);
+  }
+  .credentials-input {
+    margin: 0;
+    gap: var(--gap-33xl);
+    max-width: 100%;
+  }
+  @media screen and (max-width: 975px) {
+    .welcome-back {
+      font-size: var(--font-size-7xl);
+    }
+    .bhu-alumni-association-container {
+      font-size: var(--font-size-10xl);
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .welcome-back {
+      font-size: var(--font-size-lgi);
+    }
+    .bhu-alumni-association-container {
+      font-size: var(--font-size-3xl);
+    }
+    .field,
+    .field1 {
+      flex-wrap: wrap;
+    }
+    .input {
+      height: auto;
+      min-height: 48;
+    }
+    .remember-this-device-forgot {
+      flex-wrap: wrap;
+    }
+    .button1 {
+      font-size: var(--body-size);
+      line-height: 16px;
+    }
+    .credentials-input {
+      gap: var(--gap-7xl);
+    }
+  }

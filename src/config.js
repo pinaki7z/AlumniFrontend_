@@ -1,0 +1,1 @@
+export const BASE_URL = 'http://alumni-backend-chi.vercel.app/'
