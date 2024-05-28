@@ -1,106 +1,76 @@
-.comment-box{
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+.comment-list {
+  list-style-type: none;
+  padding-left: 0;
 }
 
-#textCommentSection {
-    padding: 0.3rem;
-    width: 100%;
-    background-color: #f0f0f0; /* Background color */
-    border-radius: 4px; /* Rounded corners */
-    border: 1px solid #ccc; /* Border */
-    height: 44px;
-  }
-  
-  #textCommentSection textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    resize: none; /* Prevent resizing */
-    outline: none; /* Remove focus border */
-  }
-  
-  #textCommentSection textarea:focus {
-    /* Add a box-shadow when the textarea is focused */
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Optionally, you can style the textarea placeholder text */
-  #textCommentSection textarea::placeholder {
-    color: #888; /* Placeholder text color */
-  }
+.comment-list ul {
+  list-style-type: none;
+  margin-left: 20px; /* Indentation for nested comments */
+  padding-left: 20px; /* Additional padding to align with the parent comment */
+  border-left: 2px solid #6FBC94; /* Thread connector */
+  position: relative;
+}
 
-#submitCommentSection {
-  text-align: right;
-  padding: 0em 2em;
-  background-color: #174873;
+.comment-list ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10px;
+  height: 100%;
+  /* border-left: 2px solid #6FBC94; */
+}
+
+.comment {
+  position: relative;
+  padding: 10px;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+/* .comment img {
+  width: 40px;
   height: 40px;
-  font-size: small;
-  color: white;
-  margin-bottom: 20px;
-  margin-top: 15px;
- 
-  }
-  
-  #submitCommentSection textarea {
-    flex-grow: 1; /* Allow textarea to grow horizontally */
-    padding: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    resize: none; /* Prevent resizing */
-    outline: none; /* Remove focus border */
-  }
-  
-  #submitCommentSection button {
-    padding: 0.5rem 1rem; /* Padding for button */
-    background-color: #007bff; /* Button background color */
-    color: #fff; /* Button text color */
-    border: none; /* Remove button border */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Add pointer cursor */
-    transition: background-color 0.2s ease; /* Smooth transition on hover */
-  
-    /* Hover state */
-    &:hover {
-      background-color: #0056b3;
-    }
-  }
-  
-  /* Optionally, you can style the button as a primary action button to make it stand out more */
-  #submitCommentSection button.primary {
-    background-color: #28a745; /* Primary button background color */
-  }
-  
-  /* Optionally, you can style the button as a secondary action button */
-  #submitCommentSection button.secondary {
-    background-color: #dc3545; /* Secondary button background color */
-  }
-  .comment-buttons{
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-    border-radius: 25%;
+  border-radius: 50%;
+} */
 
-  }
-  .comment-buttons button{
-    border-radius: 10px;
-    font-size: 12px;
-    font-style: italic;
-    font-family: sans-serif;
-    margin: 10px 0px;
-    color: #174873;
-    border: #888 solid 1px;
-  }
-  .comment-list{
-    list-style-type: none;
-    
-  }
-  .reply-form textarea:hover{
-    border: none;
+.comment p {
+  margin: 0px;
+  padding: 10px;
+  border-radius: 10px;
+}
 
+.comment-menu {
+  position: relative;
+}
+
+.comment-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1em;
+  border-radius: 25%;
+}
+
+.comment-buttons button {
+  
+  font-size: 18px;
+  background-color: white;
+  font-family: sans-serif;
+  margin: 10px 0px;
+  border: none
+}
+.comment-buttons button:hover {
+  
+  text-decoration: underline;
+  
+  
+}
+
+.reply-form textarea:hover {
+  border: none;
+}
+
+.comment-input:focus {
+  border: none;
+  border-bottom: 2px solid #6FBC94;
+  outline: none;
 }

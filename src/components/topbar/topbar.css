@@ -1,24 +1,23 @@
 .topBar {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); */
   height: 100%;
-  display: grid;
-  grid-template-columns: 1.4fr 2.7fr 0.5fr; /* Define 3 columns with equal width */
-  gap: 10px; /* Adjust the gap between columns as needed */
-  align-items: center; /* Vertically center the items within the grid */
-  background-color: #1e2321; /* Background color for the entire topBar */
+  display: flex;
+  align-items: center;
+  background-color: #E9F5EF; 
   color: white;
-  width: 78%;
-  margin-right: 130px;
+  width: 94%;
+  justify-content: space-between;
+  /* margin-right: 130px; */
 }
 .top-bar {
-  background-color: #1e2321;
+  background-color: #E9F5EF;
   display: flex;
   justify-content: center;
   position: sticky;
   top: 0px;
   z-index: 3;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* .search {
@@ -28,9 +27,13 @@
 .search input {
   width: 80%;
   border-radius: 10px;
-  color: #ffffff !important;
-  background: #0f1110 !important;
+  color: green !important;
+  background: #E9F5EF;
   padding-left: 15px;
+}
+
+.search input::placeholder {
+  color: #6FBC94;
 }
 
 .top {
@@ -40,7 +43,7 @@
 
 }
 .top button {
-  background-color: #174873;
+  background-color: #E9F5EF;
   color: white;
   display: flex;
   align-items: center;
@@ -56,6 +59,7 @@
   align-items: center;
   justify-content: space-evenly;
   position: relative;
+  width: 33%;
 }
 .profile-menu {
   position: relative;

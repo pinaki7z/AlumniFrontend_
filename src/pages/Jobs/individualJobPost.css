@@ -10,10 +10,10 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 16px;
+    margin-bottom: 30px;
     background-color: #fff;
      /* Adjust the width as needed */
-    max-width: 600px; /* Set a maximum width if desired */
+    /* max-width: 600px;  */
     height: 90vh;
     display: flex;
     flex-direction: column;

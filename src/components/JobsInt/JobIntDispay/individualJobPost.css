@@ -14,7 +14,7 @@
     margin-bottom: 16px;
     background-color: #fff;
      /* Adjust the width as needed */
-    max-width: 600px; /* Set a maximum width if desired */
+    /* max-width: 600px;  */
     display: flex;
     flex-direction: column;
     align-items: center;

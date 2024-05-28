@@ -134,7 +134,7 @@ const TopBar = ({ handleLogout }) => {
         <>
             <div className="top-bar">
                 <div className="topBar">
-                    <div className='top'>
+                    {/* <div className='top'>
                         <img src={logo} alt="io" width='150px' height='40px' />
                         <div>
                             <a href="/">
@@ -172,25 +172,47 @@ const TopBar = ({ handleLogout }) => {
                                 <button onClick={() => setShowPopover(!showPopover)} style={{ backgroundColor: '#174873' }}><FaPlus />Create</button>
                             </OverlayTrigger>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="search" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                        <form onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '100%' }}>
-                            <input type="search" name="search" id="search" placeholder='Search for people,forums and groups' value={searchText} onChange={handleChange} />
-                            <button type='submit' style={{ backgroundColor: '#1e2321', display: 'flex', padding: '5px', color: 'white' }}>
-                                {searchLoading ? (
-                                   
-                                    <l-line-spinner
-                                        size="15"
-                                        stroke="3"
-                                        speed="1"
-                                        color="white"
-                                    ></l-line-spinner>
-                                ) : (
-                                    <IoSearchSharp style={{ cursor: 'pointer', color: 'white' }} />
-                                )}
-                            </button>
-
+                    <div className="search" style={{ display: 'flex', width: '67%'}}>
+                        <form onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        <div style={{ position: 'relative', width: '100%' }}>
+                <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Search for people, forums and groups"
+                    value={searchText}
+                    onChange={handleChange}
+                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175' }}
+                />
+                <button
+                    type="submit"
+                    style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        backgroundColor: '#E9F5EF',
+                        border: 'none',
+                        padding: '5px',
+                        color: 'white',
+                        cursor: 'pointer'
+                    }}
+                >
+                    {searchLoading ? (
+                        <l-line-spinner
+                            size="15"
+                            stroke="3"
+                            speed="1"
+                            color="white"
+                        ></l-line-spinner>
+                    ) : (
+                        <IoSearchSharp style={{ color: '#136175',width: '25px',height: '25px' }} />
+                    )}
+                </button>
+            </div>
+                            
                         </form>
                     </div>
                     <div className="profile-list">
@@ -204,7 +226,7 @@ const TopBar = ({ handleLogout }) => {
                                 No New Messages
                             </div>
                         )} <div ref={notificationsOptionsRef}>
-                            <FaBell style={{ cursor: 'pointer' }} onClick={() => {
+                            <FaBell style={{ cursor: 'pointer',color: '#136175' }} onClick={() => {
                                 setShowProfileOptions(false);
                                 setShowMessages(false);
                                 setShowNotifications(true);
@@ -216,12 +238,15 @@ const TopBar = ({ handleLogout }) => {
                                 <Notifications />
                             </div>
                         )}
+                        <div style={{display: 'flex', alignItems: 'center', gap: '1vw'}}>
                         <img src={profile.profilePicture || picture} alt='Profile' width='40px' height='40px' ref={profileOptionsRef} style={{ borderRadius: '50%', cursor: 'pointer' }} onClick={() => {
                             console.log('clicked image')
                             setShowMessages(false);
                             setShowNotifications(false);
                             setShowProfileOptions(!showProfileOptions);
                         }} />
+                        <p style={{marginBottom: '0px', color: '#3A3A3A',fontWeight: '600', fontSize: '20px', lineHeight: '24.2px'}}>{profile.firstName}</p>
+                        </div>
                         {showProfileOptions && (
                             <ul className="profile-options" >
                                 <a href="/profile" style={{ textDecoration: 'none', color: 'black' }}><li>Profile</li></a>

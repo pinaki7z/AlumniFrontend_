@@ -153,7 +153,7 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
   return (
     <div className='feed'>
       {showCreatePost && <CreatePost1 photoUrl={photoUrl} username={username} onNewPost={handleNewPost} entityType={entityType} />}
-      <div className='infiniteScroll' ref={scrollContainerRef} style={{ height: "120vh", marginTop: '10px', overflowY: "auto", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div className='infiniteScroll' ref={scrollContainerRef} style={{ height: "120vh", marginTop: '10px', overflowY: "auto", width: "100%", display: "flex", flexDirection: "column", alignItems: "center",paddingTop: '27px' }}>
         {posts.map((post, index) => {
           if (post.type === 'Post' && (post.groupID === _id)) {
             return (
@@ -161,9 +161,10 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
                 <Post
                   userId={post.userId}
                   postId={post._id}
-                  username={post.firstName}
+                  username={`${post.firstName} ${post.lastName}`}
                   text={post.description}
                   image={post.picturePath}
+                  profilePicture={post.profilePicture}
                   video={post.videoPath}
                   timestamp={post.createdAt}
                   likes={post.likes}

@@ -107,7 +107,6 @@ const Profilecard = ({ member, name, addButton, groupMembers, owner, deleteButto
           setIsAdded(false);
           setLoading(false);
         }
-
         console.log('User added/removed to/from the group:', isUserAdded);
       } else {
 

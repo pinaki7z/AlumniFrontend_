@@ -11,8 +11,15 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useParams } from "react-router-dom";
+import deleteButton from "../../images/delete.svg";
+import commentIcon from "../../images/comment.svg";
+import share from "../../images/share.svg";
+import liked from "../../images/liked.svg";
+import unliked from "../../images/unliked.svg";
+import postDelete from "../../images/post-delete.svg"
 
-function Post({ userId, postId, profilePic, username, text, timestamp, image, video, likes, handleLikes, handleComments, className, onDeletePost, entityType, showDeleteButton,groupID }) {
+function Post({ userId, postId, profilePicture, username, text, timestamp, image, video, likes, handleLikes, handleComments, className, onDeletePost, entityType, showDeleteButton, groupID }) {
+  console.log('video pathh',video)
 
 
   const PrevButton = ({ onClick }) => {
@@ -39,7 +46,7 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [cookie, setCookie] = useCookies(['access_token']);
- 
+
 
 
   const [loading, setLoading] = useState(false)
@@ -147,14 +154,15 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
     <div className={`post ${className}`}>
       {loading ? (<div> Loading...</div>) : (<>
         <div className='top'>
-          <Avatar src={profilePic} />
+          {profilePicture ? (<img src={profilePicture} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />) :
+            (<Avatar src={comment} style={{ width: '50px', height: '50px' }} />)}
           <div className='info'>
             <h4>{username}</h4>
-            <span>{formatCreatedAt(timestamp)}</span>
+            <span style={{ fontSize: '14px', fontWeight: '500', color: '#136175' }}>{formatCreatedAt(timestamp)}</span>
           </div>
           {(admin || userId === profile._id) && (
             <IconButton onClick={() => handleDeletePost(userId)} className='delete-button'>
-              <DeleteRounded />
+              <img src={postDelete} />
             </IconButton>
           )}
         </div>
@@ -171,11 +179,11 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
               </div>
             ))}
           </Slider>
-        ) : image.length === 1 ?(
-            <div>
-              <img src={image} alt={`image`} style={{width: '-webkit-fill-available'}}/>
-            </div>
-          ): null
+        ) : image.length === 1 ? (
+          <div>
+            <img src={image} alt={`image`} style={{ width: '-webkit-fill-available' }} />
+          </div>
+        ) : null
         }
 
         {video && (
@@ -198,17 +206,21 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
         {console.log('entity type1', entityType)}
         {entityType === 'posts' && (
           <div className='bottomAction'>
-            <div className='action' onClick={handleLike}>
-              <ThumbUpRounded className={`postAction ${isliked ? 'blue' : 'grey'}`} />
-              <h4>Like</h4>
+            <div className='action'>
+              <img src={commentIcon} alt='comment-icon' className={`postAction grey`} />
+              <h4>Comment</h4>
+            </div>
+            <div className='action' onClick={handleLike}>{
+              isliked ? (
+                <img src={liked} alt="" srcset="" />
+              ) : (
+                <img src={unliked} alt="" srcset="" />
+              )
+            } <h4>{isliked ? 'Liked' : 'Like'}</h4>
             </div>
 
             <div className='action'>
-              <ChatBubbleOutlineRounded className={`postAction grey`} />
-              <h4>Comment</h4>
-            </div>
-            <div className='action'>
-              <NearMeRounded className={`postAction grey`} />
+              <img src={share} alt='share-icon' className={`postAction grey`} />
               <h4>Share</h4>
             </div>
           </div>
@@ -218,22 +230,5 @@ function Post({ userId, postId, profilePic, username, text, timestamp, image, vi
   );
 }
 
-const iconList = [
-  {
-    Icon: ThumbUpRounded,
-    title: 'Like',
-    color: 'grey'
-  },
-  {
-    Icon: ChatBubbleOutlineRounded,
-    title: 'Comment',
-    color: 'grey'
-  },
-  {
-    Icon: NearMeRounded,
-    title: 'Share',
-    color: 'grey'
-  }
-];
 
 export default Post;

@@ -2,11 +2,10 @@
 @import '../../YoutubeEmbed/variable';
 
 .post {
-  background-color: $component-background;
+  background-color: #E9F5EF;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
   width: 100%;
   box-shadow: 0px 5px 7px -7px $box-shadow;
 
@@ -134,6 +133,7 @@
     transition: linear 200ms;
     cursor: pointer;
     display: flex;
+    gap: 5px;
     flex-direction: row;
     padding: 0.5rem 1rem ;
     flex: 1;
@@ -166,7 +166,7 @@
       color:green;
     }
     .grey{
-      color:grey;
+      color: white
     }
   }
 }

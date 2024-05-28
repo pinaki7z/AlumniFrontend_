@@ -38,8 +38,8 @@ const LeftSidebar = () => {
     }, []);
 
     return (
-        <div style={{ width: '20%',backgroundColor: '#136175',height: '100vh' }}>
-            <div style={{ textAlign: 'center',position: 'sticky', top: '3em'}}>
+        <div style={{ width: '20%',backgroundColor: '#136175',height: '100vh',position: 'fixed' }}>
+            <div style={{ textAlign: 'center', marginTop: '3em'}}>
                         <img src={io} alt="" width="150px" height="75px"/>
                     </div>
                 <div className='sideBar'>                    

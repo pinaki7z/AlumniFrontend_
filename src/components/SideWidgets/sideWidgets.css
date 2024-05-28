@@ -1,21 +1,25 @@
   .sideWidget-feed{
-    width: 35%;
-;
+    width: 30%;
+    padding-top: 25px; 
   } 
   
   .sideWidget-post-card {
     width: 100%;
-    max-width: 25vw; /* Adjust the maximum width as needed */
-    background-color: #fff;
+    /* max-width: 25vw;  */
+    background-color: #E9F5EF;
     border: 1px solid #e0e0e0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    height: 40vh;
+    height: auto;
     display: flex;
-    max-height: 105vh;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* max-height: 105vh; */
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin-top: 80px;
   }
   
   .sideWidget-post-header {
@@ -42,24 +46,25 @@
   
   .sideWidget2-post-card {
     width: 100%;
-    max-width: 25vw; /* Adjust the maximum width as needed */
-    background-color: #fff;
+    max-width: 25vw;
+    background-color: #E9F5EF;
     border: 1px solid #e0e0e0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 12px;
     margin-top: 19px;
-    height: 30vh;
     display: flex;
-    max-height: 105vh;
     flex-direction: column;
   }
   
   .sideWidget2-post-header {
-    padding: 10px;
+    padding: 20px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #136175;
+    color: #F8F8FF;
+    border-radius: 12px 12px 0px 0px;
   }
   
   .sideWidget2-post-header img {
@@ -75,30 +80,30 @@
   
   .online{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 25vw;
-    background-color: rgb(0 192 194 / 30%);
+    background-color: #136175;
     border: 1px solid #e0e0e0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     margin-top: 19px;
-    height:10vh;
+    height:auto;
+    padding: 20px;
   }
   .online p{
-    background: -webkit-linear-gradient(45deg, #1f75ff, #00a282 80%);
+    background: #F8F8FF;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 10px 0 0;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    font-size: 15px;
+    font-size: 20px;
     font-weight: bold;
   }
   
   .invite{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -109,19 +114,19 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     margin-top: 19px;
-    height: 30vh;
+    height: 30vh; */
+    margin-top: 19px;
   }
 
   .invite p{
     display: block;
     overflow: hidden;
-    padding: 0 15px;
     line-height: 39px;
-    font-size: 14.5px;
+    font-size: 20px;
     color: #444;
     font-weight: 600;
     background: transparent !important;
-    color: #986600 !important;
+    color: #3A3A3A;
   }
   .sideWidget-email{
     display: flex;
@@ -164,4 +169,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .sideWidget-email input::placeholder{
+    color: #6FBC94;
   }

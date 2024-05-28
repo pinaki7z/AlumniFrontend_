@@ -56,6 +56,8 @@ const Dashboard = ({ handleLogout }) => {
         }}
       >
         <LeftSidebar />
+        <div style={{marginLeft: '20%', width: '80%'}}>
+        <TopBar handleLogout={handleLogout} />
         <Routes>
 
           <Route path="/groups/*" element={<Groups />} />
@@ -73,24 +75,24 @@ const Dashboard = ({ handleLogout }) => {
               element={
                 <div
                   style={{
-                    display: 'flex',
-                    gap: '2vw',
-                    marginLeft: '40px',
-                    paddingTop: '20px',
-                    width: '80%',
+                    display: 'flex',        
+                    width: '100%',
                   }}
                 >
-                  <div style={{ width: '80%' }}>
+                  
+                  <div style={{width: '100%', gap: '2vw', display: 'flex', paddingLeft: '35px'}}>
+                  <div style={{ width: '65%' }}>
                     <SocialMediaPost showCreatePost={true} />
                   </div>
                   <SideWidgets />
+                  </div>
                 </div>
               }
             />
           )}
           <Route path="/donations/*" element={<Donations />} />
           <Route path="/sponsorships/*" element={<Sponsorships />} />
-          <Route path="/members/*" element={<div style={{ width: '60%' }}><Members showHeading={true} /></div>} />
+          <Route path="/members/*" element={<div style={{ width: '60%',marginLeft: '24%' }}><Members showHeading={true} /></div>} />
           <Route path="/members/create" element={
             <div style={{ width: '60%' }}>
               <DonSponRequest name='member' />
@@ -148,7 +150,9 @@ const Dashboard = ({ handleLogout }) => {
           }
           />
         </Routes>
+
         {/* <Chatbox /> */}
+        </div>
       </div>
     </>
   );
