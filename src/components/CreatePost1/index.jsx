@@ -225,19 +225,19 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
   };
 
   const handleCreatePoll = async (question, options) => {
+    console.log('question1',question, options);
     const pollData = {
       userId: profile._id,
-      description: input,
-      department: profile.department,
+      userName: `${profile.firstName} ${profile.lastName}`,
       profilePicture: profile.profilePicture,
-      pollQuestion: question,
-      pollOptions: options,
+      question: question,
+      options: options,
     };
-    if (_id) pollData.groupID = _id;
+    // if (_id) pollData.groupID = _id;
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/${entityType}/createPoll`,
+        `http://localhost:5000/poll/createPoll`,
         pollData,
       );
       const newPoll = await response.data;

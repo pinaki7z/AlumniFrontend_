@@ -1,11 +1,11 @@
 // PollModal.js
 import React, { useState } from 'react';
-import './pollModal.css'; // Add some styles for the modal
+import './pollModal.css'; 
 
 const PollModal = ({ show, onHide, onCreatePoll }) => {
   const [pollQuestion, setPollQuestion] = useState('');
   const [pollOptions, setPollOptions] = useState(['', '', '', '', '']);
-  const [optionCount, setOptionCount] = useState(2); // Start with 2 options
+  const [optionCount, setOptionCount] = useState(2); 
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...pollOptions];
@@ -20,8 +20,12 @@ const PollModal = ({ show, onHide, onCreatePoll }) => {
   };
 
   const handleCreatePoll = () => {
-    const validOptions = pollOptions.filter(option => option.trim() !== '');
+    const validOptions = pollOptions
+      .filter(option => option.trim() !== '')
+      .map(option => ({ option, votes: [] }));
+
     if (pollQuestion.trim() && validOptions.length >= 2) {
+      console.log('question',pollQuestion, validOptions);
       onCreatePoll(pollQuestion, validOptions);
       setPollQuestion('');
       setPollOptions(['', '', '', '', '']);

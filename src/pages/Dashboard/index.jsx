@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation,useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import LeftSidebar from "../../components/left-sidebar";
 import TopBar from "../../components/topbar";
 import SocialMediaPost from "../../components/Social-wall-post";
@@ -37,14 +37,14 @@ const Dashboard = ({ handleLogout }) => {
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get('search');
   const navigate = useNavigate();
-  const profile = useSelector((state)=> state.profile);
-  
+  const profile = useSelector((state) => state.profile);
+
   useEffect(() => {
     if (profile.accountDeleted === true || (profile.expirationDate && new Date(profile.expirationDate) < new Date())) {
       navigate("/login");
     }
   }, [profile.accountDeleted, profile.expirationDate]);
-  
+
   return (
     <>
       {/* <TopBar handleLogout={handleLogout} /> */}
@@ -56,66 +56,66 @@ const Dashboard = ({ handleLogout }) => {
         }}
       >
         <LeftSidebar />
-        <div style={{marginLeft: '20%', width: '80%'}}>
-        <TopBar handleLogout={handleLogout} />
-        <Routes>
+        <div style={{ marginLeft: '20%', width: '80%' }}>
+          <TopBar handleLogout={handleLogout} />
+          <Routes>
 
-          <Route path="/groups/*" element={<Groups />} />
-          {/* <Route path="/groups/:_id/*" element={<IndividualGroup />} /> */}
-          {searchQuery && (
-            <Route
-              path="/*"
-              element={<SearchedResults searchQuery={searchQuery} />}
-            />
-          )}
-          {/* Route for displaying <SocialMedia /> when search query is not present */}
-          {!searchQuery && (
-            <Route
-              path="/*"
-              element={
-                <div
-                  style={{
-                    display: 'flex',        
-                    width: '100%',
-                  }}
-                >
-                  
-                  <div style={{width: '100%', gap: '2vw', display: 'flex', paddingLeft: '35px'}}>
-                  <div style={{ width: '65%' }}>
-                    <SocialMediaPost showCreatePost={true} />
+            <Route path="/groups/*" element={<Groups />} />
+            {/* <Route path="/groups/:_id/*" element={<IndividualGroup />} /> */}
+            {searchQuery && (
+              <Route
+                path="/*"
+                element={<SearchedResults searchQuery={searchQuery} />}
+              />
+            )}
+            {/* Route for displaying <SocialMedia /> when search query is not present */}
+            {!searchQuery && (
+              <Route
+                path="/*"
+                element={
+                  <div
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                    }}
+                  >
+
+                    <div style={{ width: '100%', gap: '2vw', display: 'flex', paddingLeft: '35px' }}>
+                      <div style={{ width: '65%' }}>
+                        <SocialMediaPost showCreatePost={true} />
+                      </div>
+                      <SideWidgets />
+                    </div>
                   </div>
-                  <SideWidgets />
-                  </div>
-                </div>
-              }
-            />
-          )}
-          <Route path="/donations/*" element={<Donations />} />
-          <Route path="/sponsorships/*" element={<Sponsorships />} />
-          <Route path="/members/*" element={<div style={{ width: '60%',marginLeft: '24%' }}><Members showHeading={true} /></div>} />
-          <Route path="/members/create" element={
-            <div style={{ width: '60%' }}>
-              <DonSponRequest name='member' />
-            </div>
-          } />
-          <Route path="/members/:id/*" element={<Profile />} />
-          <Route path="/profile/*" element={<ProfilePage />} />
-          <Route path="/notifications/*" element={<NotificationsPage />} />
-          <Route path="/events/*" element={<Events />} />
-          {/* <Route path="/chat/*" element={<Chat />} /> */}
-          <Route path="/jobs/*" element={<Jobs />} />
-          {/* <Route path="/internships/*" element={<Internships />} /> */}
-          <Route path="/settings/*" element={<Settings />} />
-          <Route path="/jobs/:_id/:title" element={<IndividualJobPost />} />
-          <Route path="/internships/:_id/:title" element={<IndividualJobPost />} />
-          <Route path="/forums/*" element={<Forum />} />
-          <Route path="/forums/create" element={<CreateForum />} />
-          <Route path="/forums/:id/*" element={<IForum />} />
-          <Route path="/profile/:id/following" element={<Following />} />
-          <Route path="/profile/:id/followers" element={<Followers />} />
-          <Route path="/profile/workExperience" element={<WorkExperience />} />
-          <Route path="/profile/profile-settings" element={<ProfileSettings />} />
-          {/* <Route path="/socialWall/*" element={
+                }
+              />
+            )}
+            <Route path="/donations/*" element={<Donations />} />
+            <Route path="/sponsorships/*" element={<Sponsorships />} />
+            <Route path="/members/*" element={<div style={{ width: '60%', marginLeft: '24%' }}><Members showHeading={true} /></div>} />
+            <Route path="/members/create" element={
+              <div style={{ width: '60%' }}>
+                <DonSponRequest name='member' />
+              </div>
+            } />
+            <Route path="/members/:id/*" element={<Profile />} />
+            <Route path="/profile/*" element={<ProfilePage />} />
+            <Route path="/notifications/*" element={<NotificationsPage />} />
+            <Route path="/events/*" element={<Events />} />
+            {/* <Route path="/chat/*" element={<Chat />} /> */}
+            <Route path="/jobs/*" element={<Jobs />} />
+            {/* <Route path="/internships/*" element={<Internships />} /> */}
+            <Route path="/settings/*" element={<Settings />} />
+            <Route path="/jobs/:_id/:title" element={<IndividualJobPost />} />
+            <Route path="/internships/:_id/:title" element={<IndividualJobPost />} />
+            <Route path="/forums/*" element={<Forum />} />
+            <Route path="/forums/create" element={<CreateForum />} />
+            <Route path="/forums/:id/*" element={<IForum />} />
+            <Route path="/profile/:id/following" element={<Following />} />
+            <Route path="/profile/:id/followers" element={<Followers />} />
+            <Route path="/profile/workExperience" element={<WorkExperience />} />
+            <Route path="/profile/profile-settings" element={<ProfileSettings />} />
+            {/* <Route path="/socialWall/*" element={
               <div
                 style={{
                   display: "flex",
@@ -131,27 +131,28 @@ const Dashboard = ({ handleLogout }) => {
               </div>
             }
           /> */}
-          <Route path="/news/*" element={
-            <div
-              style={{
-                display: "flex",
-                gap: "2vw",
-                marginLeft: "40px",
-                paddingTop: "20px",
-                width: "55%",
-                justifyContent: 'center'
-              }}
-            >
-              <div style={{ width: "65%" }}>
-                <News />
+            <Route path="/news/*" element={
+              <div
+                style={{
+                  display: "flex",
+                  gap: "2vw",
+                  marginLeft: "40px",
+                  paddingTop: "20px",
+                  width: "55%",
+                  justifyContent: 'center'
+                }}
+              >
+                <div style={{ width: "65%" }}>
+                  <News />
+                </div>
+                {/* <SideWidgets /> */}
               </div>
-              {/* <SideWidgets /> */}
-            </div>
-          }
-          />
-        </Routes>
-
-        {/* <Chatbox /> */}
+            }
+            />
+          </Routes>
+          <div className="chatbox-container" style={{position: 'fixed', right: '0', bottom: '0', width: '300px', backgroundColor: 'white'}}>
+            <Chatbox />
+          </div>
         </div>
       </div>
     </>

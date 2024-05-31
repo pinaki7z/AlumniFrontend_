@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { DisplayNews } from '../DisplayNews';
 import { dotPulse } from 'ldrs';
 import { useParams } from 'react-router-dom';
-
+import PollDisplay from './PollDisplay';
 dotPulse.register()
 
 
@@ -197,7 +197,14 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
                 />
               </div>
             );
-          } else if (entityType === 'news') {
+          } else if (post.type === 'poll') {
+            return (
+              <div key={post._id} className="post-box">
+                <PollDisplay poll={post} />
+              </div>
+            );
+          }
+          else if (entityType === 'news') {
             return (
               <div key={post._id} style={{ width: '100%' }}>
                 <DisplayNews

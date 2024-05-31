@@ -52,6 +52,7 @@
         margin: 0;
         font-size: 20px;
         color: #3A3A3A;
+        font-weight: 600;        
       }
 
       span {
@@ -65,14 +66,17 @@
     margin: 15px 0;
 
     p {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.4;
       margin: 0;
+      font-weight: 500;
+      color: #3A3A3A;
+      font-family: 'Inter';
     }
   }
 
   .image {
-    height: 300px; // Set a fixed height for the image container
+    height: 300px; 
     overflow: hidden;
     img {
       width: 100%;
@@ -107,6 +111,7 @@
         font-size: 20px;
         margin: 0;
         color: #3A3A3A;
+        font-family: 'Inter';
       }
     }
   }
@@ -117,6 +122,17 @@
 }
 
 .infiniteScroll {
-  scrollbar-width: none;  /* Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  
+  -ms-overflow-style: none;  
+}
+
+.poll-box-container{
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #E9F5EF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
