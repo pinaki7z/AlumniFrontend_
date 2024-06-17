@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from 'react-redux';
+import baseUrl from '../../../config.js';
 
 const CreateForum = () => {
   const [newForum, setNewForum] = useState({ title: "", description: "", picture: "", type: "Public" });
@@ -33,10 +34,12 @@ const CreateForum = () => {
         picture: newForum.picture,
         description: newForum.description,
         type: newForum.type,
-        department: profile.department
+        department: profile.department,
+        userName: `${profile.firstName} ${profile.lastName}`,
+        profilePicture: profile.profilePicture
       };
 
-      const response = await axios.post('http://localhost:5000/forums/createForum', body);
+      const response = await axios.post(`${baseUrl}/forums/createForum`, body);
 
       console.log('Forum created:', response.data);
       toast.success("New Forum Created");

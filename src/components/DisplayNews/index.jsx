@@ -6,6 +6,7 @@ import PlayCircleOutlineRoundedIcon from '@mui/icons-material/PlayCircleOutlineR
 import { Avatar, TextField, IconButton, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { ThumbUpRounded, ChatBubbleOutlineRounded, NearMeRounded, DeleteRounded } from '@mui/icons-material';
+import baseUrl from "../../config";
 
 
 export const DisplayNews = ({ userId,postId,description, createdAt, picturePath, videoPath, department,onDeletePost }) => {
@@ -42,7 +43,7 @@ export const DisplayNews = ({ userId,postId,description, createdAt, picturePath,
     const handleDeletePost = async (userId) => {
         if (userId === profile._id) {
             try {
-                await axios.delete(`http://localhost:5000/news/${postId}`);
+                await axios.delete(`${baseUrl}/news/${postId}`);
                 onDeletePost(postId);
             } catch (error) {
                 console.error('Error deleting post:', error);

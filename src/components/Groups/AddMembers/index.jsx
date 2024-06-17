@@ -3,6 +3,7 @@ import PageTitle from '../../PageTitle';
 import { BsGlobe } from 'react-icons/bs';
 import Members from '../../../pages/Members';
 import { useParams } from 'react-router-dom';
+import baseUrl from '../../../config';
 
 export const AddMembers = ({type}) => {
   const [members, setMembers] = useState([]);
@@ -14,7 +15,7 @@ export const AddMembers = ({type}) => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/groups/${_id}/members`);
+        const response = await fetch(`${baseUrl}/groups/${_id}/members`);
         const data = await response.json();
         if (response.ok) {
           setMembers(data.members);
@@ -29,7 +30,7 @@ export const AddMembers = ({type}) => {
     const fetchForumMembers = async () => {
       console.log('Fetching forum members')
       try {
-        const response = await fetch(`http://localhost:5000/forums/${id}/members`);
+        const response = await fetch(`${baseUrl}/forums/${id}/members`);
         const data = await response.json();
         if (response.ok) {
           setMembers(data.members);
@@ -45,11 +46,9 @@ export const AddMembers = ({type}) => {
     else if(type === 'forums') fetchForumMembers();
     else console.log('not a group or forum');
   }, []);
-  console.log('membe', members)
-
   return (
     <div>
-      <PageTitle title="Add/Remove members" style={{ marginTop: '0px' }} icon={icon} />
+      {/* <PageTitle title="Add/Remove members" style={{ marginTop: '0px' }} icon={icon} /> */}
       <Members addButton={true} groupMembers={members} owner={owner} deleteButton={false}/>
     </div>
   )

@@ -19,7 +19,7 @@ const NotificationsPage=()=>{
     }
     return(
         <>
-        <div style={{ width: '60%', paddingTop: '20px' }}>
+        <div style={{ width: '100%', paddingTop: '20px' }}>
       <Routes>
         <Route path="/" element={<PageTitle title={title} icon={icon} />} />
         <Route path="/declined" element={<PageTitle title={title} icon={icon} />} />

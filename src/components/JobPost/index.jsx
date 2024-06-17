@@ -13,6 +13,7 @@ import { FaBriefcase } from "react-icons/fa";
 import { IoIosInformationCircle } from "react-icons/io";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { RiHomeSmileLine } from "react-icons/ri";
+import baseUrl from "../../config";
 
 const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, createdAt, picture, salaryMax, duration, jobType, questions, category, currency, attachments, appliedCandidates, searchQuery, type, locationType, company }) => {
     const profile = useSelector((state) => state.profile);
@@ -37,7 +38,7 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
     function MyVerticallyCenteredModal(props) {
         const handleArchive = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/${type + 's'}/${id}`, {
+                const response = await fetch(`${baseUrl}/${type + 's'}/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -107,7 +108,7 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
         setDeleteModalShow(false)
         try {
             console.log('id', id)
-            const response = await fetch(`http://localhost:5000/${type + 's'}/${id}`, {
+            const response = await fetch(`${baseUrl}/${type + 's'}/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -135,7 +136,7 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
                         return (
                             <img
                                 key={index}
-                                src={`http://localhost:5000/uploads/${attachment}`}
+                                src={`${baseUrl}/uploads/${attachment}`}
                                 alt=""
                                 className="src"
                             />

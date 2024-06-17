@@ -15,6 +15,7 @@ import IndividualDonSpon from '../../components/IndividualDonSpon';
 import DonSponRequest from '../../components/DonSponRequest';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import baseUrl from '../../config';
 
 
 const Sponsorships = () => {
@@ -48,7 +49,7 @@ const Sponsorships = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:5000/sponsorships?page=${page}&size=${LIMIT}`
+        `${baseUrl}/sponsorships?page=${page}&size=${LIMIT}`
       );
       const postsData = response.data.records;
       setDonations((prevItems) => [...prevItems, ...postsData]);
@@ -72,7 +73,7 @@ const Sponsorships = () => {
   const getUserSponsorships = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/sponsorships/user/${profile._id}`
+        `${baseUrl}/sponsorships/user/${profile._id}`
       );
       setUserDonations(response.data.sponsorships);
     } catch (error) {
@@ -87,7 +88,7 @@ const Sponsorships = () => {
 
 
   return (
-    <div style={{ width: '60%', height: '120vh' }}>
+    <div style={{ width: '100%', height: '120vh' }}>
       <DonSpon title={title} icon={icon} />
       <Routes>
         <Route path="/" element={<PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} name='sponsorships' create={admin}/>} />

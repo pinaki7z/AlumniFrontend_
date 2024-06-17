@@ -17,7 +17,8 @@ import { uniqBy } from "lodash";
 import { MdBlock } from "react-icons/md";
 import { toast } from "react-toastify";
 import { IoIosExpand  } from "react-icons/io";
-import ChatM from "../../../src/pages/Chat"
+import ChatM from "../../../src/pages/Chat";
+import baseUrl from '../../config';
 const Chat = () => {
   const [isProfile, setIsProfile] = useState(false);
   const [ws, setWs] = useState(null);
@@ -58,7 +59,7 @@ const Chat = () => {
 
   const fetchBlockedByUsers = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/alumni/${profile._id}/blockedByUsers`);
+      const response = await fetch(`${baseUrl}/alumni/${profile._id}/blockedByUsers`);
       if (!response.ok) {
         throw new Error('Failed to fetch blocked by users');
       }
@@ -71,7 +72,7 @@ const Chat = () => {
   };
   const fetchBlockedUsers = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/alumni/${profile._id}/blockedUsers`);
+      const response = await fetch(`${baseUrl}/alumni/${profile._id}/blockedUsers`);
       if (!response.ok) {
         throw new Error('Failed to fetch blocked by users');
       }
@@ -184,7 +185,7 @@ const Chat = () => {
 
       if (file) {
         console.log('file', file);
-        const res = await axios.get(`http://localhost:5000/messages/${selectedUserId}`, {
+        const res = await axios.get(`${baseUrl}/messages/${selectedUserId}`, {
           headers: {
             Authorization: `Bearer ${cookie.token}`,
           },
@@ -266,7 +267,7 @@ const Chat = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/alumni/all/allAlumni', {
+    axios.get(`${baseUrl}/alumni/all/allAlumni`, {
       headers: {
         Authorization: `Bearer ${cookie.token}`,
       },
@@ -288,7 +289,7 @@ const Chat = () => {
     console.log('selected user id in useEffect', selectedUserId)
     if (selectedUserId) {
 
-      axios.get(`http://localhost:5000/messages/${selectedUserId}`, {
+      axios.get(`${baseUrl}/messages/${selectedUserId}`, {
         headers: {
           Authorization: `Bearer ${cookie.token}`,
         },
@@ -323,7 +324,7 @@ const Chat = () => {
     const profileId = profile._id;
 
     setBlockLoading(true);
-    axios.put(`http://localhost:5000/alumni/${profileId}/blockUser`, { blockedUserId: userId })
+    axios.put(`${baseUrl}/alumni/${profileId}/blockUser`, { blockedUserId: userId })
       .then(response => {
         console.log('User blocked successfully');
         setShowBlockModal(false);
@@ -505,7 +506,7 @@ const [showPopup, setShowPopup] = useState(false);
                           {message.file && (
                             <div style={{ fontSize: '14px', display: 'flex', alignItems: 'center' }}>
                               <AiOutlinePaperClip />
-                              <a href={`http://localhost:5000/uploads/${message.file}`} target="_blank" rel="noopener noreferrer">{message.file}</a>
+                              <a href={`${baseUrl}/uploads/${message.file}`} target="_blank" rel="noopener noreferrer">{message.file}</a>
                             </div>
                           )
                           }

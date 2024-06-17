@@ -29,7 +29,8 @@ import Form from 'react-bootstrap/Form';
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { toast } from "react-toastify";
-import profilePicture from '../../images/profilepic.jpg'
+import profilePicture from '../../images/profilepic.jpg';
+import baseUrl from "../../config";
 
 const ProfilePage = () => {
   const [cookie, setCookie] = useCookies(["token"]);
@@ -86,7 +87,7 @@ const ProfilePage = () => {
 
       let body = JSON.stringify(updatedForms);
 
-      fetch(`http://localhost:5000/alumni/workExperience/${profile._id}`, {
+      fetch(`${baseUrl}/alumni/workExperience/${profile._id}`, {
         method: 'PUT',
         body,
         headers: {
@@ -306,7 +307,7 @@ const ProfilePage = () => {
   }
   const fetchWorkExperiences = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/alumni/workExperience/${profile._id}`, {
+      const response = await fetch(`${baseUrl}/alumni/workExperience/${profile._id}`, {
         headers: {
           'Authorization': `Bearer ${cookie.token}`
         }
@@ -369,7 +370,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div style={{ width: '60%' }}>
+      <div style={{ width: '100%' }}>
         <div
           className="ple"
           style={{

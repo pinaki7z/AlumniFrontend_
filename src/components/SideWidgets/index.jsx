@@ -22,6 +22,7 @@ import send from "../../../src/images/send.svg";
 import { updateProfile } from '../../store/profileSlice';
 import { toast } from "react-toastify";
 import { lineSpinner } from 'ldrs';
+import baseUrl from '../../config';
 
 lineSpinner.register()
 
@@ -56,7 +57,7 @@ const SideWidgets = () => {
     const fetchNotifications = async () => {
         setLoad(true);
         try {
-            const response = await axios.get(`http://localhost:5000/notifications`);
+            const response = await axios.get(`${baseUrl}/notifications`);
             const sortedNotifications = response.data.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
             setNotifications(sortedNotifications);
         } catch (error) {
@@ -80,7 +81,7 @@ const SideWidgets = () => {
         console.log("MEMBER TO FOLLOW ", memberId, firstName, lastName)
         setIsLoading(prevLoading => ({ ...prevLoading, [memberId]: true }));
         try {
-            const response = await axios.patch(`http://localhost:5000/alumni/${memberId}/follow`, {
+            const response = await axios.patch(`${baseUrl}/alumni/${memberId}/follow`, {
                 userId: profile._id,
                 requestedUserName: `${profile.firstName} ${profile.lastName}`,
                 followedUserName: `${firstName} ${lastName}`

@@ -1,5 +1,5 @@
 /* PollModal.css */
-.modal-overlay {
+.modal-overlay-poll {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +12,7 @@
     z-index: 1000;
   }
   
-  .modal-content {
+  .modal-content-poll {
     background: white;
     padding: 20px;
     border-radius: 5px;
@@ -20,16 +20,16 @@
     max-width: 90%;
   }
   
-  .modal-content h2 {
+  .modal-content-poll h2 {
     margin-top: 0;
   }
   
-  .modal-content label {
+  .modal-content-poll label {
     display: block;
     margin-bottom: 5px;
   }
   
-  .modal-content input {
+  .modal-content-poll input {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -37,7 +37,7 @@
     border-radius: 3px;
   }
   
-  .modal-content button {
+  .modal-content-poll button {
     display: block;
     margin: 5px 0;
     padding: 10px;
@@ -49,7 +49,7 @@
     cursor: pointer;
   }
   
-  .modal-content button:hover {
+  .modal-content-poll button:hover {
     background-color: #58a382;
   }
   

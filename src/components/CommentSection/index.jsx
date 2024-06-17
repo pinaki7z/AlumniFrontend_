@@ -9,6 +9,7 @@ import { PiArrowBendDownLeftBold } from "react-icons/pi";
 import { MdOutlineDelete } from "react-icons/md";
 import replyy from "../../../src/images/reply.svg";
 import deletee from "../../images/delete.svg";
+import baseUrl from "../../config";
 
 const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDeleteComment }) => {
   const [content, setContent] = useState('');
@@ -21,7 +22,7 @@ const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDel
 
   const handleCommentSubmit = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/${entityType}/${entityId}/comments`, {
+      const response = await axios.post(`${baseUrl}/${entityType}/${entityId}/comments`, {
         userId: profile._id,
         content: content,
         userName: profile.firstName,
@@ -38,7 +39,7 @@ const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDel
 
   const handleCommentDelete = async (commentId) => {
     try {
-      await axios.delete(`http://localhost:5000/${entityType}/${entityId}/comments/${commentId}`);
+      await axios.delete(`${baseUrl}/${entityType}/${entityId}/comments/${commentId}`);
       onDeleteComment(commentId);
     } catch (error) {
       console.error('Error deleting comment:', error);
@@ -54,7 +55,7 @@ const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDel
 
   const handleReport = async (commentId, userId) => {
     try {
-      const response = await axios.put(`http://localhost:5000/${entityType}/${entityId}/report`, {
+      const response = await axios.put(`${baseUrl}/${entityType}/${entityId}/report`, {
         commentId: commentId,
         userId: userId,
       });
@@ -136,7 +137,7 @@ const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDel
 
   const handleReplySubmit = async (parentCommentId) => {
     try {
-      const response = await axios.post(`http://localhost:5000/${entityType}/${entityId}/comments`, {
+      const response = await axios.post(`${baseUrl}/${entityType}/${entityId}/comments`, {
         content: reply,
         userName: profile.firstName,
         parentCommentId: parentCommentId,

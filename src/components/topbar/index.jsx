@@ -10,7 +10,6 @@ import { HiUserGroup } from 'react-icons/hi';
 import { LuMessageSquare } from "react-icons/lu";
 import { BsCurrencyRupee } from 'react-icons/bs';
 import { GoSponsorTiers } from 'react-icons/go';
-
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -20,7 +19,8 @@ import { closeWebSocket } from '../../store/webSocketSlice';
 import WebSocketUtility from '../../utils/webSocketUtility';
 import { IoSearchSharp } from "react-icons/io5";
 import { SearchedResults } from '../SearchedResults';
-import { lineSpinner } from 'ldrs'
+import { lineSpinner } from 'ldrs';
+import baseUrl from '../../config';
 
 lineSpinner.register()
 
@@ -109,7 +109,7 @@ const TopBar = ({ handleLogout }) => {
         console.log('handling search', searchText)
 
         try {
-            // const response = await fetch(`http://localhost:5000/search/search?keyword=${searchText}`);
+            // const response = await fetch(`${baseUrl}/search/search?keyword=${searchText}`);
             // if (!response.ok) {
             //     throw new Error('Network response was not ok');
             // }

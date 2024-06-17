@@ -92,7 +92,7 @@ const Dashboard = ({ handleLogout }) => {
             )}
             <Route path="/donations/*" element={<Donations />} />
             <Route path="/sponsorships/*" element={<Sponsorships />} />
-            <Route path="/members/*" element={<div style={{ width: '60%', marginLeft: '24%' }}><Members showHeading={true} /></div>} />
+            <Route path="/members/*" element={<div style={{ width: '100%',padding: '0 5%'}}><Members showHeading={true} /></div>} />
             <Route path="/members/create" element={
               <div style={{ width: '60%' }}>
                 <DonSponRequest name='member' />
@@ -136,9 +136,9 @@ const Dashboard = ({ handleLogout }) => {
                 style={{
                   display: "flex",
                   gap: "2vw",
-                  marginLeft: "40px",
+                  // marginLeft: "40px",
                   paddingTop: "20px",
-                  width: "55%",
+                  width: "100%",
                   justifyContent: 'center'
                 }}
               >

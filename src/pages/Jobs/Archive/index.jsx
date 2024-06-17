@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { FaBriefcase } from "react-icons/fa";
 import { RiHomeSmileLine } from "react-icons/ri";
 import { CiLocationArrow1 } from "react-icons/ci";
+import baseUrl from '../../../config';
 
 
 
@@ -44,7 +45,7 @@ export const Archive = ({ userId, id, jobTitle, title, titleS, description, sala
         const handleArchive = async () => {
             try {
                 console.log('id', id)
-                const response = await fetch(`http://localhost:5000/${type}s/${id}`, {
+                const response = await fetch(`${baseUrl}/${type}s/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -117,7 +118,7 @@ export const Archive = ({ userId, id, jobTitle, title, titleS, description, sala
     const handleDelete = async () => {
         try {
             console.log('id', id)
-            const response = await fetch(`http://localhost:5000/${type+'s'}/${id}`, {
+            const response = await fetch(`${baseUrl}/${type+'s'}/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -152,7 +153,7 @@ export const Archive = ({ userId, id, jobTitle, title, titleS, description, sala
                         return (
                             <img
                                 key={index}
-                                src={`http://localhost:5000/uploads/${attachment}`}
+                                src={`${baseUrl}/uploads/${attachment}`}
                                 alt=""
                                 className="src"
                             />

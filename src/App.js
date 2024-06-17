@@ -2,7 +2,7 @@ import LeftSidebar from "./components/left-sidebar";
 import TopBar from "./components/topbar";
 import SocialMediaPost from "./components/Social-wall-post";
 import SideWidgets from "./components/SideWidgets";
-import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
 import Groups from "./pages/Groups";
 import Donations from "./pages/Donations";
 import Sponsorships from "./pages/Sponsorships";
@@ -22,16 +22,15 @@ import { JoinGroup } from "./components/Groups/JoinGroup";
 import IndividualGroup from "./components/Groups/IndividualGroup";
 import { GiConsoleController } from "react-icons/gi";
 import { useSelector } from "react-redux";
+import Events from "./pages/Events";
 
 function App() {
   const [cookies, removeCookie] = useCookies(["token"]);
   const [loading, setLoading] = useState(true);
-  const profile = useSelector((state)=> state.profile);
-  
-
+  const profile = useSelector((state) => state.profile);
   useEffect(() => {
     const token = cookies.token;
-    if (token && token!==undefined) {
+    if (token && token !== undefined) {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
@@ -42,7 +41,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const handleLogin = () => {
-    console.log('handling login')
     setIsLoggedIn(true);
   };
 
@@ -60,32 +58,68 @@ function App() {
     console.log("handle logout");
   };
 
-  
-  
-
   return (
     <div className="App">
       <ToastContainer />
       <div>
         <Router>
           <Routes>
-            <Route path="/login" element={<LoginPage handleLogin={handleLogin} />} />
-            <Route path="/register" element={<RegisterPage handleLogin={handleLogin}/>} />
-            {console.log('logged in',isLoggedIn)}
+            <Route
+              path="/login"
+              element={<LoginPage handleLogin={handleLogin} />}
+            />
+            <Route
+              path="/register"
+              element={<RegisterPage handleLogin={handleLogin} />}
+            />
+            {console.log("logged in", isLoggedIn)}
             {!isLoggedIn ? (
-              <Route path="*" element={<LoginPage handleLogin={handleLogin} />} />
+              <Route
+                path="*"
+                element={<LoginPage handleLogin={handleLogin} />}
+              />
             ) : (
               <>
-                <Route path="/*" element={<Dashboard handleLogout={handleLogout} />} />
-                <Route path="/groups/:_id/invite/*" element={
-                  <div>
-                    {/* <TopBar handleLogout={handleLogout}/> */}
-                    <div style={{ width: "100%", display: "flex", flexDirection: "row" }}>
+                <Route
+                  path="/*"
+                  element={<Dashboard handleLogout={handleLogout} />}
+                />
+                <Route
+                  path="/groups/:_id/invite/*"
+                  element={
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "row",
+                      }}
+                    >
                       <LeftSidebar />
-                      <JoinGroup/>
+                      <div style={{ marginLeft: "20%", width: "80%" }}>
+                        <TopBar handleLogout={handleLogout} />
+                        <JoinGroup />
+                      </div>
                     </div>
-                  </div>
-                } />
+                  }
+                />
+                <Route
+                  path="/events/:_id/*"
+                  element={
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <LeftSidebar />
+                      <div style={{ marginLeft: "20%", width: "80%" }}>
+                        <TopBar handleLogout={handleLogout} />
+                        <Events/>
+                      </div>
+                    </div>
+                  }
+                />
               </>
             )}
           </Routes>

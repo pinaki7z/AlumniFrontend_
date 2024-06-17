@@ -9,19 +9,33 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import enIN from 'date-fns/locale/en-US';
 import './Events.css';
-import { toast } from "react-toastify";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import TimePicker from 'react-time-picker';
 import { Col, Row } from 'react-bootstrap';
 import { FaCalendarPlus } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import { toast } from "react-toastify";
+import axios from 'axios';
+import pic from "../../images/profilepic.jpg";
+import { Avatar, IconButton, Modal as MModal, Box, Modal as MMModal } from '@mui/material';
+import { useParams } from "react-router-dom";
+import { lineSpinner } from 'ldrs';
+import EventDisplay from "../../components/Feeed/EventDisplay";
+import baseUrl from "../../config";
+
+lineSpinner.register()
+
+
 
 
 
 function MyVerticallyCenteredModal(props) {
   const [isEditing, setIsEditing] = useState(false);
   const profile = useSelector((state) => state.profile);
+  const [createGroup, setCreateGroup] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [newEvent, setNewEvent] = useState({
     title: "", start: "", end: "", startTime: "00:00",
     endTime: "00:00", picture: "", cName: "",
@@ -29,25 +43,24 @@ function MyVerticallyCenteredModal(props) {
   });
   const [allEvents, setAllEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState([props.selectedEvent])
-  console.log("edit modal l", props.isEditing);
 
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]; // Get the selected file
+    const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // When the file is loaded, set the data URL in formData
         setNewEvent({ ...newEvent, picture: reader.result });
       };
-      reader.readAsDataURL(file); // Read the file as a data URL
+      reader.readAsDataURL(file);
     }
   };
 
 
 
+
   const handleAddEvent = () => {
-    const { title, start, end, startTime, endTime, picture, cName, cNumber, cEmail,location } = newEvent;
+    const { title, start, end, startTime, endTime, picture, cName, cNumber, cEmail, location } = newEvent;
 
     if (!title || !start || !end || !picture) {
       alert("Please provide title, start date, end date and image");
@@ -56,6 +69,7 @@ function MyVerticallyCenteredModal(props) {
 
     const formattedStart = format(new Date(start), "yyyy-MM-dd");
     const formattedEnd = format(new Date(end), "yyyy-MM-dd");
+    setLoading(true);
 
     const eventData = {
       userId: profile._id,
@@ -63,17 +77,20 @@ function MyVerticallyCenteredModal(props) {
       start: formattedStart,
       end: formattedEnd,
       startTime,
+      userName: `${profile.firstName} ${profile.lastName}`,
+      profilePicture: profile.profilePicture,
       endTime,
       picture,
       cName,
       cNumber,
       cEmail,
       location,
-      department: profile.department
+      department: profile.department,
+      createGroup
     };
     console.log('eventData', eventData)
 
-    fetch("http://localhost:5000/events/createEvent", {
+    fetch(`${baseUrl}/events/createEvent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,18 +100,17 @@ function MyVerticallyCenteredModal(props) {
       .then((response) => response.json())
       .then((createdEvent) => {
         setAllEvents([...allEvents, createdEvent]);
+        setLoading(false);
         window.location.reload();
 
-        setNewEvent({ title: "", start: "", end: "", startTime: "", endTime: "", picture: null, cEmail: "",cName: "", cNumber: "", location: "" });
+        setNewEvent({ title: "", start: "", end: "", startTime: "", endTime: "", picture: null, cEmail: "", cName: "", cNumber: "", location: "" });
       })
       .catch((error) => console.error("Error creating event:", error));
   };
 
 
   const handleEditEvent = () => {
-    console.log('Editing Event')
-    const { title, start, end, startTime, endTime, picture, cName, cNumber, cEmail,location } = newEvent;
-    console.log("props selected event", props.selectedEvent)
+    const { title, start, end, startTime, endTime, picture, cName, cNumber, cEmail, location } = newEvent;
     const eventId = props.selectedEvent._id;
 
     if (!title || !start || !end) {
@@ -122,7 +138,7 @@ function MyVerticallyCenteredModal(props) {
 
       const jsonEventData = JSON.stringify(updatedEvent);
 
-      fetch(`http://localhost:5000/events/${eventId}`, {
+      fetch(`${baseUrl}/events/${eventId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -175,7 +191,6 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header style={{ backgroundColor: '#f5dad2' }} closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {console.log("edit modal header", props.isEditing)}
           {props.isEditing ? "Edit Event" : "Add Event"}
         </Modal.Title>
       </Modal.Header>
@@ -233,11 +248,6 @@ function MyVerticallyCenteredModal(props) {
             setNewEvent({ ...newEvent, startTime: e.target.value })
           } />
           <br /><br />
-          {/* <label htmlFor="eventType">Event Type:&nbsp;&nbsp;&nbsp;</label>
-            <select id="eventType" value={newEvent.type} onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value })}>
-              <option value="Public">Public</option>
-              <option value="Private">Private</option>
-            </select> */}
           <input
             type="number"
             placeholder="Enter Coordinator Contact Number"
@@ -285,22 +295,28 @@ function MyVerticallyCenteredModal(props) {
           </Col>
 
         </Col>
-        {/* <Row>
-          <Col>
-            <label htmlFor="eventType">Event Type:</label>
-            <select id="eventType" value={newEvent.type} onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value })}>
-              <option value="Public">Public</option>
-              <option value="Private">Private</option>
-            </select>
-          </Col>
-        </Row> */}
+
       </Modal.Body>
 
       <Modal.Footer style={{ backgroundColor: '#f5dad2' }}>
+        <div style={{ marginRight: 'auto', display: 'flex', alignItems: 'center' }}>
+          <input
+            type="checkbox"
+            id="create-group"
+            checked={createGroup}
+            onChange={(e) => setCreateGroup(e.target.checked)}
+          />
+          <label htmlFor="create-group" style={{ marginLeft: '0.5em' }}>Create a group with the same event title name</label>
+        </div>
         <Button
           onClick={props.isEditing ? handleEditEvent : handleAddEvent}
         >
-          {props.isEditing ? "Edit Event" : "Add Event"}
+          {loading
+            ? 'Adding Event...'
+            : props.isEditing
+              ? 'Edit Event'
+              : 'Add Event'}
+
         </Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
@@ -325,11 +341,16 @@ function Events() {
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "", startTime: "", endTime: "", type: "" });
   const [allEvents, setAllEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [attendees, setAttendees] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
   const [selectedEventDetails, setSelectedEventDetails] = useState(null);
+  const [selectedEventDetailsPopup, setSelectedEventDetailsPopup] = useState(null);
   const calendarRef = useRef(null);
   const profile = useSelector((state) => state.profile);
+  const { _id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [detailsModalShow, setDetailsModalShow] = useState(false);
 
   // const gapi = window.gapi;
   // const google = window.google;
@@ -354,7 +375,6 @@ function Events() {
       !event.target.closest(".modal-open")
     ) {
       setIsEditing(false);
-      console.log('edit ', isEditing);
     }
   };
 
@@ -393,23 +413,43 @@ function Events() {
 
   useEffect(() => {
     fetchEvents();
-  }, []);
+    if (_id) {
+      fetchEventDetails(_id);
+    }
+  }, [_id]);
+
+  const fetchEventDetails = (eventId) => {
+    setLoading(true);
+    fetch(`${baseUrl}/events/${eventId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSelectedEventDetailsPopup(data);
+        // setModalShow(true);
+        setDetailsModalShow(true)
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching event details:", error)
+        setLoading(false);
+      });
+
+  };
 
   const fetchEvents = () => {
-    fetch("http://localhost:5000/events")
+    fetch(`${baseUrl}/events`)
       .then((response) => response.json())
       .then((data) => {
         // Convert start and end dates to JavaScript Date objects
         const eventsWithDates = data.map((event) => ({
           ...event,
-          start: new Date(event.start), // Convert start date to Date object
-          end: new Date(event.end),     // Convert end date to Date object
+          start: new Date(event.start),
+          end: new Date(event.end),
         }));
 
-        // Add unique IDs to each event
+
         const eventsWithIds = eventsWithDates.map((event, index) => ({
           ...event,
-          id: index + 1, // You can use a better method to generate unique IDs
+          id: index + 1,
         }));
 
         // // Filter events based on profile department
@@ -426,11 +466,30 @@ function Events() {
       .catch((error) => console.error("Error fetching events:", error));
   };
 
+  const checkAttendanceStatus = async (eventId) => {
+    console.log('eventid check',eventId)
+    try {
+      const response = await axios.get(
+        `${baseUrl}/events/attendees/${eventId}`,
+      );
+      if (response.status === 200) {
+        setAttendees(response.data);
+        // determineAttendanceStatus(response.data);
+      }
+    } catch (error) {
+      console.error('Error :', error);
+      toast.error(error.response?.data?.message || 'An error occurred.');
+    }
+  };
+
+
 
 
 
   function handleEventClick(event) {
+
     setSelectedEvent(event);
+    checkAttendanceStatus(event._id)
     console.log("selected event", selectedEvent)
     setIsEditing(true);
     console.log("edit", isEditing)
@@ -453,7 +512,7 @@ function Events() {
   const handleDeleteEvent = (e) => {
     const eventId = selectedEvent._id;
     console.log("id", eventId);
-    fetch(`http://localhost:5000/events/${eventId}`, {
+    fetch(`${baseUrl}/events/${eventId}`, {
       method: 'DELETE',
     })
       .then(() => {
@@ -534,6 +593,19 @@ function Events() {
   }
 
 
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = (eventId) => {
+    console.log('eventid openmodal',eventId)
+    checkAttendanceStatus(eventId);
+    setOpen(true)
+  };
+  const handleCloseModal = () => setOpen(false);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { weekday: 'short', year: 'numeric', month: 'short', day: '2-digit' };
+    return date.toLocaleDateString('en-US', options);
+  };
 
   return (
     <div className="Events">
@@ -587,8 +659,8 @@ function Events() {
               <div style={{ display: 'flex' }}>
                 <div>
                   <p><span style={{ fontWeight: '500' }}>Title:</span> {selectedEventDetails.title}</p>
-                  <p><span style={{ fontWeight: '500' }}>Start Date:</span> {selectedEventDetails.start.toDateString()}</p>
-                  <p><span style={{ fontWeight: '500' }}>End Date:</span> {selectedEventDetails.end.toDateString()}</p>
+                  <p><span style={{ fontWeight: '500' }}>Start Date:</span> {formatDate(selectedEventDetails.start)}</p>
+                  <p><span style={{ fontWeight: '500' }}>End Date:</span> {formatDate(selectedEventDetails.end)}</p>
                   <p><span style={{ fontWeight: '500' }}>Start Time:</span>  {selectedEventDetails.startTime} hrs</p>
                   <p><span style={{ fontWeight: '500' }}>End Time:</span> {selectedEventDetails.endTime} hrs</p>
                   <p><span style={{ fontWeight: '500' }}>Coordinator Name:</span> {selectedEventDetails.cName}</p>
@@ -616,10 +688,84 @@ function Events() {
                     Delete Event
                   </Button>
                 </div>}
+                {selectedEventDetails.userId === profile._id && <div className='see-event-results' style={{ textAlign: 'right', cursor: 'pointer' }} onClick={()=>handleOpenModal(selectedEventDetails._id)}>See event attendees</div>}
               </div>
+              <MModal
+                open={open}
+                onClose={handleCloseModal}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+              >
+                <Box className='poll-modal-box'>
+                  <h2 id="modal-title">Event Attendees</h2>
+                  <div className='voters-container'>
+                    <div>
+                      <h3>Will Attend</h3>
+                      <h5>Total:- {attendees?.willAttend.length}</h5>
+                      {attendees?.willAttend.map(user => (
+                        <div key={user.userId} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <Avatar src={user.profilePicture || pic} />
+                          <span>{user.userName}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div>
+                      <h3>Might Attend</h3>
+                      <h5>Total:- {attendees?.mightAttend.length}</h5>
+                      {attendees?.mightAttend.map(user => (
+                        <div key={user.userId} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <Avatar src={user.profilePicture || pic} />
+                          <span>{user.userName}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div>
+                      <h3>Will Not Attend</h3>
+                      <h5>Total:- {attendees?.willNotAttend.length}</h5>
+                      {attendees?.willNotAttend.map(user => (
+                        <div key={user.userId} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <Avatar src={user.profilePicture || pic} />
+                          <span>{user.userName}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </Box>
+              </MModal>
             </Modal.Body>
           </Modal>
+
         )}
+        {selectedEventDetailsPopup && (
+          <div className="event-details-popup">
+            <div className="event-details-popup-content" style={{ textAlign: 'left' }}>
+              <span className="close-btn-event" onClick={() => setSelectedEventDetailsPopup(null)}>&times;</span>
+
+              <h2 align='center'>Event Details</h2>
+
+              <EventDisplay event={selectedEventDetailsPopup} />
+              {/* {(selectedEventDetailsPopup.userId === profile._id || profile.profileLevel === 0) && (
+                <div className="event-edit-delete">
+                  <Button variant="primary" onClick={() => setModalShow(true)}>
+                    Edit Event
+                  </Button>
+                  <Button variant="danger" onClick={() => {
+                    handleDeleteEvent();
+                    setSelectedEventDetails(null);
+                  }}>
+                    Delete Event
+                  </Button>
+                </div>
+              )} */}
+            </div>
+          </div>
+        )}
+        {loading && <><l-line-spinner
+          size="40"
+          stroke="3"
+          speed="1"
+          color="black"
+        ></l-line-spinner></>}
       </div>
     </div>
   );

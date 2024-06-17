@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card';
 import { Col, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import React, { useState } from 'react';
+import baseUrl from "../../config";
 
 
 
@@ -115,7 +116,7 @@ const JobsInt = ({modalShow: propModalShow,onHideModal,popover }) => {
     
         const handlePublish = async () => {
           try {
-            const response = await fetch(`http://localhost:5000/${title}/create`, {
+            const response = await fetch(`${baseUrl}/${title}/create`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

@@ -41,8 +41,8 @@ const PollModal = ({ show, onHide, onCreatePoll }) => {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="modal-overlay-poll">
+      <div className="modal-content-poll">
         <h2>Create Poll</h2>
         <div>
           <label>Poll Question:</label>

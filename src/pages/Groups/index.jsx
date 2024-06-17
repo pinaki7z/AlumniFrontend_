@@ -32,7 +32,7 @@ const Groups = () => {
 
 
   return (
-    <div style={{ width: '60%', paddingTop: '20px' }}>
+    <div style={{ width: '100%', padding: '5% 5%' }}>
       <Routes>
         <Route path="/" element={<PageTitle title={title} icon={icon} />} />
         <Route path="/:_id/*" element={<IndividualGroup />} />

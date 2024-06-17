@@ -5,6 +5,7 @@ import { FcApprove, FcDisapprove } from 'react-icons/fc';
 import Modal from 'react-bootstrap/Modal';
 import './notificationsP.css';
 import { Link } from 'react-router-dom';
+import baseUrl from "../../config"
 
 export const NotificationsP = () => {
     const [notificationList, setNotificationList] = useState([]);
@@ -24,13 +25,13 @@ export const NotificationsP = () => {
         try {
             let url = '';
             if (type === 'forum') {
-                url = `http://localhost:5000/forums/members/${groupId}`;
+                url = `${baseUrl}/forums/members/${groupId}`;
             } else if (type === 'group') {
-                url = `http://localhost:5000/groups/members/${groupId}`;
+                url = `${baseUrl}/groups/members/${groupId}`;
             } else if (type === 'ID') {
-                url = `http://localhost:5000/alumni/alumni/validateId`;
+                url = `${baseUrl}/alumni/alumni/validateId`;
             } else if (type === 'Job') {
-                url = `http://localhost:5000/jobs/${groupId}`;
+                url = `${baseUrl}/jobs/${groupId}`;
             }
             else {
                 throw new Error('Invalid type provided');
@@ -82,7 +83,7 @@ export const NotificationsP = () => {
     const handleDeleteNotification = async (notificationId) => {
         console.log('notificationId for delete:', notificationId);
         try {
-            const response = await axios.delete("http://localhost:5000/alumni/alumni/deleteNotification", {
+            const response = await axios.delete(`${baseUrl}/alumni/alumni/deleteNotification`, {
                 data: { notificationId }
             });
             console.log(response.data);
@@ -95,7 +96,7 @@ export const NotificationsP = () => {
     const getRequest = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:5000/groups/requests/req`);
+            const response = await axios.get(`${baseUrl}/groups/requests/req`);
             const filteredData = response.data.filter(notification => notification.status === false);
             setNotificationList(filteredData);
             setLoading(false);
@@ -147,7 +148,7 @@ export const NotificationsP = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.get(`http://localhost:5000/search/search/notifications?keyword=${user}`);
+            const response = await axios.get(`${baseUrl}/search/search/notifications?keyword=${user}`);
             // Handle the response data, such as updating state with the search results
             console.log('search data', response.data);
             setNotificationList(response.data.filter(notification => notification.status === false))
@@ -161,7 +162,7 @@ export const NotificationsP = () => {
         console.log('check',commentId, forumId, userId, notificationId,deleteComment)
         setLoading(true);
         try {
-          const response = await axios.put(`http://localhost:5000/forums/${forumId}/removeBlock`, {
+          const response = await axios.put(`${baseUrl}/forums/${forumId}/removeBlock`, {
             commentId,
             userId,
             notificationId,
@@ -190,14 +191,14 @@ export const NotificationsP = () => {
                     <l-line-spinner size="20" stroke="3" speed="1" color="black"></l-line-spinner>
                 ) : filteredNotifications.length ? (
                     <table style={{ width: '100%' }}>
-                        <thead>
+                        {/* <thead>
                             <tr>
                                 <th></th>
                                 <th style={{ color: 'mediumseagreen' }}>ACCEPT</th>
                                 <th style={{ color: 'orangered' }}>REJECT</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                        </thead> */}
+                        <tbody style={{display: 'table-cell', paddingBottom: '50px'}}>
                             {filteredNotifications.map((notification) => (
                                 <tr key={notification._id}>
                                     <td className='request'>
@@ -211,7 +212,7 @@ export const NotificationsP = () => {
                                             <div>
                                                 <Link to={`/members/${notification.userId}`} style={{ textDecoration: 'underline', color: 'inherit' }}>
                                                     {notification.requestedUserName}
-                                                </Link> has requested to validate for Business Connect. Click <a href={`http://localhost:5000/uploads/${notification.businessVerification}`} target="_blank" rel="noopener noreferrer">here</a> to view the document.
+                                                </Link> has requested to validate for Business Connect. Click <a href={`${baseUrl}/uploads/${notification.businessVerification}`} target="_blank" rel="noopener noreferrer">here</a> to view the document.
                                             </div>
                                         ) : notification.job !== undefined ? (
                                             <><Link to={`/members/${notification.userId}`} style={{ textDecoration: 'underline', color: 'inherit' }}>

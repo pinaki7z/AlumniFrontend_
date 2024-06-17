@@ -15,12 +15,13 @@ import { useSelector } from "react-redux";
 import { FcInvite } from "react-icons/fc";
 import { GroupInvite } from "../GroupInvite";
 import { JoinGroup } from "../JoinGroup";
+import groupBackGroundImage from "../../../images/group-happy-people-playing-summer-sunset-nature.jpg";
+import baseUrl from "../../../config";
 
 const IndividualGroup = () => {
     const { _id } = useParams();
     const [group, setGroup] = useState([]);
     const profile = useSelector((state) => state.profile);
-    console.log('Individual Group')
     let admin;
     if (profile.profileLevel === 0) {
         admin = true;
@@ -30,7 +31,7 @@ const IndividualGroup = () => {
     const getGroup = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:5000/groups/${_id}`
+                `${baseUrl}/groups/${_id}`
             );
             setGroup([response.data])
         } catch (error) {
@@ -45,7 +46,7 @@ const IndividualGroup = () => {
         <div style={{ width: '100%' }}>
             {group.map((groupItem) => (
                 <div key={groupItem._id} className="ig-container">
-                    <div className='ig-upper-container' style={{ backgroundImage: `url(${groupItem.groupLogo})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                    <div className='ig-upper-container' style={{ backgroundImage: `url(${groupItem.groupLogo? groupItem.groupLogo: groupBackGroundImage})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                         <div style={{ width: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden' }}>
                             <img src={picture} alt="" style={{ width: '7rem', height: '7rem', borderRadius: '50%' }} />
                             <h1 style={{ backgroundColor: '#f3cdcd', marginTop: '10px', borderRadius: '6px', textAlign: 'center', marginLeft: '10px' }}>{groupItem.groupName}</h1>
@@ -60,7 +61,7 @@ const IndividualGroup = () => {
                     <div className="ig-lower-container">
                         <Routes>
                             <Route exact path="/" element={<div style={{ width: '65%' }}>
-                                <SocialMediaPost style={{ marginLeft: '0px' }} showCreatePost={true} />
+                                <SocialMediaPost style={{ marginLeft: '0px' }} showCreatePost={true} groupID={_id}/>
                             </div>} />
                             <Route path="/add" element={<div style={{ width: '65%' }}>
                                 <AddMembers type='groups'/>

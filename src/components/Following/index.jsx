@@ -5,6 +5,7 @@ import Profilecard from '../Profilecard';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import baseUrl from "../../config";
 
 export const Following = () => {
   const title = 'Following';
@@ -21,7 +22,7 @@ export const Following = () => {
   
   const fetchMembers = async (page) => {
     try {
-      const response = await fetch(`http://localhost:5000/alumni/${id}/following?page=${page}&size=${LIMIT}`);
+      const response = await fetch(`${baseUrl}/alumni/${id}/following?page=${page}&size=${LIMIT}`);
       if (response.ok) {
         const data = await response.json();
         setTotalFollowing(data.totalFollowing);

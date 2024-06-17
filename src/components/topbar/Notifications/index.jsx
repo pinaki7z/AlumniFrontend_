@@ -7,6 +7,7 @@ import { FcApprove } from 'react-icons/fc';
 import { FcDisapprove } from 'react-icons/fc';
 import { lineSpinner } from 'ldrs';
 import Modal from 'react-bootstrap/Modal';
+import baseUrl from "../../../config";
 
 lineSpinner.register()
 
@@ -29,11 +30,11 @@ export const Notifications = () => {
     try {
       let url = '';
       if (type === 'forum') {
-        url = `http://localhost:5000/forums/members/${groupId}`;
+        url = `${baseUrl}/forums/members/${groupId}`;
       } else if (type === 'group') {
-        url = `http://localhost:5000/groups/members/${groupId}`;
+        url = `${baseUrl}/groups/members/${groupId}`;
       } else if (type === 'ID') {
-        url = `http://localhost:5000/alumni/alumni/validateId`;
+        url = `${baseUrl}/alumni/alumni/validateId`;
       }
       else {
         throw new Error('Invalid type provided');
@@ -61,7 +62,7 @@ export const Notifications = () => {
   const getRequest = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/groups/requests/req`);
+      const response = await axios.get(`${baseUrl}/groups/requests/req`);
       setNotificationList(response.data);
       setLoading(false);
     } catch (error) {

@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import React from 'react';
+import baseUrl from '../../config';
 
 
 lineSpinner.register();
@@ -28,7 +29,7 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
 
   const getRequest = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/groups/requests/req`);
+      const response = await axios.get(`${baseUrl}/groups/requests/req`);
       setNotificationList(response.data);
     } catch (error) {
       console.error("Error fetching request:", error);
@@ -108,7 +109,7 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
               'Content-Type': 'multipart/form-data'
             }
           };
-          const response = await axios.post(`http://localhost:5000/groups/createRequest`, formData, config);
+          const response = await axios.post(`${baseUrl}/groups/createRequest`, formData, config);
           setModalShow(false);
           toast.success('requested');
           if (response.data.requested === true) {
@@ -134,7 +135,7 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
           groupName,
           requestedUserName
         };
-        const response = await axios.post(`http://localhost:5000/groups/createRequest`, body);
+        const response = await axios.post(`${baseUrl}/groups/createRequest`, body);
         console.log('body', response.data);
         if (response.data.requested === true) setRequestStatus('Requested');
         else setRequestStatus('Request');
@@ -146,17 +147,14 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
 
     const handleAddMember = async (groupId) => {
       console.log('adding member', groupId)
-      //setLoading(true)
       try {
-        const response = await axios.put(`http://localhost:5000/groups/members/${groupId}`, {
+        const response = await axios.put(`${baseUrl}/groups/members/${groupId}`, {
           userId: profile._id,
         });
 
         if (response.status === 200) {
           const { isUserAdded } = response.data;
           if (isUserAdded === true) {
-            //setIsAdded(true);
-            //setLoading(false);
             toast.success('added')
             navigateTo(`/groups/${groupId}`)
           }
@@ -241,36 +239,6 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
     filteredGroups = groups.filter(group => group.groupType === 'Public' || (group.groupType === 'Private' && profile.department === group.department) || group.category === 'Business Connect' || group.department === 'All');
   }
 
-  // const handleModalClose = () => {
-  //   setModalOpen(false);
-  //   setSelectedGroupId(null);
-  // };
-
-  // const handleFileUpload = async (file) => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append('file', file);
-  //     formData.append('groupId', selectedGroupId);
-
-  //     const response = await axios.post(`http://localhost:5000/upload/pdf`, formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     });
-
-  //     if (response.status === 200) {
-  //       toast.success('PDF uploaded successfully');
-  //       // Close the modal
-  //       setModalOpen(false);
-  //       setSelectedGroupId(null);
-  //     } else {
-  //       toast.error('Failed to upload PDF');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error uploading PDF:', error);
-  //     toast.error('Failed to upload PDF');
-  //   }
-  // };
 
   return (
     <div className="display-post-container">

@@ -10,6 +10,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { updateSettings } from '../../store/settingsSlice';
+import baseUrl from '../../config';
 
 const Settings = () => {
     const {
@@ -77,7 +78,7 @@ const Settings = () => {
             };
 
             const response = await axios.post(
-                "http://localhost:5000/settings/createSetting",
+                `${baseUrl}/settings/createSetting`,
                 body,
                 { headers }
             );
@@ -109,7 +110,7 @@ const Settings = () => {
 
 
     return (
-        <div className="container" style={{ width: "60%", margin: '0px', paddingTop: '30px' }}>
+        <div className="container" style={{ width: "100%", margin: '0px', padding: '5% 5%' }}>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Change Brand Name</Form.Label>

@@ -20,6 +20,7 @@ import Donations from '../../pages/Donations';
 import Sponsorships from '../../pages/Sponsorships';
 import { useLocation } from 'react-router-dom';
 import { Archive } from '../../pages/Jobs/Archive';
+import baseUrl from '../../config';
 
 
 
@@ -196,7 +197,7 @@ const IntJobs = (props) => {
                 }
             }
             console.log('job formdata',formData)
-            const response = await fetch('http://localhost:5000/jobs/create', {
+            const response = await fetch(`${baseUrl}/jobs/create`, {
                 method: 'POST',
                 body: formDataToSend,
             });

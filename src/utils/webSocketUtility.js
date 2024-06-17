@@ -1,4 +1,4 @@
-// webSocketUtility.js
+
 import { useDispatch, useSelector } from 'react-redux';
 import { closeWebSocket } from '../store/webSocketSlice';
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import JobPost from '../JobPost';
+import baseUrl from '../../config';
 export const AppliedInternships = ({searchQuery}) => {
     const profile = useSelector((state) => state.profile);
     const [appliedInternships, setAppliedInternships] = useState([]);
@@ -11,7 +12,7 @@ export const AppliedInternships = ({searchQuery}) => {
     useEffect(() => {
         const fetchAppliedInternships = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/internships/${profile._id}/appliedJobs`);
+                const response = await axios.get(`${baseUrl}/internships/${profile._id}/appliedJobs`);
                 setAppliedInternships(response.data);
                 setLoading(false);
             } catch (error) {

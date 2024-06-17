@@ -1,21 +1,15 @@
-import FrameComponent from "../../components/FrameComponent";
 import "./loginPage.css";
 import "../../components/FrameComponent/FrameComponent.css";
-import io from "../../../src/images/io.png"
-import { width } from "@mui/system";
+import io from "../../../src/images/io.png";
 import { useState } from 'react';
 import './loginPage.css';
-import bhu from '../../images/bhu.png';
-import welcome from '../../images/bhuUni.jpg';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch,useSelector } from "react-redux";
 import { login } from '../../store/userSlice';
 import { updateProfile,setAdmin } from "../../store/profileSlice";
-
+import baseUrl from "../../config";
 const LoginPage = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +25,7 @@ const LoginPage = ({ handleLogin }) => {
 
     try {
       const currentDate = new Date();
-      const response = await fetch('http://localhost:5000/alumni/login', {
+      const response = await fetch(`${baseUrl}/alumni/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,8 +54,8 @@ const LoginPage = ({ handleLogin }) => {
       }
   
       toast.success("Logged in successfully!");
-      setLoading(false);
-      navigateTo("/");
+      setLoading(false); 
+      window.location.href = window.location.href;
       } else {
         const errorData = await response.json();
         console.error('Login failed',errorData);
@@ -111,11 +105,6 @@ const LoginPage = ({ handleLogin }) => {
               <div className="account-details" style={{width: '100%'}}>
                 <div className="email" style={{color: '#36454F'}}>Email</div>
                 <div className="email1" style={{width: '100%'}}>
-                  {/* <div className="selected-shape" />
-                  <div className="message">
-                    <img className="exclamation-icon" alt="" src="/exclamation.svg" />
-                    <div className="message1">Message</div>
-                  </div> */}
                   <div className="field">
                     
                     <input
@@ -134,14 +123,6 @@ const LoginPage = ({ handleLogin }) => {
                 <div className="input">
                   <div className="input1">
                     <div className="field1" style={{width: '100%'}}>
-                      {/* <div className="icon-left1">
-                        <img
-                          className="email-mail-icon1"
-                          alt=""
-                          src="/email-mail.svg"
-                        />
-                      </div>
-                      <div className="indicator1" /> */}
                       <input
                         className="email-address1"
                         placeholder="Password"

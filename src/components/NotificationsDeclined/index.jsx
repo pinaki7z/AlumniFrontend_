@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import '../NotificationsP/notificationsP.css';
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import baseUrl from '../../config';
 
 export const NotificationsDeclined = () => {
   const [notificationList, setNotificationList] = useState([]);
@@ -22,11 +23,11 @@ export const NotificationsDeclined = () => {
     try {
       let url = '';
       if (type === 'forum') {
-        url = `http://localhost:5000/forums/members/${groupId}`;
+        url = `${baseUrl}/forums/members/${groupId}`;
       } else if (type === 'group') {
-        url = `http://localhost:5000/groups/members/${groupId}`;
+        url = `${baseUrl}/groups/members/${groupId}`;
       } else if (type === 'ID') {
-        url = `http://localhost:5000/alumni/alumni/validateId`;
+        url = `${baseUrl}/alumni/alumni/validateId`;
       } else {
         throw new Error('Invalid type provided');
       }
@@ -53,7 +54,7 @@ export const NotificationsDeclined = () => {
   const handleDeleteNotification = async (notificationId) => {
     console.log('notificationId for delete:', notificationId);
     try {
-      const response = await axios.delete("http://localhost:5000/alumni/alumni/deleteNotification", {
+      const response = await axios.delete(`${baseUrl}/alumni/alumni/deleteNotification`, {
         data: { notificationId }
       });
       console.log(response.data);
@@ -67,7 +68,7 @@ export const NotificationsDeclined = () => {
   const getRequest = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/groups/requests/req`);
+      const response = await axios.get(`${baseUrl}/groups/requests/req`);
       const filteredData = response.data.filter(notification => notification.status === true);
       setNotificationList(filteredData);
       setLoading(false);
@@ -114,7 +115,7 @@ export const NotificationsDeclined = () => {
     e.preventDefault();
 
     try {
-        const response = await axios.get(`http://localhost:5000/search/search/notifications?keyword=${user}`);
+        const response = await axios.get(`${baseUrl}/search/search/notifications?keyword=${user}`);
         // Handle the response data, such as updating state with the search results
         console.log('search data',response.data);
         setNotificationList(response.data.filter(notification => notification.status === true))
@@ -135,14 +136,14 @@ export const NotificationsDeclined = () => {
           <l-line-spinner size="20" stroke="3" speed="1" color="black"></l-line-spinner>
         ) : notificationList.length ? (
           <table style={{ width: '100%' }}>
-            <thead>
+            {/* <thead>
               <tr>
                 <th></th>
                 <th style={{ color: 'mediumseagreen' }}>ACCEPT</th>
                 <th style={{ color: 'orangered' }}>DELETE</th>
               </tr>
-            </thead>
-            <tbody>
+            </thead> */}
+            <tbody style={{display: 'table-cell', paddingBottom: '50px'}}>
               {notificationList.map((notification) => (
                 <tr key={notification._id}>
                   <td className='request'>

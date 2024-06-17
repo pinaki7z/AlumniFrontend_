@@ -6,6 +6,8 @@ import PageTitle from '../../components/PageTitle';
 import { MdForum } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import DisplayForum from '../../components/DisplayForum';
+import { IoSearchSharp } from "react-icons/io5";
+import baseUrl from '../../config';
 
 const Forum = () => {
   const [totalForums, setTotalForums] = useState('');
@@ -17,7 +19,7 @@ const Forum = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:5000/forums')
+    fetch(`${baseUrl}/forums`)
       .then((response) => response.json())
       .then((data) => {
 
@@ -28,7 +30,6 @@ const Forum = () => {
           setLoading(false);
           return;
         }
-        // Filter forums based on user's department or "All"
         const filteredForums = data.forums.filter(forum => forum.department === profile.department || forum.department === 'All');
 
         // Sort based on the selected option
@@ -56,14 +57,44 @@ const Forum = () => {
     <>
       <div className='forum' style={{ paddingTop: '20px' }}>
         <div>
-          <PageTitle title='Forums' icon={icon} />
-          <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '25px', paddingBottom: '25px', alignItems: 'end' }}>
-            <p style={{ margin: '0px', fontSize: '18px', fontWeight: '600', color: '#9c9b95' }}>Total Forums:  {loading ? 0 : totalForums}</p>
-            <div>
-              <FaSearch style={{ position: 'relative', left: 30, bottom: 3, color: '#9c9b95' }} /><input type='text' name='name' id='name' placeholder='Search topics' />
+          {/* <PageTitle title='Forums' icon={icon} /> */}
+          <div style={{ display: 'flex', justifyContent: 'space-around',padding: '25px 15px', paddingRight: '18px', alignItems: 'end' }}>
+            {/* <p style={{ margin: '0px', fontSize: '18px', fontWeight: '600', color: '#9c9b95' }}>Total Forums:  {loading ? 0 : totalForums}</p> */}
+            <div className="search" style={{ display: 'flex', width: '65%'}}>
+                        <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        <div style={{ position: 'relative', width: '100%' }}>
+                <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Search for topics"
+                    // value={searchQuery}
+                    // onChange={(e) => setSearchQuery(e.target.value)}
+                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175', backgroundColor: 'white'}}
+                />
+                <button
+                    type="submit"
+                    style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        backgroundColor: 'white',
+                        border: 'none',
+                        padding: '5px',
+                        color: 'white',
+                        cursor: 'pointer'
+                    }}
+                >
+                    
+                        <IoSearchSharp style={{ color: '#136175',width: '25px',height: '25px' }} />
+                </button>
             </div>
-            <div>
-              <select onChange={(e) => setSortBy(e.target.value)}>
+                            
+                        </form>
+                    </div>
+            <div style={{width: '20%'}}>
+              <select className='select-dropdown' onChange={(e) => setSortBy(e.target.value)} style={{width: '100%'}}>
                 <option value="">Sort by</option>
                 <option value="Most popular">Most popular</option>
                 <option value="Most recent">Most recent</option>
@@ -71,10 +102,10 @@ const Forum = () => {
             </div>
             
           </div>
-          <div style={{textAlign: 'center', paddingBottom: '20px'}}>
+          <div style={{textAlign: 'right', paddingBottom: '20px',paddingRight: '5%'}}>
            
                 <Link to="/forums/create">
-                  <button>Start New Forum</button>
+                  <button style={{width: '126px'}}>Create</button>
                 </Link>
              
 

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { StarredJobs } from "../../components/StarredJobs";
 import { AppliedJobs } from "../../components/AppliedJobs";
 import { MyJobs } from "../../components/MyJobs";
+import baseUrl from "../../config";
 
 const Jobs = () => {
     const [title, setTitle] = useState('Jobs');
@@ -37,7 +38,7 @@ const Jobs = () => {
 
     const getData = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/jobs`);
+            const response = await axios.get(`${baseUrl}/jobs`);
 
             const filteredJobs = response.data.filter(job => !job.archive && job.approved);
             const filteredArchivedJobs = response.data.filter(job => job.archive && job.approved && job.userId === profile._id);
@@ -156,7 +157,7 @@ const Jobs = () => {
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'column', width: '60%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <IntJobs
                     title={title}
                     titleS={titleS}

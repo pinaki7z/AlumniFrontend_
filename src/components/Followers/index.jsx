@@ -5,6 +5,7 @@ import Profilecard from '../Profilecard';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import baseUrl from '../../config';
 
 export const Followers = () => {
   const title = 'Followers';
@@ -12,7 +13,7 @@ export const Followers = () => {
   const [members, setMembers] = useState([]);
   const [cookie, setCookie] = useCookies(['access_token']);
   const profile = useSelector((state) => state.profile);
-  const [loading, setLoading] = useState(true); // Set initial loading state to true
+  const [loading, setLoading] = useState(true); 
   const LIMIT = 6;
   const [totalFollowers, setTotalFollowers] = useState(0);
   const activePage = useRef(1);
@@ -21,7 +22,7 @@ export const Followers = () => {
   const fetchMembers = async (page) => {
     try {
       console.log('page', page);
-      const response = await fetch(`http://localhost:5000/alumni/${id}/followers?page=${page}&size=${LIMIT}`);
+      const response = await fetch(`${baseUrl}/alumni/${id}/followers?page=${page}&size=${LIMIT}`);
       if (response.ok) {
         const data = await response.json();
         setTotalFollowers(data.totalFollowers);

@@ -8,6 +8,7 @@ import JobPost from "../../components/JobPost";
 import { useSelector } from "react-redux";
 import { StarredInternships } from "../../components/StarredInternships";
 import { AppliedInternships } from '../../components/AppliedInternships';
+import baseUrl from "../../config";
 
 const Internships = () => {
     const title = 'Internships';
@@ -33,7 +34,7 @@ const Internships = () => {
     
     const getData = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/${title}/`)
+            const response = await axios.get(`${baseUrl}/${title}/`)
             if (title === 'Jobs') {
                 const filteredJobs = response.data.filter(job => job.archive === false);
                 const filteredArchivedJobs = response.data.filter(job => job.archive === true);

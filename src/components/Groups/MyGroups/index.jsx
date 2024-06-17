@@ -2,6 +2,7 @@ import DisplayPost from "../../DisplayPost";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from 'react-redux';
+import baseUrl from "../../../config";
 const MyGroups = () => {
   const title = 'MyGroups';
   const [groups, setGroups] = useState([]);
@@ -21,7 +22,7 @@ const MyGroups = () => {
   //   }
   //   try {
   //     const response = await axios.get(
-  //       `http://localhost:5000/groups?page=${page}&size=${LIMIT}`
+  //       `${baseUrl}/groups?page=${page}&size=${LIMIT}`
   //     );
   //     const postsData = response.data.records;
   //     setGroups((prevItems) => [...prevItems, ...postsData]);
@@ -42,7 +43,7 @@ const MyGroups = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:5000/groups/user/${profile._id}`
+        `${baseUrl}/groups/user/${profile._id}`
       );
       const postsData = response.data.groups;
       setGroups(postsData);

@@ -2,6 +2,7 @@ import DisplayPost from "../../DisplayPost";
 import { useSelector } from "react-redux";
 import { useState,useEffect } from "react";
 import axios from "axios";
+import baseUrl from "../../../config";
 const SuggestedGroups = () => {
     const title = 'SuggestedGroups';
     const [groups, setGroups] = useState([]);
@@ -21,7 +22,7 @@ const SuggestedGroups = () => {
         }
         try {
             const response = await axios.get(
-                `http://localhost:5000/groups?page=${page}&size=${LIMIT}&userId=${profile._id}`
+                `${baseUrl}/groups?page=${page}&size=${LIMIT}&userId=${profile._id}`
             );
             const postsData = response.data.records.filter(group => !group.businessConnect);
             setGroups((prevItems) => [...prevItems, ...postsData]);

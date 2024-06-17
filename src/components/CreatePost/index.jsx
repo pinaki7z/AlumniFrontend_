@@ -9,6 +9,7 @@ import {
 import axios from 'axios';
 import './createPost.scss';
 import PropTypes from 'prop-types';
+import baseUrl from '../../config.js';
 //import { useCookies } from 'react-cookie';
 
 function CreatePost({ photoUrl, username, onNewPost ,entityType}) {
@@ -87,7 +88,7 @@ function CreatePost({ photoUrl, username, onNewPost ,entityType}) {
 
       try {
         const response = await axios.post(
-          `http://localhost:5000/${entityType}/create`,
+          `${baseUrl}/${entityType}/create`,
           formDataObject,
         );
         const newPost = await response.data;
@@ -104,7 +105,7 @@ function CreatePost({ photoUrl, username, onNewPost ,entityType}) {
     try {
       console.log("request body", formDataObject);
       const response = await axios.post(
-        `http://localhost:5000/${entityType}/create?folder=${folderName}`,
+        `${baseUrl}/${entityType}/create?folder=${folderName}`,
         formDataObject,
         {
           headers: {
@@ -127,7 +128,7 @@ function CreatePost({ photoUrl, username, onNewPost ,entityType}) {
     try {
       console.log("request body", formDataObject);
       const response = await axios.post(
-        `http://localhost:5000/${entityType}/create`,
+        `${baseUrl}/${entityType}/create`,
         formDataObject,
       );
       const newPost = await response.data;

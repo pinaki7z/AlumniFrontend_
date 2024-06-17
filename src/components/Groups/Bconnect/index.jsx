@@ -2,6 +2,7 @@ import DisplayPost from "../../DisplayPost";
 import { useSelector } from "react-redux";
 import { useState,useEffect } from "react";
 import axios from "axios";
+import baseUrl from "../../../config";
 const Bconnect = () => {
     console.log('BConnect')
     const title = 'SuggestedGroups';
@@ -11,7 +12,7 @@ const Bconnect = () => {
        
         try {
             const response = await axios.get(
-                `http://localhost:5000/groups/groups/businessConnect`
+                `${baseUrl}/groups/groups/businessConnect`
             );
             const postsData = response.data.businessConnect;
             setGroups(postsData);

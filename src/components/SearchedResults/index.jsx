@@ -5,6 +5,7 @@ import Profilecard from '../Profilecard';
 import DisplayPost from '../DisplayPost';
 import DisplayForum from '../DisplayForum';
 import JobPost from '../JobPost';
+import baseUrl from '../../config';
 
 lineSpinner.register()
 
@@ -23,7 +24,7 @@ export const SearchedResults = () => {
     const fetchSearchResults = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:5000/search/search?keyword=${searchKeyword}`);
+        const response = await fetch(`${baseUrl}/search/search?keyword=${searchKeyword}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

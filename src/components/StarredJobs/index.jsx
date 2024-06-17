@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import JobPost from '../JobPost';
+import baseUrl from '../../config';
 
 export const StarredJobs = ({searchQuery}) => {
     const profile = useSelector((state) => state.profile);
@@ -12,7 +13,7 @@ export const StarredJobs = ({searchQuery}) => {
     useEffect(() => {
         const fetchStarredJobs = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/jobs/starred/${profile._id}`);
+                const response = await axios.get(`${baseUrl}/jobs/starred/${profile._id}`);
                 const nonArchivedStarredJobs = response.data.jobs.filter(job => !job.archive);
                 setStarredJobs(nonArchivedStarredJobs);
                 setLoading(false);

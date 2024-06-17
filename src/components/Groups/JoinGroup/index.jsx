@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { lineSpinner } from 'ldrs'
+import { lineSpinner } from 'ldrs';
+import baseUrl from '../../../config';
 
 lineSpinner.register()
 
@@ -19,7 +20,7 @@ export const JoinGroup = () => {
 
   const getAllGroupMembers = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/groups/${_id}/members`);
+      const response = await axios.get(`${baseUrl}/groups/${_id}/members`);
       if (response.status === 200) {
         setGroupMembersId(response.data.members);
       }
@@ -40,7 +41,7 @@ export const JoinGroup = () => {
 
   const handleAddMember = async () => {
     try {
-      const response = await axios.put(`http://localhost:5000/groups/members/${_id}`, {
+      const response = await axios.put(`${baseUrl}/groups/members/${_id}`, {
         userId: profile._id,
       });
 

@@ -12,6 +12,7 @@ import DonSponRequest from '../../components/DonSponRequest';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Bconnect from '../../components/Groups/Bconnect';
+import baseUrl from '../../config';
 
 
 const Donations = () => {
@@ -47,7 +48,7 @@ const Donations = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:5000/donations?page=${page}&size=${LIMIT}`
+        `${baseUrl}/donations?page=${page}&size=${LIMIT}`
       );
       const postsData = response.data.records;
       setDonations((prevItems) => [...prevItems, ...postsData]);
@@ -72,7 +73,7 @@ const Donations = () => {
   const getUserDonations = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/donations/user/${profile._id}`
+        `${baseUrl}/donations/user/${profile._id}`
       );
       setUserDonations(response.data.donations);
     } catch (error) {
@@ -87,7 +88,7 @@ const Donations = () => {
 
 
   return (
-    <div style={{ width: '60%', height: '120vh' }}>
+    <div style={{ width: '100%', height: '120vh' }}>
       <DonSpon title='Business Connect' icon={icon} />
       <Routes>
         <Route path="/" element={<PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext3={buttontext3} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} buttontext3Link={buttontext3Link} name='donations' create={admin} />} />

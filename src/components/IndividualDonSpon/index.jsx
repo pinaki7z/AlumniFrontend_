@@ -8,6 +8,7 @@ import { RiInformationFill } from 'react-icons/ri';
 import { FaFacebookSquare, FaTwitter, FaInstagram, FaLinkedin, FaPinterestSquare } from 'react-icons/fa';
 import axios from 'axios';
 import { useSelector } from "react-redux";
+import baseUrl from "../../config"
 
 
 const IndividualDonSpon = () => {
@@ -24,7 +25,7 @@ const IndividualDonSpon = () => {
     useEffect(() => {
         setIsLoading(true); // Set loading to true while fetching data
         if (location.pathname.includes('/sponsorships')) {
-            fetch(`http://localhost:5000/sponsorships/${_id}`)
+            fetch(`${baseUrl}/sponsorships/${_id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setDonations([data]);
@@ -36,7 +37,7 @@ const IndividualDonSpon = () => {
                 });
         }
         if (location.pathname.includes('/donations')) {
-            fetch(`http://localhost:5000/donations/${_id}`)
+            fetch(`${baseUrl}/donations/${_id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setDonations([data]);
@@ -98,7 +99,7 @@ const IndividualDonSpon = () => {
                                 <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Contact Number:- {donation.phone ? donation.phone : donation.number}</p>
                                 <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Email:- {donation.email? donation.email: donation.emailOfOrganiser}</p>
                                 {donation.businessPlan && <div style={{ display: 'flex', gap: '1vw',marginTop: '1rem' }}>
-                                    <p style={{ fontWeight: '500', fontSize: '15px',marginBottom: '0px' }}>BusinessPlan: </p><a href={`http://localhost:5000/uploads/${donation.businessPlan}`} target="_blank" rel="noopener noreferrer">{donation.businessPlan}</a>
+                                    <p style={{ fontWeight: '500', fontSize: '15px',marginBottom: '0px' }}>BusinessPlan: </p><a href={`${baseUrl}/uploads/${donation.businessPlan}`} target="_blank" rel="noopener noreferrer">{donation.businessPlan}</a>
                                 </div>}
                                 {donation.currentRevenue && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Current Revenue:-(₹) {donation.currentRevenue}</p>}
                                 {donation.targetMarket && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Target Market:- {donation.targetMarket}</p>}

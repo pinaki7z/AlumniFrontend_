@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { lineSpinner } from 'ldrs';
-import picture from '../../../src/images/pexels-lisa-fotios-1957478.jpg'
+import picture from '../../../src/images/pexels-lisa-fotios-1957478.jpg';
+import baseUrl from "../../config";
 
 lineSpinner.register();
 
@@ -35,7 +36,7 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
 
     const handleDelete = async (_id) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/${name}/${_id}`);
+            const response = await axios.delete(`${baseUrl}/${name}/${_id}`);
             toast.success(`Successfully deleted ${name} details`);
             if (name === "donations") {
                 setTimeout(() => {

@@ -34,7 +34,7 @@
   line-height: 20px;
 }
 
-.modal-box {
+.poll-modal-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -48,7 +48,7 @@
   overflow-y: auto;
 }
 
-.modal-box h2 {
+.poll-modal-box h2 {
   margin-bottom: 20px;
   font-size: 24px;
   color: #3A3A3A;

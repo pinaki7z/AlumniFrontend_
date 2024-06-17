@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import { flexbox } from '@mui/system';
+import baseUrl from '../../../config';
 
 const PollDisplay = ({ poll }) => {
     const [hasVoted, setHasVoted] = useState(false);
@@ -41,7 +42,7 @@ const PollDisplay = ({ poll }) => {
             };
 
             const response = await axios.put(
-                `http://localhost:5000/poll/${poll._id}`,
+                `${baseUrl}/poll/${poll._id}`,
                 body
             );
 
@@ -129,7 +130,7 @@ const PollDisplay = ({ poll }) => {
             </div>
 
             <Modal open={modalOpen} onClose={handleCloseModal}>
-                <Box className='modal-box'>
+                <Box className='poll-modal-box'>
                     <div className='voters-container'>
                         {pollData.options.map(option => (
                             <div key={option._id} className='option-result'>

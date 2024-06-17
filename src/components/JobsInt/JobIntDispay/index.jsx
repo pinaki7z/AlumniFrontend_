@@ -8,7 +8,8 @@ import { useState, useEffect } from "react";
 import { GiMoneyStack } from 'react-icons/gi';
 import { FaLocationDot, FaTags } from 'react-icons/fa6';
 import { FcBriefcase } from 'react-icons/fc';
-import profilePic from '../../../images/profilepic.jpg'
+import profilePic from '../../../images/profilepic.jpg';
+import baseUrl from '../../../config';
 
 import './individualJobPost.css';
 const JobIntDisplay = ({ picture, jobId, jobTitle, location, salaryMin, salaryMax, currency, jobType, category, description }) => {
@@ -25,7 +26,7 @@ const JobIntDisplay = ({ picture, jobId, jobTitle, location, salaryMin, salaryMa
     // };
     // const profile = useSelector((state) => state.profile);
     // const fetchDonationPost = async () => {
-    //     const response = await axios.get(`http://localhost:5000/${title}/${_id}`)
+    //     const response = await axios.get(`${baseUrl}/${title}/${_id}`)
     //     const data = response.data;
     //     setJobs(data);
     //     setLoading(false)

@@ -18,6 +18,7 @@ import { fontSize } from "@mui/system";
 import { Link } from 'react-router-dom';
 import { CiLocationArrow1 } from "react-icons/ci";
 import { RiHomeSmileLine } from "react-icons/ri";
+import baseUrl from "../../config";
 
 lineSpinner.register()
 
@@ -47,7 +48,7 @@ const IndividualJobPost = () => {
     };
     const profile = useSelector((state) => state.profile);
     const fetchDonationPost = async () => {
-        const response = await axios.get(`http://localhost:5000/${title}/${_id}`)
+        const response = await axios.get(`${baseUrl}/${title}/${_id}`)
         const data = response.data;
         setJobs(data);
         setLoading(false)
@@ -61,7 +62,7 @@ const IndividualJobPost = () => {
 
     const fetchAppliedUserIds = async () => {
         console.log('id', _id)
-        const response = await axios.get(`http://localhost:5000/${title}/appliedCandidates/${_id}`)
+        const response = await axios.get(`${baseUrl}/${title}/appliedCandidates/${_id}`)
         const data = response.data;
         setAppliedCandidates(data.userIds);
         setAppliedCandidatesDetails(data.appliedCandidates);
@@ -109,7 +110,7 @@ const IndividualJobPost = () => {
 
         const handleSubmit = () => {
             setApplyLoading(true);
-            const apiUrl = `http://localhost:5000/jobs/apply/${_id}`;
+            const apiUrl = `${baseUrl}/jobs/apply/${_id}`;
             const formData = new FormData();
             formData.append('userId', profile._id);
             formData.append('name', name);
@@ -193,7 +194,7 @@ const IndividualJobPost = () => {
         console.log('job id', status, comment, userId)
         setStatusLoading(status);
 
-        axios.put(`http://localhost:5000/jobs/${_id}/updateJobStatus`, { userId, status, comment })
+        axios.put(`${baseUrl}/jobs/${_id}/updateJobStatus`, { userId, status, comment })
             .then(response => {
                 console.log("Job status updated successfully:", response.data.message);
                 fetchAppliedUserIds();
@@ -255,7 +256,7 @@ const IndividualJobPost = () => {
                         <Link to={`/members/${candidate.userId}`} style={{ textDecoration: 'underline', color: 'inherit' }}>{candidate.name}</Link></p>
                 </div>
                 <div style={{ display: 'flex', gap: '1vw' }}>
-                    <p style={{ fontWeight: '500' }}>Resume: </p><a href={`http://localhost:5000/uploads/${candidate.resume}`} target="_blank" rel="noopener noreferrer">{candidate.resume}</a>
+                    <p style={{ fontWeight: '500' }}>Resume: </p><a href={`${baseUrl}/uploads/${candidate.resume}`} target="_blank" rel="noopener noreferrer">{candidate.resume}</a>
                 </div>
                 <div style={{ display: 'flex', gap: '1vw' }}>
                     <p style={{ fontWeight: '500' }}>Applied At: </p> <p>{formatCreatedAt(candidate.appliedAt)}</p>
@@ -400,7 +401,7 @@ const IndividualJobPost = () => {
             } else if (attachment.endsWith('.jpg') || attachment.endsWith('.jpeg') || attachment.endsWith('.png')) {
                 return (
                     <div key={index} className="image-link">
-                        <button style={{ border: 'none', borderBottom: 'solid 1px' }} onClick={() => handleImageClick(`http://localhost:5000/uploads/${attachment}`)}>
+                        <button style={{ border: 'none', borderBottom: 'solid 1px' }} onClick={() => handleImageClick(`${baseUrl}/uploads/${attachment}`)}>
                             {attachment}
                         </button>
                     </div>
@@ -417,7 +418,7 @@ const IndividualJobPost = () => {
 
     const handleStarred = (jobId) => {
         setStarLoading(true);
-        axios.put(`http://localhost:5000/${title}/${jobId}`, {
+        axios.put(`${baseUrl}/${title}/${jobId}`, {
             starred: true,
             userId: profile._id
         })
@@ -565,7 +566,7 @@ const IndividualJobPost = () => {
                                             return (
                                                 <a
                                                     key={index}
-                                                    href={`http://localhost:5000/uploads/${attachment}`}
+                                                    href={`${baseUrl}/uploads/${attachment}`}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     style={{ display: 'block', marginBottom: '10px' }}

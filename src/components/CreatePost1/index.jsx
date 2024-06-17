@@ -10,6 +10,7 @@ import video from "../../../src/images/videocam.svg";
 import gallery from "../../../src/images/gallery.svg";
 import poll from "../../../src/images/poll.svg";
 import PollModal from './PollModal';
+import baseUrl from '../../config';
 
 
 
@@ -166,7 +167,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
 
       try {
         const response = await axios.post(
-          `http://localhost:5000/${entityType}/create`,
+          `${baseUrl}/${entityType}/create`,
           formDataObject,
 
         );
@@ -185,7 +186,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
     try {
       console.log("request body", formDataObject);
       const response = await axios.post(
-        `http://localhost:5000/${entityType}/create?folder=${folderName}`,
+        `${baseUrl}/${entityType}/create?folder=${folderName}`,
         formDataObject,
         {
           headers: {
@@ -209,7 +210,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
     try {
       console.log("request body", formDataObject);
       const response = await axios.post(
-        `http://localhost:5000/${entityType}/create`,
+        `${baseUrl}/${entityType}/create`,
         formDataObject,
 
       );
@@ -233,11 +234,11 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
       question: question,
       options: options,
     };
-    // if (_id) pollData.groupID = _id;
+    if (_id) pollData.groupID = _id;
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/poll/createPoll`,
+        `${baseUrl}/poll/createPoll`,
         pollData,
       );
       const newPoll = await response.data;

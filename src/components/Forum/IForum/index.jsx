@@ -9,17 +9,23 @@ import { IconButton } from '@mui/material';
 import { toast } from "react-toastify";
 import { useNavigate, Link, Route, Routes } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { AddMembers } from '../../Groups/AddMembers';
+import deleteButton from '../../../images/deleteButton.svg';
+import reply from '../../../images/reply-forum.svg';
+import baseUrl from '../../../config';
 
 const IForum = () => {
   const [forum, setForum] = useState(null);
   const [members, setMembers] = useState([]);
   const [blockedUserIds, setBlockedUserIds] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const { id } = useParams();
   const navigateTo = useNavigate();
   const profile = useSelector((state) => state.profile);
   const [requestStatus, setRequestStatus] = useState('Join Forum');
   const [notificationList, setNotificationList] = useState([]);
+  const allMembers = useSelector((state) => state.member);
+  const [selectedMembers, setSelectedMembers] = useState([]);
 
   let admin;
   if (profile.profileLevel === 0) {
@@ -28,7 +34,7 @@ const IForum = () => {
 
   const getRequest = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/groups/requests/req`);
+      const response = await axios.get(`${baseUrl}/groups/requests/req`);
       setNotificationList(response.data);
     } catch (error) {
       console.error("Error fetching request:", error);
@@ -53,7 +59,7 @@ const IForum = () => {
 
   const refreshComments = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/forums/${id}`);
+      const response = await axios.get(`${baseUrl}/forums/${id}`);
       setForum(response.data);
     } catch (error) {
       console.error('Error fetching forum data:', error);
@@ -62,17 +68,16 @@ const IForum = () => {
 
   const getForumMembers = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/forums/${id}/members`);
+      const response = await axios.get(`${baseUrl}/forums/${id}/members`);
       setMembers(response.data.members);
     } catch (error) {
       console.error('Error fetching forum members:', error);
     }
   };
 
-
   const getBlockedMembers = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/forums/${id}/blockedUserIds`);
+      const response = await axios.get(`${baseUrl}/forums/${id}/blockedUserIds`);
       setBlockedUserIds(response.data.blockedUserIds);
     } catch (error) {
       console.error('Error fetching forum members:', error);
@@ -88,12 +93,9 @@ const IForum = () => {
     refreshComments();
   }, [id]);
 
-
-  console.log('blockedUserIds', blockedUserIds)
-
   const handleDeletePost = async (forumId) => {
     try {
-      await axios.delete(`http://localhost:5000/forums/${forumId}`);
+      await axios.delete(`${baseUrl}/forums/${forumId}`);
       toast.success('Deleted successfully!');
       navigateTo('/forums');
     } catch (error) {
@@ -110,11 +112,9 @@ const IForum = () => {
       forumName,
       requestedUserName
     };
-    console.log('body', body);
     setRequestStatus('Loading...');
     try {
-      const response = await axios.post(`http://localhost:5000/forums/createRequest`, body);
-      console.log('body', response.data);
+      const response = await axios.post(`${baseUrl}/forums/createRequest`, body);
       if (response.data.requested === true) setRequestStatus('Requested');
       else setRequestStatus('Request');
     } catch (error) {
@@ -141,61 +141,126 @@ const IForum = () => {
         requestedUserName: profile.firstName + profile.lastName,
         forumName,
       };
-  
-      const response = await axios.post(`http://localhost:5000/forums/${forumId}/reportToSuperAdmin`, body);
-      console.log('Report sent successfully:', response.data);
+
+      const response = await axios.post(`${baseUrl}/forums/${forumId}/reportToSuperAdmin`, body);
       getBlockedMembers();
-     
-  
     } catch (error) {
       console.error('Error while reporting:', error);
     }
+  };
+
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+
+    const daySuffix = (day) => {
+      if (day > 3 && day < 21) return 'th';
+      switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+
+    return `${day}${daySuffix(day)} ${month} ${year}`;
   }
+
+  const filteredMembers = allMembers.filter(member =>
+    member.firstName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   
+  const handleMemberSelect = (memberId) => {
+    setSelectedMembers((prevSelected) =>
+      prevSelected.includes(memberId)
+        ? prevSelected.filter((id) => id !== memberId)
+        : [...prevSelected, memberId]
+    );
+  };
+
+  const handleSaveMembers = async () => {
+    console.log('selectedMembers',selectedMembers)
+    // try {
+    //   const response = await axios.put(
+    //     `${baseUrl}/forums/members/${id}`,
+    //     {
+    //       userId: selectedMembers,
+    //     }
+    //   );
+    //   setShowModal(false);
+    //   getForumMembers();
+    //   toast.success('Members updated successfully!');
+    // } catch (error) {
+    //   console.error('Error updating members:', error);
+    //   toast.error('Failed to update members.');
+    // }
+  };
+
 
   return (
-    <div style={{ width: '60%' }}>
-      <h1 style={{ backgroundColor: '#174873', color: 'white', textAlign: 'center', padding: '30px 0px', fontWeight: '600' }}>Forums</h1>
-      <div className='iforum'>
-        <div className='iforum-1'>
-          {forum && (
-            <>
-              {((forum.userId === profile._id || admin) && forum.type === 'Private') && (
-                <>
-                  <IconButton onClick={() => handleDeletePost(forum._id)} className='delete-button'>
-                    <DeleteRounded />
-                  </IconButton>
-                  <Link to={`/forums/${id}/members`}>
-                    <p>Manage forum members</p>
-                  </Link>
-                </>
+    <div style={{ width: '100%' }}>
+      <div className="forum-post-container">
+        {forum && (
+          <>
+            {(forum.userId === profile._id || admin) && forum.type === 'Private' && (
+              <div className='manage-members'>
+                <p className='manage-members-btn' onClick={() => setShowModal(true)}>Manage forum members</p>
+              </div>
+            )}
+            <div className="forum-post">
+              <div className="user-info">
+                <div className="avatar">
+                  <img src={forum.profilePicture} alt="" style={{ borderRadius: '50%', width: '152px', height: '152px' }} />
+                </div>
+                <div className="user-details-forum">
+                  <p className="username">{forum.userName}</p>
+                </div>
+              </div>
+              <div className="post-info">
+                <p className="post-date">Posted on {formatDate(forum.createdAt)}</p>
+                <h2 className="post-title">{forum.title}</h2>
+                <p className="post-description" dangerouslySetInnerHTML={{ __html: forum.description }}></p>
+                {forum.picture && (
+                  <img
+                    src={forum.picture}
+                    alt="Forum Image"
+                    style={{ width: '300px', height: '300px', objectFit: 'cover', borderRadius: '10px', paddingBottom: '10px' }}
+                  />
+                )}
+              </div>
+              {(forum.userId === profile._id || admin) && forum.type === 'Private' && (
+                <div className="post-actions">
+                  <img src={deleteButton} alt="delete-button" className="delete-icon" onClick={() => handleDeletePost(forum._id)} />
+                </div>
               )}
-              <h1 style={{ fontFamily: 'sans-serif', fontWeight: 500, fontSize: 30, marginTop: '1em' }}>{forum.title}</h1>
-              <p style={{ fontWeight: '500', fontSize: '20' }} dangerouslySetInnerHTML={{ __html: forum.description }}></p>
-              {forum.picture && <img src={forum.picture} alt="Forum Image" style={{ width: '300px', height: '300px', objectFit: 'cover', borderRadius: '10px', paddingBottom: '10px' }} />}
-            </>
-          )}
-        </div>
+              <div className="reply-action">
+                <img src={reply} alt="reply-icon" className="reply-icon" />
+                <span>Reply</span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <Routes>
         <Route path="/" element={
           forum && (
             (forum.type === 'Public' || forum.comment === true || profile.profileLevel === 0 || forum.userId === profile._id || members.includes(profile._id)) ? (
-              <div style={{ width: '100%', display: 'flex', justifyContent: 'center', backgroundColor: '#F5F5F5', margin: '20px 0px' }}>
-                <div style={{ width: '60%', padding: '30px' }}>
+              <div style={{ width: '100%', display: 'flex', justifyContent: 'center', padding: '0% 5%' }}>
+                <div style={{ width: '100%' }}>
                   {forum && (
                     <>
                       {blockedUserIds.some(item => item.userId === profile._id && !item.sent) ? (
                         <>
-                          <p>You have been blocked for the comment: <span style={{ fontWeight: '500' }}>{blockedUserIds.find(item => item.userId === profile._id).content}</span>.  Click <span onClick={() => reportToSuperAdmin(blockedUserIds.find(item => item.userId === profile._id).commentId, blockedUserIds.find(item => item.userId === profile._id).content,forum.title,forum._id)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>here</span> to report to Super Admin
-                          </p>
+                          <p>You have been blocked for the comment: <span style={{ fontWeight: '500' }}>{blockedUserIds.find(item => item.userId === profile._id).content}</span>. Click <span onClick={() => reportToSuperAdmin(blockedUserIds.find(item => item.userId === profile._id).commentId, blockedUserIds.find(item => item.userId === profile._id).content, forum.title, forum._id)} style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}>here</span> to report to Super Admin</p>
                         </>
-                      ) : blockedUserIds.some(item => item.userId === profile._id && item.sent===true)?(
+                      ) : blockedUserIds.some(item => item.userId === profile._id && item.sent === true) ? (
                         <>
-                          Reported to super admin.Please wait while it is being verified.
+                          Reported to super admin. Please wait while it is being verified.
                         </>
-                      ):
-                      (
+                      ) : (
                         <CommentSection
                           comments={forum.comments ? filterReportedComments(forum.comments) : null}
                           entityId={id}
@@ -206,7 +271,6 @@ const IForum = () => {
                       )}
                     </>
                   )}
-
                 </div>
               </div>
             ) : (
@@ -216,8 +280,44 @@ const IForum = () => {
             )
           )
         } />
-        <Route path={`/members/*`} element={<AddMembers type='forums' />} />
       </Routes>
+
+      {showModal && (
+        <div className="modal-overlay-forum">
+          <div className="modal-forum">
+            <div className="modal-header-forum">
+              <div>
+                <h2>Manage Members</h2>
+                <p>Add/Remove Members</p>
+              </div>
+              <button className="close-button" onClick={() => setShowModal(false)}>X</button>
+            </div>
+            <input
+              type="text"
+              placeholder="Search people"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+            <ul className="members-list">
+              {filteredMembers.map((member, index) => (
+                <li key={index} className="member-item">
+                  <div className="member-info">
+
+                    <img src={member.profilePicture ? member.profilePicture : Picture} alt="avatar" className="member-avatar" />
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                      <span>{member.firstName}</span>
+                      <span className="member-role">{member.profileLevel===0 ? 'Super Admin': member.profileLevel===1 ? 'Admin':member.profileLevel===2 ? 'Alumni': 'Student'}</span>
+                    </div>
+                  </div>
+                  <input type="checkbox" checked={members.includes(member._id)} onChange={() => handleMemberSelect(member._id)}/>
+                </li>
+              ))}
+            </ul>
+            <button className="save-button" onClick={handleSaveMembers}>Save</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

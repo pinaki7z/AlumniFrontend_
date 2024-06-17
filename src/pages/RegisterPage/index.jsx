@@ -9,6 +9,7 @@ import pic from "../../images/bhuUni.jpg";
 import logo from "../../images/bhu.png";
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
+import baseUrl from "../../config.js";
 
 const RegisterPage = () => {
   const navigateTo = useNavigate();
@@ -34,7 +35,7 @@ const RegisterPage = () => {
     setLoading(true);
     try {
       console.log('formData', formData);
-      const response = await axios.post('http://localhost:5000/alumni/register', formData);
+      const response = await axios.post(`${baseUrl}/alumni/register`, formData);
 
       console.log('Registration successful!', response.data);
       toast.success("User Registered successfully!");

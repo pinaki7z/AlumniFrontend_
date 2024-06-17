@@ -9,14 +9,17 @@ import JobIntDisplay from '../JobsInt/JobIntDispay';
 import { useSelector } from 'react-redux';
 import { DisplayNews } from '../DisplayNews';
 import { dotPulse } from 'ldrs';
+import EventDisplay from './EventDisplay';
 import { useParams } from 'react-router-dom';
 import PollDisplay from './PollDisplay';
-dotPulse.register()
+import baseUrl from '../../config';
+dotPulse.register();
 
 
 
 
-function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDeleteButton, admin }) {
+
+function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDeleteButton, admin,userId,groupID }) {
   const [posts, setPosts] = useState([]);
   const profile = useSelector((state) => state.profile);
   const [loading, setLoading] = useState(false);
@@ -29,10 +32,6 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
   const [jobs, setJobs] = useState([]);
   const { _id } = useParams();
 
-
-  const getJobs = () => {
-
-  }
 
   const LIMIT = 4;
 
@@ -88,7 +87,7 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
 
   const handleLikes = async (entityId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/${entityType}/${entityId}`);
+      const response = await axios.get(`${baseUrl}/${entityType}/${entityId}`);
       const updatedPost = response.data;
 
 
@@ -114,7 +113,7 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
 
   const refreshComments = async (postId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/${entityType}/${postId}`);
+      const response = await axios.get(`${baseUrl}/${entityType}/${postId}`);
       const updatedPost = response.data;
       setPosts((prevPosts) => {
         return prevPosts.map((post) => {
@@ -130,17 +129,37 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
   };
 
   const getPosts = async (page) => {
+    console.log('getting posts')
     setLoading(true);
     isFetchingRef.current = false;
     console.log("Getting posts/news")
     try {
+      if(userId){
+        const response = await axios.get(
+          `${baseUrl}/${entityType}/userPosts/${userId}?page=${page}&size=${LIMIT}`
+        );
+        const postsData = response.data.records;
+        setPosts((prevItems) => [...prevItems, ...postsData]);
+        setTotalPosts(response.data.total);
+        lastFetchedPageRef.current = page;
+      }else if(groupID){
+        const response = await axios.get(
+          `${baseUrl}/groups/groups/${groupID}?page=${page}&size=${LIMIT}`
+        );
+        const postsData = response.data.records;
+        setPosts((prevItems) => [...prevItems, ...postsData]);
+        setTotalPosts(response.data.total);
+        lastFetchedPageRef.current = page;
+      }
+      else{
       const response = await axios.get(
-        `http://localhost:5000/${entityType}?page=${page}&size=${LIMIT}`
+        `${baseUrl}/${entityType}?page=${page}&size=${LIMIT}`
       );
       const postsData = response.data.records;
       setPosts((prevItems) => [...prevItems, ...postsData]);
       setTotalPosts(response.data.total);
       lastFetchedPageRef.current = page;
+    }
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
@@ -200,7 +219,13 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
           } else if (post.type === 'poll') {
             return (
               <div key={post._id} className="post-box">
-                <PollDisplay poll={post} />
+                <PollDisplay poll={post}/>
+              </div>
+            );
+          }else if (post.type === 'event') {
+            return (
+              <div key={post._id} className="post-box">
+                <EventDisplay event={post}/>
               </div>
             );
           }

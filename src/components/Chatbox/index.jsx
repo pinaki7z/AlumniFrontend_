@@ -9,7 +9,8 @@ import arrowUp from '../../images/arrowDoubleUp.svg';
 import arrowDown from '../../images/arrowDoubleDown.svg';
 import profileIcon from '../../images/profile.svg';
 import expand from '../../images/expand.svg';
-import ChatM from '../../pages/Chat'
+import ChatM from '../../pages/Chat';
+import baseUrl from '../../config';
 
 const Chatbox = () => {
   const [isExpanded, setIsExpanded] = useState(false);

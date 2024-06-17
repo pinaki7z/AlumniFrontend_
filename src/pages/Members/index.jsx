@@ -8,9 +8,13 @@ import DonSponRequest from '../../components/DonSponRequest';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { toast } from "react-toastify";
+import { IoSearchSharp } from "react-icons/io5";
+import createMember from "../../images/create.svg";
+import { Link } from 'react-router-dom';
+import baseUrl from '../../config';
 const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
   const membersred = useSelector((state) => state.member.filter(member => member.profileLevel !== 0));
-  const [cookie,setCookie] = useCookies('token')
+  const [cookie, setCookie] = useCookies('token')
   const [displayedMembers, setDisplayedMembers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [noUsersFound, setNoUsersFound] = useState(false);
@@ -79,8 +83,8 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
   const handleDelete = async (memberId) => {
     console.log('handling delete')
     try {
-      const token = cookie.token; 
-      const response = await axios.delete(`https://localhost:5000/alumni/${memberId}`, {
+      const token = cookie.token;
+      const response = await axios.delete(`${baseUrl}/alumni/${memberId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -98,42 +102,74 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
       console.error('Error deleting user:', error);
     }
   };
-  
+
 
   return (
     <div className="member-container">
       <div
         style={{
-          backgroundColor: '#174873',
           paddingBottom: '2em',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '17vh',
+          paddingTop: '25px'
         }}
       >
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Search for members"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+        <p style={{fontWeight: '600', paddingBottom: '0px',color: '#3A3A3A', fontSize: '32px'}}>Members</p>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div className="search" style={{ display: 'flex', width: '75%'}}>
+                        <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        <div style={{ position: 'relative', width: '100%' }}>
+                <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Search for members"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175', backgroundColor: 'white'}}
+                />
+                <button
+                    type="submit"
+                    style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        backgroundColor: 'white',
+                        border: 'none',
+                        padding: '5px',
+                        color: 'white',
+                        cursor: 'pointer'
+                    }}
+                >
+                    
+                        <IoSearchSharp style={{ color: '#136175',width: '25px',height: '25px' }} />
+                </button>
+            </div>
+                            
+                        </form>
+                    </div>
+          <select className='select-dropdown'>
+            <option value="">All Roles</option>
+            <option value="Admin">Admin</option>
+            <option value="Alumni">Alumni</option>
+            <option value="Current Student">Current Student</option>
+          </select>
         </div>
+
       </div>
       <Routes>
         <Route path="/" element={
 
           <>
-            <div>
+            {/* <div>
               <PageSubTitle
                 buttontext1={`All Members (${profile.profileLevel === 0 ? 'superadmin' : profile.profileLevel === 1 ? 'admin' : 'alumni/current'})`}
                 name='members'
                 create={admin}
               />
 
-            </div>
+            </div> */}
             <div
               className="pro"
               style={{
@@ -143,6 +179,11 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
                 paddingBottom: '20px',
               }}
             >
+              <Link to={`/members/create`} style={{ textDecoration: 'none', color: 'black' }}>
+              <div style={{border: '2px dotted #6FBC94', borderRadius: '8px', width: '17vw', height: '100%',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <img src={createMember} alt="" srcset="" />
+              </div>
+              </Link>
               {displayedMembers.map((member) => (
                 <Profilecard
                   key={member._id}

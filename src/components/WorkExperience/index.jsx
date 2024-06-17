@@ -4,6 +4,7 @@ import { RiBriefcase4Line } from "react-icons/ri";
 import { useCookies } from 'react-cookie';
 import './workExperience.css';
 import { useSelector } from "react-redux";
+import baseUrl from '../../config';
 
 
 export const WorkExperience = () => {
@@ -18,7 +19,7 @@ export const WorkExperience = () => {
 
     const fetchWorkExperiences = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/alumni/workExperience/${profile._id}`, {
+            const response = await fetch(`${baseUrl}/alumni/workExperience/${profile._id}`, {
                 headers: {
                     'Authorization': `Bearer ${cookie.token}`
                 }

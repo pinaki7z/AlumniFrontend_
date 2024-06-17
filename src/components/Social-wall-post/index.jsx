@@ -4,7 +4,7 @@ import Feeed from '../Feeed';
 //import { useCookies } from 'react-cookie';
 //import './SocialWall.scss';
 
-function SocialMediaPost({showCreatePost}) {
+function SocialMediaPost({showCreatePost,groupID}) {
   //const [cookie,setCookie]= useCookies(['access_token']);  
 //   const photo = currentUser?.photoURL ?? undefined;
   //const user = cookie.access_token?.userName ?? null;
@@ -15,7 +15,7 @@ function SocialMediaPost({showCreatePost}) {
       {/* <Header photoUrl={photo} username={user} /> */}
       <div className='socialWallBody' style={{height: '100%'}}>
         {/* <SideBar photoUrl={photo} username={user} /> */}
-        <Feeed entityType='posts' showCreatePost={showCreatePost} showDeleteButton={true}/>
+        <Feeed entityType='posts' showCreatePost={showCreatePost} showDeleteButton={true} groupID={groupID}/>
         {/* <Widget /> */}
       </div>
     </>

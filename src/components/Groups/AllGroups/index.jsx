@@ -2,6 +2,7 @@ import DisplayPost from "../../DisplayPost";
 import { useSelector } from "react-redux";
 import { useState,useEffect } from "react";
 import axios from "axios";
+import baseUrl from "../../../config";
 const AllGroups = () => {
     console.log("ALL GROUPS")
     const title = 'SuggestedGroups';
@@ -21,7 +22,7 @@ const AllGroups = () => {
         }
         try {
             const response = await axios.get(
-                `http://localhost:5000/groups?page=${page}&size=${LIMIT}`,
+                `${baseUrl}/groups?page=${page}&size=${LIMIT}`,
                 { userId: profile._id },
             );
             const postsData = response.data.records;

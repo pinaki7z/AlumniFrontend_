@@ -3,6 +3,7 @@ import { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import baseUrl from "../../../config";
 const JoinedGroups = () => {
   const title = 'JoinedGroups';
   const { id } = useParams();
@@ -22,7 +23,7 @@ const JoinedGroups = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:5000/groups/joined?page=${page}&size=${LIMIT}&userId=${id}`
+        `${baseUrl}/groups/joined?page=${page}&size=${LIMIT}&userId=${id}`
       );
       const postsData = response.data.records;
       setGroups((prevItems) => [...prevItems, ...postsData]);

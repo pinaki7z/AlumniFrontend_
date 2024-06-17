@@ -10,7 +10,7 @@ import { useCookies } from "react-cookie";
 import Contact from "./Contact";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePaperClip } from "react-icons/ai";
-import { BASE_URL } from "../../config";
+import baseUrl from "../../config";
 
 const Chat = ({userId}) => {
   
@@ -28,7 +28,6 @@ const Chat = ({userId}) => {
   const [blockedByUsers, setBlockedByUsers] = useState([]);
   const [blockedUsers, setBlockedUsers] = useState([]);
   const navigateTo = useNavigate();
-  console.log('base url',BASE_URL);
   
 
 
@@ -48,7 +47,7 @@ const Chat = ({userId}) => {
 
   const fetchBlockedByUsers = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/alumni/${profile._id}/blockedByUsers`);
+      const response = await fetch(`${baseUrl}/alumni/${profile._id}/blockedByUsers`);
       if (!response.ok) {
         throw new Error('Failed to fetch blocked by users');
       }
@@ -61,7 +60,7 @@ const Chat = ({userId}) => {
   };
   const fetchBlockedUsers = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/alumni/${profile._id}/blockedUsers`);
+      const response = await fetch(`${baseUrl}/alumni/${profile._id}/blockedUsers`);
       if (!response.ok) {
         throw new Error('Failed to fetch blocked by users');
       }
@@ -135,7 +134,7 @@ const Chat = ({userId}) => {
     
     if(file){
       console.log('file',file)
-      axios.get(`http://localhost:5000/messages/${selectedUserId}`, {
+      axios.get(`${baseUrl}/messages/${selectedUserId}`, {
         headers: {
           Authorization: `Bearer ${cookie.token}`,
         },
@@ -199,7 +198,7 @@ const Chat = ({userId}) => {
   }, [messages])
 
   useEffect(() => {
-    axios.get('http://localhost:5000/alumni/all/allAlumni', {
+    axios.get(`${baseUrl}/alumni/all/allAlumni`, {
       headers: {
         Authorization: `Bearer ${cookie.token}`,
       },
@@ -221,7 +220,7 @@ const Chat = ({userId}) => {
     console.log('selected user id in useEffect',selectedUserId)
     if (selectedUserId) {
 
-      axios.get(`http://localhost:5000/messages/${selectedUserId}`, {
+      axios.get(`${baseUrl}/messages/${selectedUserId}`, {
         headers: {
           Authorization: `Bearer ${cookie.token}`,
         },
@@ -298,7 +297,7 @@ const Chat = ({userId}) => {
                       {message.file && (
                         <div style={{fontSize: '14px',display: 'flex', alignItems: 'center'}}>
                           <AiOutlinePaperClip/>
-                          <a href={`http://localhost:5000/uploads/${message.file}`} target="_blank" rel="noopener noreferrer">{message.file}</a>
+                          <a href={`${baseUrl}/uploads/${message.file}`} target="_blank" rel="noopener noreferrer">{message.file}</a>
                       </div>
                       )
                       }

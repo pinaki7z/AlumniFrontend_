@@ -30,7 +30,25 @@
 
 .pro{
     display: flex;
-    gap: 15px;
+    gap: 17px;
 }
+.select-dropdown {
+    background-color: 
+    #E9F5EF; 
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #00796b; 
+    position: relative;
+    font-size: 16px; /* increase font size */
+  }
+  
+  .select-dropdown::after {
+    font-size: 28px; 
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
         
       

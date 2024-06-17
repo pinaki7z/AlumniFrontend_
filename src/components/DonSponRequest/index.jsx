@@ -16,6 +16,7 @@ import Finance from "../../../src/images/pexels-lukas-590041.jpg";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from 'react';
+import baseUrl from "../../config";
 const DonSponRequest = ({ name, edit }) => {
     console.log("DON SPON");
     console.log('name', name, edit)
@@ -46,24 +47,24 @@ const DonSponRequest = ({ name, edit }) => {
                 const fileInput = document.getElementById('csv');
                 const formData = new FormData();
                 formData.append('csv', fileInput.files[0]);
-    
-                const response = await axios.post('http://localhost:5000/alumni/alumni/bulkRegister', formData, {
+
+                const response = await axios.post(`${baseUrl}/alumni/alumni/bulkRegister`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-    
+
                 console.log('Registration successful!', response.data);
                 toast.success("User Registered successfully!");
                 setLoading(false);
                 navigateTo('/members');
-    
+
             } catch (error) {
                 console.error('Registration failed!', error.response.data);
                 toast.error(error.response.data.error);
             }
         };
-    
+
         return (
             <Modal
                 {...props}
@@ -81,7 +82,7 @@ const DonSponRequest = ({ name, edit }) => {
                         <p>Upload .csv file</p>
                         <input type="file" name="csv" id="csv" />
                         <a
-                            href="http://localhost:5000/uploads/Book-_1_.csv"
+                            href={`${baseUrl}/uploads/Book-_1_.csv`}
                             download="Book-_1_.csv"
                         >
                             Download sample .csv file
@@ -227,7 +228,7 @@ const DonSponRequest = ({ name, edit }) => {
             }
             try {
                 console.log('formData member', formData)
-                const response = await axios.post('http://localhost:5000/alumni/register', formData);
+                const response = await axios.post(`${baseUrl}/alumni/register`, formData);
                 console.log('Registration successful!', response.data);
                 toast.success("User Registered successfully!");
                 setLoading(false);
@@ -266,7 +267,7 @@ const DonSponRequest = ({ name, edit }) => {
 
                 console.log('formData to  send ', formDataToSend)
 
-                const response = await fetch('http://localhost:5000/donations/create', {
+                const response = await fetch(`${baseUrl}/donations/create`, {
                     method: 'POST',
                     body: formDataToSend,
                 });
@@ -306,7 +307,7 @@ const DonSponRequest = ({ name, edit }) => {
 
                 // }
 
-                const response = await fetch('http://localhost:5000/sponsorships/create', {
+                const response = await fetch(`${baseUrl}/sponsorships/create`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -334,7 +335,7 @@ const DonSponRequest = ({ name, edit }) => {
         if (!edit) {
             console.log('body', body)
             try {
-                const response = await axios.post(`http://localhost:5000/${name}s/create`,
+                const response = await axios.post(`${baseUrl}/${name}s/create`,
                     body,
                     {
                         "Content-Type": "application/json"
@@ -354,13 +355,13 @@ const DonSponRequest = ({ name, edit }) => {
 
             } catch (error) {
                 toast.error(error.response.data.message);
-                console.log('error',error)
+                console.log('error', error)
                 console.error(error.response.data.message);
             }
         }
         else {
             try {
-                const response = await axios.put(`http://localhost:5000/${name}s/${_id}`,
+                const response = await axios.put(`${baseUrl}/${name}s/${_id}`,
                     body,
                     {
                         "Content-Type": "application/json"
@@ -755,7 +756,7 @@ const DonSponRequest = ({ name, edit }) => {
                     <PageTitle icon={icon} title={heading} />
                 </div>
                 <div>
-                    <form className= 'don-spon-request' onSubmit={handleSubmit} style={{ display: 'flex', paddingBottom: '20px', alignItems: 'center', backgroundColor: 'white', borderRadius: '6px', marginTop: '20px', flexDirection: 'column' }}>
+                    <form className='don-spon-request' onSubmit={handleSubmit} style={{ display: 'flex', paddingBottom: '20px', alignItems: 'center', backgroundColor: 'white', borderRadius: '6px', marginTop: '20px', flexDirection: 'column' }}>
                         {extraFields}
                         <div style={{ display: 'flex', flexDirection: 'row', width: '95%', justifyContent: 'center', gap: '2rem' }}>
                             <button style={{ display: 'flex', border: 'none', background: 'inherit', alignItems: 'center', color: '#666', width: '14%', gap: '0.5rem', justifyContent: 'center' }}><Link to={`/${name}s`} style={{ textDecoration: 'none', color: 'black', display: 'flex', alignItems: 'center', color: 'rgb(102, 102, 102)', width: '100%', gap: '0.5rem', justifyContent: 'center' }}><FaArrowLeft /><p style={{ marginBottom: '0rem' }}>Go Back</p></Link></button>

@@ -16,7 +16,8 @@ import commentIcon from "../../images/comment.svg";
 import share from "../../images/share.svg";
 import liked from "../../images/liked.svg";
 import unliked from "../../images/unliked.svg";
-import postDelete from "../../images/post-delete.svg"
+import postDelete from "../../images/post-delete.svg";
+import baseUrl from "../../config";
 
 function Post({ userId, postId, profilePicture, username, text, timestamp, image, video, likes, handleLikes, handleComments, className, onDeletePost, entityType, showDeleteButton, groupID }) {
   console.log('video pathh',video)
@@ -90,7 +91,7 @@ function Post({ userId, postId, profilePicture, username, text, timestamp, image
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/posts/${postId}/comments`);
+      const response = await axios.get(`${baseUrl}/posts/${postId}/comments`);
       const fetchedComments = response.data.comments;
       setComments(fetchedComments);
     } catch (error) {
@@ -104,7 +105,7 @@ function Post({ userId, postId, profilePicture, username, text, timestamp, image
     try {
 
       const response = await axios.patch(
-        `http://localhost:5000/posts/${postId}/likes`,
+        `${baseUrl}/posts/${postId}/likes`,
         {
           userId: loggedInUserId,
           userName: username,
@@ -127,7 +128,7 @@ function Post({ userId, postId, profilePicture, username, text, timestamp, image
   const handleDeletePost = async (userId) => {
     if (userId === profile._id) {
       try {
-        await axios.delete(`http://localhost:5000/${entityType}/${postId}`);
+        await axios.delete(`${baseUrl}/${entityType}/${postId}`);
         onDeletePost(postId);
       } catch (error) {
         console.error('Error deleting post:', error);
