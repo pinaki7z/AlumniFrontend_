@@ -172,7 +172,7 @@ const IForum = () => {
   const filteredMembers = allMembers.filter(member =>
     member.firstName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
+
   const handleMemberSelect = (memberId) => {
     setSelectedMembers((prevSelected) =>
       prevSelected.includes(memberId)
@@ -182,7 +182,7 @@ const IForum = () => {
   };
 
   const handleSaveMembers = async () => {
-    console.log('selectedMembers',selectedMembers)
+    console.log('selectedMembers', selectedMembers)
     // try {
     //   const response = await axios.put(
     //     `${baseUrl}/forums/members/${id}`,
@@ -232,12 +232,16 @@ const IForum = () => {
                 )}
               </div>
               {(forum.userId === profile._id || admin) && forum.type === 'Private' && (
-                <div className="post-actions">
-                  <img src={deleteButton} alt="delete-button" className="delete-icon" onClick={() => handleDeletePost(forum._id)} />
+                <div className="post-actions" onClick={() => handleDeletePost(forum._id)} >
+                  <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V4H1V16ZM14 1H10.5L9.5 0H4.5L3.5 1H0V3H14V1Z" fill="#136175" />
+                  </svg>
                 </div>
               )}
               <div className="reply-action">
-                <img src={reply} alt="reply-icon" className="reply-icon" />
+                <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 4V0L0 7L7 14V9.9C12 9.9 15.5 11.5 18 15C17 10 14 5 7 4Z" fill="#136175" />
+                </svg>
                 <span>Reply</span>
               </div>
             </div>
@@ -305,12 +309,12 @@ const IForum = () => {
                   <div className="member-info">
 
                     <img src={member.profilePicture ? member.profilePicture : Picture} alt="avatar" className="member-avatar" />
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
                       <span>{member.firstName}</span>
-                      <span className="member-role">{member.profileLevel===0 ? 'Super Admin': member.profileLevel===1 ? 'Admin':member.profileLevel===2 ? 'Alumni': 'Student'}</span>
+                      <span className="member-role">{member.profileLevel === 0 ? 'Super Admin' : member.profileLevel === 1 ? 'Admin' : member.profileLevel === 2 ? 'Alumni' : 'Student'}</span>
                     </div>
                   </div>
-                  <input type="checkbox" checked={members.includes(member._id)} onChange={() => handleMemberSelect(member._id)}/>
+                  <input type="checkbox" checked={members.includes(member._id)} onChange={() => handleMemberSelect(member._id)} />
                 </li>
               ))}
             </ul>

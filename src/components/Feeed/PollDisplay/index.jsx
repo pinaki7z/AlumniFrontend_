@@ -104,7 +104,9 @@ const PollDisplay = ({ poll }) => {
                     <span style={{ fontSize: '14px', fontWeight: '500', color: '#136175' }}>{formatCreatedAt(poll.createdAt)}</span>
                 </div>
                 <IconButton className='delete-button' style={{ marginRight: '10px', marginLeft: 'auto' }}>
-                    <img src={postDelete} />
+                    <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V4H1V16ZM14 1H10.5L9.5 0H4.5L3.5 1H0V3H14V1Z" fill="#003366" />
+                    </svg>
                 </IconButton>
             </div>
             <h3 style={{ fontWeight: '600', fontSize: '20px', paddingTop: '30px', color: '#3A3A3A', fontFamily: 'Inter' }}>{poll.question}</h3>
@@ -134,7 +136,7 @@ const PollDisplay = ({ poll }) => {
                     <div className='voters-container'>
                         {pollData.options.map(option => (
                             <div key={option._id} className='option-result'>
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <h3>{option.option} </h3>
                                     <h3>Total votes- {option.votes.length} </h3>
                                 </div>

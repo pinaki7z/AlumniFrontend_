@@ -15,7 +15,8 @@ import { useSelector } from "react-redux";
 import { FcInvite } from "react-icons/fc";
 import { GroupInvite } from "../GroupInvite";
 import { JoinGroup } from "../JoinGroup";
-import groupBackGroundImage from "../../../images/group-happy-people-playing-summer-sunset-nature.jpg";
+// import groupBackGroundImage from "../../../images/group-happy-people-playing-summer-sunset-nature.jpg";
+import backgroundImage from "./group-happy-people-playing-summer-sunset-nature.jpg"
 import baseUrl from "../../../config";
 
 const IndividualGroup = () => {
@@ -46,7 +47,7 @@ const IndividualGroup = () => {
         <div style={{ width: '100%' }}>
             {group.map((groupItem) => (
                 <div key={groupItem._id} className="ig-container">
-                    <div className='ig-upper-container' style={{ backgroundImage: `url(${groupItem.groupLogo? groupItem.groupLogo: groupBackGroundImage})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                    <div className='ig-upper-container' style={{ backgroundImage: `url(${groupItem.groupLogo? groupItem.groupLogo: backgroundImage})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                         <div style={{ width: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden' }}>
                             <img src={picture} alt="" style={{ width: '7rem', height: '7rem', borderRadius: '50%' }} />
                             <h1 style={{ backgroundColor: '#f3cdcd', marginTop: '10px', borderRadius: '6px', textAlign: 'center', marginLeft: '10px' }}>{groupItem.groupName}</h1>
