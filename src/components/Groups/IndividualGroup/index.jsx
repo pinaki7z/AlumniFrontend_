@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import picture from 'public/images/d-group.jpg';
+import picture from 'images/d-group.jpg';
 import { Link } from "react-router-dom";
 import './IndividualGroup.css';
 import SocialMediaPost from "../../Social-wall-post";
@@ -16,7 +16,7 @@ import { FcInvite } from "react-icons/fc";
 import { GroupInvite } from "../GroupInvite";
 import { JoinGroup } from "../JoinGroup";
 // import groupBackGroundImage from "../../../images/group-happy-people-playing-summer-sunset-nature.jpg";
-import backgroundImage from "public/images/group-happy-people-playing-summer-sunset-nature.jpg"
+import backgroundImage from "images/group-happy-people-playing-summer-sunset-nature.jpg"
 import baseUrl from "../../../config";
 
 const IndividualGroup = () => {

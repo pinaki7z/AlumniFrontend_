@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './chat.css';
-import Picture from 'public/images/profilepic.jpg';
+import Picture from 'images/profilepic.jpg';
 import { FaFaceSmile } from 'react-icons/fa6';
 import { FiSend } from 'react-icons/fi';
 import Picker from 'emoji-picker-react';

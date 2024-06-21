@@ -11,12 +11,12 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useParams } from "react-router-dom";
-import deleteButton from "public/images/delete.svg";
-import commentIcon from "public/images/comment.svg";
-import share from "public/images/share.svg";
-import liked from "public/images/liked.svg";
-import unliked from "public/images/unliked.svg";
-import postDelete from "public/images/post-delete.svg";
+import deleteButton from "images/delete.svg";
+import commentIcon from "images/comment.svg";
+import share from "images/share.svg";
+import liked from "images/liked.svg";
+import unliked from "images/unliked.svg";
+import postDelete from "images/post-delete.svg";
 import baseUrl from "../../config";
 
 function Post({ userId, postId, profilePicture, username, text, timestamp, image, video, likes, handleLikes, handleComments, className, onDeletePost, entityType, showDeleteButton, groupID }) {

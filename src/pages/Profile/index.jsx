@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "./profile.css";
-import picture from "public/images/d-cover.jpg";
+import picture from "images/d-cover.jpg";
 import { BiUserPlus } from 'react-icons/bi'
 import { LuMessageSquare } from 'react-icons/lu'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -10,11 +10,11 @@ import Icons1 from "../../components/Icons1";
 import { useSelector } from "react-redux";
 import { height, padding } from "@mui/system";
 import Feeed from "../../components/Feeed";
-import about from "public/images/about.svg";
-import work from "public/images/work.svg";
-import location from "public/images/location.svg";
-import time from "public/images/Time.svg";
-import arrowRight from "public/images/arrowRight.svg";
+import about from "images/about.svg";
+import work from "images/work.svg";
+import location from "images/location.svg";
+import time from "images/Time.svg";
+import arrowRight from "images/arrowRight.svg";
 
 const Profile = () => {
   const { id } = useParams();

@@ -1,6 +1,6 @@
-import pic from "public/images/profilepic.jpg";
+import pic from "images/profilepic.jpg";
 import { Avatar, IconButton, Modal, Box } from '@mui/material';
-import postDelete from "public/images/post-delete.svg";
+import postDelete from "images/post-delete.svg";
 import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import { toast } from "react-toastify";

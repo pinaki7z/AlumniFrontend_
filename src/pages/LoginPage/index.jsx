@@ -1,6 +1,6 @@
 import "./loginPage.css";
 import "../../components/FrameComponent/FrameComponent.css";
-import io from "public/images/io.png";
+import io from "images/io.png";
 import { useState } from 'react';
 import './loginPage.css';
 import { useCookies } from "react-cookie";

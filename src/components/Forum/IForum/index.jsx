@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Picture from 'public/images/io.png';
+import Picture from 'images/io.png';
 import CommentSection from '../../CommentSection';
 import axios from 'axios';
 import './IForum.css';
@@ -9,8 +9,8 @@ import { IconButton } from '@mui/material';
 import { toast } from "react-toastify";
 import { useNavigate, Link, Route, Routes } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import deleteButton from 'public/images/deleteButton.svg';
-import reply from "public/images/reply-forum.svg";
+import deleteButton from 'images/deleteButton.svg';
+import reply from "images/reply-forum.svg";
 import baseUrl from '../../../config';
 
 const IForum = () => {

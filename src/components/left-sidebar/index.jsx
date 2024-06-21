@@ -11,11 +11,11 @@ import { updateMember } from "../../store/membersSlice";
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { IoIosNotifications } from "react-icons/io";
-import io from "public/images/insideout.png";
 import baseUrl from "../../config";
 
 
 const LeftSidebar = () => {
+    console.log('env ', process.env.REACT_APP_URL)
 
     const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ const LeftSidebar = () => {
     return (
         <div style={{ width: '20%',backgroundColor: '#136175',height: '100vh',position: 'fixed' }}>
             <div style={{ textAlign: 'center', marginTop: '3em'}}>
-                        <img src={io} alt="" width="150px" height="75px"/>
+                        <img src={`${process.env.REACT_APP_URL}/images/insideout.png`} alt="" width="150px" height="75px"/>
                     </div>
                 <div className='sideBar'>                    
                     <ul style={{paddingLeft: '0px', width: '100%'}}>
