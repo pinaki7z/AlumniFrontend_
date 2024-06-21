@@ -5,10 +5,10 @@ import Chat from '../Chat';
 import { HiUserGroup } from "react-icons/hi2";
 import { PiUserListFill } from "react-icons/pi";
 import { AiOutlineArrowUp } from "react-icons/ai";
-import arrowUp from 'images/arrowDoubleUp.svg';
-import arrowDown from 'images/arrowDoubleDown.svg';
-import profileIcon from 'images/profile.svg';
-import expand from 'images/expand.svg';
+import arrowUp from 'public/images/arrowDoubleUp.svg';
+import arrowDown from 'public/images/arrowDoubleDown.svg';
+import profileIcon from 'public/images/profile.svg';
+import expand from 'public/images/expand.svg';
 import ChatM from '../../pages/Chat';
 import baseUrl from '../../config';
 

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { lineSpinner } from 'ldrs';
-import picture from 'images/pexels-lisa-fotios-1957478.jpg';
+import picture from 'public/images/pexels-lisa-fotios-1957478.jpg';
 import baseUrl from "../../config";
 
 lineSpinner.register();

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import './commentSection.css';
-import pic from "images/odA9sNLrE86.jpg";
+import pic from "public/images/odA9sNLrE86.jpg";
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { PiArrowBendDownLeftBold } from "react-icons/pi";
 import { MdOutlineDelete } from "react-icons/md";
-import replyy from "images/reply.svg";
-import deletee from "images/delete.svg";
+import replyy from "public/images/reply.svg";
+import deletee from "public/images/delete.svg";
 import baseUrl from "../../config";
 
 const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDeleteComment }) => {

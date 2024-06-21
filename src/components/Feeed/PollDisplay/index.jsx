@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './pollDisplay.css';
 import { Avatar, IconButton, Modal, Box } from '@mui/material';
-import postDelete from "images/post-delete.svg";
-import pic from "images/profilepic.jpg";
+import postDelete from "public/images/post-delete.svg";
+import pic from "public/images/profilepic.jpg";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from "react-toastify";
