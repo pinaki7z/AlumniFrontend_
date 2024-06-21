@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import backgroundPicture1 from '../../images/pexels-mohamed-abdelghaffar-771742.jpg';
-import picture from '../../../src/images/pexels-lisa-fotios-1957478.jpg';
+import backgroundPicture1 from 'images/pexels-mohamed-abdelghaffar-771742.jpg';
+import picture from 'images/pexels-lisa-fotios-1957478.jpg';
 import './individualDonSpon.css';
 import { RiInformationFill } from 'react-icons/ri';
 import { FaFacebookSquare, FaTwitter, FaInstagram, FaLinkedin, FaPinterestSquare } from 'react-icons/fa';

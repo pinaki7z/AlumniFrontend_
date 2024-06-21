@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { toast } from "react-toastify";
 import { IoSearchSharp } from "react-icons/io5";
-import createMember from "../../images/create.svg";
+import createMember from "images/create.svg";
 import { Link } from 'react-router-dom';
 import baseUrl from '../../config';
 const Members = ({ addButton, groupMembers, owner, deleteButton }) => {

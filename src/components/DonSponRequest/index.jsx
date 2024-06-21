@@ -8,11 +8,11 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Technology from "../../../src/images/pexels-pixabay-356056.jpg";
-import Retail from "../../../src/images/pexels-pixabay-264636.jpg";
-import Manufacturing from "../../../src/images/pexels-pixabay-257700.jpg";
-import Healthcare from "../../../src/images/pexels-chokniti-khongchum-2280568.jpg";
-import Finance from "../../../src/images/pexels-lukas-590041.jpg";
+import Technology from "images/pexels-pixabay-356056.jpg";
+import Retail from "images/pexels-pixabay-264636.jpg";
+import Manufacturing from "images/pexels-pixabay-257700.jpg";
+import Healthcare from "images/pexels-chokniti-khongchum-2280568.jpg";
+import Finance from "images/pexels-lukas-590041.jpg";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from 'react';
@@ -397,7 +397,6 @@ const DonSponRequest = ({ name, edit }) => {
             const reader = new FileReader();
 
             reader.onloadend = () => {
-
                 const blobString = reader.result;
                 item(blobString);
             };
@@ -411,13 +410,12 @@ const DonSponRequest = ({ name, edit }) => {
     const handleSponsorshipChange = (e) => {
         const { name, value, type, checked } = e.target;
 
-        // If the input type is checkbox, handle the checked state
+        
         const newValue = type === 'checkbox' ? checked : value;
 
-        // Convert specific fields to their desired types
         let updatedValue;
         if (name === 'number' || name === 'sponsorshipAmount' || name === 'expectedAttendees') {
-            updatedValue = parseFloat(newValue); // Convert to number
+            updatedValue = parseFloat(newValue);
 
         } else {
             updatedValue = newValue;
@@ -433,7 +431,7 @@ const DonSponRequest = ({ name, edit }) => {
 
 
 
-    const handleIndustryChange = (event) => { // Remove the second parameter 'item'
+    const handleIndustryChange = (event) => { 
         setIndustry(event.target.value);
         const industryImages = {
             Technology: Technology,
@@ -443,7 +441,7 @@ const DonSponRequest = ({ name, edit }) => {
             Healthcare: Healthcare,
         };
 
-        const imagePath = industryImages[event.target.value]; // Assuming this is a path to an image file
+        const imagePath = industryImages[event.target.value]; 
         fetch(imagePath)
             .then(response => response.blob())
             .then(blob => {

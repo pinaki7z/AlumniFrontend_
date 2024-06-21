@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./registerpage.css";
 import "../LoginPage/loginPage.css"
-import backgroundPic from "../../images/imgb.jpg";
-import pic from "../../images/bhuUni.jpg";
-import logo from "../../images/bhu.png";
+import backgroundPic from "images/imgb.jpg";
+import pic from "images/bhuUni.jpg";
+import logo from "images/bhu.png";
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import baseUrl from "../../config.js";

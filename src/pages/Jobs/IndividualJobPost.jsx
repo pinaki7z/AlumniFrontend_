@@ -13,7 +13,7 @@ import Form from 'react-bootstrap/Form';
 import { toast } from "react-toastify";
 import { lineSpinner } from 'ldrs';
 import './individualJobPost.css';
-import coverImage from '../../../src/images/cultural-1.jpg'
+import coverImage from 'images/cultural-1.jpg'
 import { fontSize } from "@mui/system";
 import { Link } from 'react-router-dom';
 import { CiLocationArrow1 } from "react-icons/ci";

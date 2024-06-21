@@ -1,6 +1,6 @@
 import './displayPost.css';
 import NoGroups from '../Groups/NoGroups';
-import picture from '../../images/d-group.jpg';
+import picture from 'images/d-group.jpg';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';

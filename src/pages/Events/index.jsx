@@ -17,7 +17,7 @@ import { FaCalendarPlus } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import axios from 'axios';
-import pic from "../../images/profilepic.jpg";
+import pic from "images/profilepic.jpg";
 import { Avatar, IconButton, Modal as MModal, Box, Modal as MMModal } from '@mui/material';
 import { useParams } from "react-router-dom";
 import { lineSpinner } from 'ldrs';

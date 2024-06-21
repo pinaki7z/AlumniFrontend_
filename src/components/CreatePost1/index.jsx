@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import '../CreatePost/socialWall.css';
-import picture from '../../images/profilepic.jpg'
+import picture from 'images/profilepic.jpg'
 import axios from 'axios';
 import JobsInt from '../JobsInt';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
-import video from "../../../src/images/videocam.svg";
-import gallery from "../../../src/images/gallery.svg";
-import poll from "../../../src/images/poll.svg";
+import video from "images/videocam.svg";
+import gallery from "images/gallery.svg";
+import poll from "images/poll.svg";
 import PollModal from './PollModal';
 import baseUrl from '../../config';
 

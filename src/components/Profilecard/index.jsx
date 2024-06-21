@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./profilecard.css";
-import picture from "../../images/profilepic.jpg";
+import picture from "images/profilepic.jpg";
 import { HiUsers } from "react-icons/hi";
 import { IoIosReorder } from "react-icons/io";
 import { MdLocationOn } from "react-icons/md";
@@ -11,8 +11,8 @@ import { useCookies } from "react-cookie";
 import { orbit } from 'ldrs';
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import delButton from "../../images/deleteButton.svg";
-import profileImage from "../../images/profileImage.png";
+import delButton from "images/deleteButton.svg";
+import profileImage from "images/profileImage.png";
 import { MdOutlineRestore } from "react-icons/md";
 import { MdOutlineDelete } from "react-icons/md";
 import baseUrl from "../../config";

@@ -1,6 +1,6 @@
 import './topbar.css'
 import { FaPlus, FaHome, FaBell } from 'react-icons/fa';
-import picture from '../../images/profilepic.jpg'
+import picture from 'images/profilepic.jpg'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { BiSolidBriefcase } from 'react-icons/bi';
@@ -239,7 +239,7 @@ const TopBar = ({ handleLogout }) => {
                             </div>
                         )}
                         <div style={{display: 'flex', alignItems: 'center', gap: '1vw'}}>
-                        <img src={profile.profilePicture || picture} alt='Profile' width='40px' height='40px' ref={profileOptionsRef} style={{ borderRadius: '50%', cursor: 'pointer' }} onClick={() => {
+                        <img src={profile.profilePicture ? profile.profilePicture : picture} alt='Profile' width='40px' height='40px' ref={profileOptionsRef} style={{ borderRadius: '50%', cursor: 'pointer' }} onClick={() => {
                             console.log('clicked image')
                             setShowMessages(false);
                             setShowNotifications(false);

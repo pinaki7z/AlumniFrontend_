@@ -132,7 +132,7 @@
     padding: 32px var(--padding-xl) 69px;
     box-sizing: border-box;
     gap: 32px;
-    background-image: url(/src/images/background.jpg);
+    background-image: url(images/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;

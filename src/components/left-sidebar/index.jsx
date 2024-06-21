@@ -11,7 +11,7 @@ import { updateMember } from "../../store/membersSlice";
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { IoIosNotifications } from "react-icons/io";
-import io from "../../../src/images/insideout.png";
+import io from "images/insideout.png";
 import baseUrl from "../../config";
 
 
