@@ -1,6 +1,6 @@
 import './topbar.css'
 import { FaPlus, FaHome, FaBell } from 'react-icons/fa';
-import picture from 'images/profilepic.jpg'
+import picture from 'public/images/profilepic.jpg'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { BiSolidBriefcase } from 'react-icons/bi';
