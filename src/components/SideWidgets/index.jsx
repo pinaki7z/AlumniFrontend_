@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import profilepic from 'images/profilepic.jpg';
+import profilepic from 'public/images/profilepic.jpg';
 import './sideWidgets.css';
 import picture from 'images/pexels-damon-hall-2274725.jpg';
 import { HiUsers } from 'react-icons/hi';
@@ -17,8 +17,8 @@ import { BsCurrencyRupee } from 'react-icons/bs';
 import { GoSponsorTiers } from 'react-icons/go';
 import { FaPlus } from 'react-icons/fa';
 import { BiSolidBriefcase } from 'react-icons/bi';
-import Groups from "images/Groups.svg";
-import send from "images/send.svg";
+import Groups from "public/images/Groups.svg";
+import send from "public/images/send.svg";
 import { updateProfile } from '../../store/profileSlice';
 import { toast } from "react-toastify";
 import { lineSpinner } from 'ldrs';
