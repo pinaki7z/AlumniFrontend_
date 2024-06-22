@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProfilePage.css";
-import picture from "images/d-cover.jpg";
-import pic from "images/profilepic.jpg";
+// import picture from "public/images/d-cover.jpg";
+// import pic from "public/images/profilepic.jpg";
 import { MdModeEditOutline } from "react-icons/md";
 import { IoIosList } from "react-icons/io";
 import { FiBriefcase } from "react-icons/fi";
@@ -29,7 +29,7 @@ import Form from 'react-bootstrap/Form';
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { toast } from "react-toastify";
-import profilePicture from 'images/profilepic.jpg';
+//import profilePicture from 'public/images/profilepic.jpg';
 import baseUrl from "../../config";
 
 const ProfilePage = () => {
@@ -37,6 +37,8 @@ const ProfilePage = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [workExperiences, setWorkExperiences] = useState([]);
   const profile = useSelector((state) => state.profile);
+
+  const profilePicture = `${process.env.REACT_APP_URL}/images/profilepic.jpg`;
 
 
   function MyVerticallyCenteredModal(props) {

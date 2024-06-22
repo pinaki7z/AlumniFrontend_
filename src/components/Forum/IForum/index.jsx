@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Picture from 'images/io.png';
+//import Picture from 'public/images/io.png';
 import CommentSection from '../../CommentSection';
 import axios from 'axios';
 import './IForum.css';
@@ -9,8 +9,8 @@ import { IconButton } from '@mui/material';
 import { toast } from "react-toastify";
 import { useNavigate, Link, Route, Routes } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import deleteButton from 'images/deleteButton.svg';
-import reply from "images/reply-forum.svg";
+//import deleteButton from 'public/images/deleteButton.svg';
+//import reply from "public/images/reply-forum.svg";
 import baseUrl from '../../../config';
 
 const IForum = () => {
@@ -308,7 +308,7 @@ const IForum = () => {
                 <li key={index} className="member-item">
                   <div className="member-info">
 
-                    <img src={member.profilePicture ? member.profilePicture : Picture} alt="avatar" className="member-avatar" />
+                    <img src={member.profilePicture ? member.profilePicture : `${process.env.REACT_APP_URL}/images/io.png`} alt="avatar" className="member-avatar" />
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                       <span>{member.firstName}</span>
                       <span className="member-role">{member.profileLevel === 0 ? 'Super Admin' : member.profileLevel === 1 ? 'Admin' : member.profileLevel === 2 ? 'Alumni' : 'Student'}</span>

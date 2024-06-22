@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "./profile.css";
-import picture from "images/d-cover.jpg";
+//import picture from "public/images/d-cover.jpg";
 import { BiUserPlus } from 'react-icons/bi'
 import { LuMessageSquare } from 'react-icons/lu'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -10,17 +10,22 @@ import Icons1 from "../../components/Icons1";
 import { useSelector } from "react-redux";
 import { height, padding } from "@mui/system";
 import Feeed from "../../components/Feeed";
-import about from "images/about.svg";
-import work from "images/work.svg";
-import location from "images/location.svg";
-import time from "images/Time.svg";
-import arrowRight from "images/arrowRight.svg";
+// import about from "public/images/about.svg";
+// import work from "public/images/work.svg";
+// import location from "public/images/location.svg";
+// import time from "public/images/Time.svg";
+// import arrowRight from "public/images/arrowRight.svg";
 
 const Profile = () => {
   const { id } = useParams();
   console.log('member id', id);
   const members = useSelector((state) => state.member);
   const member = members.find(member => member._id === id);
+  const about = `${process.env.REACT_APP_URL}/images/about.svg`;
+  const work = `${process.env.REACT_APP_URL}/images/work.svg`;
+  const location = `${process.env.REACT_APP_URL}/images/location.svg`;
+  const time = `${process.env.REACT_APP_URL}/images/Time.svg`;
+  const arrowRight = `${process.env.REACT_APP_URL}/images/arrowRight.svg`;
 
   if (!member) {
     return <div>Member not found</div>;

@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import backgroundPicture1 from 'images/pexels-mohamed-abdelghaffar-771742.jpg';
-import picture from 'images/pexels-lisa-fotios-1957478.jpg';
+//import backgroundPicture1 from 'public/images/pexels-mohamed-abdelghaffar-771742.jpg';
+//import picture from 'public/images/pexels-lisa-fotios-1957478.jpg';
 import './individualDonSpon.css';
 import { RiInformationFill } from 'react-icons/ri';
 import { FaFacebookSquare, FaTwitter, FaInstagram, FaLinkedin, FaPinterestSquare } from 'react-icons/fa';
@@ -21,6 +21,7 @@ const IndividualDonSpon = () => {
     const [isLoading, setIsLoading] = useState(true);
     const profile = useSelector((state) => state.profile);
     console.log('Individual Don Spon',donations)
+    const picture = `${process.env.REACT_APP_URL}/images/pexels-lisa-fotios-1957478.jpg`;
 
     useEffect(() => {
         setIsLoading(true); // Set loading to true while fetching data

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './pollDisplay.css';
 import { Avatar, IconButton, Modal, Box } from '@mui/material';
-import postDelete from "images/post-delete.svg";
-import pic from "images/profilepic.jpg";
+//import postDelete from "public/images/post-delete.svg";
+//import pic from "public/images/profilepic.jpg";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from "react-toastify";
@@ -97,7 +97,7 @@ const PollDisplay = ({ poll }) => {
                 {poll.profilePicture ? (
                     <img src={poll.profilePicture} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
                 ) : (
-                    <Avatar src={pic} style={{ width: '50px', height: '50px' }} />
+                    <Avatar src={`${process.env.REACT_APP_URL}/images/profilepic.jpg`} style={{ width: '50px', height: '50px' }} />
                 )}
                 <div className='info'>
                     <h4>{poll.userName}</h4>
@@ -143,7 +143,7 @@ const PollDisplay = ({ poll }) => {
                                 {option.votes && option.votes.length > 0 ? (
                                     option.votes.map(vote => (
                                         <div key={vote.userId} className='voter-info'>
-                                            <Avatar src={vote.profilePicture || pic} />
+                                            <Avatar src={vote.profilePicture ? vote.profilePicture : `${process.env.REACT_APP_URL}/images/profilepic.jpg`} />
                                             <span>{vote.userName}</span>
                                         </div>
                                     ))

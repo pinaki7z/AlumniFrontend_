@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./profilecard.css";
-import picture from "images/profilepic.jpg";
+//import picture from "public/images/profilepic.jpg";
 import { HiUsers } from "react-icons/hi";
 import { IoIosReorder } from "react-icons/io";
 import { MdLocationOn } from "react-icons/md";
@@ -11,8 +11,8 @@ import { useCookies } from "react-cookie";
 import { orbit } from 'ldrs';
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import delButton from "images/deleteButton.svg";
-import profileImage from "images/profileImage.png";
+// import delButton from "public/images/deleteButton.svg";
+// import profileImage from "public/images/profileImage.png";
 import { MdOutlineRestore } from "react-icons/md";
 import { MdOutlineDelete } from "react-icons/md";
 import baseUrl from "../../config";
@@ -20,6 +20,8 @@ import baseUrl from "../../config";
 orbit.register()
 
 const Profilecard = ({ member, name, addButton, groupMembers, owner, deleteButton, handleDelete }) => {
+  const delButton = `${process.env.REACT_APP_URL}/images/deleteButton.svg`;
+  const profileImage = `${process.env.REACT_APP_URL}/images/profileImage.png`;
   const [isFollowing, setIsFollowing] = useState(false);
   const [cookie, setCookie] = useCookies(["access_token"]);
   const [loading, setLoading] = useState(true);

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { lineSpinner } from 'ldrs';
-import picture from 'images/pexels-lisa-fotios-1957478.jpg';
+//import picture from 'public/images/pexels-lisa-fotios-1957478.jpg';
 import baseUrl from "../../config";
 
 lineSpinner.register();
@@ -67,7 +67,7 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
                     donations.map((donation) => (
                         <div key={donation._id} className='donSpon-card'>
                             <div className="donation-card-image">
-                                <img src={donation.picturePath? donation.picturePath : picture} alt="" className="src" />
+                                <img src={donation.picturePath? donation.picturePath : `${process.env.REACT_APP_URL}/images/pexels-lisa-fotios-1957478.jpg`} alt="" className="src" />
                             </div>
                             <div style={{ paddingLeft: '12px', height: '20%' }}>
                                 <Link to={`/${name}/${donation._id}`} style={{ textDecoration: 'none', color: 'black' }}>

@@ -5,10 +5,10 @@ import Chat from '../Chat';
 import { HiUserGroup } from "react-icons/hi2";
 import { PiUserListFill } from "react-icons/pi";
 import { AiOutlineArrowUp } from "react-icons/ai";
-import arrowUp from 'images/arrowDoubleUp.svg';
-import arrowDown from 'images/arrowDoubleDown.svg';
-import profileIcon from 'images/profile.svg';
-import expand from 'images/expand.svg';
+// import arrowUp from 'public/images/arrowDoubleUp.svg';
+// import arrowDown from 'public/images/arrowDoubleDown.svg';
+// import profileIcon from 'public/images/profile.svg';
+// import expand from 'public/images/expand.svg';
 import ChatM from '../../pages/Chat';
 import baseUrl from '../../config';
 
@@ -45,9 +45,9 @@ const Chatbox = () => {
       <div className='chatbox-header'>
         <p style={{ marginBottom: '0px' }}>Messages</p>
         <div style={{ display: 'flex', gap: '2vw' }}>
-          <img src={expand} alt="" srcset="" className='arrow-up' onClick={togglePopup} />
-          <img src={profileIcon} alt="" srcset="" />
-          {!isExpanded ? (<img src={arrowUp} alt="" srcset="" onClick={toggleExpand} className='arrow-up' />) : (<img src={arrowDown} alt="" srcset="" onClick={toggleExpand} className='arrow-up' />)}
+          <img src={`${process.env.REACT_APP_URL}/images/expand.svg`} alt="" srcset="" className='arrow-up' onClick={togglePopup} />
+          <img src={`${process.env.REACT_APP_URL}/images/profile.svg`} alt="" srcset="" />
+          {!isExpanded ? (<img src={`${process.env.REACT_APP_URL}/images/arrowDoubleUp.svg`} alt="" srcset="" onClick={toggleExpand} className='arrow-up' />) : (<img src={`${process.env.REACT_APP_URL}/images/arrowDoubleDown.svg`} alt="" srcset="" onClick={toggleExpand} className='arrow-up' />)}
         </div>
 
       </div>
@@ -116,7 +116,7 @@ const Chatbox = () => {
             <ChatM />
           </div>
           <div>
-            <img src={expand} alt="" srcset="" className='arrow-up' onClick={togglePopup}  style={{ position: 'absolute', top: '5px', right: '10px' }}/>
+            <img src={`${process.env.REACT_APP_URL}/images/expand.svg`} alt="" srcset="" className='arrow-up' onClick={togglePopup}  style={{ position: 'absolute', top: '5px', right: '10px' }}/>
 
           </div>
         </div>

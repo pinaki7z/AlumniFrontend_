@@ -1,13 +1,17 @@
 import '../BrowseDonations/browseDonations.css';
 import DisplayDonSpon from '../DisplayDonSpon';
 import { useState } from 'react';
-import picture from 'images/profilepic.jpg';
-import backgroundPicture1 from 'images/pexels-mohamed-abdelghaffar-771742.jpg';
-import backgroundPicture2 from 'images/pexels-tyler-lastovich-590179.jpg';
-import backgroundPicture3 from 'images/bgimg.jpg';
+//import picture from 'public/images/profilepic.jpg';
+// import backgroundPicture1 from 'public/images/pexels-mohamed-abdelghaffar-771742.jpg';
+// import backgroundPicture2 from 'public/images/pexels-tyler-lastovich-590179.jpg';
+// import backgroundPicture3 from 'public/images/bgimg.jpg';
 
 
 const MyDonationRequests = ({name}) => {
+    const backgroundPicture1 = `${process.env.REACT_APP_URL}/images/pexels-mohamed-abdelghaffar-771742.jpg`;
+    const backgroundPicture2 = `${process.env.REACT_APP_URL}/images/pexels-tyler-lastovich-590179.jpg`;
+    const backgroundPicture3 = `${process.env.REACT_APP_URL}/images/bgimg.jpg`;
+    const picture = `${process.env.REACT_APP_URL}/images/profilepic.jpg`;
     const [donations, setDonations] = useState([
         {
           id: 1,

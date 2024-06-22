@@ -8,11 +8,11 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Technology from "images/pexels-pixabay-356056.jpg";
-import Retail from "images/pexels-pixabay-264636.jpg";
-import Manufacturing from "images/pexels-pixabay-257700.jpg";
-import Healthcare from "images/pexels-chokniti-khongchum-2280568.jpg";
-import Finance from "images/pexels-lukas-590041.jpg";
+// import Technology from "public/images/pexels-pixabay-356056.jpg";
+// import Retail from "public/images/pexels-pixabay-264636.jpg";
+// import Manufacturing from "public/images/pexels-pixabay-257700.jpg";
+// import Healthcare from "public/images/pexels-chokniti-khongchum-2280568.jpg";
+// import Finance from "public/images/pexels-lukas-590041.jpg";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from 'react';
@@ -434,11 +434,11 @@ const DonSponRequest = ({ name, edit }) => {
     const handleIndustryChange = (event) => { 
         setIndustry(event.target.value);
         const industryImages = {
-            Technology: Technology,
-            Finance: Finance,
-            Manufacturing: Manufacturing,
-            Retail: Retail,
-            Healthcare: Healthcare,
+            Technology: `${process.env.REACT_APP_URL}/images/pexels-pixabay-356056.jpg`,
+            Finance: `${process.env.REACT_APP_URL}/images/pexels-lukas-590041.jpg`,
+            Manufacturing: `${process.env.REACT_APP_URL}/images/pexels-pixabay-257700.jpg`,
+            Retail: `${process.env.REACT_APP_URL}/images/pexels-pixabay-264636.jpg`,
+            Healthcare: `${process.env.REACT_APP_URL}/images/pexels-chokniti-khongchum-2280568.jpg`,
         };
 
         const imagePath = industryImages[event.target.value]; 

@@ -17,7 +17,7 @@ import { FaCalendarPlus } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import axios from 'axios';
-import pic from "images/profilepic.jpg";
+//import pic from "public/images/profilepic.jpg";
 import { Avatar, IconButton, Modal as MModal, Box, Modal as MMModal } from '@mui/material';
 import { useParams } from "react-router-dom";
 import { lineSpinner } from 'ldrs';
@@ -35,6 +35,7 @@ function MyVerticallyCenteredModal(props) {
   const profile = useSelector((state) => state.profile);
   const [createGroup, setCreateGroup] = useState(false);
   const [loading, setLoading] = useState(false);
+
 
   const [newEvent, setNewEvent] = useState({
     title: "", start: "", end: "", startTime: "00:00",
@@ -352,6 +353,8 @@ function Events() {
   const [loading, setLoading] = useState(false);
   const [detailsModalShow, setDetailsModalShow] = useState(false);
 
+  const pic = `${process.env.REACT_APP_URL}/images/profilepic.jpg`;
+
   // const gapi = window.gapi;
   // const google = window.google;
 
@@ -606,6 +609,8 @@ function Events() {
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: '2-digit' };
     return date.toLocaleDateString('en-US', options);
   };
+
+
 
   return (
     <div className="Events">

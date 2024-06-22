@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './chat.css';
-import Picture from 'images/profilepic.jpg';
+//import Picture from 'public/images/profilepic.jpg';
 import { FaFaceSmile } from 'react-icons/fa6';
 import { FiSend } from 'react-icons/fi';
 import Picker from 'emoji-picker-react';
@@ -434,7 +434,7 @@ const [showPopup, setShowPopup] = useState(false);
             {/* <div className='chat-style' style={chatStyle}> */}
             <div className='chat-style' >
               <div style={{ display: 'flex', }}>
-                <img src={Picture} style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }} />
+                <img src={`${process.env.REACT_APP_URL}/images/profilepic.jpg`} style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }} />
                 <p style={{ margin: '0px', alignContent: 'center', color: 'white' }}>{selectedUsername}</p>
 
               </div>

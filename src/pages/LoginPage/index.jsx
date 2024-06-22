@@ -1,6 +1,6 @@
 import "./loginPage.css";
 import "../../components/FrameComponent/FrameComponent.css";
-import io from "images/io.png";
+//import io from "public/images/io.png";
 import { useState } from 'react';
 import './loginPage.css';
 import { useCookies } from "react-cookie";
@@ -17,7 +17,9 @@ const LoginPage = ({ handleLogin }) => {
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
   const [loading,setLoading] = useState(false);
-  const profile = useSelector((state)=> state.profile);
+  //const profile = useSelector((state)=> state.profile);
+  const backgroundImageUrl = `${process.env.REACT_APP_URL}/images/background.jpg`;
+  const io = `${process.env.REACT_APP_URL}/images/io.png`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +72,7 @@ const LoginPage = ({ handleLogin }) => {
   };
 
   return (
-    <div className="landing-page-1">
+    <div className="landing-page-1" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
       <div className="main-container">
         <div className="content-area">
           <img src={io} alt="" srcset="" width='200px' height='100px' />

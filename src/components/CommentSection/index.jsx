@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import './commentSection.css';
-import pic from "images/odA9sNLrE86.jpg";
+//import pic from "public/images/odA9sNLrE86.jpg";
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { PiArrowBendDownLeftBold } from "react-icons/pi";
 import { MdOutlineDelete } from "react-icons/md";
-import replyy from "images/reply.svg";
-import deletee from "images/delete.svg";
-import baseUrl from "../../config";
+// import replyy from "public/images/reply.svg";
+// import deletee from "public/images/delete.svg";
+ import baseUrl from "../../config";
 
 const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDeleteComment }) => {
   const [content, setContent] = useState('');
@@ -100,11 +100,11 @@ const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDel
 
               <div className="comment-buttons">
                 {comment.userId === profile._id || profile.profileLevel === 0 ? <div style={{fontSize: '18px', display: 'flex', alignItems: 'center'}}>
-                <img src={deletee} alt="" srcset="" />
+                <img src={`${process.env.REACT_APP_URL}/images/delete.svg`} alt="" srcset="" />
                  <button onClick={() => handleCommentDelete(comment._id)}>Delete</button> 
                 </div> : null}
                 <div style={{fontSize: '18px'}}>
-                <img src={replyy} alt="" srcset=""/>
+                <img src={`${process.env.REACT_APP_URL}/images/reply.svg`} alt="" srcset=""/>
                   <button onClick={() => handleCommentReply(comment._id)}>Reply</button>
                 </div>
 

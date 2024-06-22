@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import picture from 'images/d-group.jpg';
+//import picture from 'public/images/d-group.jpg';
 import { Link } from "react-router-dom";
 import './IndividualGroup.css';
 import SocialMediaPost from "../../Social-wall-post";
@@ -16,13 +16,14 @@ import { FcInvite } from "react-icons/fc";
 import { GroupInvite } from "../GroupInvite";
 import { JoinGroup } from "../JoinGroup";
 // import groupBackGroundImage from "../../../images/group-happy-people-playing-summer-sunset-nature.jpg";
-import backgroundImage from "images/group-happy-people-playing-summer-sunset-nature.jpg"
+//import backgroundImage from "public/images/group-happy-people-playing-summer-sunset-nature.jpg"
 import baseUrl from "../../../config";
 
 const IndividualGroup = () => {
     const { _id } = useParams();
     const [group, setGroup] = useState([]);
     const profile = useSelector((state) => state.profile);
+    const backgroundImage = `${process.env.REACT_APP_URL}/images/group-happy-people-playing-summer-sunset-nature.jpg`;
     let admin;
     if (profile.profileLevel === 0) {
         admin = true;
@@ -40,7 +41,7 @@ const IndividualGroup = () => {
         }
     }
     useEffect(() => {
-        getGroup()
+        getGroup();
     }, [])
 
     return (
@@ -49,7 +50,7 @@ const IndividualGroup = () => {
                 <div key={groupItem._id} className="ig-container">
                     <div className='ig-upper-container' style={{ backgroundImage: `url(${groupItem.groupLogo? groupItem.groupLogo: backgroundImage})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                         <div style={{ width: '30%', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden' }}>
-                            <img src={picture} alt="" style={{ width: '7rem', height: '7rem', borderRadius: '50%' }} />
+                            <img src={`${process.env.REACT_APP_URL}/images/d-group.jpg`} alt="" style={{ width: '7rem', height: '7rem', borderRadius: '50%' }} />
                             <h1 style={{ backgroundColor: '#f3cdcd', marginTop: '10px', borderRadius: '6px', textAlign: 'center', marginLeft: '10px' }}>{groupItem.groupName}</h1>
                             <p style={{ backgroundColor: '#f3cdcd', padding: '6px', borderRadius: '6px' }}>{groupItem.members.length} {groupItem.members.length === 1 ? 'Member' : 'Members'}</p>
                             <div className='display-post-ediit' style={{ width: '50%', background: 'transparent' }}>

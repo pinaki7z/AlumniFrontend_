@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import '../CreatePost/socialWall.css';
-import picture from 'images/profilepic.jpg'
+//import picture from 'public/images/profilepic.jpg'
 import axios from 'axios';
 import JobsInt from '../JobsInt';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
-import video from "images/videocam.svg";
-import gallery from "images/gallery.svg";
-import poll from "images/poll.svg";
+// import video from "public/images/videocam.svg";
+// import gallery from "public/images/gallery.svg";
+// import poll from "public/images/poll.svg";
 import PollModal from './PollModal';
 import baseUrl from '../../config';
 
@@ -26,7 +26,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
   const [showModal, setShowModal] = useState(false);
   const [cookie, setCookie] = useCookies(["access_token"]);
   const profile = useSelector((state) => state.profile);
-  const [showPollModal, setShowPollModal] = useState(false); 
+  const [showPollModal, setShowPollModal] = useState(false);
 
   const onHideModal = (modalVisibility) => {
     setShowModal(modalVisibility);
@@ -226,7 +226,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
   };
 
   const handleCreatePoll = async (question, options) => {
-    console.log('question1',question, options);
+    console.log('question1', question, options);
     const pollData = {
       userId: profile._id,
       userName: `${profile.firstName} ${profile.lastName}`,
@@ -256,24 +256,31 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
   return (
     <div className={`social-media-post ${isExpanded ? 'expanded' : ''}`}>
       <div className={`overlay ${isExpanded ? 'expanded' : ''}`} onClick={handleInputClick}></div>
-      <div className={`card ${isExpanded ? 'expanded' : ''}`} style={{ border: 'none',paddingTop: '50px' }}>
-        <div className="card-header" style={{ backgroundColor: 'white',borderBottom: 'none',padding: '0px' }}>
+      <div className={`card ${isExpanded ? 'expanded' : ''}`} style={{ border: 'none', paddingTop: '50px' }}>
+        <div className="card-header" style={{ backgroundColor: 'white', borderBottom: 'none', padding: '0px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src={profile.profilePicture || picture} alt='Profile' width='75px' height='75px' style={{ borderRadius: '50%' }} />
-            <div style={{borderBottom: '1px solid #ccc', width: '93%'}}>
+            <img
+              src={profile.profilePicture ? profile.profilePicture : `${process.env.REACT_APP_URL}/images/profilepic.jpg`}
+              alt='Profile'
+              width='75px'
+              height='75px'
+              style={{ borderRadius: '50%' }}
+            />
+
+            <div style={{ borderBottom: '1px solid #ccc', width: '93%' }}>
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Whats Going on??"
-                
+
               />
             </div>
           </div>
         </div>
         <div className={`img-job-vide ${isExpanded ? 'expanded' : ''}`}>
-          <label style={{ border: '1px solid #6FBC94' ,color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', display: 'flex', alignItems: 'center', justifyContent: 'center',fontSize: '15px', gap: '5px',width: '18%' }}>
-          <img src={gallery} alt="" srcset="" />Image
+          <label style={{ border: '1px solid #6FBC94', color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', gap: '5px', width: '18%' }}>
+            <img src={`${process.env.REACT_APP_URL}/images/gallery.svg`} alt="" srcset="" />Image
             <input
               type='file'
               accept='image/*'
@@ -282,11 +289,11 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
               multiple
             />
           </label>
-          <button style={{ backgroundColor: 'white', color: 'black', padding: '5px 10px', marginLeft: '0px', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '15px', width: '18%', borderRadius: '3em',border: '1px solid #6FBC94'  }} onClick={() => setShowPollModal(true)}><img src={poll} alt="" srcset="" />Poll</button>
-  
+          <button style={{ backgroundColor: 'white', color: 'black', padding: '5px 10px', marginLeft: '0px', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '15px', width: '18%', borderRadius: '3em', border: '1px solid #6FBC94' }} onClick={() => setShowPollModal(true)}><img src={`${process.env.REACT_APP_URL}/images/poll.svg`} alt="" srcset="" />Poll</button>
 
-          <label style={{ border: '1px solid #6FBC94' , color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', fontSize: '15px',display: 'flex', alignItems: 'center', justifyContent: 'center',width: '18%', gap: '5px' }}>
-          <img src={video} alt="" srcset="" />Video
+
+          <label style={{ border: '1px solid #6FBC94', color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', fontSize: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '18%', gap: '5px' }}>
+            <img src={`${process.env.REACT_APP_URL}/images/videocam.svg`} alt="" srcset="" />Video
             <input
               type='file'
               accept='video/*'
@@ -294,14 +301,14 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
               onChange={handleFileInputChange}
             />
           </label>
-          <div style={{ marginTop: '4px',marginLeft: 'auto' }}>
-              <button onClick={handleSubmit} style={{
-                float: 'right', color: '#ffffff',
-                backgroundColor: '#6FBC94',
-                borderColor: '#174873',
-                fontSize: '16px'
-              }}>Post</button>
-            </div>
+          <div style={{ marginTop: '4px', marginLeft: 'auto' }}>
+            <button onClick={handleSubmit} style={{
+              float: 'right', color: '#ffffff',
+              backgroundColor: '#6FBC94',
+              borderColor: '#174873',
+              fontSize: '16px'
+            }}>Post</button>
+          </div>
         </div>
       </div>
       <PollModal

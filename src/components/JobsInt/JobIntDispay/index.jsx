@@ -1,5 +1,5 @@
 
-import coverImage from 'images/cultural-1.jpg'
+//import coverImage from 'public/images/cultural-1.jpg'
 import { useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { GiMoneyStack } from 'react-icons/gi';
 import { FaLocationDot, FaTags } from 'react-icons/fa6';
 import { FcBriefcase } from 'react-icons/fc';
-import profilePic from 'images/profilepic.jpg';
+//import profilePic from 'public/images/profilepic.jpg';
 import baseUrl from '../../../config';
 
 import './individualJobPost.css';
@@ -19,7 +19,8 @@ const JobIntDisplay = ({ picture, jobId, jobTitle, location, salaryMin, salaryMa
     const [loading, setLoading] = useState(false);
     const [showShareOptions, setShowShareOptions] = useState(false);
     const title = 'Jobs'
-    console.log('titleijb', title)
+    console.log('titleijb', title);
+    const coverImage = `${process.env.REACT_APP_URL}/images/cultural-1.jpg`;
 
     // const toggleShareOptions = () => {
     //     setShowShareOptions(!showShareOptions);

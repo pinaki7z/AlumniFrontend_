@@ -1,6 +1,6 @@
-import pic from "images/profilepic.jpg";
+//import pic from "public/images/profilepic.jpg";
 import { Avatar, IconButton, Modal, Box } from '@mui/material';
-import postDelete from "images/post-delete.svg";
+//import postDelete from "public/images/post-delete.svg";
 import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import { toast } from "react-toastify";
@@ -143,14 +143,14 @@ const EventDisplay = ({ event }) => {
                 {event.profilePicture ? (
                     <img src={event.profilePicture} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
                 ) : (
-                    <Avatar src={pic} style={{ width: '50px', height: '50px' }} />
+                    <Avatar src={`${process.env.REACT_APP_URL}/images/profilepic.jpg`} style={{ width: '50px', height: '50px' }} />
                 )}
                 <div className='info'>
                     <h4>{event.userName ? event.userName : null}</h4>
                     <span style={{ fontSize: '14px', fontWeight: '500', color: '#136175' }}>{formatCreatedAt(event.createdAt)}</span>
                 </div>
                 {event.userId === profile._id && <IconButton className='delete-button' style={{ marginRight: '10px', marginLeft: 'auto' }}>
-                    <img src={postDelete} onClick={handleDeleteEvent}/>
+                    <img src={`${process.env.REACT_APP_URL}/images/post-delete.svg`} onClick={handleDeleteEvent}/>
                 </IconButton>}
             </div>
             <div style={{ paddingTop: '20px'}}>
@@ -202,7 +202,7 @@ const EventDisplay = ({ event }) => {
                             <h5>Total:- {attendees?.willAttend.length}</h5>
                             {attendees?.willAttend.map(user => (
                                 <div key={user.userId} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <Avatar src={user.profilePicture || pic} />
+                                    <Avatar src={user.profilePicture ? user.profilePicture : `${process.env.REACT_APP_URL}/images/profilepic.jpg`} />
                                     <span>{user.userName}</span>
                                 </div>
                             ))}
@@ -212,7 +212,7 @@ const EventDisplay = ({ event }) => {
                             <h5>Total:- {attendees?.mightAttend.length}</h5>
                             {attendees?.mightAttend.map(user => (
                                 <div key={user.userId} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <Avatar src={user.profilePicture || pic} />
+                                    <Avatar src={user.profilePicture ? user.profilePicture : `${process.env.REACT_APP_URL}/images/profilepic.jpg`} />
                                     <span>{user.userName}</span>
                                 </div>
                             ))}
@@ -222,7 +222,7 @@ const EventDisplay = ({ event }) => {
                             <h5>Total:- {attendees?.willNotAttend.length}</h5>
                             {attendees?.willNotAttend.map(user => (
                                 <div key={user.userId} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <Avatar src={user.profilePicture || pic} />
+                                    <Avatar src={user.profilePicture ? user.profilePicture : `${process.env.REACT_APP_URL}/images/profilepic.jpg`} />
                                     <span>{user.userName}</span>
                                 </div>
                             ))}
