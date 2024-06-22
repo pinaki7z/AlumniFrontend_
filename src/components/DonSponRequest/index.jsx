@@ -410,7 +410,6 @@ const DonSponRequest = ({ name, edit }) => {
     const handleSponsorshipChange = (e) => {
         const { name, value, type, checked } = e.target;
 
-
         const newValue = type === 'checkbox' ? checked : value;
 
         let updatedValue;
