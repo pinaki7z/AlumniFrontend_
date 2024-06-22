@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-//import profilepic from "public/images/profilepic.jpg";
 import './sideWidgets.css';
 //import picture from 'public/images/pexels-damon-hall-2274725.jpg';
 import { HiUsers } from 'react-icons/hi';
