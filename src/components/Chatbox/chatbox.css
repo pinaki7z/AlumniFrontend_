@@ -1,0 +1,79 @@
+.chat{
+    width: 17%;
+    display: flex;
+    justify-content: end;
+    overflow: hidden;
+    position: fixed;
+    right: 0%;
+    height: 100vh;
+}
+
+.chat1{
+    width: 100%;
+    background-color: white;
+}
+.search-users {
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: end;
+}
+.search-users input{
+background-color: #fcfafa;
+margin: 10px 15px;
+padding: 12px 30px;
+border-radius: 25px;
+border: none;
+outline: none;
+}
+
+.chatbox-container {
+    position: fixed;
+    right: 2vw;
+    bottom: 0;
+    width: 23.3%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 0 0;
+    z-index: 1000;
+    transition: height 0.3s ease;
+}
+
+.chatbox-container.collapsed {
+    height: 50px;
+}
+
+.chatbox-container.expanded {
+    height: 100%; 
+}
+
+.chatbox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: #f1f1f1;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 0px 20px;
+}
+
+.chatbox-content {
+    padding: 10px;
+    overflow-y: auto;
+}
+
+
+
+.search-users input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.arrow-up{
+    cursor: pointer;
+}
+

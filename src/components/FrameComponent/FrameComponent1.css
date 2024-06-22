@@ -1,0 +1,148 @@
+.first-name {
+    position: relative;
+    line-height: 140%;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 94px;
+    z-index: 1;
+  }
+  .selected-shape {
+    height: 54px;
+    width: 462px;
+    position: relative;
+    border-radius: var(--br-9xs);
+    border: 3px solid var(--input-stroke);
+    box-sizing: border-box;
+    display: none;
+    max-width: 100%;
+  }
+  .exclamation-icon {
+    height: 13px;
+    width: 13px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: none;
+  }
+  .message1 {
+    align-self: stretch;
+    position: relative;
+    line-height: 120%;
+  }
+  .message {
+    height: 14px;
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-base) 0 0;
+    box-sizing: border-box;
+    gap: var(--gap-10xs);
+  }
+  .email-mail-icon {
+    height: 18px;
+    width: 18px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .icon-left {
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-5xs) 0 0;
+  }
+  .register-email-address,
+  .indicator {
+    height: 22px;
+    position: relative;
+  }
+  .indicator {
+    width: 1px;
+    border-radius: var(--br-12xs);
+    background-color: var(--black1);
+    display: none;
+  }
+  .register-email-address {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    font-family: var(--input-text);
+    font-size: var(--input-text-size);
+    background-color: transparent;
+    line-height: 140%;
+    color: #3A3A3A;
+    text-align: left;
+    display: inline-block;
+    padding: 0;
+  }
+  .indicator-right,
+  .spacer {
+    height: 22px;
+    position: relative;
+    border-radius: var(--br-12xs);
+  }
+  .indicator-right {
+    width: 1px;
+    background-color: var(--black1);
+    display: none;
+  }
+  .spacer {
+    flex: 1;
+    min-width: 247px;
+    max-width: 100%;
+  }
+  .arrow-down-icon {
+    height: 18px;
+    width: 18px;
+    position: relative;
+    display: none;
+  }
+  .field {
+    flex: 1;
+    border-radius: var(--br-9xs);
+    border: 1px solid var(--input-stroke);
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-direction: row;
+    padding: var(--padding-2xs) var(--padding-mini);
+    row-gap: 20px;
+  }
+  .field,
+  .input,
+  .input1,
+  .last-name-field {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .input1 {
+    flex: 1;
+    flex-direction: row;
+  }
+  .input,
+  .last-name-field {
+    align-self: stretch;
+  }
+  .input {
+    flex-direction: row;
+    z-index: 1;
+    font-size: var(--label-size);
+    color: var(--black-60);
+  }
+  .last-name-field {
+    flex-direction: column;
+    gap: var(--gap-5xs);
+    text-align: left;
+    font-size: var(--input-text-title-size);
+    color: #3A3A3A;
+    font-family: var(--input-text);
+  }
+  @media screen and (max-width: 450px) {
+    .field {
+      flex-wrap: wrap;
+    }
+  }
+  

@@ -1,0 +1,128 @@
+.topBar {
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #E9F5EF; 
+  color: white;
+  width: 94%;
+  justify-content: space-between;
+  padding-right: 70px;
+  /* margin-right: 130px; */
+}
+.top-bar {
+  background-color: #E9F5EF;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0px;
+  z-index: 3;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 2%;
+}
+
+/* .search {
+
+} */
+
+.search input {
+  width: 80%;
+  border-radius: 10px;
+  color: green !important;
+  background: #E9F5EF;
+  padding-left: 15px;
+}
+
+.search input::placeholder {
+  color: #6FBC94;
+}
+
+.top {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+.top button {
+  background-color: #E9F5EF;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.profile-list{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  width: 33%;
+}
+.profile-menu {
+  position: relative;
+}
+
+.profile-options {
+  position: absolute;
+  top: 50px; /* Adjust this value as needed */
+  right: 0;
+  background-color: #ffffff;
+  list-style: none;
+  padding: 0;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  color: black;
+  width: 13vw;
+}
+
+.profile-options li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.profile-options li:hover {
+  background-color: #174873;
+  color: white;
+}
+
+.notifications-card {
+  position: absolute;
+  top: 50px; /* Adjust this value as needed */
+  right: 0;
+  background-color: #174873;
+  list-style: none;
+  padding: 0;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  color: whitesmoke;
+  width: 25vw;
+  min-height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messages-card {
+  position: absolute;
+  top: 50px; /* Adjust this value as needed */
+  right: 0;
+  background-color: #ffffff;
+  list-style: none;
+  padding: 0;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  color: black;
+  width: 13vw;
+  min-height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

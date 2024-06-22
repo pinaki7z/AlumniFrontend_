@@ -1,0 +1,121 @@
+.frame-child,
+.frame-item {
+  position: relative;
+  display: none;
+  max-width: 100%;
+}
+.frame-child {
+  align-self: stretch;
+  width: 1128px;
+  border-radius: var(--br-5xl);
+  background-color: var(--background-light);
+}
+.frame-item {
+  height: 960px;
+  width: 456px;
+  border-radius: var(--br-xs) var(--br-5xl) var(--br-5xl) var(--br-xs);
+  background-color: var(--background-medium);
+}
+.alumni-association1 {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.alumni-association {
+  font-size: 36px;
+}
+.bhu-alumni-association-container1 {
+  width: 264px;
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  z-index: 2;
+}
+.first-name-field-wrapper,
+.rectangle-group {
+  width: 456px;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.rectangle-group {
+  height: 960px;
+  border-radius: var(--br-xs) var(--br-5xl) var(--br-5xl) var(--br-xs);
+  background-color: #136175;
+  color: #FFFFFF;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 313px var(--padding-xl);
+  z-index: 1;
+}
+.first-name-field-wrapper {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 0 25px;
+}
+.rectangle-parent,
+.register {
+  display: flex;
+  flex-direction: row;
+}
+.rectangle-parent {
+  width: 1128px;
+  border-radius: var(--br-5xl);
+  background-color: var(--background-light);
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 120px;
+  max-width: 100%;
+  text-align: left;
+  font-size: 68px;
+  color: var(--black);
+  font-family: var(--input-text);
+}
+.register {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px var(--padding-xl);
+  box-sizing: border-box;
+  line-height: normal;
+  letter-spacing: normal;
+  background-image: url(../../images/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+@media screen and (max-width: 1025px) {
+  .rectangle-parent {
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+}
+@media screen and (max-width: 975px) {
+  .bhu-alumni-association-container {
+    font-size: 29px;
+  }
+  .rectangle-group {
+    padding-top: var(--padding-184xl);
+    padding-bottom: var(--padding-184xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 725px) {
+  .rectangle-parent {
+    gap: 30px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .bhu-alumni-association-container {
+    font-size: 22px;
+  }
+  .rectangle-group {
+    padding-top: var(--padding-113xl);
+    padding-bottom: var(--padding-113xl);
+    box-sizing: border-box;
+  }
+}

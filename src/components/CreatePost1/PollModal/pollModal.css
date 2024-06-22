@@ -1,0 +1,55 @@
+/* PollModal.css */
+.modal-overlay-poll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-content-poll {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 90%;
+  }
+  
+  .modal-content-poll h2 {
+    margin-top: 0;
+  }
+  
+  .modal-content-poll label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .modal-content-poll input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .modal-content-poll button {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    background-color: #6FBC94;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .modal-content-poll button:hover {
+    background-color: #58a382;
+  }
+  
