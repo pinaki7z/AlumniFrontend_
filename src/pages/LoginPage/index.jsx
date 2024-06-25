@@ -56,7 +56,18 @@ const LoginPage = ({ handleLogin }) => {
   
       toast.success("Logged in successfully!");
       setLoading(false); 
-      window.location.href = window.location.href;
+      const currentUrl = window.location.href;
+      
+      const loginPath = '/login';
+      const baseUrl = currentUrl.endsWith(loginPath)
+          ? currentUrl.slice(0, -loginPath.length)
+          : currentUrl;
+
+      if (currentUrl.endsWith(loginPath)) {          
+          window.location.href = baseUrl;
+      } else {          
+          window.location.href = window.location.href;
+      }
       } else {
         const errorData = await response.json();
         console.error('Login failed',errorData);
