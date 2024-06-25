@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { IoIosNotifications } from "react-icons/io";
 import baseUrl from "../../config";
+import io from "../../images/insideout.png"
 
 
 const LeftSidebar = () => {
@@ -40,7 +41,7 @@ const LeftSidebar = () => {
     return (
         <div style={{ width: '20%',backgroundColor: '#136175',height: '100vh',position: 'fixed' }}>
             <div style={{ textAlign: 'center', marginTop: '3em'}}>
-                        <img src={`${process.env.REACT_APP_URL}/images/insideout.png`} alt="" width="150px" height="75px"/>
+                        <img src={io} alt="" width="150px" height="75px"/>
                     </div>
                 <div className='sideBar'>                    
                     <ul style={{paddingLeft: '0px', width: '100%'}}>

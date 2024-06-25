@@ -71,7 +71,7 @@ const LoginPage = ({ handleLogin }) => {
   };
 
   return (
-    <div className="landing-page-1" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
+    <div className="landing-page-1">
       <div className="main-container">
         <div className="content-area">
           <img src={io} alt="" srcset="" width='200px' height='100px' />
