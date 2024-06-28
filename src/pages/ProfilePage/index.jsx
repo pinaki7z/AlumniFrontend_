@@ -553,7 +553,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { updateProfile } from "../../store/profileSlice";
 import { toast } from 'react-toastify';
-import { lineSpinner } from 'ldrs'
+import { lineSpinner } from 'ldrs';
+import profilePic from "../../images/profilepic.jpg"
 
 lineSpinner.register()
 
@@ -749,7 +750,7 @@ const ProfilePage = () => {
           </div>
           <div style={{ position: 'absolute', top: '10vh', left: '50%', transform: 'translateX(-50%) translateY(50%)' }}>
             <div style={{ position: 'relative' }}>
-              <img src={profile.profilePicture} alt="profile-picture" style={{ width: '200px', height: '200px', borderRadius: '50%', border: '5px solid white' }} />
+              <img src={profile.profilePicture? profile.profilePicture : profilePic} alt="profile-picture" style={{ width: '200px', height: '200px', borderRadius: '50%', border: '5px solid white' }} />
               <input type="file" name="profilePicture" id="profilePicture" onChange={(event) => handleFileChange(event, 'profilePicture')} style={{ display: 'none' }} />
               <img src={editProfilePicture} alt="profile-picture" style={{ borderRadius: '50%', border: '5px solid white', position: 'absolute', bottom: '20px', right: '5px', cursor: 'pointer' }} onClick={() => document.getElementById('profilePicture').click()} />
             </div>
@@ -768,7 +769,7 @@ const ProfilePage = () => {
               <button>Follow</button>
             </div> */}
             <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}>
-              <div style={{ width: '40%', paddingTop: '70px' }}>
+              <div style={{ width: '40%', paddingTop: '100px' }}>
                 <p style={{ fontWeight: '700', color: '#3A3A3A', fontSize: '24px', fontFamily: 'Inter' }}>{member.firstName} {member.lastName} {profile.validated === true ? <HiMiniCheckBadge style={{ color: '#51a8f5' }} /> : null}</p>
                 <p style={{ fontWeight: '300', color: '#000000', fontSize: '14px', fontFamily: 'Inter' }}>{member.profileLevel === 1 ? 'ADMIN' : member.profileLevel === 2 ? 'ALUMNI' : member.profileLevel === 3 ? 'STUDENT' : 'SUPERADMIN'}</p>
                 <p style={{ fontWeight: '400', color: '#3A3A3A', fontSize: '16px', fontFamily: 'Inter' }}>Passionate soul, chasing dreams, inspiring others, embracing life's adventures joyfully.</p>

@@ -20,6 +20,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { SearchedResults } from '../SearchedResults';
 import { lineSpinner } from 'ldrs';
 import baseUrl from '../../config';
+import profilePic from "../../images/profilepic.jpg"
 
 lineSpinner.register()
 
@@ -117,7 +118,7 @@ const TopBar = ({ handleLogout }) => {
             // setSearchResults(data);
             setSearchLoading(false);
         } catch (error) {
-            
+
             console.error('Error fetching search results:', error);
             setSearchResults(null);
         }
@@ -173,45 +174,45 @@ const TopBar = ({ handleLogout }) => {
                         </div>
                     </div> */}
 
-                    <div className="search" style={{ display: 'flex', width: '67%'}}>
+                    <div className="search" style={{ display: 'flex', width: '67%' }}>
                         <form onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                        <div style={{ position: 'relative', width: '100%' }}>
-                <input
-                    type="search"
-                    name="search"
-                    id="search"
-                    placeholder="Search for people, forums and groups"
-                    value={searchText}
-                    onChange={handleChange}
-                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175' }}
-                />
-                <button
-                    type="submit"
-                    style={{
-                        position: 'absolute',
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: '#E9F5EF',
-                        border: 'none',
-                        padding: '5px',
-                        color: 'white',
-                        cursor: 'pointer'
-                    }}
-                >
-                    {searchLoading ? (
-                        <l-line-spinner
-                            size="15"
-                            stroke="3"
-                            speed="1"
-                            color="white"
-                        ></l-line-spinner>
-                    ) : (
-                        <IoSearchSharp style={{ color: '#136175',width: '25px',height: '25px' }} />
-                    )}
-                </button>
-            </div>
-                            
+                            <div style={{ position: 'relative', width: '100%' }}>
+                                <input
+                                    type="search"
+                                    name="search"
+                                    id="search"
+                                    placeholder="Search for people, forums and groups"
+                                    value={searchText}
+                                    onChange={handleChange}
+                                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175' }}
+                                />
+                                <button
+                                    type="submit"
+                                    style={{
+                                        position: 'absolute',
+                                        right: '10px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        backgroundColor: '#E9F5EF',
+                                        border: 'none',
+                                        padding: '5px',
+                                        color: 'white',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    {searchLoading ? (
+                                        <l-line-spinner
+                                            size="15"
+                                            stroke="3"
+                                            speed="1"
+                                            color="white"
+                                        ></l-line-spinner>
+                                    ) : (
+                                        <IoSearchSharp style={{ color: '#136175', width: '25px', height: '25px' }} />
+                                    )}
+                                </button>
+                            </div>
+
                         </form>
                     </div>
                     <div className="profile-list">
@@ -225,7 +226,7 @@ const TopBar = ({ handleLogout }) => {
                                 No New Messages
                             </div>
                         )} <div ref={notificationsOptionsRef}>
-                            <FaBell style={{ cursor: 'pointer',color: '#136175' }} onClick={() => {
+                            <FaBell style={{ cursor: 'pointer', color: '#136175' }} onClick={() => {
                                 setShowProfileOptions(false);
                                 setShowMessages(false);
                                 setShowNotifications(true);
@@ -237,14 +238,15 @@ const TopBar = ({ handleLogout }) => {
                                 <Notifications />
                             </div>
                         )}
-                        <div style={{display: 'flex', alignItems: 'center', gap: '1vw'}}>
-                        <img src={profile.profilePicture ? profile.profilePicture : `${process.env.REACT_APP_URL}/images/profilepic.jpg`} alt='Profile' width='40px' height='40px' ref={profileOptionsRef} style={{ borderRadius: '50%', cursor: 'pointer' }} onClick={() => {
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1vw', cursor: 'pointer'  }} ref={profileOptionsRef} 
+                        onClick={() => {
                             console.log('clicked image')
                             setShowMessages(false);
                             setShowNotifications(false);
                             setShowProfileOptions(!showProfileOptions);
-                        }} />
-                        <p style={{marginBottom: '0px', color: '#3A3A3A',fontWeight: '600', fontSize: '20px', lineHeight: '24.2px'}}>{profile.firstName}</p>
+                        }} >
+                            <img src={profile.profilePicture ? profile.profilePicture : profilePic} alt='profile-pic' width='40px' height='40px' style={{ borderRadius: '50%'}} />
+                            <p style={{ marginBottom: '0px', color: '#3A3A3A', fontWeight: '600', fontSize: '20px', lineHeight: '24.2px' }}>{profile.firstName}</p>
                         </div>
                         {showProfileOptions && (
                             <ul className="profile-options" >
