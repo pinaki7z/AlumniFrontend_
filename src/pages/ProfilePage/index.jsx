@@ -573,7 +573,7 @@ const ProfilePage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const token = cookie.token;
 
