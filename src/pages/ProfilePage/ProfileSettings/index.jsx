@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { updateProfile } from "../../../store/profileSlice";
 import { IoMdAdd } from "react-icons/io";
 import baseUrl from '../../../config';
+import { padding } from '@mui/system';
 
 
 export const ProfileSettings = () => {
@@ -160,7 +161,6 @@ export const ProfileSettings = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log('User updated successfully', response);
         dispatch(updateProfile(responseData));
         toast.success('User Updated Successfully');
         setLoading(false);
@@ -224,10 +224,10 @@ export const ProfileSettings = () => {
   const icon = <CgProfile style={{ color: '#174873' }} />;
 
   return (
-    <div style={{ width: '60%', paddingTop: '20px' }}>
+    <div style={{ width: '100%', padding: '5% 5%' }}>
       <PageTitle title={title} icon={icon} />
       <div>
-        <Form style={{ paddingBottom: '30px', paddingLeft: '10px' }} onSubmit={handleSubmit}>
+        <Form style={{ paddingBottom: '30px', paddingTop: '30px' }} onSubmit={handleSubmit}>
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicFname">

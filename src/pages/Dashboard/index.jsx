@@ -94,7 +94,7 @@ const Dashboard = ({ handleLogout }) => {
             <Route path="/sponsorships/*" element={<Sponsorships />} />
             <Route path="/members/*" element={<div style={{ width: '100%',padding: '0 5%'}}><Members showHeading={true} /></div>} />
             <Route path="/members/create" element={
-              <div style={{ width: '60%' }}>
+              <div style={{ width: '100%' }}>
                 <DonSponRequest name='member' />
               </div>
             } />
