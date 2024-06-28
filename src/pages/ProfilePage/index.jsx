@@ -573,7 +573,7 @@ const ProfilePage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const token = cookie.token;
 
@@ -738,14 +738,14 @@ const ProfilePage = () => {
                 <button style={{ backgroundColor: 'white', border: '2px solid #6FBC94', color: '#136175' }}>Edit Profile</button></Link>
             </div>
             <div style={{ textAlign: 'center' }}>
-              {loading ? <div style={{ backgroundColor: 'whitesmoke' }}>
+              {loading ? 
                 <l-line-spinner
                   size="30"
                   stroke="3"
                   speed="1"
                   color="black"
-                ></l-line-spinner>
-                </div> : null}
+                  style={{backgroundColor: 'whitesmoke',padding: '20px'}}
+                ></l-line-spinner> : null}
             </div>
           </div>
           <div style={{ position: 'absolute', top: '10vh', left: '50%', transform: 'translateX(-50%) translateY(50%)' }}>
