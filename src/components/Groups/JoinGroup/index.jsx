@@ -42,7 +42,12 @@ export const JoinGroup = () => {
   const handleAddMember = async () => {
     try {
       const response = await axios.put(`${baseUrl}/groups/members/${_id}`, {
-        userId: profile._id,
+        member: {
+          userId: profile._id,
+          profilePicture: profile.profilePicture,
+          userName: `${profile.firstName} ${profile.lastName}`,
+          profileLevel: profile.profileLevel
+        }
       });
 
       if (response.status === 200) {

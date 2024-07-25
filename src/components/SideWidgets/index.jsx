@@ -43,7 +43,7 @@ const SideWidgets = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const itemsPerPage = 3;
     const dispatch = useDispatch();
-    console.log('notifications1', notifications);
+    console.log('notifications1', notifications,profile);
 
 
     const popover = (popoverVisibility) => {
@@ -78,7 +78,6 @@ const SideWidgets = () => {
     const displayedMembers = peopleYouMayKnow.slice(0, currentPage * itemsPerPage);
 
     const handleFollowToggle = async (memberId, firstName, lastName) => {
-        console.log("MEMBER TO FOLLOW ", memberId, firstName, lastName)
         setIsLoading(prevLoading => ({ ...prevLoading, [memberId]: true }));
         try {
             const response = await axios.patch(`${baseUrl}/alumni/${memberId}/follow`, {
@@ -92,13 +91,11 @@ const SideWidgets = () => {
                 const { alumni } = responseData;
                 dispatch(updateProfile(alumni));
                 console.log('followed');
-                toast.success('Followed')
+                toast.success('Followed');
                 if (loading) setLoading(false);
                 else setLoading(true);
             }
             setIsLoading(prevLoading => ({ ...prevLoading, [memberId]: false }));
-
-
         } catch (error) {
             console.error("Error toggling follow status:", error);
             setIsLoading(prevLoading => ({ ...prevLoading, [memberId]: false }));

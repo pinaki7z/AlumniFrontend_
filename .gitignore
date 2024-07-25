@@ -5,7 +5,8 @@
 /package-lock.json
 /.pnp
 .pnp.js
-
+/DonSponRequest
+/ProfilePage
 # testing
 /coverage
 

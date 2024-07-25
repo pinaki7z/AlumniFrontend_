@@ -11,19 +11,19 @@
 }
 
 .display-post-card{
-    width: 20%;
+    width: 30%;
     background-color: white;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); */
     border-radius: max(0px, min(8px, calc((100vw - 4px - 100%) * 9999))) / 8px;
     position: relative;
-    height: 40vh;
+    height: 50vh;
 }
 
 .display-post-image{
     overflow: hidden;
     width: 100%;
     border-radius: inherit;
-    height: 60%;  
+    height: 80%;  
 
 }
 .display-post-image img{
@@ -32,18 +32,16 @@
 }
 
 .display-post-title{
-    padding-left: 7px;
+    padding: 0px 12px;
     margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.display-post-edit{
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 8px;
-    border-radius: 10px;
-    position: absolute;
-    width: 95%;
-    bottom: 10px;
+.display-post-edit{    
+    margin-top: 18px;
+    border-radius: 8px;
+    width: 100%;
 }
 
 .display-post-edit button{

@@ -558,7 +558,6 @@ import profilePic from "../../images/profilepic.jpg"
 
 lineSpinner.register()
 
-// Default values shown
 
 
 const ProfilePage = () => {

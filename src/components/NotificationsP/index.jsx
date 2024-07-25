@@ -56,6 +56,29 @@ export const NotificationsP = () => {
                 }
 
             }
+            else if (type === 'group'){
+                console.log('group')
+                const response = await axios.put(url, {
+                    members: {
+                        userId: profile._id,
+                        profilePicture: profile.profilePicture,
+                        userName: `${profile.firstName} ${profile.lastName}`,
+                        profileLevel: profile.profileLevel
+                      },
+                    notificationId: notificationId,
+                    toDelete
+                });
+
+                if (response.status === 200) {
+                    const { isUserAdded } = response.data;
+                    setIsAdded(true);
+                    setLoading(false);
+                    console.log('User added/removed from the group:', isUserAdded);
+                } else {
+                    console.error('Failed to add/remove user from the group');
+                    setLoading(false);
+                }
+            }
             else {
                 console.log('Not a job')
                 const response = await axios.put(url, {

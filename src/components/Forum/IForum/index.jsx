@@ -183,20 +183,20 @@ const IForum = () => {
 
   const handleSaveMembers = async () => {
     console.log('selectedMembers', selectedMembers)
-    // try {
-    //   const response = await axios.put(
-    //     `${baseUrl}/forums/members/${id}`,
-    //     {
-    //       userId: selectedMembers,
-    //     }
-    //   );
-    //   setShowModal(false);
-    //   getForumMembers();
-    //   toast.success('Members updated successfully!');
-    // } catch (error) {
-    //   console.error('Error updating members:', error);
-    //   toast.error('Failed to update members.');
-    // }
+    try {
+      const response = await axios.put(
+        `${baseUrl}/forums/members/${id}`,
+        {
+          userId: selectedMembers,
+        }
+      );
+      setShowModal(false);
+      getForumMembers();
+      toast.success('Members updated successfully!');
+    } catch (error) {
+      console.error('Error updating members:', error);
+      toast.error('Failed to update members.');
+    }
   };
 
 

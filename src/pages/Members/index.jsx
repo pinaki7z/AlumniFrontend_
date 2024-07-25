@@ -30,15 +30,7 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
 
   const totalMembers = membersred.length;
 
-  // useEffect(() => {
-  //   console.log('useEffect1')
-  //   if (membersred.length > 0) {
-  //     console.log('members red2')
-  //     const initialBatch = membersred.slice(0, LIMIT);
-  //     setDisplayedMembers(initialBatch);
 
-  //   }
-  // }, []);
 
   useEffect(() => {
     console.log('useEffect2')
@@ -81,7 +73,7 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
   };
 
   const handleDelete = async (memberId) => {
-    console.log('handling delete')
+    console.log('handling delete');
     try {
       const token = cookie.token;
       const response = await axios.delete(`${baseUrl}/alumni/${memberId}`, {
@@ -114,41 +106,41 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
           paddingTop: '25px'
         }}
       >
-        <p style={{fontWeight: '600', paddingBottom: '0px',color: '#3A3A3A', fontSize: '32px'}}>Members</p>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <div className="search" style={{ display: 'flex', width: '75%'}}>
-                        <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                        <div style={{ position: 'relative', width: '100%' }}>
+        <p style={{ fontWeight: '600', paddingBottom: '0px', color: '#3A3A3A', fontSize: '32px' }}>Members</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div className="search" style={{ display: 'flex', width: '75%' }}>
+            <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+              <div style={{ position: 'relative', width: '100%' }}>
                 <input
-                    type="search"
-                    name="search"
-                    id="search"
-                    placeholder="Search for members"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175', backgroundColor: 'white'}}
+                  type="search"
+                  name="search"
+                  id="search"
+                  placeholder="Search for members"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175', backgroundColor: 'white' }}
                 />
                 <button
-                    type="submit"
-                    style={{
-                        position: 'absolute',
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: 'white',
-                        border: 'none',
-                        padding: '5px',
-                        color: 'white',
-                        cursor: 'pointer'
-                    }}
+                  type="submit"
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'white',
+                    border: 'none',
+                    padding: '5px',
+                    color: 'white',
+                    cursor: 'pointer'
+                  }}
                 >
-                    
-                        <IoSearchSharp style={{ color: '#136175',width: '25px',height: '25px' }} />
+
+                  <IoSearchSharp style={{ color: '#136175', width: '25px', height: '25px' }} />
                 </button>
-            </div>
-                            
-                        </form>
-                    </div>
+              </div>
+
+            </form>
+          </div>
           <select className='select-dropdown'>
             <option value="">All Roles</option>
             <option value="Admin">Admin</option>
@@ -180,9 +172,9 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
               }}
             >
               <Link to={`/members/create`} style={{ textDecoration: 'none', color: 'black' }}>
-              <div style={{border: '2px dotted #6FBC94', borderRadius: '8px', width: '17vw', height: '100%',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <img src={createMember} alt="" srcset="" />
-              </div>
+                <div style={{ border: '2px dotted #6FBC94', borderRadius: '8px', width: '17vw', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <img src={createMember} alt="" srcset="" />
+                </div>
               </Link>
               {displayedMembers.map((member) => (
                 <Profilecard

@@ -17,6 +17,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from 'react';
 import baseUrl from "../../config";
+import upload from "../../images/upload.svg"
 const DonSponRequest = ({ name, edit }) => {
     console.log("DON SPON");
     console.log('name', name, edit)
@@ -25,18 +26,20 @@ const DonSponRequest = ({ name, edit }) => {
     const [modalShow, setModalShow] = React.useState(false);
     let heading;
     const { _id } = useParams();
-    console.log('params', _id)
+    const capitalizeFirstLetter=(string)=>{
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     if (edit) {
         heading = <p style={{ marginBottom: '0', fontSize: '24px', fontWeight: '700',fontFamily: 'Inter' }}>Edit new {name} request</p>
     }
     else {
-        heading = <p style={{ marginBottom: '0', fontSize: '24px', fontWeight: '700',fontFamily: 'Inter' }}>Create a new {name}</p>
+        heading = <p style={{ marginBottom: '0', fontSize: '24px', fontWeight: '700',fontFamily: 'Inter' }}>Create A New {capitalizeFirstLetter(name)}</p>
     }
     if (name === 'group') {
         if (!edit)
-            heading = <p style={{ marginBottom: '0', fontSize: '24px', fontWeight: '700',fontFamily: 'Inter'}}>Create a new {name} </p>
+            heading = <p style={{ marginBottom: '0', fontSize: '24px', fontWeight: '700',fontFamily: 'Inter'}}>Create A New {capitalizeFirstLetter(name)} </p>
         else {
-            heading = <p style={{ marginBottom: '0', fontSize: '24px', fontWeight: '700',fontFamily: 'Inter' }}>Edit {name} </p>
+            heading = <p style={{ marginBottom: '0', fontSize: '24px', fontWeight: '700',fontFamily: 'Inter' }}>Edit {capitalizeFirstLetter(name)} </p>
         }
     }
 
@@ -99,9 +102,10 @@ const DonSponRequest = ({ name, edit }) => {
 
 
     const [groupName, setGroupName] = useState("");
-    const [groupType, setGroupType] = useState("Public");
-    const [category, setCategory] = useState("Cars and Vehicles");
+    const [groupType, setGroupType] = useState("Select Group Type");
+    const [category, setCategory] = useState("Select Cateory");
     const [background, setBackground] = useState("");
+    const [groupPicture, setGroupPicture] = useState("");
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -368,10 +372,6 @@ const DonSponRequest = ({ name, edit }) => {
                     });
 
                 console.log(response.data);
-
-                // setTitle("");
-                // setDescription("");
-                // setTotalAmount("");
                 toast.success(`Successfully edited ${name} details`);
                 setTimeout(() => {
                     navigateTo(`/${name}s`);
@@ -467,20 +467,22 @@ const DonSponRequest = ({ name, edit }) => {
     if (name === 'group') {
         extraFields = (
             <>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '95%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label htmlFor="groupName">Group Name</label>
-                    <input type="text" style={{ borderRadius: '6px', height: '5.5vh' }} value={groupName} onChange={(e) => setGroupName(e.target.value)} />
+                    <input type="text" style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={groupName} onChange={(e) => setGroupName(e.target.value)} />
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '95%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label htmlFor="groupType">Group Type</label>
-                    <select style={{ borderRadius: '6px', height: '5.5vh' }} value={groupType} onChange={(e) => setGroupType(e.target.value)}>
+                    <select style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={groupType} onChange={(e) => setGroupType(e.target.value)}>
+                    <option value="">Select Group Type</option>
                         <option value="Public">Public</option>
                         <option value="Private">Private</option>
                     </select>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '95%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label htmlFor="category">Category</label>
-                    <select style={{ borderRadius: '6px', height: '5.5vh' }} value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <select style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option value="">Select Category</option>
                         <option value="Cars and vehicles">Cars and Vehicles</option>
                         <option value="Comedy">Comedy</option>
                         <option value="Entertainment">Entertainment</option>
@@ -490,12 +492,24 @@ const DonSponRequest = ({ name, edit }) => {
                         <option value="Pets and Animals">Pets and Animals</option>
                     </select>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '95%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label htmlFor="image">Group Background</label>
-                    <label for="images" className="drop-container" id="dropcontainer">
-                        <span className="drop-title">Drop files here</span>
+                    <label for="images" className="drop-container" id="dropcontainer" style={{marginTop: '10px'}}>
+                        <img src={upload} alt="" />
+                        <span className="drop-title">Drag & Drop</span>
                         or
                         <input type="file" id="images" accept="image/*" required onChange={(e) => handleImageChange(e, setBackground)} />
+                        <span style={{fontSize: '14px', fontWeight: '500', fontFamily: 'Inter'}}>to upload your image (max size: 10 MB)</span>
+                    </label>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                    <label htmlFor="groupPicture">Group Logo</label>
+                    <label for="groupPicture" className="drop-container" id="dropcontainer" style={{marginTop: '10px'}}>
+                        <img src={upload} alt="" />
+                        <span className="drop-title">Drag & Drop</span>
+                        or
+                        <input type="file" id="images" accept="image/*" required onChange={(e) => handleImageChange(e, setGroupPicture)} />
+                        <span style={{fontSize: '14px', fontWeight: '500', fontFamily: 'Inter'}}>to upload your image (max size: 10 MB)</span>
                     </label>
                 </div>
             </>
@@ -505,7 +519,13 @@ const DonSponRequest = ({ name, edit }) => {
             groupName: groupName,
             groupType: groupType,
             category: category,
-            groupLogo: background
+            groupLogo: background,
+            groupPicture: groupPicture,
+            member: {
+                userId: profile._id,
+                profilePicture: profile.profilePicture,
+                userName: `${profile.firstName} ${profile.lastName}`
+            }
         };
 
     } else if (name === 'member') {
@@ -756,7 +776,7 @@ const DonSponRequest = ({ name, edit }) => {
                     <form className='don-spon-request' onSubmit={handleSubmit} style={{ display: 'flex', paddingBottom: '20px', alignItems: 'center', backgroundColor: 'white', borderRadius: '6px', marginTop: '20px', flexDirection: 'column' }}>
                         {extraFields}
                         <div style={{ width: '100%'}}>
-                            <div style={{ display: 'flex', width: '65%', justifyContent: 'center', gap: '2rem' }}>
+                        <div style={{ display: 'flex', width: name === 'member' ? '65%' : '100%', justifyContent: 'center', gap: '2rem' }}>
                             <button style={{ display: 'flex', border: 'none', background: 'inherit', alignItems: 'center', color: '#666', width: '14%', gap: '0.5rem', justifyContent: 'center',border: '2px solid #6FBC94', borderRadius: '8px' }}><Link to={`/${name}s`} style={{ textDecoration: 'none', color: 'black', display: 'flex', alignItems: 'center', color: 'rgb(102, 102, 102)', width: '100%', gap: '0.5rem', justifyContent: 'center' }}><p style={{ marginBottom: '0rem' }}>Back</p></Link></button>
                             <button style={{ color: '#ffffff', backgroundColor: '#174873', borderColor: '#174873', borderRadius: '6px', width: '18%', height: '5vh' }} type="submit">{loading ? 'Creating...' : 'Create'}</button>
                             </div>                            
