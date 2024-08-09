@@ -19,7 +19,7 @@ dotPulse.register();
 
 
 
-function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDeleteButton, admin,userId,groupID }) {
+function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDeleteButton, admin, userId, groupID, showCreateButton }) {
   const [posts, setPosts] = useState([]);
   const profile = useSelector((state) => state.profile);
   const [loading, setLoading] = useState(false);
@@ -134,7 +134,7 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
     isFetchingRef.current = false;
     console.log("Getting posts/news")
     try {
-      if(userId){
+      if (userId) {
         const response = await axios.get(
           `${baseUrl}/${entityType}/userPosts/${userId}?page=${page}&size=${LIMIT}`
         );
@@ -142,7 +142,7 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
         setPosts((prevItems) => [...prevItems, ...postsData]);
         setTotalPosts(response.data.total);
         lastFetchedPageRef.current = page;
-      }else if(groupID){
+      } else if (groupID) {
         const response = await axios.get(
           `${baseUrl}/groups/groups/${groupID}?page=${page}&size=${LIMIT}`
         );
@@ -151,15 +151,15 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
         setTotalPosts(response.data.total);
         lastFetchedPageRef.current = page;
       }
-      else{
-      const response = await axios.get(
-        `${baseUrl}/${entityType}?page=${page}&size=${LIMIT}`
-      );
-      const postsData = response.data.records;
-      setPosts((prevItems) => [...prevItems, ...postsData]);
-      setTotalPosts(response.data.total);
-      lastFetchedPageRef.current = page;
-    }
+      else {
+        const response = await axios.get(
+          `${baseUrl}/${entityType}?page=${page}&size=${LIMIT}`
+        );
+        const postsData = response.data.records;
+        setPosts((prevItems) => [...prevItems, ...postsData]);
+        setTotalPosts(response.data.total);
+        lastFetchedPageRef.current = page;
+      }
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
@@ -167,12 +167,18 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
     setLoading(false);
   };
 
-  
+
 
   return (
     <div className='feed'>
       {showCreatePost && <CreatePost1 photoUrl={photoUrl} username={username} onNewPost={handleNewPost} entityType={entityType} />}
-      <div className='infiniteScroll' ref={scrollContainerRef} style={{ height: "120vh", marginTop: '10px', overflowY: "auto", width: "100%", display: "flex", flexDirection: "column", alignItems: "center",paddingTop: '27px' }}>
+      {showCreateButton &&
+        <div style={{width: '100%'}}>
+          <button style={{fontFamily: 'Inter', fontWeight: '500', fontSize: '20px',padding: '30px',borderRadius: '8px', border: 'none',height: '0vh', width: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px'}}>
+            Create
+          </button>
+        </div>}
+      <div className='infiniteScroll' ref={scrollContainerRef} style={{ height: "120vh", marginTop: '10px', overflowY: "auto", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", paddingTop: '27px' }}>
         {posts.map((post, index) => {
           if (post.type === 'Post' && (post.groupID === _id)) {
             return (
@@ -219,13 +225,13 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
           } else if (post.type === 'poll') {
             return (
               <div key={post._id} className="post-box">
-                <PollDisplay poll={post}/>
+                <PollDisplay poll={post} />
               </div>
             );
-          }else if (post.type === 'event') {
+          } else if (post.type === 'event') {
             return (
               <div key={post._id} className="post-box">
-                <EventDisplay event={post}/>
+                <EventDisplay event={post} />
               </div>
             );
           }
