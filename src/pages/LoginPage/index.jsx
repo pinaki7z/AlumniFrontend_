@@ -1,6 +1,7 @@
 import "./loginPage.css";
 import "../../components/FrameComponent/FrameComponent.css";
 import io from "../../images/io.png";
+import bhu from "../../images/bhu.png";
 import { useState } from 'react';
 import './loginPage.css';
 import { useCookies } from "react-cookie";
@@ -85,7 +86,7 @@ const LoginPage = ({ handleLogin }) => {
     <div className="landing-page-1">
       <div className="main-container">
         <div className="content-area">
-          <img src={io} alt="" srcset="" width='200px' height='100px' />
+          <img src={bhu} alt="" srcset="" width='300px' height='100px' />
         </div>
       </div>
       <main className="login-panel">
@@ -105,7 +106,7 @@ const LoginPage = ({ handleLogin }) => {
             <div className="university-affiliation">
               <div className="bhu-alumni-association-container">
                 <b className="bhu">
-                  <span className="bhu1" style={{color: '#36454F'}}>InsideOut</span>
+                  <span className="bhu1" style={{color: '#36454F'}}>BHU</span>
                 </b>
                 <span className="alumni-association">
                   <b className="b">{` `}</b>
