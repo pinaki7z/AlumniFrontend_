@@ -65,7 +65,7 @@ const RegisterPage = () => {
           <div className="frame-item" />
           <div className="bhu-alumni-association-container1">
             <b>
-              <span>InsideOut</span>
+              <span>BHU</span>
             </b>
             <span className="alumni-association">
               <b>{` `}</b>
