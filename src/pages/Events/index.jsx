@@ -629,7 +629,7 @@ function Events() {
           selectable
           onSelectEvent={handleEventClick}
         />
-        {admin && (
+        
           <Button
             className="add-event-button"
             variant="primary"
@@ -644,7 +644,7 @@ function Events() {
           >
             <FaCalendarPlus />
           </Button>
-        )}
+       
 
         {selectedEventDetails && (
           <Modal
