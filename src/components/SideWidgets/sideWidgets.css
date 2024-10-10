@@ -7,7 +7,7 @@
   .sideWidget-post-card {
     width: 100%;
     /* max-width: 25vw;  */
-    background-color: #E9F5EF;
+    background-color: #eeeeee;
     border: 1px solid #e0e0e0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -48,7 +48,7 @@
   .sideWidget2-post-card {
     width: 100%;
     max-width: 25vw;
-    background-color: #E9F5EF;
+    background-color: #eeeeee;
     border: 1px solid #e0e0e0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 12px;

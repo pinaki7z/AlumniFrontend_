@@ -193,7 +193,7 @@ const TopBar = ({ handleLogout }) => {
                                         right: '10px',
                                         top: '50%',
                                         transform: 'translateY(-50%)',
-                                        backgroundColor: '#E9F5EF',
+                                        backgroundColor: '#eeeeee',
                                         border: 'none',
                                         padding: '5px',
                                         color: 'white',

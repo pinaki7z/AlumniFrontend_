@@ -205,11 +205,11 @@ export const NotificationsP = () => {
 
     return (
         <div style={{ paddingTop: '20px' }}>
-            <form onSubmit={handleAlumniSearch} style={{ display: 'flex', gap: '15px' }}>
+            <form onSubmit={handleAlumniSearch} style={{ display: 'flex', gap: '15px',padding: '0 5%' }}>
                 <input type="text" placeholder='Search for name' name='user' value={user} onChange={(e) => setUser(e.target.value)} style={{ width: '40%', borderRadius: '5px' }} />
                 <button type="submit" style={{ borderRadius: '5px' }}>Search</button>
             </form>
-            <div>
+            <div style={{padding: '2% 5%'}}>
                 {loading ? (
                     <l-line-spinner size="20" stroke="3" speed="1" color="black"></l-line-spinner>
                 ) : filteredNotifications.length ? (

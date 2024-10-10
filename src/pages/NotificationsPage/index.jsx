@@ -21,8 +21,10 @@ const NotificationsPage=()=>{
         <>
         <div style={{ width: '100%', paddingTop: '20px' }}>
       <Routes>
-        <Route path="/" element={<PageTitle title={title} icon={icon} />} />
-        <Route path="/declined" element={<PageTitle title={title} icon={icon} />} />
+        <Route path="/" element={<div style={{padding: '0 5%'}}>
+        <PageTitle title={title} icon={icon} />
+        </div>} />
+        <Route path="/declined" element={<div style={{padding: '0 5%'}}><PageTitle title={title} icon={icon} /> </div>} />
       </Routes>
       <Routes>
           <Route path="/" element={<PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} name='notifications' create={false}/>} />

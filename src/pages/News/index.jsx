@@ -13,7 +13,7 @@ const News = () => {
 
   return (
     <div>
-      <div style={{borderRadius: '12px',padding: '30px',backgroundColor: '#E9F5EF'}}>
+      <div style={{borderRadius: '12px',padding: '30px',backgroundColor: '#eeeeee'}}>
         <div style={{fontFamily: 'Inter', fontSize: '32px',fontWeight: '600'}}>
           News
         </div>
