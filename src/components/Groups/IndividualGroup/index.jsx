@@ -266,7 +266,7 @@ const IndividualGroup = () => {
                                         </div>
                                     </div>
                                     <div className="lower-div" style={{
-                                        backgroundColor: '#eeeeee',
+                                        backgroundColor: '#efeff0',
                                         width: '100%',
                                         minHeight: '15vh',
                                         backgroundSize: 'cover',
@@ -385,7 +385,7 @@ const IndividualGroup = () => {
                                                     value={searchTerm}
                                                     onChange={(e) => setSearchTerm(e.target.value)}
                                                     className="search-input"
-                                                    style={{ backgroundColor: '#eeeeee' }}
+                                                    style={{ backgroundColor: '#efeff0' }}
                                                 />
                                                 <img src={searchIcon} alt="" srcset="" style={{position: 'absolute',top: '10px', right: '10px'}}/>
                                             </div>
