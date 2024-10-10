@@ -317,7 +317,7 @@ export const WorkExperience = () => {
             <div style={{paddingTop: '20px'}}>
             <button
                 type="button"
-                style={{ backgroundColor: 'white', display: 'flex', alignItems: 'center', gap: '7px', border: '2px solid #6FBC94', color: '#136175', borderRadius: '5px',padding: '10px' }}
+                style={{ backgroundColor: 'white', display: 'flex', alignItems: 'center', gap: '7px', border: '2px solid #a98de3', color: '#301C58', borderRadius: '5px',padding: '10px' }}
                 onClick={() => setModalShow(true)}
               >
                 <IoIosList/>

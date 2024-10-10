@@ -272,7 +272,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
           </div>
         </div>
         <div className={`img-job-vide ${isExpanded ? 'expanded' : ''}`}>
-          <label style={{ border: '1px solid #6FBC94' ,color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', display: 'flex', alignItems: 'center', justifyContent: 'center',fontSize: '15px', gap: '5px',width: '18%' }}>
+          <label style={{ border: '1px solid #a98de3' ,color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', display: 'flex', alignItems: 'center', justifyContent: 'center',fontSize: '15px', gap: '5px',width: '18%' }}>
           <img src={gallery} alt="" srcset="" />Image
             <input
               type='file'
@@ -282,10 +282,10 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
               multiple
             />
           </label>
-          <button style={{ backgroundColor: 'white', color: 'black', padding: '5px 10px', marginLeft: '0px', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '15px', width: '18%', borderRadius: '3em',border: '1px solid #6FBC94'  }} onClick={() => setShowPollModal(true)}><img src={poll} alt="" srcset="" />Poll</button>
+          <button style={{ backgroundColor: 'white', color: 'black', padding: '5px 10px', marginLeft: '0px', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '15px', width: '18%', borderRadius: '3em',border: '1px solid #a98de3'  }} onClick={() => setShowPollModal(true)}><img src={poll} alt="" srcset="" />Poll</button>
   
 
-          <label style={{ border: '1px solid #6FBC94' , color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', fontSize: '15px',display: 'flex', alignItems: 'center', justifyContent: 'center',width: '18%', gap: '5px' }}>
+          <label style={{ border: '1px solid #a98de3' , color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', fontSize: '15px',display: 'flex', alignItems: 'center', justifyContent: 'center',width: '18%', gap: '5px' }}>
           <img src={video} alt="" srcset="" />Video
             <input
               type='file'
@@ -297,7 +297,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
           <div style={{ marginTop: '4px',marginLeft: 'auto' }}>
               <button onClick={handleSubmit} style={{
                 float: 'right', color: '#ffffff',
-                backgroundColor: '#6FBC94',
+                backgroundColor: '#a98de3',
                 borderColor: '#174873',
                 fontSize: '16px'
               }}>Post</button>

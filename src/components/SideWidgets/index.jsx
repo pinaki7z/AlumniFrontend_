@@ -156,7 +156,7 @@ const SideWidgets = () => {
                         </Popover>
                     }
                 >
-                    <button onClick={() => setShowPopover(!showPopover)} style={{ backgroundColor: '#136175', color: '#FFFFF0', width: '125px', height: '45px', borderRadius: '8px', border: 'none', fontSize: '20px' }}>Create</button>
+                    <button onClick={() => setShowPopover(!showPopover)} style={{ backgroundColor: '#301C58', color: '#FFFFF0', width: '125px', height: '45px', borderRadius: '8px', border: 'none', fontSize: '20px' }}>Create</button>
                 </OverlayTrigger>
             </div>
 
@@ -166,13 +166,13 @@ const SideWidgets = () => {
                     <Link to='/profile' style={{ textDecoration: 'none', color: 'black' }}>
                         <p style={{ marginBottom: '0rem', fontWeight: '500', fontSize: '20px' }}>{profile.firstName}</p>
                     </Link>
-                    <p style={{ marginBottom: '0rem', fontSize: '14px', backgroundColor: '#6FBC94', paddingLeft: '5px', paddingRight: '5px' }}>@{profile.firstName}</p>
+                    <p style={{ marginBottom: '0rem', fontSize: '14px', backgroundColor: '#a98de3', paddingLeft: '5px', paddingRight: '5px' }}>@{profile.firstName}</p>
                 </div>
                 <div style={{ height: '20%' }}>
                     <ul style={{ paddingLeft: '0px', marginBottom: '0px', display: 'flex', gap: '10px' }}>
-                        <li style={{ display: 'inline-block', borderRight: '1px solid #e9e9e9', textAlign: 'center', paddingRight: '7px' }}><a href="" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'black' }}><span>Posts</span><span style={{ fontWeight: '500', color: '#136175' }}>5</span></a></li>
-                        <li style={{ display: 'inline-block', borderRight: '1px solid #e9e9e9', textAlign: 'center', paddingRight: '7px' }}><a href="" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'black' }}><span>Following</span><span style={{ fontWeight: '500', color: '#136175' }}>1</span></a></li>
-                        <li style={{ display: 'inline-block', textAlign: 'center' }}><a href="" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'black' }}><span>Followers</span><span style={{ fontWeight: '500', color: '#136175' }}>1</span></a></li>
+                        <li style={{ display: 'inline-block', borderRight: '1px solid #e9e9e9', textAlign: 'center', paddingRight: '7px' }}><a href="" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'black' }}><span>Posts</span><span style={{ fontWeight: '500', color: '#301C58' }}>5</span></a></li>
+                        <li style={{ display: 'inline-block', borderRight: '1px solid #e9e9e9', textAlign: 'center', paddingRight: '7px' }}><a href="" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'black' }}><span>Following</span><span style={{ fontWeight: '500', color: '#301C58' }}>1</span></a></li>
+                        <li style={{ display: 'inline-block', textAlign: 'center' }}><a href="" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'black' }}><span>Followers</span><span style={{ fontWeight: '500', color: '#301C58' }}>1</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -180,14 +180,14 @@ const SideWidgets = () => {
             <div className='sideWidget2-post-card'>
                 <div className="sideWidget2-post-header">
                     <p style={{ marginBottom: '0rem', fontWeight: '500', fontSize: '20px' }}>People You May Know</p>
-                    <button style={{ border: 'none', backgroundColor: '#136175' }}><TbReload style={{ color: '#F8F8FF' }} /></button>
+                    <button style={{ border: 'none', backgroundColor: '#301C58' }}><TbReload style={{ color: '#F8F8FF' }} /></button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     {displayedMembers.map((member, index) => (
                         <div key={member._id} style={{ display: 'flex', gap: '10px', alignItems: 'center', padding: '10px', border: '1px solid #e9e9e9', borderRadius: '10px', width: '100%' }}>
                             {member.profilePicture ? <img src={member.profilePicture} alt="Profile" width="60px" height="60px" style={{ borderRadius: '50%' }} /> : <img src={profilepic} alt="Profile" width="60px" height="60px" style={{ borderRadius: '50%' }} />}
                             <p style={{ marginBottom: '0rem', fontWeight: '500' }}>{member.firstName}</p>
-                            <button onClick={() => handleFollowToggle(member._id, member.firstName, member.lastName)} style={{ backgroundColor: '#6FBC94', color: 'white', borderRadius: '32px', border: 'none', marginLeft: 'auto', color: '#F8F8FF', padding: '8px 32px', pointer: 'cursor' }}>{isloading[member._id] ? <l-line-spinner
+                            <button onClick={() => handleFollowToggle(member._id, member.firstName, member.lastName)} style={{ backgroundColor: '#a98de3', color: 'white', borderRadius: '32px', border: 'none', marginLeft: 'auto', color: '#F8F8FF', padding: '8px 32px', pointer: 'cursor' }}>{isloading[member._id] ? <l-line-spinner
                                 size="20"
                                 stroke="3"
                                 speed="1"
@@ -196,7 +196,7 @@ const SideWidgets = () => {
                         </div>
                     ))}
                     {peopleYouMayKnow.length > displayedMembers.length && (
-                        <p onClick={() => setCurrentPage(currentPage + 1)} style={{ color: '#136175', borderRadius: '10px', borderColor: 'white', padding: '10px', marginTop: '10px', cursor: 'pointer', fontWeight: '500' }}>See More</p>
+                        <p onClick={() => setCurrentPage(currentPage + 1)} style={{ color: '#301C58', borderRadius: '10px', borderColor: 'white', padding: '10px', marginTop: '10px', cursor: 'pointer', fontWeight: '500' }}>See More</p>
                     )}
                 </div>
 
@@ -211,7 +211,7 @@ const SideWidgets = () => {
             <div className="sideWidget2-post-card">
                 <div className="sideWidget2-post-header">
                     <p style={{ marginBottom: '0rem', fontWeight: '500', fontSize: '20px' }}>Latest Activities</p>
-                    <button style={{ border: 'none', backgroundColor: '#136175' }}><TbReload onClick={fetchNotifications} style={{
+                    <button style={{ border: 'none', backgroundColor: '#301C58' }}><TbReload onClick={fetchNotifications} style={{
                         color: '#F8F8FF'
                     }} /></button>
                 </div>

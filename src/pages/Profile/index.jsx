@@ -86,21 +86,21 @@ const Profile = () => {
           <div style={{ width: '70%' }}><Feeed entityType='posts' showCreatePost={false} showDeleteButton={true} userId={member._id} /></div>
           <div style={{ width: '28%', paddingTop: '37px' }}>
             <div>
-              <div style={{ backgroundColor: '#136175', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ backgroundColor: '#301C58', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <img src={about} alt="" />
                 <p style={{ fontFamily: 'Inter', fontWeight: '600', fontSize: '20px', marginBottom: '0px' }}>About {member.firstName}</p>
               </div>
               <p style={{ backgroundColor: '#E9F5EF', borderRadius: '0px 0px 12px 12px', padding: '10px 16px 10px 16px', fontFamily: 'Inter', fontWeight: '500', fontSize: '16px', color: '#636364' }}>{member.aboutMe ? member.aboutMe : 'User has not updated his Bio'}</p>
             </div>
             <div>
-              <div style={{ backgroundColor: '#136175', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ backgroundColor: '#301C58', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <img src={work} alt="" />
                 <p style={{ fontFamily: 'Inter', fontWeight: '600', fontSize: '20px', marginBottom: '0px' }}>Currently Working As</p>
               </div>
               <div style={{ backgroundColor: '#E9F5EF' }}>
                 <p style={{ backgroundColor: '#E9F5EF', borderRadius: '0px 0px 12px 12px', padding: '10px 16px 10px 16px', fontFamily: 'Inter', fontWeight: '500', fontSize: '16px', color: '#636364', marginBottom: '0px' }}>{currentWork && currentWork.title ? currentWork.title : 'User has not updated his current work title'}</p>
                 <div style={{ padding: '16px' }}>
-                  <p style={{ color: '#136175', fontWeight: '500', fontSize: '18px' }}>{currentWork && currentWork.companyName ? currentWork.companyName : 'User has not updated his current work place'}</p>
+                  <p style={{ color: '#301C58', fontWeight: '500', fontSize: '18px' }}>{currentWork && currentWork.companyName ? currentWork.companyName : 'User has not updated his current work place'}</p>
                   <div style={{ display: 'flex', gap: '10px' }}>
                     {currentWork && (currentWork.startMonth && currentWork.startYear && currentWork.endMonth)
                         ? <img src={time} alt="" />: ''}

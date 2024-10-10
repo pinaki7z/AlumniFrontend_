@@ -101,7 +101,7 @@ const PollDisplay = ({ poll }) => {
                 )}
                 <div className='info'>
                     <h4>{poll.userName}</h4>
-                    <span style={{ fontSize: '14px', fontWeight: '500', color: '#136175' }}>{formatCreatedAt(poll.createdAt)}</span>
+                    <span style={{ fontSize: '14px', fontWeight: '500', color: '#301C58' }}>{formatCreatedAt(poll.createdAt)}</span>
                 </div>
                 <IconButton className='delete-button' style={{ marginRight: '10px', marginLeft: 'auto' }}>
                     <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">

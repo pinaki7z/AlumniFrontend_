@@ -727,14 +727,14 @@ const ProfilePage = () => {
               <input type="file" name="coverPicture" id="coverPicture" onChange={(event) => handleFileChange(event, 'coverPicture')} style={{ display: 'none' }} />
               <button
                 type="button"
-                style={{ backgroundColor: 'white', display: 'flex', alignItems: 'center', gap: '7px', border: '2px solid #6FBC94', color: '#136175' }}
+                style={{ backgroundColor: 'white', display: 'flex', alignItems: 'center', gap: '7px', border: '2px solid #a98de3', color: '#301C58' }}
                 onClick={() => document.getElementById('coverPicture').click()}
               >
                 <img src={edit} alt="edit" />
                 <p style={{ marginBottom: '0px' }}>Edit Cover Picture </p>
               </button>
               <Link to='/profile/profile-settings' style={{ textDecoration: 'none', color: 'black' }}>
-                <button style={{ backgroundColor: 'white', border: '2px solid #6FBC94', color: '#136175' }}>Edit Profile</button></Link>
+                <button style={{ backgroundColor: 'white', border: '2px solid #a98de3', color: '#301C58' }}>Edit Profile</button></Link>
             </div>
             <div style={{ textAlign: 'center' }}>
               {loading ? 
@@ -801,7 +801,7 @@ const ProfilePage = () => {
           <div style={{ width: '70%' }}><Feeed entityType='posts' showCreatePost={true} showDeleteButton={true} userId={member._id} /></div>
           <div style={{ width: '28%', paddingTop: '37px' }}>
             <div>
-              <div style={{ backgroundColor: '#136175', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ backgroundColor: '#301C58', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <img src={userProfile} alt="" />
                 <p style={{ fontFamily: 'Inter', fontWeight: '600', fontSize: '20px', marginBottom: '0px' }}>Profile Completion</p>
               </div>
@@ -871,21 +871,21 @@ const ProfilePage = () => {
               </div>
             </div>
             <div>
-              <div style={{ backgroundColor: '#136175', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ backgroundColor: '#301C58', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <img src={about} alt="" />
                 <p style={{ fontFamily: 'Inter', fontWeight: '600', fontSize: '20px', marginBottom: '0px' }}>About Me</p>
               </div>
               <p style={{ backgroundColor: '#E9F5EF', borderRadius: '0px 0px 12px 12px', padding: '10px 16px 10px 16px', fontFamily: 'Inter', fontWeight: '500', fontSize: '16px', color: '#636364' }}>{member.aboutMe ? member.aboutMe : 'User has not updated his Bio'}</p>
             </div>
             {/* <div>
-              <div style={{ backgroundColor: '#136175', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ backgroundColor: '#301C58', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <img src={work} alt="" />
                 <p style={{ fontFamily: 'Inter', fontWeight: '600', fontSize: '20px', marginBottom: '0px' }}>Currently Working As</p>
               </div>
               <div style={{ backgroundColor: '#E9F5EF' }}>
                 <p style={{ backgroundColor: '#E9F5EF', borderRadius: '0px 0px 12px 12px', padding: '10px 16px 10px 16px', fontFamily: 'Inter', fontWeight: '500', fontSize: '16px', color: '#636364', marginBottom: '0px' }}>{currentWork && currentWork.title ? currentWork.title : 'User has not updated his current work title'}</p>
                 <div style={{ padding: '16px' }}>
-                  <p style={{ color: '#136175', fontWeight: '500', fontSize: '18px' }}>{currentWork && currentWork.companyName ? currentWork.companyName : 'User has not updated his current work place'}</p>
+                  <p style={{ color: '#301C58', fontWeight: '500', fontSize: '18px' }}>{currentWork && currentWork.companyName ? currentWork.companyName : 'User has not updated his current work place'}</p>
                   <div style={{ display: 'flex', gap: '10px' }}>
                     {currentWork && (currentWork.startMonth && currentWork.startYear && currentWork.endMonth)
                       ? <img src={time} alt="" /> : ''}
@@ -908,7 +908,7 @@ const ProfilePage = () => {
 
             </div> */}
             <Link to='/profile/workExperience' style={{ textDecoration: 'none', color: 'black' }}>
-              <div style={{ backgroundColor: '#136175', color: '#F8F8FF', borderRadius: '12px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ backgroundColor: '#301C58', color: '#F8F8FF', borderRadius: '12px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <img src={workExperience} alt="" />
                 <p style={{ marginBottom: '0px' }}>Work Experience </p>
                 <img src={arrowRight} alt="" style={{ marginLeft: 'auto' }} />

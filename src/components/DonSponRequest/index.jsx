@@ -532,7 +532,7 @@ const DonSponRequest = ({ name, edit }) => {
         extraFields = (
             <>
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <Button variant="primary" onClick={() => setModalShow(true)} style={{ width: '15%',background: '#136175' }}>
+                    <Button variant="primary" onClick={() => setModalShow(true)} style={{ width: '15%',background: '#301C58' }}>
                         Bulk Upload
                     </Button>
                 </div>
@@ -542,27 +542,27 @@ const DonSponRequest = ({ name, edit }) => {
                 />
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>First Name*</label><br />
-                    <input type='text' name='firstName' id='firstName' placeholder='Enter First Name' className='custom-placeholder' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #136175', padding: '10px'}}/>
+                    <input type='text' name='firstName' id='firstName' placeholder='Enter First Name' className='custom-placeholder' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #301C58', padding: '10px'}}/>
                 </div>
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>Last Name*</label><br />
-                    <input type='text' name='lastName' id='lastName' placeholder='Enter Last Name' className='custom-placeholder' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #136175', padding: '10px'}}/>
+                    <input type='text' name='lastName' id='lastName' placeholder='Enter Last Name' className='custom-placeholder' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #301C58', padding: '10px'}}/>
                 </div>
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>E-mail address*</label><br />
-                    <input type='text' name='email' id='email' className='custom-placeholder' placeholder='Enter email' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #136175', padding: '10px'}}/>
+                    <input type='text' name='email' id='email' className='custom-placeholder' placeholder='Enter email' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #301C58', padding: '10px'}}/>
                 </div>
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>Password*</label><br />
-                    <input type='password' name='password' id='password' className='custom-placeholder' placeholder='Enter Password' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #136175', padding: '10px'}}/>
+                    <input type='password' name='password' id='password' className='custom-placeholder' placeholder='Enter Password' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #301C58', padding: '10px'}}/>
                 </div>
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>Confirm Password*</label><br />
-                    <input type='password' name='confirmPassword' id='confirmPassword' className='custom-placeholder' placeholder='Confirm Password' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #136175', padding: '10px'}}/>
+                    <input type='password' name='confirmPassword' id='confirmPassword' className='custom-placeholder' placeholder='Confirm Password' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #301C58', padding: '10px'}}/>
                 </div>
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>Gender*</label><br />
-                    <select name='gender' id='gender' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #136175', padding: '9px',color: '#6FBC94'}}>
+                    <select name='gender' id='gender' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #301C58', padding: '9px',color: '#a98de3'}}>
                         <option value='0'>Gender</option>
                         <option value='Male'>Male</option>
                         <option value='Female'>Female</option>
@@ -587,7 +587,7 @@ const DonSponRequest = ({ name, edit }) => {
 
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>Department*</label><br />
-                    <select name='department' id='department' title='Department' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #136175', padding: '9px',color: '#6FBC94'}}>
+                    <select name='department' id='department' title='Department' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #301C58', padding: '9px',color: '#a98de3'}}>
                         <option value='' disabled selected>Select Department</option>
                         <option value='Agricultural Engineering'>Agricultural Engineering</option>
                         <option value='Gastroenterology'>Gastroenterology</option>
@@ -598,7 +598,7 @@ const DonSponRequest = ({ name, edit }) => {
                 </div>
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>Batch*</label><br />
-                    <select name='batch' id='batch' onChange={handleChange} disabled={isAdmin} style={{ backgroundColor: isAdmin ? '#f2f2f2' : 'white',width: '65%', height: '48px' , border: '2px solid #136175',borderRadius: '6px', padding: '9px',color: '#6FBC94'}} required>
+                    <select name='batch' id='batch' onChange={handleChange} disabled={isAdmin} style={{ backgroundColor: isAdmin ? '#f2f2f2' : 'white',width: '65%', height: '48px' , border: '2px solid #301C58',borderRadius: '6px', padding: '9px',color: '#a98de3'}} required>
                         <option value='' disabled selected>Select Batch</option>
                         {generateYears().map((year) => (
                             <option key={year} value={year}>
@@ -777,7 +777,7 @@ const DonSponRequest = ({ name, edit }) => {
                         {extraFields}
                         <div style={{ width: '100%'}}>
                         <div style={{ display: 'flex', width: name === 'member' ? '65%' : '100%', justifyContent: 'center', gap: '2rem' }}>
-                            <button style={{ display: 'flex', border: 'none', background: 'inherit', alignItems: 'center', color: '#666', width: '14%', gap: '0.5rem', justifyContent: 'center',border: '2px solid #6FBC94', borderRadius: '8px' }}><Link to={`/${name}s`} style={{ textDecoration: 'none', color: 'black', display: 'flex', alignItems: 'center', color: 'rgb(102, 102, 102)', width: '100%', gap: '0.5rem', justifyContent: 'center' }}><p style={{ marginBottom: '0rem' }}>Back</p></Link></button>
+                            <button style={{ display: 'flex', border: 'none', background: 'inherit', alignItems: 'center', color: '#666', width: '14%', gap: '0.5rem', justifyContent: 'center',border: '2px solid #a98de3', borderRadius: '8px' }}><Link to={`/${name}s`} style={{ textDecoration: 'none', color: 'black', display: 'flex', alignItems: 'center', color: 'rgb(102, 102, 102)', width: '100%', gap: '0.5rem', justifyContent: 'center' }}><p style={{ marginBottom: '0rem' }}>Back</p></Link></button>
                             <button style={{ color: '#ffffff', backgroundColor: '#174873', borderColor: '#174873', borderRadius: '6px', width: '18%', height: '5vh' }} type="submit">{loading ? 'Creating...' : 'Create'}</button>
                             </div>                            
                         </div>

@@ -92,7 +92,7 @@
   .welcome-message {
     width: 552px;
     border-radius: var(--br-xs) var(--br-5xl) var(--br-5xl) var(--br-xs);
-    background-color:#136175;
+    background-color:#301C58;
 
     padding: var(--padding-265xl) 18px var(--padding-265xl) var(--padding-21xl);
     gap: 12px;

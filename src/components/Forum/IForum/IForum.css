@@ -25,17 +25,17 @@
   
   .manage-members-btn {
     background-color: transparent;
-    border: 1px solid #136175;
+    border: 1px solid #301C58;
     border-radius: 8px;
     padding: 10px 20px;
-    color: #136175;
+    color: #301C58;
     cursor: pointer;
     font-family: 'Arial', sans-serif;
     font-weight: 500;
   }
   
   .manage-members-btn:hover {
-    background-color: #136175;
+    background-color: #301C58;
     color: #ffffff;
   }
   
@@ -116,7 +116,7 @@
     display: flex;
     align-items: end;
     cursor: pointer;
-    color: #136175;
+    color: #301C58;
     font-weight: 500;
     gap: 10px;
   }

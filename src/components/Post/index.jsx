@@ -159,7 +159,7 @@ function Post({ userId, postId, profilePicture, username, text, timestamp, image
             (<Avatar src={comment} style={{ width: '50px', height: '50px' }} />)}
           <div className='info'>
             <h4>{username}</h4>
-            <span style={{ fontSize: '14px', fontWeight: '500', color: '#136175' }}>{formatCreatedAt(timestamp)}</span>
+            <span style={{ fontSize: '14px', fontWeight: '500', color: '#301C58' }}>{formatCreatedAt(timestamp)}</span>
           </div>
           {(admin || userId === profile._id) && (
             <IconButton onClick={() => handleDeletePost(userId)} className='delete-button'>

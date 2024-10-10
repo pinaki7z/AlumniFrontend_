@@ -102,15 +102,15 @@ const LoginPage = ({ handleLogin }) => {
         </div>
         <div className="login-fields">
           <form className="credentials-input" onSubmit={handleSubmit}>
-            <h1 className="welcome-back" style={{color: '#36454F'}}>Welcome Back!</h1>
+            <h1 className="welcome-back" style={{color: '#301c58'}}>Welcome Back!</h1>
             <div className="university-affiliation">
               <div className="bhu-alumni-association-container">
                 <b className="bhu">
-                  <span className="bhu1" style={{color: '#36454F'}}>BHU</span>
+                  <span className="bhu1" style={{color: '#301c58'}}>BHU</span>
                 </b>
                 <span className="alumni-association">
                   <b className="b">{` `}</b>
-                  <span className="alumni-association1" style={{color: '#36454F'}}>Alumni Association</span>
+                  <span className="alumni-association1" style={{color: '#301c58'}}>Alumni Association</span>
                 </span>
               </div>
             </div>
@@ -168,7 +168,7 @@ const LoginPage = ({ handleLogin }) => {
             <div className="action-buttons">
               <button className="button" type='submit' style={{
                 color: '#F8F8FF',
-                background: '#6FBC94' 
+                background: '#a98de3' 
               }}>
                 <div className="button1" style={{ color: '#F8F8FF' }}>{loading? 'Logging in...' : 'Login'}</div>
               </button>

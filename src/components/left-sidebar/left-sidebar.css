@@ -29,7 +29,7 @@
     color: #F8F8FF;
 }
 .sideBar li:hover {
-    background-color: #6FBC94; 
+    background-color: #a98de3; 
     color: #F8F8FF;
   }
   
@@ -38,7 +38,7 @@
   }
 
   .dashboard-icon {
-    color: #6FBC94;
+    color: #a98de3;
   }
 
   .sideBar li:hover .dashboard-icon {

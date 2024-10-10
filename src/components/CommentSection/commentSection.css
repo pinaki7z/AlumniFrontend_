@@ -7,7 +7,7 @@
   list-style-type: none;
   margin-left: 20px; /* Indentation for nested comments */
   padding-left: 20px; /* Additional padding to align with the parent comment */
-  border-left: 2px solid #6FBC94; /* Thread connector */
+  border-left: 2px solid #a98de3; /* Thread connector */
   position: relative;
 }
 
@@ -17,7 +17,7 @@
   top: 0;
   left: -10px;
   height: 100%;
-  /* border-left: 2px solid #6FBC94; */
+  /* border-left: 2px solid #a98de3; */
 }
 
 .comment {
@@ -71,6 +71,6 @@
 
 .comment-input:focus {
   border: none;
-  border-bottom: 2px solid #6FBC94;
+  border-bottom: 2px solid #a98de3;
   outline: none;
 }

@@ -70,7 +70,7 @@ const Forum = () => {
                     placeholder="Search for topics"
                     // value={searchQuery}
                     // onChange={(e) => setSearchQuery(e.target.value)}
-                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175', backgroundColor: 'white'}}
+                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #301C58', backgroundColor: 'white'}}
                 />
                 <button
                     type="submit"
@@ -87,7 +87,7 @@ const Forum = () => {
                     }}
                 >
                     
-                        <IoSearchSharp style={{ color: '#136175',width: '25px',height: '25px' }} />
+                        <IoSearchSharp style={{ color: '#301C58',width: '25px',height: '25px' }} />
                 </button>
             </div>
                             

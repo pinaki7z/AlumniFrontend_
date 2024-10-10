@@ -118,7 +118,7 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
                   placeholder="Search for members"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #136175', backgroundColor: 'white' }}
+                  style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #301C58', backgroundColor: 'white' }}
                 />
                 <button
                   type="submit"
@@ -135,7 +135,7 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
                   }}
                 >
 
-                  <IoSearchSharp style={{ color: '#136175', width: '25px', height: '25px' }} />
+                  <IoSearchSharp style={{ color: '#301C58', width: '25px', height: '25px' }} />
                 </button>
               </div>
 
@@ -172,7 +172,7 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
               }}
             >
               <Link to={`/members/create`} style={{ textDecoration: 'none', color: 'black' }}>
-                <div style={{ border: '2px dotted #6FBC94', borderRadius: '8px', width: '17vw', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ border: '2px dotted #a98de3', borderRadius: '8px', width: '17vw', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <img src={createMember} alt="" srcset="" />
                 </div>
               </Link>

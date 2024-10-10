@@ -40,9 +40,9 @@ const LeftSidebar = () => {
     }, []);
 
     return (
-        <div style={{ width: '20%',backgroundColor: '#136175',height: '100vh',position: 'fixed' }}>
+        <div style={{ width: '20%',backgroundColor: '#301C58',height: '100vh',position: 'fixed' }}>
             <div style={{ textAlign: 'center', marginTop: '3em'}}>
-                        <img src={bhu} alt="" width="230px" height="75px"/>
+                        <img src={bhu} alt="" width="230px" height="75px" style={{borderRadius: '8px'}}/>
                     </div>
                 <div className='sideBar'>                    
                     <ul style={{paddingLeft: '0px', width: '100%'}}>
