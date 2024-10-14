@@ -45,7 +45,7 @@ const Chatbox = () => {
       <div className='chatbox-header'>
         <p style={{ marginBottom: '0px' }}>Messages</p>
         <div style={{ display: 'flex', gap: '2vw' }}>
-          <img src={expand} alt="" srcset="" className='arrow-up' onClick={togglePopup} />
+          {/* <img src={expand} alt="" srcset="" className='arrow-up' onClick={togglePopup} /> */}
           <img src={profileIcon} alt="" srcset="" />
           {!isExpanded ? (<img src={arrowUp} alt="" srcset="" onClick={toggleExpand} className='arrow-up' />) : (<img src={arrowDown} alt="" srcset="" onClick={toggleExpand} className='arrow-up' />)}
         </div>
@@ -115,10 +115,10 @@ const Chatbox = () => {
           <div className="chat-details">
             <ChatM />
           </div>
-          <div>
+          {/* <div>
             <img src={expand} alt="" srcset="" className='arrow-up' onClick={togglePopup}  style={{ position: 'absolute', top: '5px', right: '10px' }}/>
 
-          </div>
+          </div> */}
         </div>
       )}
 

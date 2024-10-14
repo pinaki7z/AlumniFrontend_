@@ -93,6 +93,7 @@ export const ProfileSettings = () => {
     city: '',
     country: '',
     student: false,
+    linkedIn: ''
   });
 
   const handleProfileImageChange = (e) => {
@@ -274,6 +275,21 @@ export const ProfileSettings = () => {
               onChange={handleCurrentStudentChange}
             />
           </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicFname">
+                <Form.Label>LinkedIn profile link</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter linkedIn profile link"
+                  name="linkedIn"
+                  value={formData.linkedIn}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            </Row>
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicWorking">

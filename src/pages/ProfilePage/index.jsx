@@ -564,7 +564,7 @@ const ProfilePage = () => {
   const { id } = useParams();
   console.log('member id', id);
   const members = useSelector((state) => state.member);
-  console.log('members profile page',members)
+  console.log('members profile page', members)
   const profile = useSelector((state) => state.profile);
   const member = members.find(member => member._id === profile._id);
   const [workExperiences, setWorkExperiences] = useState([]);
@@ -737,19 +737,19 @@ const ProfilePage = () => {
                 <button style={{ backgroundColor: 'white', border: '2px solid #a98de3', color: '#301C58' }}>Edit Profile</button></Link>
             </div>
             <div style={{ textAlign: 'center' }}>
-              {loading ? 
+              {loading ?
                 <l-line-spinner
                   size="30"
                   stroke="3"
                   speed="1"
                   color="black"
-                  style={{backgroundColor: 'whitesmoke',padding: '20px'}}
+                  style={{ backgroundColor: 'whitesmoke', padding: '20px' }}
                 ></l-line-spinner> : null}
             </div>
           </div>
           <div style={{ position: 'absolute', top: '10vh', left: '50%', transform: 'translateX(-50%) translateY(50%)' }}>
             <div style={{ position: 'relative' }}>
-              <img src={profile.profilePicture? profile.profilePicture : profilePic} alt="profile-picture" style={{ width: '200px', height: '200px', borderRadius: '50%', border: '5px solid white' }} />
+              <img src={profile.profilePicture ? profile.profilePicture : profilePic} alt="profile-picture" style={{ width: '200px', height: '200px', borderRadius: '50%', border: '5px solid white' }} />
               <input type="file" name="profilePicture" id="profilePicture" onChange={(event) => handleFileChange(event, 'profilePicture')} style={{ display: 'none' }} />
               <img src={editProfilePicture} alt="profile-picture" style={{ borderRadius: '50%', border: '5px solid white', position: 'absolute', bottom: '20px', right: '5px', cursor: 'pointer' }} onClick={() => document.getElementById('profilePicture').click()} />
             </div>
@@ -875,7 +875,17 @@ const ProfilePage = () => {
                 <img src={about} alt="" />
                 <p style={{ fontFamily: 'Inter', fontWeight: '600', fontSize: '20px', marginBottom: '0px' }}>About Me</p>
               </div>
-              <p style={{ backgroundColor: '#efeff0', borderRadius: '0px 0px 12px 12px', padding: '10px 16px 10px 16px', fontFamily: 'Inter', fontWeight: '500', fontSize: '16px', color: '#636364' }}>{member.aboutMe ? member.aboutMe : 'User has not updated his Bio'}</p>
+              <p style={{ backgroundColor: '#efeff0', borderRadius: '0px 0px 12px 12px', padding: '10px 16px', fontFamily: 'Inter', fontWeight: '500', fontSize: '16px', color: '#636364' }}>
+                {member.linkedIn ? (
+                  <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" style={{ color: '#0072b1', textDecoration: 'none' }}>
+                    <span style={{fontWeight: '500'}}>LinkedIn:</span> {member.linkedIn}
+                  </a>
+                ) : (
+                  'User has not updated his Bio'
+                )}
+              </p>
+
+
             </div>
             {/* <div>
               <div style={{ backgroundColor: '#301C58', color: '#F8F8FF', borderRadius: '12px 12px 0px 0px', padding: '12px 16px 12px 16px', display: 'flex', alignItems: 'center', gap: '15px' }}>
