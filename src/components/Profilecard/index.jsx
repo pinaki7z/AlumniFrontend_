@@ -10,7 +10,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { orbit } from 'ldrs';
 import { useParams } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import delButton from "../../images/deleteButton.svg";
 import profileImage from "../../images/profileImage.png";
 import { MdOutlineRestore } from "react-icons/md";
@@ -176,10 +176,14 @@ const Profilecard = ({ member, name, addButton, groupMembers, owner, deleteButto
         >
           <div style={{ textAlign: 'center' }}>
             <h3 style={{ paddingTop: "1em", fontWeight: "600", fontSize: '20px', fontFamily: 'Inter', color: '#000000' }}>
-              {member.userName ? member.userName: `${member.firstName} ${member.lastName}`}
+              {member.userName ? member.userName : `${member.firstName} ${member.lastName}`}
             </h3>
             <p style={{ fontSize: '14px', fontWeight: '300', fontFamily: 'Inter', color: '#3A3A3A' }}>{member.profileLevel === 1 ? 'ADMIN' : member.profileLevel === 2 ? 'ALUMNI' : member.profileLevel === 3 ? 'STUDENT' : 'SUPER ADMIN'}</p>
             <p style={{ fontSize: '14px', fontWeight: '300', fontFamily: 'Inter', color: '#3A3A3A' }}>{member.department}</p>
+            <p style={{ fontSize: '14px', fontWeight: '300', fontFamily: 'Inter', color: '#3A3A3A' }}>
+              {member.graduatingYear ? member.graduatingYear : (member.class ? member.class : null)}
+            </p>
+
             <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
               <div>
                 <p style={{ color: '#636364', fontWeight: '500', fontSize: '14px', fontFamily: 'Inter' }}>Followers</p>

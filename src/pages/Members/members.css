@@ -50,5 +50,51 @@
     transform: translateY(-50%);
     pointer-events: none;
   }
-        
-      
+   
+  
+ /* For grid view */
+.grid-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  /* For list view */
+  .list-view-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    flex-direction: column;
+  }
+
+  .list-view{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .list-item-username {
+    font-weight: bold;
+  }
+  
+  .list-item-role {
+    font-style: italic;
+  }
+  
+  /* Toggle button styling */
+  .toggle-button {
+    background-color: #301C58;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .toggle-button:hover {
+    background-color: #60399c;
+  }
+       
