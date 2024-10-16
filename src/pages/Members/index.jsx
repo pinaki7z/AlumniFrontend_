@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import './members.css';
 import Profilecard from '../../components/Profilecard';
-//import ListViewItem from '../../components/ListViewItem'; // Import the new component
 import PageSubTitle from '../../components/PageSubTitle';
 import { Route, Routes } from "react-router-dom";
 import DonSponRequest from '../../components/DonSponRequest';
@@ -21,9 +20,13 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [noUsersFound, setNoUsersFound] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [viewMode, setViewMode] = useState('grid'); // New state for view mode
+  const [viewMode, setViewMode] = useState('grid');
   const activePageRef = useRef(1);
   const LIMIT = 6;
+  const [memberRole, setMemberRole] = useState('');
+  const [graduatingYear, setGraduatingYear] = useState('');
+  const [department, setDepartment] = useState('');
+  const [batch, setBatch] = useState('');
   const profile = useSelector((state) => state.profile);
   let admin;
   if (profile.profileLevel === 0 || profile.profileLevel === 1) {
@@ -32,42 +35,23 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
 
   const totalMembers = membersred.length;
 
-  useEffect(() => {
-    initialMembers();
-  }, []);
-
-  useEffect(() => {
-    if (searchQuery) {
-      const filteredMembers = membersred.filter(
-        (member) =>
-          member.firstName.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setDisplayedMembers(filteredMembers.slice(0, LIMIT));
-      setNoUsersFound(filteredMembers.length === 0);
-    } else {
-      const initialBatch = membersred.slice(0, LIMIT);
-      setDisplayedMembers(initialBatch);
-      setNoUsersFound(false);
+  // Generate last 100 years for graduatingYear and batch ranges
+  const generateYears = () => {
+    const currentYear = new Date().getFullYear();
+    const years = [];
+    for (let i = currentYear; i >= currentYear - 100; i--) {
+      years.push(i);
     }
-  }, [searchQuery]);
-
-  const loadMoreMembers = () => {
-    setLoading(true);
-    const startIndex = activePageRef.current * LIMIT;
-    const endIndex = startIndex + LIMIT;
-    const nextBatch = membersred.slice(startIndex, endIndex);
-    setDisplayedMembers((prevMembers) => [...prevMembers, ...nextBatch]);
-    activePageRef.current++;
-    setLoading(false);
+    return years;
   };
 
-  const initialMembers = () => {
-    setLoading(true);
-    const startIndex = activePageRef.current * LIMIT;
-    const endIndex = startIndex + LIMIT;
-    const nextBatch = membersred.slice(startIndex, endIndex);
-    setDisplayedMembers((prevMembers) => [...prevMembers, ...nextBatch]);
-    setLoading(false);
+  const generateBatches = () => {
+    const currentYear = new Date().getFullYear();
+    const batches = [];
+    for (let i = currentYear; i >= currentYear - 100; i -= 3) {
+      batches.push(`${i - 2}-${i}`);
+    }
+    return batches;
   };
 
   const ListViewItem = ({ member }) => {
@@ -103,6 +87,100 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
     } catch (error) {
       console.error('Error deleting user:', error);
     }
+  };
+
+  useEffect(() => {
+    initialMembers();
+  }, []);
+
+  useEffect(() => {
+    console.log('members red',membersred)
+    let filteredMembers = membersred;
+
+    // Apply search filter
+    if (searchQuery) {
+      filteredMembers = filteredMembers.filter(
+        (member) =>
+          member.firstName.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Apply memberRole filter
+    if (memberRole) {
+      const roleMapping = {
+        "1": 1, 
+        "2": 2, 
+        "3": 3  
+      };
+      filteredMembers = filteredMembers.filter(
+        (member) => member.profileLevel === roleMapping[memberRole]
+      );
+    }
+
+    // Apply graduatingYear filter
+    if (graduatingYear) {
+      filteredMembers = filteredMembers.filter(
+        (member) => member.graduatingYear === parseInt(graduatingYear)
+      );
+    }
+
+    // Apply department filter
+    if (department) {
+      console.log('department', typeof department)
+      filteredMembers = filteredMembers.filter(
+        (member) => member.department === department
+      );
+    }
+
+    // Apply batch filter
+    if (batch) {
+      const [startYear, endYear] = batch.split('-').map(Number);
+      filteredMembers = filteredMembers.filter(
+        (member) =>
+          member.graduatingYear >= startYear && member.graduatingYear <= endYear
+      );
+    }
+
+    // Update no users found state
+    setNoUsersFound(filteredMembers.length === 0);
+
+    // Update displayed members
+    setDisplayedMembers(filteredMembers.slice(0, LIMIT));
+  }, [searchQuery, memberRole, graduatingYear, department, batch]);
+
+  const loadMoreMembers = () => {
+    setLoading(true);
+    const startIndex = activePageRef.current * LIMIT;
+    const endIndex = startIndex + LIMIT;
+    const nextBatch = membersred.slice(startIndex, endIndex);
+    setDisplayedMembers((prevMembers) => [...prevMembers, ...nextBatch]);
+    activePageRef.current++;
+    setLoading(false);
+  };
+
+  const initialMembers = () => {
+    setLoading(true);
+    const startIndex = activePageRef.current * LIMIT;
+    const endIndex = startIndex + LIMIT;
+    const nextBatch = membersred.slice(startIndex, endIndex);
+    setDisplayedMembers((prevMembers) => [...prevMembers, ...nextBatch]);
+    setLoading(false);
+  };
+
+  const handleMemberRoleChange = (e) => {
+    setMemberRole(e.target.value); 
+  };
+
+  const handleGraduatingYearChange = (e) => {
+    setGraduatingYear(e.target.value);
+  };
+
+  const handleDepartmentChange = (e) => {
+    setDepartment(e.target.value);
+  };
+
+  const handleBatchChange = (e) => {
+    setBatch(e.target.value);
   };
 
   return (
@@ -149,28 +227,50 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
             </form>
           </div>
           
-          <select className='select-dropdown'>
+          {/* New Filters */}
+          <select className='select-dropdown' value={memberRole} onChange={handleMemberRoleChange}>
             <option value="">All Roles</option>
-            <option value="Admin">Admin</option>
-            <option value="Alumni">Alumni</option>
-            <option value="Current Student">Current Student</option>
+            <option value="1">Admin</option>
+            <option value="2">Alumni</option>
+            <option value="3">Current Student</option>
           </select>
-          
+
+          <select className='select-dropdown' value={graduatingYear} onChange={handleGraduatingYearChange}>
+            <option value="">All Graduating Years</option>
+            {generateYears().map(year => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
+
+          <select className='select-dropdown' value={department} onChange={handleDepartmentChange}>
+            <option value="">All Departments</option>
+            <option value="Agricultural">Agricultural</option>
+            <option value="Gastroenterology">Gastroenterology</option>
+            <option value="Neurosurgery">Neurosurgery</option>
+            <option value="Human Languages">Human Languages</option>
+          </select>
+
+          <select className='select-dropdown' value={batch} onChange={handleBatchChange}>
+            <option value="">All Batches</option>
+            {generateBatches().map(batch => (
+              <option key={batch} value={batch}>{batch}</option>
+            ))}
+          </select>
+
         </div>
         <div style={{paddingTop: '20px'}}>
-            <button onClick={() => setViewMode('grid')} className="toggle-button">
-              Grid View
-            </button>
-            <button onClick={() => setViewMode('list')} className="toggle-button">
-              List View
-            </button>
-          </div>
+          <button onClick={() => setViewMode('grid')} className="toggle-button">
+            Grid View
+          </button>
+          <button onClick={() => setViewMode('list')} className="toggle-button">
+            List View
+          </button>
+        </div>
       </div>
 
       <Routes>
         <Route path="/" element={
           <>
-            {/* Conditionally render based on viewMode */}
             {viewMode === 'grid' ? (
               <div className="pro grid-view">
                 <Link to={`/members/create`} style={{ textDecoration: 'none', color: 'black' }}>

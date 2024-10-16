@@ -209,7 +209,7 @@ const RegisterPage = () => {
               </div>
             </div>
             <button className="register-button" type='submit' id='btn' name='btn'>
-              <div className="register-button1">{loading? 'Registering...' : "Let's go"}</div>
+              <div className="register-button1">{loading? 'Registering...' : "Register"}</div>
             </button>
           </form>
         </div>
