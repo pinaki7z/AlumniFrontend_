@@ -12,6 +12,7 @@ import Members from '../Members';
 import Profile from '../Profile';
 import Events from "../Events";
 import Jobs from "../Jobs";
+import LandingPage from "../LandingPage/index.jsx";
 import IndividualJobPost from "../Jobs/IndividualJobPost.jsx";
 import Internships from "../Internships";
 import NotificationsPage from "../NotificationsPage";
@@ -90,8 +91,8 @@ const Dashboard = ({ handleLogout }) => {
                 }
               />
             )}
-            <Route path="/donations/*" element={<Donations />} />
-            <Route path="/sponsorships/*" element={<Sponsorships />} />
+            <Route path="/donations/*" element={<LandingPage />} />
+            <Route path="/sponsorships/*" element={<LandingPage />} />
             <Route path="/members/*" element={<div style={{ width: '100%',padding: '0% 5%'}}><Members showHeading={true} /></div>} />
             <Route path="/members/create" element={
               <div style={{ width: '100%',padding: '5%' }}>

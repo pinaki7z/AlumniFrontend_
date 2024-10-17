@@ -124,6 +124,7 @@ const DonSponRequest = ({ name, edit }) => {
     const [picturePath, setPicturePath] = useState("");
     const navigateTo = useNavigate();
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isSpecialRole, setIsSpecialRole] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -133,7 +134,8 @@ const DonSponRequest = ({ name, edit }) => {
         gender: '',
         admin: false,
         alumni: false,
-        student: false
+        student: false,
+        specialRole: false,
     });
 
     const [sponsorshipFormData, setSponsorshipFormData] = useState({
@@ -163,6 +165,7 @@ const DonSponRequest = ({ name, edit }) => {
                 admin: checked,
                 alumni: checked ? false : prevFormData.alumni,
                 student: checked ? false : prevFormData.student,
+                specialRole: checked ? false : prevFormData.specialRole,
                 batch: checked ? null : prevFormData.batch
             }));
         } else if (name === 'alumni') {
@@ -170,14 +173,35 @@ const DonSponRequest = ({ name, edit }) => {
                 ...prevFormData,
                 alumni: checked,
                 admin: checked ? false : prevFormData.admin,
-                student: checked ? false : prevFormData.student
+                student: checked ? false : prevFormData.student,
+                specialRole: checked ? false : prevFormData.specialRole
             }));
         } else if (name === 'student') {
             setFormData(prevFormData => ({
                 ...prevFormData,
                 student: checked,
                 alumni: checked ? false : prevFormData.alumni,
-                admin: checked ? false : prevFormData.admin
+                admin: checked ? false : prevFormData.admin,
+                specialRole: checked ? false : prevFormData.specialRole
+            }));
+        } else if (name === 'student') {
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                student: checked,
+                alumni: checked ? false : prevFormData.alumni,
+                admin: checked ? false : prevFormData.admin,
+                specialRole: checked ? false : prevFormData.specialRole
+            }));
+        }else if (name === 'specialRole') {
+            setIsSpecialRole(checked);
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                student: checked ? false : prevFormData.alumni,
+                alumni: checked ? false : prevFormData.alumni,
+                admin: checked ? false : prevFormData.admin,
+                specialRole: checked,
+                batch: checked ? null : prevFormData.batch,
+                department: checked ? null : prevFormData.department
             }));
         }
         else {
@@ -225,7 +249,7 @@ const DonSponRequest = ({ name, edit }) => {
         console.log("handling submit");
         console.log('body', body)
         if (name === 'member') {
-            if (formData.admin === false && formData.batch === null) {
+            if (formData.admin === false && formData.batch === null && formData.specialRole === false) {
                 console.log('formData member1', formData)
                 toast.error('Please select batch again');
                 return;
@@ -572,22 +596,26 @@ const DonSponRequest = ({ name, edit }) => {
                 <div style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px',width: '100%'}}>
                     <p>Pick User Type</p>
                     <div className='check' style={{ flexDirection: 'row', width: '100%', display: profile.profileLevel === 0 ? 'flex' : 'none',gap: '10px' }}>
-                        <input type='checkbox' name='admin' id='admin' onChange={handleChange} disabled={formData.alumni || formData.student} required={!(formData.alumni || formData.student)} />
+                        <input type='checkbox' name='admin' id='admin' onChange={handleChange} disabled={formData.alumni || formData.student || formData.specialRole} required={!(formData.alumni || formData.student || formData.specialRole)} />
                         <p style={{ marginBottom: '0px' }}> Admin</p>
                     </div>
                     <div className='check' style={{ flexDirection: 'row', width: '100%', display: profile.profileLevel === 1 || profile.profileLevel === 0 ? 'flex' : 'none',gap: '10px' }}>
-                        <input type='checkbox' name='alumni' id='alumni' onChange={handleChange} disabled={formData.admin || formData.student} required={!(formData.admin || formData.student)} />
+                        <input type='checkbox' name='alumni' id='alumni' onChange={handleChange} disabled={formData.admin || formData.student || formData.specialRole} required={!(formData.admin || formData.student || formData.specialRole)} />
                         <p style={{ marginBottom: '0px' }}> Alumni</p>
                     </div>
                     <div className="check" style={{ flexDirection: 'row', width: '100%',display: 'flex',gap: '10px' }}>
-                        <input type='checkbox' name='student' id='student' onChange={handleChange} disabled={formData.admin || formData.alumni} required={!(formData.admin || formData.alumni)}/>
+                        <input type='checkbox' name='student' id='student' onChange={handleChange} disabled={formData.admin || formData.alumni || formData.specialRole} required={!(formData.admin || formData.alumni || formData.specialRole)}/>
                         <p style={{ marginBottom: '0px' }}>Student</p>
+                    </div>
+                    <div className="check" style={{ flexDirection: 'row', width: '100%',display: 'flex',gap: '10px' }}>
+                        <input type='checkbox' name='specialRole' id='specialRole' onChange={handleChange} disabled={formData.admin || formData.alumni || formData.student} required={!(formData.admin || formData.alumni || formData.student)}/>
+                        <p style={{ marginBottom: '0px' }}>Special Role</p>
                     </div>
                 </div>
 
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>Department*</label><br />
-                    <select name='department' id='department' title='Department' onChange={handleChange} required style={{width: '65%', height: '48px',borderRadius: '6px', border: '2px solid #301C58', padding: '9px',color: '#a98de3'}}>
+                    <select name='department' id='department' title='Department' onChange={handleChange} disabled={isSpecialRole} required  style={{ backgroundColor: isSpecialRole ? '#f2f2f2' : 'white',width: '65%', height: '48px' , border: '2px solid #301C58',borderRadius: '6px', padding: '9px',color: '#a98de3'}}>
                         <option value='' disabled selected>Select Department</option>
                         <option value='Agricultural Engineering'>Agricultural Engineering</option>
                         <option value='Gastroenterology'>Gastroenterology</option>
@@ -598,7 +626,7 @@ const DonSponRequest = ({ name, edit }) => {
                 </div>
                 <div className='form-fields' style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <label style={{fontFamily: 'Inter', fontWeight: '500',fontSize: '18px'}}>Batch*</label><br />
-                    <select name='batch' id='batch' onChange={handleChange} disabled={isAdmin} style={{ backgroundColor: isAdmin ? '#f2f2f2' : 'white',width: '65%', height: '48px' , border: '2px solid #301C58',borderRadius: '6px', padding: '9px',color: '#a98de3'}} required>
+                    <select name='batch' id='batch' onChange={handleChange} disabled={isAdmin || isSpecialRole} style={{ backgroundColor: (isAdmin || isSpecialRole) ? '#f2f2f2' : 'white',width: '65%', height: '48px' , border: '2px solid #301C58',borderRadius: '6px', padding: '9px',color: '#a98de3'}} required>
                         <option value='' disabled selected>Select Batch</option>
                         {generateYears().map((year) => (
                             <option key={year} value={year}>

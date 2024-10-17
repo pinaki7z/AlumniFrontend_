@@ -74,3 +74,9 @@
   border-bottom: 2px solid #a98de3;
   outline: none;
 }
+
+.like-container{
+  position: relative;
+  font-size: 18px;
+  top: -25px;
+}

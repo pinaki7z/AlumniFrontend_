@@ -11,6 +11,8 @@ import replyy from "../../images/reply.svg";
 import deletee from "../../images/delete.svg";
 import baseUrl from "../../config";
 
+const reactions = ['😍', '😂', '😡', '😞', '🤩'];
+
 const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDeleteComment }) => {
   const [content, setContent] = useState('');
   const [replyToCommentId, setReplyToCommentId] = useState(null);
@@ -19,6 +21,7 @@ const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDel
   const forumId = '64f5ce5db9cddde68ba64b75';
   const profile = useSelector((state) => state.profile);
   const [showReport, setShowReport] = useState({});
+  const [likes, setLikes] = useState({});
 
   const handleCommentSubmit = async () => {
     try {
@@ -66,6 +69,13 @@ const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDel
     }
   };
 
+  const handleLikeToggle = (commentId, reaction = '❤️') => {
+    setLikes(prevLikes => ({
+      ...prevLikes,
+      [commentId]: prevLikes[commentId] === reaction ? null : reaction
+    }));
+  };
+
   const renderComments = (commentsArray) => {
     if (!commentsArray || commentsArray.length === 0) {
       return null;
@@ -107,7 +117,29 @@ const CommentSection = ({ comments, entityId, entityType, onCommentSubmit, onDel
                 <img src={replyy} alt="" srcset=""/>
                   <button onClick={() => handleCommentReply(comment._id)}>Reply</button>
                 </div>
-
+                <div className="like-container" onMouseLeave={() => setLikes({ ...likes, hoverComment: null })} style={{ position: 'relative', fontSize: '18px' }}>
+                  <button
+                    onClick={() => handleLikeToggle(comment._id)}
+                    onMouseEnter={() => setLikes({ ...likes, hoverComment: comment._id })}
+                    //onMouseLeave={() => setLikes({ ...likes, hoverComment: null })}
+                    style={{position: 'absolute', top: '25px', left: '-40px'}}
+                  >
+                    {likes[comment._id] || 'Like'}
+                  </button>
+                  {likes.hoverComment === comment._id && (
+                    <div className="reaction-emojis" style={{ position: 'absolute', top: '0px', left: '-40px', display: 'flex', gap: '5px', background: '#fff', border: '1px solid #ddd', padding: '5px', borderRadius: '5px' }}>
+                      {reactions.map((reaction, index) => (
+                        <span
+                          key={index}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => handleLikeToggle(comment._id, reaction)}
+                        >
+                          {reaction}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
               {replyToCommentId === comment._id && (
                 <div className="reply-form">

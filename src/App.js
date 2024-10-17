@@ -12,6 +12,7 @@ import Settings from "./pages/Settings";
 import ProfilePage from "./pages/ProfilePage";
 import Members from "./pages/Members";
 import Profile from "./pages/Profile";
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import { useState, useEffect } from "react";
@@ -76,7 +77,7 @@ function App() {
             {!isLoggedIn ? (
               <Route
                 path="*"
-                element={<LoginPage handleLogin={handleLogin} />}
+                element={<LandingPage handleLogin={handleLogin} />}
               />
             ) : (
               <>
@@ -96,7 +97,7 @@ function App() {
                     >
                       <LeftSidebar />
                       <div style={{ marginLeft: "20%", width: "80%" }}>
-                        <TopBar handleLogout={handleLogout} />
+                        <TopBar handleLogout={handleLogout}/>
                         <JoinGroup />
                       </div>
                     </div>

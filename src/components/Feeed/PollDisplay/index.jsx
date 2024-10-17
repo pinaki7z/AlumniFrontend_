@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './pollDisplay.css';
 import { Avatar, IconButton, Modal, Box } from '@mui/material';
-import postDelete from "../../../images/post-delete.svg";
 import pic from "../../../images/profilepic.jpg";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from "react-toastify";
-import { flexbox } from '@mui/system';
 import baseUrl from '../../../config';
 
 const PollDisplay = ({ poll }) => {
     const [hasVoted, setHasVoted] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
     const [updatedPoll, setUpdatedPoll] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const profile = useSelector((state) => state.profile);
@@ -27,7 +26,6 @@ const PollDisplay = ({ poll }) => {
     }, [poll, profile._id]);
 
     const handleVote = async (optionId) => {
-        console.log('handling vote')
         if (poll.userId === profile._id) {
             toast.error("You cannot vote on your own poll.");
             return;
@@ -103,32 +101,54 @@ const PollDisplay = ({ poll }) => {
                     <h4>{poll.userName}</h4>
                     <span style={{ fontSize: '14px', fontWeight: '500', color: '#301C58' }}>{formatCreatedAt(poll.createdAt)}</span>
                 </div>
-                <IconButton className='delete-button' style={{ marginRight: '10px', marginLeft: 'auto' }}>
-                    <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V4H1V16ZM14 1H10.5L9.5 0H4.5L3.5 1H0V3H14V1Z" fill="#003366" />
-                    </svg>
-                </IconButton>
+                {profile._id === poll.userId && (
+                    <IconButton className='delete-button' style={{ marginRight: '10px', marginLeft: 'auto' }}>
+                        <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V4H1V16ZM14 1H10.5L9.5 0H4.5L3.5 1H0V3H14V1Z" fill="#003366" />
+                        </svg>
+                    </IconButton>
+                )}
             </div>
             <h3 style={{ fontWeight: '600', fontSize: '20px', paddingTop: '30px', color: '#3A3A3A', fontFamily: 'Inter' }}>{poll.question}</h3>
 
             <div className="options-container">
                 {poll.userId === profile._id && <div className='see-poll-results' style={{ textAlign: 'right' }} onClick={handleOpenModal}>See Poll Results</div>}
-                {optionsWithPercentages.map(option => (
-                    <div
-                        key={option._id}
-                        className={`option ${hasVoted ? 'voted' : 'clickable'}`}
-                        onClick={() => !hasVoted && handleVote(option._id)}
-                    >
-                        <div style={{ textAlign: 'center' }}>{option.option}</div>
-                        {hasVoted && (
-                            <div className="percentage-bar-container" onClick={() => handleVote(option._id)}>
-                                <div className="percentage-bar" style={{ width: `${option.percentage}%` }}>
+
+                <form className="poll-form">
+                    {optionsWithPercentages.map(option => (
+                        <div key={option._id} className="poll-option">
+                            <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <input
+                                    type="radio"
+                                    name="poll-option"
+                                    value={option._id}
+                                    disabled={hasVoted}
+                                    checked={selectedOption === option._id}
+                                    onChange={() => setSelectedOption(option._id)}
+                                />
+                                <p style={{ marginBottom: '2px' }}>{option.option}</p>
+                            </label>
+
+                            {/* Display percentage after voting */}
+                            {hasVoted && (
+                                <span className="poll-percentage">
                                     {option.percentage.toFixed(2)}%
-                                </div>
-                            </div>
-                        )}
+                                </span>
+                            )}
+                        </div>
+                    ))}
+                </form>
+
+                {!hasVoted && selectedOption && (
+                    <div style={{ textAlign: 'center', paddingTop: '20px' }}>
+                        <button
+                            className="submit-vote-button"
+                            onClick={() => handleVote(selectedOption)}
+                        >
+                            Submit Vote
+                        </button>
                     </div>
-                ))}
+                )}
             </div>
 
             <Modal open={modalOpen} onClose={handleCloseModal}>
