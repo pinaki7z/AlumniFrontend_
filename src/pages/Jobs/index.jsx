@@ -13,7 +13,7 @@ import baseUrl from "../../config";
 
 const Jobs = () => {
     const [title, setTitle] = useState('Jobs');
-    const titleS = 'job'
+    const titleS = 'job';
     const entityType = 'jobs';
     const [jobs, setJobs] = useState([]);
     const [internships, setInternships] = useState([]);
@@ -32,15 +32,16 @@ const Jobs = () => {
     const [buttontext4, setButtontext4] = useState('');
     const [buttontext5, setButtontext5] = useState('');
     const [myJobs, setMyJobs] = useState([]);
+    const [verifiedFilter, setVerifiedFilter] = useState('all');
     const profile = useSelector((state) => state.profile);
     console.log('search query', searchQuery)
 
 
     const getData = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/jobs`);
+            const response = await axios.get(`${baseUrl}/internships`);
 
-            const filteredJobs = response.data.filter(job => !job.archive && job.approved);
+            const filteredJobs = response.data.filter(job => !job.archive);
             const filteredArchivedJobs = response.data.filter(job => job.archive && job.approved && job.userId === profile._id);
             const filteredMyJobs = response.data.filter(job => job.userId === profile._id && !job.archive && job.approved);
             setMyJobs(filteredMyJobs);
@@ -59,6 +60,18 @@ const Jobs = () => {
         getData();
     }, []);
 
+    const handleVerifiedFilterChange = (event) => {
+        setVerifiedFilter(event.target.value);
+    };
+
+    const filterByVerified = (job) => {
+        if (verifiedFilter === 'verified') {
+            return job.verified === true;
+        } else if (verifiedFilter === 'unverified') {
+            return job.verified === false;
+        }
+        return true; // 'all' option, show all jobs
+    };
 
 
     useEffect(() => {
@@ -66,7 +79,7 @@ const Jobs = () => {
 
         if (profile.profileLevel === 0 || profile.profileLevel === 1) {
             console.log('profile')
-        } else if (profile.profileLevel === 2){
+        } else if (profile.profileLevel === 2) {
             setButtontext2('Starred');
             setButtontext3('Applied');
             setButtontext4('Archive');
@@ -84,21 +97,22 @@ const Jobs = () => {
     }, [profile.profileLevel])
 
 
-    const filteredJobs = jobs.filter(job => {
-        const { title, employmentType, category } = searchQuery;
-        console.log('search query inside the filtered jobs', searchQuery);
-        const lowerCaseJobTitle = title ? title.toLowerCase() : '';
-        const lowerCaseJobType = employmentType ? employmentType.toLowerCase() : '';
-        const lowerCaseCategory = category ? category.toLowerCase() : '';
+    const filteredJobs = jobs
+        .filter(job => filterByVerified(job))
+        .filter(job => {
+            const { title, employmentType, category } = searchQuery;
+            const lowerCaseJobTitle = title ? title.toLowerCase() : '';
+            const lowerCaseJobType = employmentType ? employmentType.toLowerCase() : '';
+            const lowerCaseCategory = category ? category.toLowerCase() : '';
 
-        const jobTitleMatch = lowerCaseJobTitle ? job.title.toLowerCase().includes(lowerCaseJobTitle) : true;
-        const jobTypeMatch = lowerCaseJobType ? job.employmentType.toLowerCase().includes(lowerCaseJobType) : true;
-        const categoryMatch = lowerCaseCategory ? job.category.toLowerCase().includes(lowerCaseCategory) : true;
+            const jobTitleMatch = lowerCaseJobTitle ? job.title.toLowerCase().includes(lowerCaseJobTitle) : true;
+            const jobTypeMatch = lowerCaseJobType ? job.employmentType.toLowerCase().includes(lowerCaseJobType) : true;
+            const categoryMatch = lowerCaseCategory ? job.category.toLowerCase().includes(lowerCaseCategory) : true;
 
-        return jobTitleMatch && jobTypeMatch && categoryMatch;
-    });
+            return jobTitleMatch && jobTypeMatch && categoryMatch;
+        });
 
-    
+
     const filteredMyJobs = myJobs.filter(job => {
         const { title, employmentType, category } = searchQuery;
         console.log('search query inside the filtered jobs', searchQuery);
@@ -168,6 +182,15 @@ const Jobs = () => {
                         });
                     }}
                 />
+
+                <div style={{ margin: '20px 0',zIndex: '1'}}>
+                    <label>Filter by Verification: </label>
+                    <select value={verifiedFilter} onChange={handleVerifiedFilterChange}>
+                        <option value="all">All Jobs</option>
+                        <option value="verified">Verified Jobs</option>
+                        <option value="unverified">Unverified Jobs</option>
+                    </select>
+                </div>
                 <Routes>
                     <Route path="/" element={
                         <div style={{ marginTop: '215px', zIndex: '1' }}>
@@ -246,7 +269,7 @@ const Jobs = () => {
                     <Route path="/myJobs" element={<>
                         <div className="job-poztt">
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '5vw', flexWrap: 'wrap', paddingTop: '20px' }}>
-                            {loading ? (
+                                {loading ? (
                                     <div>Loading.....</div>
                                 ) : filteredMyJobs.length ? (
                                     filteredMyJobs.map((job) => (
@@ -319,6 +342,7 @@ const Jobs = () => {
                                                 searchQuery={searchQuery}
                                                 locationType={job.locationType}
                                                 company={job.company}
+                                                verified={job.verified}
                                             />
                                         </div>
                                     ))

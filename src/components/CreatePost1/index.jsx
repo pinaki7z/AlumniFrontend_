@@ -11,6 +11,338 @@ import gallery from "../../images/gallery.svg";
 import poll from "../../images/poll.svg";
 import PollModal from './PollModal';
 import baseUrl from '../../config';
+import { toast } from "react-toastify";
+import format from "date-fns/format";
+import { Col, Row } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import DatePicker from "react-datepicker";
+
+
+function MyVerticallyCenteredModal(props) {
+  const [isEditing, setIsEditing] = useState(false);
+  const profile = useSelector((state) => state.profile);
+  const [createGroup, setCreateGroup] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { _id } = useParams();
+
+  // New states for price type, amount, and currency
+  const [priceType, setPriceType] = useState("free");
+  const [amount, setAmount] = useState("");
+  const [currency, setCurrency] = useState("INR");
+
+  const [newEvent, setNewEvent] = useState({
+    title: "", start: "", end: "", startTime: "00:00",
+    endTime: "00:00", picture: "", cName: "",
+    cNumber: "", cEmail: "", location: ""
+  });
+  const [allEvents, setAllEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState([props.selectedEvent]);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewEvent({ ...newEvent, picture: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleAddEvent = () => {
+    const { title, start, end, startTime, endTime, picture, cName, cNumber, cEmail, location } = newEvent;
+
+    if (!title || !start || !end || !picture) {
+      alert("Please provide title, start date, end date and image");
+      return;
+    }
+
+    const formattedStart = format(new Date(start), "yyyy-MM-dd");
+    const formattedEnd = format(new Date(end), "yyyy-MM-dd");
+    setLoading(true);
+
+    const eventData = {
+      userId: profile._id,
+      title,
+      start: formattedStart,
+      end: formattedEnd,
+      startTime,
+      userName: `${profile.firstName} ${profile.lastName}`,
+      profilePicture: profile.profilePicture,
+      endTime,
+      picture,
+      cName,
+      cNumber,
+      cEmail,
+      location,
+      department: profile.department,
+      createGroup,
+      groupEvent : _id ? true : false,
+      groupId : _id ? _id : null,
+      // Include price type and amount based on selection
+      priceType,
+      amount: priceType === "paid" ? amount : null, // Only include amount if it's paid
+      currency: priceType === "paid" ? currency : ""
+    };
+    console.log('eventData', eventData);
+
+    fetch(`${baseUrl}/events/createEvent`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(eventData),
+    })
+      .then((response) => response.json())
+      .then((createdEvent) => {
+        //setAllEvents([...allEvents, createdEvent]);
+        setLoading(false);
+        window.location.reload();
+
+        setNewEvent({ title: "", start: "", end: "", startTime: "", endTime: "", picture: null, cEmail: "", cName: "", cNumber: "", location: "" });
+      })
+      .catch((error) => console.error("Error creating event:", error));
+  };
+
+  const handleEditEvent = () => {
+    const { title, start, end, startTime, endTime, picture, cName, cNumber, cEmail, location } = newEvent;
+    const eventId = props.selectedEvent._id;
+
+    if (!title || !start || !end) {
+      alert("Please provide title, start date, and end date.");
+      return;
+    }
+
+    try {
+      const formattedStart = format(new Date(start), "yyyy-MM-dd");
+      const formattedEnd = format(new Date(end), "yyyy-MM-dd");
+
+      const updatedEvent = {
+        title: title,
+        start: formattedStart,
+        end: formattedEnd,
+        startTime,
+        endTime,
+        picture,
+        cName,
+        cNumber,
+        cEmail,
+        location,
+        priceType,
+        amount: priceType === "paid" ? amount : "0", // Only include amount if it's paid
+        currency: priceType === "paid" ? currency : ""
+      };
+
+      const jsonEventData = JSON.stringify(updatedEvent);
+
+      fetch(`${baseUrl}/events/${eventId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonEventData,
+      })
+        .then(() => {
+          const updatedEvents = allEvents.map((event) =>
+            event._id === eventId ? updatedEvent : event
+          );
+
+          setAllEvents(updatedEvents);
+          setSelectedEvent(null);
+          props.onHide();
+          toast.success("Event updated successfully.");
+          window.location.reload();
+        })
+        .catch((error) => console.error("Error updating event:", error));
+    } catch (jsonError) {
+      console.error("JSON serialization error:", jsonError);
+      alert("Error updating event: JSON serialization error");
+    }
+  };
+
+  const handleDateChange = (date, field) => {
+    if (props.isEditing) {
+      const updatedEvent = { ...newEvent };
+      updatedEvent[field] = date;
+      setNewEvent(updatedEvent);
+      setIsEditing(true);
+    } else {
+      setNewEvent({ ...newEvent, [field]: date });
+    }
+  };
+
+  const handleTimeChange = (time, field) => {
+    const updatedEvent = { ...newEvent };
+    updatedEvent[field] = time;
+    setNewEvent(updatedEvent);
+  };
+
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header style={{ backgroundColor: '#f5dad2' }} closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          {props.isEditing ? "Edit Event" : "Add Event"}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{ display: 'flex', gap: '2em', backgroundColor: '#eaf6ff' }}>
+        <Col>
+          <Row style={{ padding: '0px 5px' }}>
+            <input
+              type="text"
+              placeholder="Add/Edit Title"
+              style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
+              value={newEvent.title}
+              onChange={(e) =>
+                setNewEvent({ ...newEvent, title: e.target.value })
+              }
+            />
+            <br />
+            <br />
+            <label htmlFor={newEvent.picture}>Insert a Picture:-</label>
+            <br />
+            <input type="file" name={newEvent.picture}
+              style={{ width: '60%' }}
+              onChange={handleImageChange} />
+
+            <input
+              type="text"
+              placeholder="Enter Coordinator Name"
+              style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
+              value={newEvent.cName}
+              onChange={(e) =>
+                setNewEvent({ ...newEvent, cName: e.target.value })
+              }
+            />
+          </Row>
+        </Col>
+
+        <Col>
+          <DatePicker
+            placeholderText="Start Date"
+            style={{ marginRight: "10px", padding: "0.5em" }}
+            selected={newEvent.start}
+            onChange={(date) => handleDateChange(date, "start")}
+          />
+          <br /><br />
+          <input type="time" id="appt" name="startTime" value={newEvent.startTime} onChange={(e) =>
+            setNewEvent({ ...newEvent, startTime: e.target.value })
+          } />
+          <br /><br />
+          <input
+            type="number"
+            placeholder="Enter Coordinator Contact Number"
+            style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
+            value={newEvent.cNumber}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, cNumber: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            placeholder="Enter event location"
+            style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
+            value={newEvent.location}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, location: e.target.value })
+            }
+          />
+        </Col>
+
+        <Col>
+          <DatePicker
+            placeholderText="End Date"
+            style={{ padding: "0.5em" }}
+            selected={newEvent.end}
+            onChange={(date) => handleDateChange(date, "end")}
+          />
+          <br /><br />
+          <input type="time" id="appt" name="endTime" value={newEvent.endTime} onChange={(e) =>
+            setNewEvent({ ...newEvent, endTime: e.target.value })
+          } />
+          <input
+            type="email"
+            placeholder="Enter Coordinator Email"
+            style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
+            value={newEvent.cEmail}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, cEmail: e.target.value })
+            }
+          />
+        </Col>
+      </Modal.Body>
+
+      <Modal.Footer style={{ backgroundColor: '#f5dad2' }}>
+        <div style={{ marginRight: 'auto', display: 'flex', alignItems: 'center' }}>
+          <input
+            type="checkbox"
+            id="create-group"
+            checked={createGroup}
+            onChange={(e) => setCreateGroup(e.target.checked)}
+          />
+          <label htmlFor="create-group" style={{ marginLeft: '0.5em' }}>Create a group with the same event title name</label>
+        </div>
+
+        {/* Free/Paid Radio Buttons */}
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="free"
+              checked={priceType === "free"}
+              onChange={(e) => setPriceType(e.target.value)}
+            /> Free
+          </label>
+          <label style={{ marginLeft: '1em' }}>
+            <input
+              type="radio"
+              value="paid"
+              checked={priceType === "paid"}
+              onChange={(e) => setPriceType(e.target.value)}
+            /> Paid
+          </label>
+        </div>
+
+        {/* Conditionally render the price and currency input */}
+        {priceType === "paid" && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+            <input
+              type="number"
+              placeholder="Amount"
+              value={amount}
+              onChange={(e) => setAmount(parseFloat(e.target.value))}
+              style={{ width: '100px', padding: '0.5em', borderRadius: '5px' }}
+            />
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              style={{ padding: '0.5em', borderRadius: '5px' }}
+            >
+              <option value="INR">INR</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="JYN">JYN</option>
+            </select>
+          </div>
+        )}
+
+        <Button onClick={props.isEditing ? handleEditEvent : handleAddEvent}>
+          {loading
+            ? 'Adding Event...'
+            : props.isEditing
+              ? 'Edit Event'
+              : 'Add Event'}
+        </Button>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 
 
 
@@ -27,6 +359,10 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
   const [cookie, setCookie] = useCookies(["access_token"]);
   const profile = useSelector((state) => state.profile);
   const [showPollModal, setShowPollModal] = useState(false); 
+  const [modalShow, setModalShow] = React.useState(false);
+  const [selectedEventDetails, setSelectedEventDetails] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const onHideModal = (modalVisibility) => {
     setShowModal(modalVisibility);
@@ -294,6 +630,9 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
               onChange={handleFileInputChange}
             />
           </label>
+          {_id && <label onClick={() => setModalShow(true)} style={{ border: '1px solid #a98de3' , color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', fontSize: '15px',display: 'flex', alignItems: 'center', justifyContent: 'center',width: '18%', gap: '5px' }}>
+          <img src={video} alt="" srcset="" />Event
+          </label>}
           <div style={{ marginTop: '4px',marginLeft: 'auto' }}>
               <button onClick={handleSubmit} style={{
                 float: 'right', color: '#ffffff',
@@ -309,6 +648,15 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
         onHide={() => setShowPollModal(false)}
         onCreatePoll={handleCreatePoll}
       />
+      <MyVerticallyCenteredModal
+          show={modalShow}
+          isEditing={isEditing}
+          selectedEvent={selectedEvent}
+          onHide={() => {
+            setModalShow(false);
+            setSelectedEventDetails(null);
+          }}
+        />
     </div>
 
   );

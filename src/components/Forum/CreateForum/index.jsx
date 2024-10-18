@@ -55,12 +55,12 @@ const CreateForum = () => {
       <div className='crt'>
         <div className='crt-forum'>
           <div>
-            <p style={{ marginTop: '20px', fontSize: '30px', fontWeight: '500' }}> Title</p>
-            <input type='text' name='name' placeholder='Forum title' style={{ height: '50px', marginTop: '15px', width: '100%', borderRadius: '5px' }} value={newForum.title} onChange={handleTitleChange} />
+            <p style={{ marginTop: '20px', fontSize: '30px', fontWeight: '500' }}> Title*</p>
+            <input type='text' name='name' placeholder='Forum title' style={{ height: '50px', marginTop: '15px', width: '100%', borderRadius: '5px' }} value={newForum.title} onChange={handleTitleChange} required/>
           </div>
           <div>
-            <p style={{ fontSize: '30px', fontWeight: '500', margin: '15px 0px' }}>Type</p>
-            <select value={newForum.type} onChange={handleTypeChange}>
+            <p style={{ fontSize: '30px', fontWeight: '500', margin: '15px 0px' }}>Type*</p>
+            <select value={newForum.type} onChange={handleTypeChange} required>
               <option value="Public">Public</option>
               <option value="Private">Private</option>
             </select>

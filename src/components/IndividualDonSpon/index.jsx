@@ -20,7 +20,7 @@ const IndividualDonSpon = () => {
     const shareButtonRef = useRef(null);
     const [isLoading, setIsLoading] = useState(true);
     const profile = useSelector((state) => state.profile);
-    console.log('Individual Don Spon',donations)
+    console.log('Individual Don Spon', donations)
 
     useEffect(() => {
         setIsLoading(true); // Set loading to true while fetching data
@@ -94,12 +94,12 @@ const IndividualDonSpon = () => {
                                 </div>
                             </div>
                             <div className="ids-amount">
-                                <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Total Amount:-(₹) {donation.amount? donation.amount : donation.sponsorshipAmount}</p>
+                                <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Total Amount:-(₹) {donation.amount ? donation.amount : donation.sponsorshipAmount}</p>
                                 <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Name:- {donation.name ? donation.name : donation.nameOfOrganiser}</p>
                                 <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Contact Number:- {donation.phone ? donation.phone : donation.number}</p>
-                                <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Email:- {donation.email? donation.email: donation.emailOfOrganiser}</p>
-                                {donation.businessPlan && <div style={{ display: 'flex', gap: '1vw',marginTop: '1rem' }}>
-                                    <p style={{ fontWeight: '500', fontSize: '15px',marginBottom: '0px' }}>BusinessPlan: </p><a href={`${baseUrl}/uploads/${donation.businessPlan}`} target="_blank" rel="noopener noreferrer">{donation.businessPlan}</a>
+                                <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Email:- {donation.email ? donation.email : donation.emailOfOrganiser}</p>
+                                {donation.businessPlan && <div style={{ display: 'flex', gap: '1vw', marginTop: '1rem' }}>
+                                    <p style={{ fontWeight: '500', fontSize: '15px', marginBottom: '0px' }}>BusinessPlan: </p><a href={`${baseUrl}/uploads/${donation.businessPlan}`} target="_blank" rel="noopener noreferrer">{donation.businessPlan}</a>
                                 </div>}
                                 {donation.currentRevenue && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Current Revenue:-(₹) {donation.currentRevenue}</p>}
                                 {donation.targetMarket && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Target Market:- {donation.targetMarket}</p>}
@@ -110,6 +110,16 @@ const IndividualDonSpon = () => {
                                 {donation.location && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Event Location:- {donation.location}</p>}
                                 {donation.expectedAttendees && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Expected Attendees:- {donation.expectedAttendees}</p>}
                                 {donation.sponsorshipBenefits && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Sponsorship Benefits:- {donation.sponsorshipBenefits}</p>}
+                                {profile._id !== donation.userId && (
+                                    <button
+                                        style={{ width: '30%', padding: '10px', marginTop: '10px' }}
+                                        onClick={() => window.open('https://razorpay.com/payment-link/plink_PA5q7Jm6wJENlt', '_blank')}
+                                    >
+                                       Donate
+                                    </button>
+                                )}
+
+
                                 {/* <p>Raised of ₹{donation.totalAmount}</p>
                                 <div className="ids-bar">
                                     <div

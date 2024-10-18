@@ -492,20 +492,20 @@ const DonSponRequest = ({ name, edit }) => {
         extraFields = (
             <>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <label htmlFor="groupName">Group Name</label>
-                    <input type="text" style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={groupName} onChange={(e) => setGroupName(e.target.value)} />
+                    <label htmlFor="groupName">Group Name*</label>
+                    <input type="text" style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={groupName} onChange={(e) => setGroupName(e.target.value)} required/>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <label htmlFor="groupType">Group Type</label>
-                    <select style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={groupType} onChange={(e) => setGroupType(e.target.value)}>
+                    <label htmlFor="groupType">Group Type*</label>
+                    <select style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={groupType} onChange={(e) => setGroupType(e.target.value)} required>
                     <option value="">Select Group Type</option>
                         <option value="Public">Public</option>
                         <option value="Private">Private</option>
                     </select>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <label htmlFor="category">Category</label>
-                    <select style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <label htmlFor="category">Category*</label>
+                    <select style={{ borderRadius: '6px', height: '5.5vh',padding: '10px',marginTop: '10px' }} value={category} onChange={(e) => setCategory(e.target.value)} required>
                     <option value="">Select Category</option>
                         <option value="Cars and vehicles">Cars and Vehicles</option>
                         <option value="Comedy">Comedy</option>

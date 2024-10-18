@@ -36,14 +36,18 @@ function MyVerticallyCenteredModal(props) {
   const [createGroup, setCreateGroup] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // New states for price type, amount, and currency
+  const [priceType, setPriceType] = useState("free");
+  const [amount, setAmount] = useState("");
+  const [currency, setCurrency] = useState("INR");
+
   const [newEvent, setNewEvent] = useState({
     title: "", start: "", end: "", startTime: "00:00",
     endTime: "00:00", picture: "", cName: "",
     cNumber: "", cEmail: "", location: ""
   });
   const [allEvents, setAllEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState([props.selectedEvent])
-
+  const [selectedEvent, setSelectedEvent] = useState([props.selectedEvent]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -55,9 +59,6 @@ function MyVerticallyCenteredModal(props) {
       reader.readAsDataURL(file);
     }
   };
-
-
-
 
   const handleAddEvent = () => {
     const { title, start, end, startTime, endTime, picture, cName, cNumber, cEmail, location } = newEvent;
@@ -86,9 +87,13 @@ function MyVerticallyCenteredModal(props) {
       cEmail,
       location,
       department: profile.department,
-      createGroup
+      createGroup,
+      // Include price type and amount based on selection
+      priceType,
+      amount: priceType === "paid" ? amount : null, // Only include amount if it's paid
+      currency: priceType === "paid" ? currency : ""
     };
-    console.log('eventData', eventData)
+    console.log('eventData', eventData);
 
     fetch(`${baseUrl}/events/createEvent`, {
       method: "POST",
@@ -108,7 +113,6 @@ function MyVerticallyCenteredModal(props) {
       .catch((error) => console.error("Error creating event:", error));
   };
 
-
   const handleEditEvent = () => {
     const { title, start, end, startTime, endTime, picture, cName, cNumber, cEmail, location } = newEvent;
     const eventId = props.selectedEvent._id;
@@ -122,7 +126,6 @@ function MyVerticallyCenteredModal(props) {
       const formattedStart = format(new Date(start), "yyyy-MM-dd");
       const formattedEnd = format(new Date(end), "yyyy-MM-dd");
 
-
       const updatedEvent = {
         title: title,
         start: formattedStart,
@@ -133,7 +136,10 @@ function MyVerticallyCenteredModal(props) {
         cName,
         cNumber,
         cEmail,
-        location
+        location,
+        priceType,
+        amount: priceType === "paid" ? amount : "0", // Only include amount if it's paid
+        currency: priceType === "paid" ? currency : ""
       };
 
       const jsonEventData = JSON.stringify(updatedEvent);
@@ -168,7 +174,7 @@ function MyVerticallyCenteredModal(props) {
       const updatedEvent = { ...newEvent };
       updatedEvent[field] = date;
       setNewEvent(updatedEvent);
-      setIsEditing(true)
+      setIsEditing(true);
     } else {
       setNewEvent({ ...newEvent, [field]: date });
     }
@@ -179,8 +185,6 @@ function MyVerticallyCenteredModal(props) {
     updatedEvent[field] = time;
     setNewEvent(updatedEvent);
   };
-
-
 
   return (
     <Modal
@@ -199,12 +203,13 @@ function MyVerticallyCenteredModal(props) {
           <Row style={{ padding: '0px 5px' }}>
             <input
               type="text"
-              placeholder="Add/Edit Title"
+              placeholder="Add/Edit Title*"
               style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
               value={newEvent.title}
               onChange={(e) =>
                 setNewEvent({ ...newEvent, title: e.target.value })
               }
+              required
             />
             <br />
             <br />
@@ -213,7 +218,6 @@ function MyVerticallyCenteredModal(props) {
             <input type="file" name={newEvent.picture}
               style={{ width: '60%' }}
               onChange={handleImageChange} />
-
 
             <input
               type="text"
@@ -224,24 +228,16 @@ function MyVerticallyCenteredModal(props) {
                 setNewEvent({ ...newEvent, cName: e.target.value })
               }
             />
-
-
-
           </Row>
-
-
-
         </Col>
-
-
-
 
         <Col>
           <DatePicker
-            placeholderText="Start Date"
+            placeholderText="Start Date*"
             style={{ marginRight: "10px", padding: "0.5em" }}
             selected={newEvent.start}
             onChange={(date) => handleDateChange(date, "start")}
+            required
           />
           <br /><br />
           <input type="time" id="appt" name="startTime" value={newEvent.startTime} onChange={(e) =>
@@ -250,52 +246,49 @@ function MyVerticallyCenteredModal(props) {
           <br /><br />
           <input
             type="number"
-            placeholder="Enter Coordinator Contact Number"
+            placeholder="*Enter Coordinator Contact Number"
             style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
             value={newEvent.cNumber}
             onChange={(e) =>
               setNewEvent({ ...newEvent, cNumber: e.target.value })
             }
+            required
           />
-
           <input
             type="text"
-            placeholder="Enter event location"
+            placeholder="Enter event location*"
             style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
             value={newEvent.location}
             onChange={(e) =>
               setNewEvent({ ...newEvent, location: e.target.value })
             }
+            required
           />
-
         </Col>
-
 
         <Col>
-          <Col>
-            <DatePicker
-              placeholderText="End Date"
-              style={{ padding: "0.5em" }}
-              selected={newEvent.end}
-              onChange={(date) => handleDateChange(date, "end")}
-            />
-            <br /><br />
-            <input type="time" id="appt" name="endTime" value={newEvent.endTime} onChange={(e) =>
-              setNewEvent({ ...newEvent, endTime: e.target.value })
-            } />
-            <input
-              type="email"
-              placeholder="Enter Coordinator Email"
-              style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
-              value={newEvent.cEmail}
-              onChange={(e) =>
-                setNewEvent({ ...newEvent, cEmail: e.target.value })
-              }
-            />
-          </Col>
-
+          <DatePicker
+            placeholderText="End Date*"
+            style={{ padding: "0.5em" }}
+            selected={newEvent.end}
+            onChange={(date) => handleDateChange(date, "end")}
+            required
+          />
+          <br /><br />
+          <input type="time" id="appt" name="endTime" value={newEvent.endTime} onChange={(e) =>
+            setNewEvent({ ...newEvent, endTime: e.target.value })
+          } />
+          <input
+            type="email"
+            placeholder="Enter Coordinator Email*"
+            style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
+            value={newEvent.cEmail}
+            onChange={(e) =>
+              setNewEvent({ ...newEvent, cEmail: e.target.value })
+            }
+            required
+          />
         </Col>
-
       </Modal.Body>
 
       <Modal.Footer style={{ backgroundColor: '#f5dad2' }}>
@@ -308,22 +301,63 @@ function MyVerticallyCenteredModal(props) {
           />
           <label htmlFor="create-group" style={{ marginLeft: '0.5em' }}>Create a group with the same event title name</label>
         </div>
-        <Button
-          onClick={props.isEditing ? handleEditEvent : handleAddEvent}
-        >
+
+        {/* Free/Paid Radio Buttons */}
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="free"
+              checked={priceType === "free"}
+              onChange={(e) => setPriceType(e.target.value)}
+            /> Free
+          </label>
+          <label style={{ marginLeft: '1em' }}>
+            <input
+              type="radio"
+              value="paid"
+              checked={priceType === "paid"}
+              onChange={(e) => setPriceType(e.target.value)}
+            /> Paid
+          </label>
+        </div>
+
+        {/* Conditionally render the price and currency input */}
+        {priceType === "paid" && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+            <input
+              type="number"
+              placeholder="Amount"
+              value={amount}
+              onChange={(e) => setAmount(parseFloat(e.target.value))}
+              style={{ width: '100px', padding: '0.5em', borderRadius: '5px' }}
+            />
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              style={{ padding: '0.5em', borderRadius: '5px' }}
+            >
+              <option value="INR">INR</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="JYN">JYN</option>
+            </select>
+          </div>
+        )}
+
+        <Button onClick={props.isEditing ? handleEditEvent : handleAddEvent}>
           {loading
             ? 'Adding Event...'
             : props.isEditing
               ? 'Edit Event'
               : 'Add Event'}
-
         </Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
-
     </Modal>
   );
 }
+
 
 
 const locales = {
@@ -351,6 +385,63 @@ function Events() {
   const { _id } = useParams();
   const [loading, setLoading] = useState(false);
   const [detailsModalShow, setDetailsModalShow] = useState(false);
+  const [attendanceStatus, setAttendanceStatus] = useState(null);
+  const [eventId, setEventId] = useState(null); 
+  const [attendanceLoading,setAttendanceLoading] = useState(false);
+  
+  
+  
+  useEffect(() => {
+    if (selectedEventDetails) {
+      setEventId(selectedEventDetails._id); // Set eventId
+    }
+  }, [selectedEventDetails]);
+  
+  useEffect(() => {
+    if (eventId) {
+      checkAttendanceStatus(eventId); // Call checkAttendanceStatus only after eventId is set
+    }
+  }, [eventId]);
+  
+  
+  
+  
+  
+  
+  const handleAttendance = async (attendance, eventId) => {
+    console.log('handling attendance')
+    setAttendanceLoading(true);
+    console.log('event titlee', selectedEvent.title, attendance,eventId)
+    try {
+      let body = {
+        userId: profile._id,
+        userName: `${profile.firstName} ${profile.lastName}`,
+        profilePicture: profile.profilePicture,
+        attendance,
+        groupName: selectedEvent.title
+      };
+
+      const response = await axios.put(
+        `${baseUrl}/events/attendEvent/${eventId}`,
+        body
+      );
+
+      if (response.status === 200) {
+        toast.success('Vote submitted successfully.');
+        setNewEvent(response.data.event);
+        checkAttendanceStatus();
+        setAttendanceLoading(false);
+      } else {
+        console.error('Unexpected response status:', response.status, response.message);
+        alert('An unexpected error occurred. Please try again.');
+        setAttendanceLoading(false);
+      }
+    } catch (error) {
+      console.error('Error submitting attendance:', error);
+      toast.error(error.response?.data?.message || 'An error occurred.');
+      setAttendanceLoading(false);
+    }
+  };
 
   // const gapi = window.gapi;
   // const google = window.google;
@@ -439,48 +530,70 @@ function Events() {
     fetch(`${baseUrl}/events`)
       .then((response) => response.json())
       .then((data) => {
+        // Filter events based on groupId or no groupId
+        const filteredEvents = data.filter((event) => {
+          // If groupId is not present, include the event
+          if (!event.groupId) {
+            return true;
+          }
+          // If groupId is present, check if it's in profile.groupNames
+          return profile.groupNames.includes(event.groupId);
+        });
+  
         // Convert start and end dates to JavaScript Date objects
-        const eventsWithDates = data.map((event) => ({
+        const eventsWithDates = filteredEvents.map((event) => ({
           ...event,
           start: new Date(event.start),
           end: new Date(event.end),
         }));
-
-
+  
+        // Add an id to each event
         const eventsWithIds = eventsWithDates.map((event, index) => ({
           ...event,
           id: index + 1,
         }));
-
-        // // Filter events based on profile department
-        // const filteredEvents = eventsWithIds.filter((event) => {
-        //   if (event.department === 'All' || event.type === 'Public' || profile.profileLevel === 0) {
-        //     return true; // Return true for all events if department is 'All'
-        //   } else {
-        //     return event.department === profile.department;
-        //   }
-        // });
-
+  
+        // Set the filtered and processed events
         setAllEvents(eventsWithIds);
       })
-      .catch((error) => console.error("Error fetching events:", error));
+      .catch((error) => {
+        console.error("Error fetching events:", error);
+      });
   };
+  
+  
 
-  const checkAttendanceStatus = async (eventId) => {
-    console.log('eventid check',eventId)
+  const checkAttendanceStatus = async () => {
+    if (!eventId) {
+      console.log('No eventId provided, skipping API call.');
+      return; // Exit early if eventId is null or undefined
+    }
+  
+    console.log('eventId check', eventId);
     try {
-      const response = await axios.get(
-        `${baseUrl}/events/attendees/${eventId}`,
-      );
+      const response = await axios.get(`${baseUrl}/events/attendees/${eventId}`);
       if (response.status === 200) {
         setAttendees(response.data);
-        // determineAttendanceStatus(response.data);
+        determineAttendanceStatus(response.data);
       }
     } catch (error) {
       console.error('Error :', error);
       toast.error(error.response?.data?.message || 'An error occurred.');
     }
   };
+  
+
+  const determineAttendanceStatus = (attendees) => {
+    if (attendees.willAttend.some(user => user.userId === profile._id)) {
+        setAttendanceStatus(0);
+    } else if (attendees.mightAttend.some(user => user.userId === profile._id)) {
+        setAttendanceStatus(1);
+    } else if (attendees.willNotAttend.some(user => user.userId === profile._id)) {
+        setAttendanceStatus(2);
+    } else {
+        setAttendanceStatus(null);
+    }
+};
 
 
 
@@ -595,7 +708,7 @@ function Events() {
 
   const [open, setOpen] = useState(false);
   const handleOpenModal = (eventId) => {
-    console.log('eventid openmodal',eventId)
+    console.log('eventid openmodal', eventId)
     checkAttendanceStatus(eventId);
     setOpen(true)
   };
@@ -629,22 +742,22 @@ function Events() {
           selectable
           onSelectEvent={handleEventClick}
         />
-        
-          <Button
-            className="add-event-button"
-            variant="primary"
-            onClick={() => setModalShow(true)}
-            style={{
-              borderRadius: '50%',
-              width: '60px',
-              height: '60px',
-              position: 'absolute',
-              backgroundColor: '#174873'
-            }}
-          >
-            <FaCalendarPlus />
-          </Button>
-       
+
+        <Button
+          className="add-event-button"
+          variant="primary"
+          onClick={() => setModalShow(true)}
+          style={{
+            borderRadius: '50%',
+            width: '60px',
+            height: '60px',
+            position: 'absolute',
+            backgroundColor: '#174873'
+          }}
+        >
+          <FaCalendarPlus />
+        </Button>
+
 
         {selectedEventDetails && (
           <Modal
@@ -671,9 +784,59 @@ function Events() {
                 <img src={selectedEventDetails.picture} style={{ height: '200px', width: '300px', marginLeft: 'auto' }} />
               </div>
               <div style={{ display: 'flex', gap: '2vw' }}>
-                <Button variant="success" onClick={addToGoogleCalendar}>
+                {/* <Button variant="success" onClick={addToGoogleCalendar}>
                   Add To Google Calendar
-                </Button>
+                </Button> */}
+                <div>
+                  {
+                    selectedEventDetails.priceType === 'paid'
+                      ? <p>This is a paid event</p>
+                      : selectedEventDetails.priceType === 'free'
+                        ? <p>This is a free event</p>
+                        : null
+                  }
+
+                  <ul style={{ paddingLeft: '0px' }}>
+                    <div
+                      className="percentage-bar-container"
+                      onClick={() => {
+                        if (selectedEventDetails.priceType === 'free') {
+                          handleAttendance(0, selectedEventDetails._id);
+                        } else if (selectedEventDetails.priceType === 'paid') {
+                          window.open("https://razorpay.com/payment-link/plink_PA5q7Jm6wJENlt", "_blank");
+                        }
+                      }}
+                    >
+                      I will attend {attendanceStatus === 0 && <span>✔</span>}
+                    </div>
+
+                    <div
+                      className="percentage-bar-container"
+                      onClick={() => handleAttendance(1, selectedEventDetails._id)}
+                    >
+                      I might attend {attendanceStatus === 1 && <span>✔</span>}
+                    </div>
+
+                    <div
+                      className="percentage-bar-container"
+                      onClick={() => handleAttendance(2, selectedEventDetails._id)}
+                    >
+                      I will not attend {attendanceStatus === 2 && <span>✔</span>}
+                    </div>
+
+                    {attendanceLoading && (
+                      <div>
+                        <l-line-spinner
+                          size="20"
+                          stroke="3"
+                          speed="1"
+                          color="black"
+                        ></l-line-spinner>
+                      </div>
+                    )}
+                  </ul>
+                </div>
+
                 {(selectedEventDetails.userId === profile._id || profile.profileLevel === 0) && <div className="event-edit-delete">
 
                   <Button variant="primary" onClick={() => setModalShow(true)}>
@@ -688,7 +851,7 @@ function Events() {
                     Delete Event
                   </Button>
                 </div>}
-                {selectedEventDetails.userId === profile._id && <div className='see-event-results' style={{ textAlign: 'right', cursor: 'pointer' }} onClick={()=>handleOpenModal(selectedEventDetails._id)}>See event attendees</div>}
+                {selectedEventDetails.userId === profile._id && <div className='see-event-results' style={{ textAlign: 'right', cursor: 'pointer' }} onClick={() => handleOpenModal(selectedEventDetails._id)}>See event attendees</div>}
               </div>
               <MModal
                 open={open}

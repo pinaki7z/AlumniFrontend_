@@ -153,26 +153,50 @@ const IntJobs = (props) => {
         const handleCoverImageChange = (e) => {
             const file = e.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const coverImageData = reader.result;
-                    setFormData(prevFormData => ({
-                        ...prevFormData,
-                        coverImage: coverImageData,
-                    }));
-                };
-                reader.readAsDataURL(file);
+                const imageFormData = new FormData();
+                imageFormData.append('image', file);
+                axios.post(`${baseUrl}/uploadImage/singleImage`, imageFormData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                    .then(res => {
+                        setFormData({ ...formData, coverImage: res.data });
+                        //setPicLoading(false);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             }
         };
 
         const handleImageChange = (e) => {
             const files = e.target.files;
-            if (files) {
-                const filesArray = Array.from(files);
-                setFormData(prevFormData => ({
-                    ...prevFormData,
-                    attachments: filesArray,
-                }));
+            if (files && files.length > 0) {
+
+                const data = new FormData();
+
+                // Append each file to the FormData object with the key 'images[]'
+                Array.from(files).forEach((file) => {
+                    data.append('images', file);  // Use 'images' as the key for all files
+                });
+
+                // Send the FormData to the API
+                axios.post(`${baseUrl}/uploadImage/image`, data, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                    .then(res => {
+                        // Assuming res.data contains the uploaded files' data (like URLs or IDs)
+                        setFormData(prevState => ({
+                            ...prevState,
+                            attachments: res.data  // Update the attachments array in formData
+                        }));
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             }
         };
 
@@ -203,29 +227,29 @@ const IntJobs = (props) => {
                 return;
             }
             setLoading(true);
-    
+
             try {
+                //const formDataToSend = { ...formData };
                 const formDataToSend = new FormData();
-    
-                for (const key in formData) {
-                    if (key === 'attachments') {
-                        formData.attachments.forEach(file => {
-                            formDataToSend.append('attachments', file);
-                        });
-                    } else if (key === 'locationType') {
-                        for (const locationKey in formData.locationType) {
-                            formDataToSend.append(`locationType[${locationKey}]`, formData.locationType[locationKey]);
-                        }
-                    } else {
-                        formDataToSend.append(key, formData[key]);
-                    }
-                }
-                console.log('job formdata',formData)
-                const response = await fetch(`${baseUrl}/jobs/create`, {
-                    method: 'POST',
-                    body: formDataToSend,
-                });
-                if (response.ok) {
+                console.log('job formdata before', formDataToSend)
+
+                // for (const key in formData) {
+                //     if (key === 'attachments') {
+                //         formData.attachments.forEach(file => {
+                //             formDataToSend.append('attachments', file);
+                //         });
+                //     } else if (key === 'locationType') {
+                //         for (const locationKey in formData.locationType) {
+                //             formDataToSend.append(`locationType[${locationKey}]`, formData.locationType[locationKey]);
+                //         }
+                //     } else {
+                //         formDataToSend.append(key, formData[key]);
+                //     }
+                // }
+                console.log('job formdata', formData)
+                console.log('job formdata to send', formDataToSend)
+                const response = await axios.post(`${baseUrl}/jobs/create`,formData);
+                if (response) {
                     console.log('Data saved successfully');
                     const successMessage = formData.type === 'Internship' ? 'The internship post is being validated by the admin' : 'The job post is being validated by the admin';
                     toast.success(successMessage);
@@ -240,7 +264,7 @@ const IntJobs = (props) => {
             setLoading(false);
         };
 
-        
+
         const handleCheckboxChange = (e) => {
             const { name, checked } = e.target;
             if (name === 'isJob' && checked) {
@@ -307,7 +331,7 @@ const IntJobs = (props) => {
                         <Row>
                             <Col>
                                 <Form.Group as={Col} >
-                                    <Form.Label htmlFor="job">Title</Form.Label>
+                                    <Form.Label htmlFor="job">Title*</Form.Label>
                                     <Form.Control
                                         id="job"
                                         type="text"
@@ -315,12 +339,13 @@ const IntJobs = (props) => {
                                         name='title'
                                         value={formData.title}
                                         onChange={handleInputChange}
+                                        required
                                     />
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group as={Col} controlId="location">
-                                    <Form.Label>Location</Form.Label>
+                                    <Form.Label>Location*</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter location"
@@ -328,6 +353,7 @@ const IntJobs = (props) => {
                                         value={formData.location}
                                         onChange={handleInputChange}
                                         disabled={formData.locationType.remote}
+                                        required
                                     />
                                 </Form.Group>
 
@@ -335,7 +361,7 @@ const IntJobs = (props) => {
                         </Row>
 
                         <Form.Group controlId="companyType">
-                            <Form.Label>I am hiring for :-</Form.Label>
+                            <Form.Label>I am hiring for :-*</Form.Label>
                             <div>
                                 <Form.Check
                                     type='radio'
@@ -578,12 +604,12 @@ const IntJobs = (props) => {
                             />
                         </Form.Group>
                         <Form.Group controlId="coverImage">
-                            <Form.Label>Add cover image</Form.Label>
-                            <input className='form-control' type="file" onChange={handleCoverImageChange} accept=".jpg, .jpeg, .png, .pdf" />
+                            <Form.Label>Add cover image*</Form.Label>
+                            <input className='form-control' type="file" onChange={handleCoverImageChange} accept=".jpg, .jpeg, .png, .pdf" required/>
                         </Form.Group>
                         <Form.Group controlId="attachments">
-                            <Form.Label>Add attachments</Form.Label>
-                            <input className='form-control' type="file" onChange={handleImageChange} multiple accept=".jpg, .jpeg, .png, .pdf" />
+                            <Form.Label>Add attachments*</Form.Label>
+                            <input className='form-control' type="file" onChange={handleImageChange} multiple accept=".jpg, .jpeg, .png, .pdf" required/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

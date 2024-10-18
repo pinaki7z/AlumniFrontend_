@@ -15,7 +15,7 @@ import { CiLocationArrow1 } from "react-icons/ci";
 import { RiHomeSmileLine } from "react-icons/ri";
 import baseUrl from "../../config";
 
-const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, createdAt, picture, salaryMax, duration, jobType, questions, category, currency, attachments, appliedCandidates, searchQuery, type, locationType, company }) => {
+const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, createdAt, picture, salaryMax, duration, jobType, questions, category, currency, attachments, appliedCandidates, searchQuery, type, locationType, company,verified }) => {
     const profile = useSelector((state) => state.profile);
     const navigateTo = useNavigate();
     const [menuVisible, setMenuVisible] = useState(false);
@@ -136,7 +136,7 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
                         return (
                             <img
                                 key={index}
-                                src={`${baseUrl}/uploads/${attachment}`}
+                                src={attachment}
                                 alt=""
                                 className="src"
                             />
@@ -146,9 +146,13 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
                 })}
             </div>
             <div style={{ padding: '16px' }}>
+                <div>
+                    {verified ? 'verified' : 'unverified'}
+                </div>
                 <div style={{ border: '1px', padding: '5px', backgroundColor: "white", width: '100%' }}>
                     <div className="donation-card-title" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                         <h2 onClick={handleClick} style={{ cursor: 'pointer' }}>{jobTitle}</h2>
+
                         {appliedCandidates && appliedCandidates.map(candidate => {
                             if (candidate.userId === profile._id) {
                                 return (
