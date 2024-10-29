@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import "./global.css"
+import "./global.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import storePromise from "./store";
 //import 'react-loading-skeleton/dist/skeleton.css';
-import { tailChase } from 'ldrs'
+import { tailChase } from "ldrs";
 
 tailChase.register();
-
-
 
 function AppLoader() {
   const [isLoading, setLoading] = useState(true);
@@ -29,7 +27,15 @@ function AppLoader() {
 
   if (isLoading || !store) {
     return (
-      <div className="loading-container" style={{display:'flex', alignItems: 'center', justifyContent: 'center', height:'100vh'}}>
+      <div
+        className="loading-container"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
         <l-tail-chase size="40" speed="1.75" color="#174873"></l-tail-chase>
       </div>
     );
@@ -37,9 +43,9 @@ function AppLoader() {
 
   return (
     //<React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
+    <Provider store={store}>
+      <App />
+    </Provider>
     //</React.StrictMode>
   );
 }

@@ -76,8 +76,9 @@ const RegisterPage = () => {
         <div className="first-name-field-wrapper">
           <form className="first-name-field" onSubmit={handleSubmit} >
             <h1 className="create-an-account">Create an account</h1>
+            <span style={{fontSize:"15px"}}>(All fields are mandatory)</span>
             <div className="last-name-field-parent">
-              <div className="last-name-field">First Name*</div>
+              <div className="last-name-field">First Name</div>
               <div className="input">
                 <div className="input1">
                   <div className="field">
@@ -91,7 +92,7 @@ const RegisterPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="last-name-field">Last Name*</div>
+              <div className="last-name-field">Last Name</div>
               <div className="input">
                 <div className="input1">
                   <div className="field">
@@ -105,7 +106,7 @@ const RegisterPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="last-name-field">E-mail*</div>
+              <div className="last-name-field">E-mail</div>
               <div className="input">
                 <div className="input1">
                   <div className="field">
@@ -121,7 +122,7 @@ const RegisterPage = () => {
 
               </div>
               <div className="last-name-field1">
-                <div className="password">Password*</div>
+                <div className="password">Password</div>
                 <div className="input2">
                   <div className="input3">
                     <div className="field1">
@@ -138,7 +139,7 @@ const RegisterPage = () => {
                 </div>
               </div>
               <div className="last-name-field2">
-                <div className="password">Confirm Password*</div>
+                <div className="password">Confirm Password</div>
                 <div className="input2">
                   <div className="input3">
                     <div className="field1">
@@ -154,7 +155,7 @@ const RegisterPage = () => {
                 </div>
               </div>
               <div className="last-name-field3">
-                <div className="gender">Gender*</div>
+                <div className="gender">Gender</div>
                 <div className="gender1">
                   <select name='department' id='department' style={{ fontSize: 'var(--input-text-title-size)', width: '100%', height: '100%', borderRadius: 'var(--br-9xs)', border: '1px solid var(--outline-box)', boxSizing: 'border-box', backgroundColor: 'var(--background-light)' }} onChange={handleChange} required>
                     <option value='' disabled selected >Select Gender</option>
@@ -166,7 +167,7 @@ const RegisterPage = () => {
                 </div>
               </div>
               <div className="last-name-field4">
-                <div className="department">Department*</div>
+                <div className="department">Department</div>
                 <div className="dept">
                   <select name='department' id='department' style={{ fontSize: 'var(--input-text-title-size)', width: '100%', height: '100%', borderRadius: 'var(--br-9xs)', border: '1px solid var(--outline-box)', boxSizing: 'border-box', backgroundColor: 'var(--background-light)' }} onChange={handleChange} required>
                     <option value='' disabled selected >Select Department</option>
@@ -179,7 +180,7 @@ const RegisterPage = () => {
                 </div>
               </div>
               <div className="last-name-field5">
-                <div className="batch">Batch*</div>
+                <div className="batch">Batch</div>
                 <div className="batch1">
                   <select name='batch' id='batch' style={{ fontSize: 'var(--input-text-title-size)', width: '100%', height: '100%', borderRadius: 'var(--br-9xs)', border: '1px solid var(--outline-box)', boxSizing: 'border-box', backgroundColor: 'var(--background-light)' }} onChange={handleChange} required>
                     <option value='' disabled selected>Select Batch</option>

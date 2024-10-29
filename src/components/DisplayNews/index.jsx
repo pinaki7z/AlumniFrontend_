@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ThumbUpRounded, ChatBubbleOutlineRounded, NearMeRounded, DeleteRounded } from '@mui/icons-material';
 import baseUrl from "../../config";
 import newsImage from "../../images/d-group.jpg"
+import { FaArrowCircleRight } from 'react-icons/fa';
 
 
 export const DisplayNews = ({ userId, postId, description, createdAt, picturePath, videoPath, department, onDeletePost }) => {
@@ -55,57 +56,58 @@ export const DisplayNews = ({ userId, postId, description, createdAt, picturePat
         }
     };
 
+    const formatDate = (dateString) => {
+        // Split the string to extract day, month, and year
+        const dateParts = dateString.split(" ");
+        
+        // Extract day, month, and year based on your format
+        const day = parseInt(dateParts[1], 10); // `23` as a number
+        const month = dateParts[2].substring(0, 3); // `Apr` as a 3-letter month
+        const year = dateParts[3]; // `2024`
+    
+        // Determine the appropriate suffix for the day
+        const daySuffix = (day) => {
+            if (day > 3 && day < 21) return 'th';
+            switch (day % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
+        };
+    
+        // Construct and return the formatted date string
+        return `${day}${daySuffix(day)} ${month} ${year}`;
+    };
+
+    console.log("Raw createdAt:", createdAt);
+
     return (
         <>
             {isUserDepartment && (
-                <div className={`post post-box`} style={{flexDirection: 'row'}}>
-                    {loading ? (<div> Loading...</div>) : (<>
-                        <div>
-                            <img src={newsImage} alt="" srcset="" />
-                        </div>
-                        <div>
-                            <div className='top'>
-                                <div className='info'>
-                                    <h4>{createdAt}</h4>
-                                </div>
-                                {(admin || userId === profile._id) && (
-                                    <IconButton onClick={() => handleDeletePost(postId)} className='delete-button'>
-                                        <DeleteRounded />
-                                    </IconButton>
-                                )}
-                            </div>
-                            {description && (
-                                <div className='texxt'>
-                                    <p style={{padding: '1.1rem'}}>{description}</p>
-                                </div>
-                            )}
-                            {picturePath && (
-                                <div className='image'>
-                                    <img src={picturePath} alt='Post Image' />
-                                </div>
-                            )}
-                            {videoPath && (
-                                <div className='video'>
-                                    <video
-                                        ref={videoRef}
-                                        autoPlay={isPlaying}
-                                        preload="auto"
-                                        controls={false}
-                                        onClick={handlePlay}
-                                    >
-                                        <source src={videoPath.videoPath} type='video/mp4' />
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <div className={`play-button ${isPlaying ? '' : ''}`} onClick={handlePlay}>
-                                        <PlayCircleOutlineRoundedIcon fontSize='large' />
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-
-                    </>)}
+                <div className="news-card">
+                <div className="news-card-image">
+                    <img src={picturePath || newsImage} alt="News" />
                 </div>
+                <div className="news-card-content">
+                    <div className="news-card-header">
+                    <h3 className="news-title">News Headline</h3>
+                        <span style={{color:'gray', fontSize:'14px'}}>Posted on {formatDate(createdAt)}</span><br/>
+                        <span style={{color:'gray'}}>By SuperAdmin</span>
+                        
+                    </div>
+                    
+                    <p className="news-description">{description}</p>
+                    <button className="read-more">
+                        Read More <FaArrowCircleRight className="arrow-icon" />
+                    </button>
+                </div>
+                {(admin || userId === profile._id) && (
+                            <IconButton onClick={handleDeletePost} style={{color:'red'}} className="delete-button">
+                                <DeleteRounded />
+                            </IconButton>
+                        )}
+            </div>
             )}
         </>
     )

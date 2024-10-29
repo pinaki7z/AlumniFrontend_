@@ -1,10 +1,12 @@
 .Events{
     text-align: center;
-    background-image: url(../../images/pexels-tyler-lastovich-590179.jpg);
-    color: #4d63b2;
+    /* background-image: url(../../images/pexels-tyler-lastovich-590179.jpg); */
+    /* color: #4d63b2; */
+    font-weight: 600;
     height: 92vh;
     position: relative;
     width: 100%;
+    padding-top: 20px;
 }
 .event-button-create{
     margin-top: 0px;
@@ -57,4 +59,24 @@
     cursor: pointer;
     font-size: 20px;
   }
+
+  
+.rbc-event, .rbc-day-slot .rbc-background-event {
+  border: none;
+  box-sizing: border-box;
+  box-shadow: none;
+  margin: 0;
+  padding: 2px 5px;
+  background-color: #301c5B;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.react-datepicker__input-container input {
+  padding: 0.5em;
+  border-radius: 5px;
+  border-color: black;
+}
   

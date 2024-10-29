@@ -2,7 +2,12 @@ import LeftSidebar from "./components/left-sidebar";
 import TopBar from "./components/topbar";
 import SocialMediaPost from "./components/Social-wall-post";
 import SideWidgets from "./components/SideWidgets";
-import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
 import Groups from "./pages/Groups";
 import Donations from "./pages/Donations";
 import Sponsorships from "./pages/Sponsorships";
@@ -97,7 +102,7 @@ function App() {
                     >
                       <LeftSidebar />
                       <div style={{ marginLeft: "20%", width: "80%" }}>
-                        <TopBar handleLogout={handleLogout}/>
+                        <TopBar handleLogout={handleLogout} />
                         <JoinGroup />
                       </div>
                     </div>
@@ -116,7 +121,7 @@ function App() {
                       <LeftSidebar />
                       <div style={{ marginLeft: "20%", width: "80%" }}>
                         <TopBar handleLogout={handleLogout} />
-                        <Events/>
+                        <Events />
                       </div>
                     </div>
                   }

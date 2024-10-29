@@ -23,6 +23,7 @@ import { useParams } from "react-router-dom";
 import { lineSpinner } from 'ldrs';
 import EventDisplay from "../../components/Feeed/EventDisplay";
 import baseUrl from "../../config";
+import { borderTop } from "@mui/system";
 
 lineSpinner.register()
 
@@ -58,6 +59,15 @@ function MyVerticallyCenteredModal(props) {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewEvent({ ...newEvent, [name]: value });
+  };
+
+  const handleDateChange = (date, field) => {
+    setNewEvent({ ...newEvent, [field]: date });
   };
 
   const handleAddEvent = () => {
@@ -169,16 +179,16 @@ function MyVerticallyCenteredModal(props) {
     }
   };
 
-  const handleDateChange = (date, field) => {
-    if (props.isEditing) {
-      const updatedEvent = { ...newEvent };
-      updatedEvent[field] = date;
-      setNewEvent(updatedEvent);
-      setIsEditing(true);
-    } else {
-      setNewEvent({ ...newEvent, [field]: date });
-    }
-  };
+  // const handleDateChange = (date, field) => {
+  //   if (props.isEditing) {
+  //     const updatedEvent = { ...newEvent };
+  //     updatedEvent[field] = date;
+  //     setNewEvent(updatedEvent);
+  //     setIsEditing(true);
+  //   } else {
+  //     setNewEvent({ ...newEvent, [field]: date });
+  //   }
+  // };
 
   const handleTimeChange = (time, field) => {
     const updatedEvent = { ...newEvent };
@@ -192,106 +202,206 @@ function MyVerticallyCenteredModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      className="modal-dialog-scrollable"
     >
-      <Modal.Header style={{ backgroundColor: '#f5dad2' }} closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+      <Modal.Header  className="border-0">
+        <Modal.Title id="contained-modal-title-vcenter" style={{fontWeight:700}}>
           {props.isEditing ? "Edit Event" : "Add Event"}
         </Modal.Title>
+        <button
+          type="button"
+          className="btn-close"
+          aria-label="Close"
+          onClick={props.onHide}
+          style={{
+            backgroundColor: "#d1d5db", // Equivalent to Tailwind's bg-gray-300
+            color: "#1f2937",
+            borderRadius: "50%", // Make it rounded
+            border: "none",
+            padding: "0.5em",
+            cursor: "pointer",
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#9ca3af")} // Equivalent to Tailwind's hover:bg-gray-400
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#d1d5db")}
+        />
       </Modal.Header>
-      <Modal.Body style={{ display: 'flex', gap: '2em', backgroundColor: '#eaf6ff' }}>
-        <Col>
-          <Row style={{ padding: '0px 5px' }}>
+      <Modal.Body
+        style={{
+          backgroundColor: "rgb(243, 244, 246)", // Equivalent to Tailwind's .bg-gray-100
+          padding: "1rem",
+          margin:"15px",
+          borderRadius:5,
+          maxHeight: "400px",
+          overflowY: "auto",
+          scrollbarWidth: "thin", // For Firefox
+          scrollbarColor: "rgb(136, 136, 136) rgb(241, 241, 241)", // For Firefox
+        }}
+      >
+        <form>
+          <div className="mb-3">
             <input
               type="text"
-              placeholder="Add/Edit Title*"
-              style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
+              className="form-control"
+              placeholder="Event Title"
               value={newEvent.title}
               onChange={(e) =>
                 setNewEvent({ ...newEvent, title: e.target.value })
               }
               required
+              style={{ borderColor: "black" }} // Adding black border
             />
-            <br />
-            <br />
-            <label htmlFor={newEvent.picture}>Insert a Picture:-</label>
-            <br />
-            <input type="file" name={newEvent.picture}
-              style={{ width: '60%' }}
-              onChange={handleImageChange} />
-
+          </div>
+          <div className="row g-3">
+            <div className="col-md-6">
+              <label className="form-label">Start Date</label><br/>
+              <DatePicker
+                className="form-control"
+                selected={newEvent.start || new Date()} // Set to current date if not provided
+                onChange={(date) => handleDateChange(date, "start")}
+                required
+                style={{ borderColor: "black" }} // Adding black border
+              />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label">End Date</label><br/>
+              <DatePicker
+                className="form-control"
+                selected={newEvent.end || new Date()} // Set to current date if not provided
+                onChange={(date) => handleDateChange(date, "end")}
+                required
+                style={{ borderColor: "black" }} // Adding black border
+              />
+            </div>
+          </div>
+          <div className="row g-3 mt-2">
+            <div className="col-md-6">
+              <input
+                type="time"
+                className="form-control"
+                value={newEvent.startTime}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, startTime: e.target.value })
+                }
+                style={{ borderColor: "black" }} // Adding black border
+              />
+            </div>
+            <div className="col-md-6">
+              <input
+                type="time"
+                className="form-control"
+                value={newEvent.endTime}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, endTime: e.target.value })
+                }
+                style={{ borderColor: "black" }} // Adding black border
+              />
+            </div>
+          </div>
+          <div className="mb-3 mt-3">
             <input
               type="text"
-              placeholder="Enter Coordinator Name"
-              style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
+              className="form-control"
+              placeholder="Event Location"
+              value={newEvent.location}
+              onChange={(e) =>
+                setNewEvent({ ...newEvent, location: e.target.value })
+              }
+              required
+              style={{ borderColor: "black" }} // Adding black border
+            />
+          </div>
+          {/* Free/Paid Radio Buttons */}
+          <div className="mb-3">
+            <label>
+              <input
+                type="radio"
+                value="free"
+                checked={priceType === "free"}
+                onChange={(e) => setPriceType(e.target.value)}
+              /> Free
+            </label>
+            <label style={{ marginLeft: '1em' }}>
+              <input
+                type="radio"
+                value="paid"
+                checked={priceType === "paid"}
+                onChange={(e) => setPriceType(e.target.value)}
+              /> Paid
+            </label>
+          </div>
+          {/* Conditionally render the price and currency input */}
+          {priceType === "paid" && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }} className="mb-3">
+              <input
+                type="number"
+                placeholder="Amount"
+                value={amount}
+                onChange={(e) => setAmount(parseFloat(e.target.value))}
+                style={{ width: '100px', padding: '0.5em', borderRadius: '5px' }}
+              />
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                style={{ padding: '0.5em', borderRadius: '5px' }}
+              >
+                <option value="INR">INR</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="JYN">JYN</option>
+              </select>
+            </div>
+          )}
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Coordinator Name"
               value={newEvent.cName}
               onChange={(e) =>
                 setNewEvent({ ...newEvent, cName: e.target.value })
               }
+              style={{ borderColor: "black" }} // Adding black border
             />
-          </Row>
-        </Col>
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Coordinator Number"
+              value={newEvent.cNumber}
+              onChange={(e) =>
+                setNewEvent({ ...newEvent, cNumber: e.target.value })
+              }
+              required
+              style={{ borderColor: "black" }} // Adding black border
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Coordinator Email"
+              value={newEvent.cEmail}
+              onChange={(e) =>
+                setNewEvent({ ...newEvent, cEmail: e.target.value })
+              }
+              required
+              style={{ borderColor: "black" }} // Adding black border
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="file"
+              className="form-control"
+              onChange={handleImageChange}
+              style={{ borderColor: "black" }} // Adding black border
+            />
+          </div>
 
-        <Col>
-          <DatePicker
-            placeholderText="Start Date*"
-            style={{ marginRight: "10px", padding: "0.5em" }}
-            selected={newEvent.start}
-            onChange={(date) => handleDateChange(date, "start")}
-            required
-          />
-          <br /><br />
-          <input type="time" id="appt" name="startTime" value={newEvent.startTime} onChange={(e) =>
-            setNewEvent({ ...newEvent, startTime: e.target.value })
-          } />
-          <br /><br />
-          <input
-            type="number"
-            placeholder="*Enter Coordinator Contact Number"
-            style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
-            value={newEvent.cNumber}
-            onChange={(e) =>
-              setNewEvent({ ...newEvent, cNumber: e.target.value })
-            }
-            required
-          />
-          <input
-            type="text"
-            placeholder="Enter event location*"
-            style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
-            value={newEvent.location}
-            onChange={(e) =>
-              setNewEvent({ ...newEvent, location: e.target.value })
-            }
-            required
-          />
-        </Col>
-
-        <Col>
-          <DatePicker
-            placeholderText="End Date*"
-            style={{ padding: "0.5em" }}
-            selected={newEvent.end}
-            onChange={(date) => handleDateChange(date, "end")}
-            required
-          />
-          <br /><br />
-          <input type="time" id="appt" name="endTime" value={newEvent.endTime} onChange={(e) =>
-            setNewEvent({ ...newEvent, endTime: e.target.value })
-          } />
-          <input
-            type="email"
-            placeholder="Enter Coordinator Email*"
-            style={{ width: "100%", padding: "0.5em", borderRadius: "10px" }}
-            value={newEvent.cEmail}
-            onChange={(e) =>
-              setNewEvent({ ...newEvent, cEmail: e.target.value })
-            }
-            required
-          />
-        </Col>
+          
+        </form>
       </Modal.Body>
-
-      <Modal.Footer style={{ backgroundColor: '#f5dad2' }}>
+      <Modal.Footer className="border-0">
         <div style={{ marginRight: 'auto', display: 'flex', alignItems: 'center' }}>
           <input
             type="checkbox"
@@ -301,61 +411,24 @@ function MyVerticallyCenteredModal(props) {
           />
           <label htmlFor="create-group" style={{ marginLeft: '0.5em' }}>Create a group with the same event title name</label>
         </div>
-
-        {/* Free/Paid Radio Buttons */}
-        <div>
-          <label>
-            <input
-              type="radio"
-              value="free"
-              checked={priceType === "free"}
-              onChange={(e) => setPriceType(e.target.value)}
-            /> Free
-          </label>
-          <label style={{ marginLeft: '1em' }}>
-            <input
-              type="radio"
-              value="paid"
-              checked={priceType === "paid"}
-              onChange={(e) => setPriceType(e.target.value)}
-            /> Paid
-          </label>
-        </div>
-
-        {/* Conditionally render the price and currency input */}
-        {priceType === "paid" && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-            <input
-              type="number"
-              placeholder="Amount"
-              value={amount}
-              onChange={(e) => setAmount(parseFloat(e.target.value))}
-              style={{ width: '100px', padding: '0.5em', borderRadius: '5px' }}
-            />
-            <select
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-              style={{ padding: '0.5em', borderRadius: '5px' }}
-            >
-              <option value="INR">INR</option>
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
-              <option value="JYN">JYN</option>
-            </select>
-          </div>
-        )}
-
-        <Button onClick={props.isEditing ? handleEditEvent : handleAddEvent}>
-          {loading
-            ? 'Adding Event...'
-            : props.isEditing
-              ? 'Edit Event'
-              : 'Add Event'}
+         <Button
+            variant="light"
+            onClick={props.onHide}
+            style={{ backgroundColor: "#f1f1f1", color: "#000" }} // Custom styling for Cancel button
+          >
+                  Cancel
+                </Button>
+                <Button
+            variant="primary"
+            onClick={props.isEditing ? handleEditEvent : handleAddEvent}
+          >
+          {props.isEditing ? "Edit Event" : "Add Event"}
         </Button>
-        <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
+  
+  
 }
 
 
@@ -721,9 +794,9 @@ function Events() {
   };
 
   return (
-    <div className="Events">
-      <h1 style={{ color: '#174873' }}>Event Calendar</h1>
-      <div ref={calendarRef}>
+    <div className="Events mx-auto px-4 py-8">
+      <h1 style={{ color: '#301c5B', fontWeight:600, marginBottom:40, }}>Event Calendar</h1>
+      <div class="bg-white rounded-lg p-4 shadow-lg"   ref={calendarRef}>
         <MyVerticallyCenteredModal
           show={modalShow}
           isEditing={isEditing}
@@ -738,7 +811,7 @@ function Events() {
           events={allEvents}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: '60vh', margin: "50px" }}
+          style={{ height: '60vh' }}
           selectable
           onSelectEvent={handleEventClick}
         />
@@ -752,7 +825,7 @@ function Events() {
             width: '60px',
             height: '60px',
             position: 'absolute',
-            backgroundColor: '#174873'
+            backgroundColor: '#301c5B'
           }}
         >
           <FaCalendarPlus />
@@ -853,7 +926,7 @@ function Events() {
                 </div>}
                 {selectedEventDetails.userId === profile._id && <div className='see-event-results' style={{ textAlign: 'right', cursor: 'pointer' }} onClick={() => handleOpenModal(selectedEventDetails._id)}>See event attendees</div>}
               </div>
-              <MModal
+              <Modal
                 open={open}
                 onClose={handleCloseModal}
                 aria-labelledby="modal-title"
@@ -894,7 +967,7 @@ function Events() {
                     </div>
                   </div>
                 </Box>
-              </MModal>
+              </Modal>
             </Modal.Body>
           </Modal>
 

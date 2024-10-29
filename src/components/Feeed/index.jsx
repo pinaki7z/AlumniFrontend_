@@ -174,7 +174,7 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
       {showCreatePost && <CreatePost1 photoUrl={photoUrl} username={username} onNewPost={handleNewPost} entityType={entityType} />}
       {showCreateButton &&
         <div style={{width: '100%'}}>
-          <button style={{fontFamily: 'Inter', fontWeight: '500', fontSize: '20px',padding: '30px',borderRadius: '8px', border: 'none',height: '0vh', width: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px'}}>
+          <button style={{fontFamily: 'Inter', fontWeight: '500', fontSize: '18px',backgroundColor:'#eee8fa',padding: '20px',borderRadius: '8px', border: 'none',height: '0vh', width: '10%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px'}}>
             Create
           </button>
         </div>}

@@ -135,15 +135,19 @@ const Dashboard = ({ handleLogout }) => {
             <Route path="/news/*" element={
               <div
                 style={{
-                  display: "flex",
-                  gap: "2vw",
-                  // marginLeft: "40px",
-                  paddingTop: "20px",
-                  width: "100%",
-                  justifyContent: 'center'
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
+                  padding: '2% 5%',
+                  // display: "flex",
+                  // gap: "2vw",
+                  // // marginLeft: "40px",
+                  // paddingTop: "20px",
+                  // width: "100%",
+                  // justifyContent: 'center'
                 }}
               >
-                <div style={{ width: "65%" }}>
+                <div style={{ width: "80%" }}>
                   <News />
                 </div>
                 {/* <SideWidgets /> */}

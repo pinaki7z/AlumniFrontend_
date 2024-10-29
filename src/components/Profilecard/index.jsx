@@ -148,6 +148,7 @@ const Profilecard = ({ member, name, addButton, groupMembers, owner, deleteButto
         style={{
           width: "17vw",
           backgroundPosition: "center",
+          backgroundColor:"#eee8fa",
           WebkitBackgroundSize: "cover",
           position: 'relative',
           height: '42vh',

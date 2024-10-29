@@ -171,7 +171,7 @@ const Jobs = () => {
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '2% 5% ' }}>
                 <IntJobs
                     title={title}
                     titleS={titleS}
@@ -183,9 +183,9 @@ const Jobs = () => {
                     }}
                 />
 
-                <div style={{ margin: '20px 0',zIndex: '1'}}>
+                <div style={{ margin: '20px 0',zIndex: '1', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'flex-start'}}>
                     <label>Filter by Verification: </label>
-                    <select value={verifiedFilter} onChange={handleVerifiedFilterChange}>
+                    <select value={verifiedFilter} onChange={handleVerifiedFilterChange} style={{backgroundColor: '#eee8fa',marginLeft:'10px',color: 'black',borderColor: '#ced4da', padding: '5px 10px', borderRadius:5}}>
                         <option value="all">All Jobs</option>
                         <option value="verified">Verified Jobs</option>
                         <option value="unverified">Unverified Jobs</option>
@@ -193,27 +193,27 @@ const Jobs = () => {
                 </div>
                 <Routes>
                     <Route path="/" element={
-                        <div style={{ marginTop: '215px', zIndex: '1' }}>
+                        <div style={{ marginTop: '20px', zIndex: '1' }}>
                             <PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext3={buttontext3} buttontext4={buttontext4} buttontext5={buttontext5} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} buttontext3Link={buttontext3Link} buttontext4Link={buttontext4Link} buttontext5Link={buttontext5Link} name='jobs' create={false} />
                         </div>
                     } />
                     <Route path="/archive" element={
-                        <div style={{ marginTop: '215px', zIndex: '1' }}>
+                        <div style={{ marginTop: '20px', zIndex: '1' }}>
                             <PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext3={buttontext3} buttontext4={buttontext4} buttontext5={buttontext5} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} buttontext3Link={buttontext3Link} buttontext4Link={buttontext4Link} buttontext5Link={buttontext5Link} name='jobs' create={false} />
                         </div>
                     } />
                     <Route path="/starred" element={
-                        <div style={{ marginTop: '215px', zIndex: '1' }}>
+                        <div style={{ marginTop: '20px', zIndex: '1' }}>
                             <PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext3={buttontext3} buttontext4={buttontext4} buttontext5={buttontext5} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} buttontext3Link={buttontext3Link} buttontext4Link={buttontext4Link} buttontext5Link={buttontext5Link} name='jobs' create={false} />
                         </div>
                     } />
                     <Route path="/applied" element={
-                        <div style={{ marginTop: '215px', zIndex: '1' }}>
+                        <div style={{ marginTop: '20px', zIndex: '1' }}>
                             <PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext3={buttontext3} buttontext4={buttontext4} buttontext5={buttontext5} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} buttontext3Link={buttontext3Link} buttontext4Link={buttontext4Link} buttontext5Link={buttontext5Link} name='jobs' create={false} />
                         </div>
                     } />
                     <Route path="/myJobs" element={
-                        <div style={{ marginTop: '215px', zIndex: '1' }}>
+                        <div style={{ marginTop: '20px', zIndex: '1' }}>
                             <PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext3={buttontext3} buttontext4={buttontext4} buttontext5={buttontext5} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} buttontext3Link={buttontext3Link} buttontext4Link={buttontext4Link} buttontext5Link={buttontext5Link} name='jobs' create={false} />
                         </div>
                     } />
@@ -231,6 +231,7 @@ const Jobs = () => {
                                                 userId={job.userId}
                                                 id={job._id}
                                                 jobTitle={job.title}
+                                                employmentType={job.employmentType}
                                                 description={job.description}
                                                 salaryMin={job.salaryMin}
                                                 salaryMax={job.salaryMax}
@@ -278,6 +279,7 @@ const Jobs = () => {
                                                 userId={job.userId}
                                                 id={job._id}
                                                 jobTitle={job.title}
+                                                employmentType={job.employmentType}
                                                 description={job.description}
                                                 salaryMin={job.salaryMin}
                                                 salaryMax={job.salaryMax}
@@ -325,6 +327,7 @@ const Jobs = () => {
                                                 userId={job.userId}
                                                 id={job._id}
                                                 jobTitle={job.title}
+                                                employmentType={job.employmentType}
                                                 description={job.description}
                                                 salaryMin={job.salaryMin}
                                                 salaryMax={job.salaryMax}

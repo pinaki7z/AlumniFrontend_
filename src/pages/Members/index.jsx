@@ -194,8 +194,8 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
         }}
       >
         <p style={{ fontWeight: '600', paddingBottom: '0px', color: '#3A3A3A', fontSize: '32px' }}>Members</p>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div className="search" style={{ display: 'flex', width: '75%' }}>
+        <div style={{  alignItems: 'center' }}>
+          <div className="search" style={{ display: 'flex', width: '75%', marginBottom:'10px' }}>
             <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
               <div style={{ position: 'relative', width: '100%' }}>
                 <input
@@ -228,21 +228,22 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
           </div>
           
           {/* New Filters */}
+          <div style={{ display:'flex', justifyContent:'flex-start',alignItems: 'center' }}>
           <select className='select-dropdown' value={memberRole} onChange={handleMemberRoleChange}>
-            <option value="">All Roles</option>
+            <option value="">All Members</option>
             <option value="1">Admin</option>
             <option value="2">Alumni</option>
             <option value="3">Current Student</option>
           </select>
 
-          <select className='select-dropdown' value={graduatingYear} onChange={handleGraduatingYearChange}>
+          <select className='select-dropdown' style={{marginLeft:'10px'}} value={graduatingYear} onChange={handleGraduatingYearChange}>
             <option value="">All Graduating Years</option>
             {generateYears().map(year => (
               <option key={year} value={year}>{year}</option>
             ))}
           </select>
 
-          <select className='select-dropdown' value={department} onChange={handleDepartmentChange}>
+          <select className='select-dropdown' style={{marginLeft:'10px'}} value={department} onChange={handleDepartmentChange}>
             <option value="">All Departments</option>
             <option value="Agricultural">Agricultural</option>
             <option value="Gastroenterology">Gastroenterology</option>
@@ -250,12 +251,13 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
             <option value="Human Languages">Human Languages</option>
           </select>
 
-          <select className='select-dropdown' value={batch} onChange={handleBatchChange}>
+          <select className='select-dropdown' style={{marginLeft:'10px'}} value={batch} onChange={handleBatchChange}>
             <option value="">All Batches</option>
             {generateBatches().map(batch => (
               <option key={batch} value={batch}>{batch}</option>
             ))}
           </select>
+          </div>
 
         </div>
         <div style={{paddingTop: '20px'}}>

@@ -69,12 +69,13 @@ export const StarredJobs = ({searchQuery}) => {
                                 userId={job.userId}
                                 id={job._id}
                                 jobTitle={job.title}
+                                employmentType={job.employmentType}
                                 description={job.description}
                                 salaryMin={job.salaryMin}
                                 salaryMax={job.salaryMax}
                                 picture={job.picture}
                                 duration={job.duration}
-                                jobType={job.employmentType}
+                                jobType={job.jobType ? job.jobType : job.internshipType}
                                 questions={job.questions}
                                 category={job.category}
                                 currency={job.currency}

@@ -1,5 +1,5 @@
 .job-post{
-    width: 45%;
+    width: 100%;
 }
 
 .jobs-title {
@@ -54,8 +54,23 @@
 }
 
 .custom-dropdown .dropdown-toggle {
-    font-size: 15px;
-  }
+    background-color: #eee8fa !important; /* Ensure the background color remains the same */
+    color: black !important; /* Ensure the text color is black */
+    border-color: #ced4da !important; /* Optional: consistent border color */
+    width:100%;
+}
+
+/* Styles for the dropdown menu items */
+.custom-dropdown .dropdown-menu {
+    background-color: #eee8fa !important; /* Set the background color for the opened dropdown */
+    color: black !important; /* Set the text color for dropdown items */
+    width:100% !important;
+}
+
+/* Add some padding or margin to ensure the text has space from the caret */
+.custom-dropdown .dropdown-toggle::after {
+    margin-left: 8px; /* Add space between text and caret */
+}
 
 .jobs-dropdowns .dropdown {
     flex: 1; 
@@ -79,3 +94,5 @@
     padding: 5px;
     border-radius: 10px;
 }
+
+
