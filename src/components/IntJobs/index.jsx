@@ -22,6 +22,8 @@ import { useLocation } from 'react-router-dom';
 import { Archive } from '../../pages/Jobs/Archive';
 import baseUrl from '../../config';
 import { FaSearch } from 'react-icons/fa'; // Import the search icon
+import { Link } from 'react-router-dom';
+
 
 
 const IntJobs = (props) => {
@@ -248,7 +250,7 @@ const IntJobs = (props) => {
                 // }
                 console.log('job formdata', formData)
                 console.log('job formdata to send', formDataToSend)
-                const response = await axios.post(`${baseUrl}/jobs/create`,formData);
+                const response = await axios.post(`${baseUrl}/jobs/create`, formData);
                 if (response) {
                     console.log('Data saved successfully');
                     const successMessage = formData.type === 'Internship' ? 'The internship post is being validated by the admin' : 'The job post is being validated by the admin';
@@ -605,11 +607,11 @@ const IntJobs = (props) => {
                         </Form.Group>
                         <Form.Group controlId="coverImage">
                             <Form.Label>Add cover image*</Form.Label>
-                            <input className='form-control' type="file" onChange={handleCoverImageChange} accept=".jpg, .jpeg, .png, .pdf" required/>
+                            <input className='form-control' type="file" onChange={handleCoverImageChange} accept=".jpg, .jpeg, .png, .pdf" required />
                         </Form.Group>
                         <Form.Group controlId="attachments">
                             <Form.Label>Add attachments*</Form.Label>
-                            <input className='form-control' type="file" onChange={handleImageChange} multiple accept=".jpg, .jpeg, .png, .pdf" required/>
+                            <input className='form-control' type="file" onChange={handleImageChange} multiple accept=".jpg, .jpeg, .png, .pdf" required />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
@@ -801,11 +803,16 @@ const IntJobs = (props) => {
                                             <Dropdown.Item eventKey="Transportation">Transportation</Dropdown.Item>
                                         </div>
                                     </DropdownButton>
-                                    {profile.profileLevel === 2 && (
-                                        <Button variant="danger" onClick={() => setModalShow(true)}>
-                                            Create a job/internship
-                                        </Button>
-                                    )}
+                                    {profile.profileLevel === 2 ? (
+                                        <div className="pt-4 flex justify-start">
+                                            <Link
+                                                to="/jobs/create"
+                                                style={{border: '1px solid black'}}
+                                            >
+                                                Create
+                                            </Link>
+                                        </div>
+                                    ) : null}
 
                                     <MyVerticallyCenteredModal
                                         show={modalShow}

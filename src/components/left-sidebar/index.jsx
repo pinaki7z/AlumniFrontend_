@@ -12,8 +12,11 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { IoIosNotifications } from "react-icons/io";
 import baseUrl from "../../config";
+import { LuHeartHandshake } from 'react-icons/lu';
 import io from "../../images/insideout.png";
 import bhu from "../../images/bhu.png";
+import gallery from "../../images/gallery.svg";
+import { GrGallery } from "react-icons/gr";
 
 
 const LeftSidebar = () => {
@@ -53,10 +56,11 @@ const LeftSidebar = () => {
                         {/* <li><Link to="/chat" style={{ textDecoration: 'none' }}><MdSettings style={{ color: '#b744b7' }} /><p>Chat</p></Link></li> */}
                         <li><Link to="/forums" style={{ textDecoration: 'none' }}><MdForum className="dashboard-icon" /><p>Forums</p></Link></li>
                         <li><Link to="/news" style={{ textDecoration: 'none' }}><BiNews className="dashboard-icon" /><p>News</p></Link></li>
-                        <li><Link to="/donations" style={{ textDecoration: 'none' }}><BsCurrencyRupee className="dashboard-icon" /><p>Business Connect</p></Link></li>
+                        <li><Link to="/donations" style={{ textDecoration: 'none' }}><LuHeartHandshake className="dashboard-icon" /><p>Business Connect</p></Link></li>
                         <li><Link to="/sponsorships" style={{ textDecoration: 'none' }}><GoSponsorTiers className="dashboard-icon" /><p>Sponsorships</p></Link></li>
                         <li><Link to="/events" style={{ textDecoration: 'none' }}><MdOutlineEvent className="dashboard-icon" /><p>Events</p></Link></li>
                         <li><Link to="/jobs" style={{ textDecoration: 'none' }}><FaBriefcase className="dashboard-icon" /><p>Jobs/Internships</p></Link></li>
+                        <li><Link to="/photo-gallery" style={{ textDecoration: 'none' }}><GrGallery className="dashboard-icon" /><p>Photo Gallery</p></Link></li>
                         {/* <li><Link to="/internships" style={{ textDecoration: 'none' }}><HiOutlineBriefcase style={{ color: '#407093' }} /><p>Internships</p></Link></li> */}
                         <li><Link to="/notifications" style={{ textDecoration: 'none' }}><IoIosNotifications className="dashboard-icon" /><p>Notifications</p></Link></li>
                         <li><Link to="/settings" style={{ textDecoration: 'none' }}><MdSettings className="dashboard-icon" /><p>Settings</p></Link></li>

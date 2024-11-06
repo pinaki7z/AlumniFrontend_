@@ -926,7 +926,7 @@ function Events() {
                 </div>}
                 {selectedEventDetails.userId === profile._id && <div className='see-event-results' style={{ textAlign: 'right', cursor: 'pointer' }} onClick={() => handleOpenModal(selectedEventDetails._id)}>See event attendees</div>}
               </div>
-              <Modal
+              <MModal
                 open={open}
                 onClose={handleCloseModal}
                 aria-labelledby="modal-title"
@@ -967,7 +967,7 @@ function Events() {
                     </div>
                   </div>
                 </Box>
-              </Modal>
+              </MModal>
             </Modal.Body>
           </Modal>
 

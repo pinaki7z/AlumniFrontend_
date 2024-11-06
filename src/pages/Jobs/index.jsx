@@ -297,6 +297,7 @@ const Jobs = () => {
                                                 searchQuery={searchQuery}
                                                 locationType={job.locationType}
                                                 company={job.company}
+                                               
                                             />
                                         </div>
                                     ))

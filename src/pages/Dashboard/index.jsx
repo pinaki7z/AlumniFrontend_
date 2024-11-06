@@ -32,6 +32,8 @@ import DonSponRequest from "../../components/DonSponRequest/index.jsx";
 import { SearchedResults } from "../../components/SearchedResults";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import PhotoGallery from "../PhotoGallery/index.jsx";
+import { CreateJob } from "../Jobs/CreateJob/index.jsx";
 const Dashboard = ({ handleLogout }) => {
 
   const location = useLocation();
@@ -92,6 +94,7 @@ const Dashboard = ({ handleLogout }) => {
               />
             )}
             <Route path="/donations/*" element={<Donations />} />
+            <Route path="/photo-gallery/*" element={<PhotoGallery />} />
             <Route path="/sponsorships/*" element={<Sponsorships />} />
             <Route path="/members/*" element={<div style={{ width: '100%',padding: '0% 5%'}}><Members showHeading={true} /></div>} />
             <Route path="/members/create" element={
@@ -105,6 +108,10 @@ const Dashboard = ({ handleLogout }) => {
             <Route path="/events/*" element={<Events />} />
             {/* <Route path="/chat/*" element={<Chat />} /> */}
             <Route path="/jobs/*" element={<Jobs />} />
+            <Route
+              path="/jobs/create"
+              element={<CreateJob />}
+            />
             {/* <Route path="/internships/*" element={<Internships />} /> */}
             <Route path="/settings/*" element={<Settings />} />
             <Route path="/jobs/:_id/:title" element={<IndividualJobPost />} />

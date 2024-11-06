@@ -7,11 +7,8 @@ import { toast } from "react-toastify";
 import axios from 'axios';
 import { lineSpinner } from 'ldrs';
 import format from "date-fns/format";
-import getDay from "date-fns/getDay";
-import parse from "date-fns/parse";
-import startOfWeek from "date-fns/startOfWeek";
-import { EventBusy } from "@mui/icons-material";
-import baseUrl from "../../../config"
+import baseUrl from "../../../config";
+import * as XLSX from 'xlsx';  // Import the XLSX library
 
 lineSpinner.register();
 
@@ -57,9 +54,7 @@ const EventDisplay = ({ event }) => {
     };
 
     const handleAttendance = async (attendance, eventId) => {
-        console.log('handling attendance')
         setLoading(true);
-        console.log('event titlee',event.title,attendance)
         try {
             let body = {
                 userId: profile._id,
@@ -110,32 +105,62 @@ const EventDisplay = ({ event }) => {
     const handleClose = () => setOpen(false);
 
     const handleDeleteEvent = async () => {
-        console.log('deleting event')
         try {
-         
-          const url = `${baseUrl}/events/${event._id}`;
-          
-         
-          const requestBody = {
-            groupName: event.title
-          };
-      
-        
-          const response = await axios.delete(url, { data: requestBody });
-      
-          if (response.status === 200) {
-            console.log("Event deleted successfully");
-            toast.success("Event deleted successfully");
-            window.location.reload();
-          } else {
-            console.error("Failed to delete event");
-            toast.error("Failed to delete event");
-         
-          }
+            const url = `${baseUrl}/events/${event._id}`;
+            const requestBody = {
+                groupName: event.title
+            };
+            const response = await axios.delete(url, { data: requestBody });
+
+            if (response.status === 200) {
+                toast.success("Event deleted successfully");
+                window.location.reload();
+            } else {
+                console.error("Failed to delete event");
+                toast.error("Failed to delete event");
+            }
         } catch (error) {
-          console.error("Error occurred while deleting event:", error);
+            console.error("Error occurred while deleting event:", error);
         }
-      };
+    };
+
+    // Function to export attendees as Excel file
+    const exportAttendeesToExcel = () => {
+        if (!attendees) {
+            return;
+        }
+    
+        // Create arrays for each category of attendees
+        const willAttendNames = attendees.willAttend.map(attendee => attendee.userName);
+        const mightAttendNames = attendees.mightAttend.map(attendee => attendee.userName);
+        const willNotAttendNames = attendees.willNotAttend.map(attendee => attendee.userName);
+    
+        // Find the longest list for the rows count
+        const maxLength = Math.max(willAttendNames.length, mightAttendNames.length, willNotAttendNames.length);
+    
+        // Create a new array to hold rows with 3 columns for the Excel sheet
+        const rows = [];
+    
+        for (let i = 0; i < maxLength; i++) {
+            rows.push({
+                'Will Attend': willAttendNames[i] || '',  // If no attendee at this index, leave it empty
+                'Might Attend': mightAttendNames[i] || '',
+                'Will Not Attend': willNotAttendNames[i] || ''
+            });
+        }
+    
+        // Create the worksheet
+        const worksheet = XLSX.utils.json_to_sheet(rows, {header: ['Will Attend', 'Might Attend', 'Will Not Attend']});
+        
+        // Create a new workbook and append the worksheet
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Attendees");
+    
+        // Save the workbook to file
+        XLSX.writeFile(workbook, `${event.title}_Attendees.xlsx`);
+    };
+    
+    
 
     return (
         <>
@@ -154,7 +179,7 @@ const EventDisplay = ({ event }) => {
                 </IconButton>}
             </div>
             <div style={{ paddingTop: '20px'}}>
-                <p><span style={{ fontWeight: '500' }}>Title:</span> {event.title}</p>
+                <p><span style={{ fontWeight: '500' }}>Title:</span>{event.title}</p>
                 <p><span style={{ fontWeight: '500' }}>Start Date:</span> {formatDate(event.start)}</p>
                 <p><span style={{ fontWeight: '500' }}>End Date:</span> {formatDate(event.end)}</p>
                 <p><span style={{ fontWeight: '500' }}>Start Time:</span>  {event.startTime} hrs</p>
@@ -196,6 +221,9 @@ const EventDisplay = ({ event }) => {
             >
                 <Box className='poll-modal-box'>
                     <h2 id="modal-title">Event Attendees</h2>
+                    <button className='excel-export-button' onClick={exportAttendeesToExcel} style={{backgroundColor: '#a98de3', padding: '10px', borderRadius: '6px', border: 'none',color: 'white'}}>
+                        Export as an Excel Sheet
+                    </button>
                     <div className='voters-container'>
                         <div>
                             <h3>Will Attend</h3>
@@ -228,6 +256,9 @@ const EventDisplay = ({ event }) => {
                             ))}
                         </div>
                     </div>
+
+                    {/* Add Export Button Inside Modal */}
+                    
                 </Box>
             </Modal>
         </>

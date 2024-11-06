@@ -26,6 +26,7 @@
     "emoji-picker-react": "^4.5.16",
     "ldrs": "^1.0.1",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.453.0",
     "react": "^18.2.0",
     "react-big-calendar": "^1.8.5",
     "react-bootstrap": "^2.9.1",
@@ -43,7 +44,8 @@
     "react-toastify": "^9.1.3",
     "sass": "^1.69.3",
     "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

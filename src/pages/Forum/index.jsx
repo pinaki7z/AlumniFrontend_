@@ -58,58 +58,61 @@ const Forum = () => {
       <div className='forum' style={{ paddingTop: '20px' }}>
         <div>
           {/* <PageTitle title='Forums' icon={icon} /> */}
-          <div style={{ display: 'flex', justifyContent: 'space-around',padding: '25px 15px', paddingRight: '18px', alignItems: 'end' }}>
+          <div>
+            <h1 style={{padding: '0px 5%'}}>Forums</h1>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-around', padding: '25px 15px', paddingRight: '18px', alignItems: 'end' }}>
             {/* <p style={{ margin: '0px', fontSize: '18px', fontWeight: '600', color: '#9c9b95' }}>Total Forums:  {loading ? 0 : totalForums}</p> */}
-            <div className="search" style={{ display: 'flex', width: '65%'}}>
-                        <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                        <div style={{ position: 'relative', width: '100%' }}>
-                <input
+            <div className="search" style={{ display: 'flex', width: '65%' }}>
+              <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                <div style={{ position: 'relative', width: '100%' }}>
+                  <input
                     type="search"
                     name="search"
                     id="search"
                     placeholder="Search for topics"
                     // value={searchQuery}
                     // onChange={(e) => setSearchQuery(e.target.value)}
-                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #301C58', backgroundColor: 'white'}}
-                />
-                <button
+                    style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #301C58', backgroundColor: 'white' }}
+                  />
+                  <button
                     type="submit"
                     style={{
-                        position: 'absolute',
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: 'white',
-                        border: 'none',
-                        padding: '5px',
-                        color: 'white',
-                        cursor: 'pointer'
+                      position: 'absolute',
+                      right: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      backgroundColor: 'white',
+                      border: 'none',
+                      padding: '5px',
+                      color: 'white',
+                      cursor: 'pointer'
                     }}
-                >
-                    
-                        <IoSearchSharp style={{ color: '#301C58',width: '25px',height: '25px' }} />
-                </button>
+                  >
+
+                    <IoSearchSharp style={{ color: '#301C58', width: '25px', height: '25px' }} />
+                  </button>
+                </div>
+
+              </form>
             </div>
-                            
-                        </form>
-                    </div>
-            <div style={{width: '20%'}}>
-              <select className='select-dropdown' onChange={(e) => setSortBy(e.target.value)} style={{width: '100%'}}>
+            <div style={{ width: '20%' }}>
+              <select className='select-dropdown' onChange={(e) => setSortBy(e.target.value)} style={{ width: '100%' }}>
                 <option value="">Sort by</option>
                 <option value="Most popular">Most popular</option>
                 <option value="Most recent">Most recent</option>
               </select>
             </div>
-            
-          </div>
-          <div style={{textAlign: 'right', paddingBottom: '20px',paddingRight: '5%'}}>
-           
-                <Link to="/forums/create">
-                  <button style={{width: '126px'}}>Create</button>
-                </Link>
-             
 
-            </div>
+          </div>
+          <div style={{ textAlign: 'right', paddingBottom: '20px', paddingRight: '5%' }}>
+
+            <Link to="/forums/create">
+              <button style={{ width: '126px' }}>Create</button>
+            </Link>
+
+
+          </div>
         </div>
         <DisplayForum forumData={forumData} loading={loading} admin={admin} />
       </div>

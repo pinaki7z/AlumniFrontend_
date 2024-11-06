@@ -609,7 +609,7 @@ const DonSponRequest = ({ name, edit }) => {
                     </div>
                     <div className="check" style={{ flexDirection: 'row', width: '100%',display: 'flex',gap: '10px' }}>
                         <input type='checkbox' name='specialRole' id='specialRole' onChange={handleChange} disabled={formData.admin || formData.alumni || formData.student} required={!(formData.admin || formData.alumni || formData.student)}/>
-                        <p style={{ marginBottom: '0px' }}>Special Role</p>
+                        <p style={{ marginBottom: '0px' }}>Patron</p>
                     </div>
                 </div>
 
