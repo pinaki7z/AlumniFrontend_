@@ -635,123 +635,142 @@ const IntJobs = (props) => {
 
     return (
         <>
-        
-        <div style={{ width: '100%'}}>
-            <div style={{ textAlign: 'left', padding: '20px', borderRadius:'10px', marginBottom: '10px', backgroundColor: '#a98de3'  }}>
-                <h2 style={{ margin: '0' }}>{title}</h2>
-                <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
-                    Discover, explore, and submit applications for job openings on the Alumni Portal.
-                </p>
-            </div>
 
-            {/* Search Bar */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', width: '100%' }}>
-                <div style={{ position: 'relative', flexGrow: 1 }}>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search for jobs/internships"
-                        onChange={(e) => handleSearchChange(e, e.target.value, 'text')}
-                        style={{
-                            width: '100%',
-                            padding: '10px 40px 10px 10px',
-                            fontSize: '16px',
-                            borderRadius: '4px',
-                            border: '1px solid #ced4da',
-                        }}
-                    />
-                    <FaSearch
-                        style={{
-                            position: 'absolute',
-                            right: '10px',
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            fontSize: '18px',
-                            color: '#6c757d',
-                        }}
-                    />
+            <div style={{ width: '100%' }}>
+                <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
+                    <h2 style={{ margin: '0' }}>{title}</h2>
+                    <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
+                        Discover, explore, and submit applications for job openings on the Alumni Portal.
+                    </p>
                 </div>
-            </div>
 
-            {/* Dropdowns */}
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', width: '100%' }}>
-                <DropdownButton
-                    id="employment-type-dropdown"
-                    title={<span style={{ paddingRight: '8px' }}>{selectedEmploymentType !== 'All' ? selectedEmploymentType : 'Employment Type'}</span>}
-                    onSelect={(selectedOption) => handleSearchChange('', selectedOption, 'employmentType')}
-                    className="custom-dropdown"
-                    style={{  color:'black', borderRadius:5, width:'500px'}}
-                    variant="light"
-                >
-                    <Dropdown.Item eventKey="Full-time">Full-time</Dropdown.Item>
-                    <Dropdown.Item eventKey="Part-time">Part-time</Dropdown.Item>
-                    <Dropdown.Item eventKey="Internship">Internship</Dropdown.Item>
-                    <Dropdown.Item eventKey="Volunteer">Volunteer</Dropdown.Item>
-                    <Dropdown.Item eventKey="Contract">Contract</Dropdown.Item>
-                </DropdownButton>
-                <DropdownButton
-                    id="categories-dropdown"
-                    title={<span style={{ paddingRight: '8px' }}>{selectedCategory !== 'All' ? selectedCategory : 'Category'}</span>}
-                    onSelect={(selectedOption) => handleSearchChange('', selectedOption, 'category')}
-                    className="custom-dropdown"
-                    style={{ color:'black', borderRadius:5, width:'500px'}}
-                    variant="light"
-                >
-                    <Dropdown.Item eventKey="Admin & Office">Admin & Office</Dropdown.Item>
-                    <Dropdown.Item eventKey="Art & Design">Art & Design</Dropdown.Item>
-                    <Dropdown.Item eventKey="Business Operations">Business Operations</Dropdown.Item>
-                    <Dropdown.Item eventKey="Healthcare">Healthcare</Dropdown.Item>
-                    <Dropdown.Item eventKey="Management">Management</Dropdown.Item>
-                    <Dropdown.Item eventKey="Retail & Sales">Retail & Sales</Dropdown.Item>
-                </DropdownButton>
-            </div>
+                {/* Search Bar */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', width: '100%' }}>
+                    <div style={{ position: 'relative', flexGrow: 1 }}>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search for jobs/internships"
+                            onChange={(e) => handleSearchChange(e, e.target.value, 'text')}
+                            style={{
+                                width: '100%',
+                                padding: '10px 40px 10px 10px',
+                                fontSize: '16px',
+                                borderRadius: '4px',
+                                border: '1px solid #ced4da',
+                            }}
+                        />
+                        <FaSearch
+                            style={{
+                                position: 'absolute',
+                                right: '10px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                fontSize: '18px',
+                                color: '#6c757d',
+                            }}
+                        />
+                    </div>
+                </div>
 
-            {/* Buttons */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                <button
-                    style={{
-                        backgroundColor: '#eee8fa',
-                        border: '1px solid #ced4da',
-                        padding: '5px 10px',
-                        cursor: 'pointer',
-                        borderRadius: '5px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                    }}
-                >
-                    View Interested Candidates <span style={{backgroundColor:"#301c5B", borderRadius:5, padding:'0px 2px', color:'white', width: '15px',
-            height: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px'}}>1</span>
-                </button>
-                {profile.profileLevel === 2 && (
+                {/* Dropdowns */}
+                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', width: '100%' }}>
+                    <DropdownButton
+                        id="employment-type-dropdown"
+                        title={<span style={{ paddingRight: '8px' }}>{selectedEmploymentType !== 'All' ? selectedEmploymentType : 'Employment Type'}</span>}
+                        onSelect={(selectedOption) => handleSearchChange('', selectedOption, 'employmentType')}
+                        className="custom-dropdown"
+                        style={{ color: 'black', borderRadius: 5, width: '500px' }}
+                        variant="light"
+                    >
+                        <Dropdown.Item eventKey="Full-time">Full-time</Dropdown.Item>
+                        <Dropdown.Item eventKey="Part-time">Part-time</Dropdown.Item>
+                        <Dropdown.Item eventKey="Internship">Internship</Dropdown.Item>
+                        <Dropdown.Item eventKey="Volunteer">Volunteer</Dropdown.Item>
+                        <Dropdown.Item eventKey="Contract">Contract</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton
+                        id="categories-dropdown"
+                        title={<span style={{ paddingRight: '8px' }}>{selectedCategory !== 'All' ? selectedCategory : 'Category'}</span>}
+                        onSelect={(selectedOption) => handleSearchChange('', selectedOption, 'category')}
+                        className="custom-dropdown"
+                        style={{ color: 'black', borderRadius: 5, width: '500px' }}
+                        variant="light"
+                    >
+                        <Dropdown.Item eventKey="Admin & Office">Admin & Office</Dropdown.Item>
+                        <Dropdown.Item eventKey="Art & Design">Art & Design</Dropdown.Item>
+                        <Dropdown.Item eventKey="Business Operations">Business Operations</Dropdown.Item>
+                        <Dropdown.Item eventKey="Healthcare">Healthcare</Dropdown.Item>
+                        <Dropdown.Item eventKey="Management">Management</Dropdown.Item>
+                        <Dropdown.Item eventKey="Retail & Sales">Retail & Sales</Dropdown.Item>
+                    </DropdownButton>
+                </div>
+
+                {/* Buttons */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                     <button
                         style={{
                             backgroundColor: '#eee8fa',
-                            color: 'black',
-                            border: 'none',
-                            padding: '10px 20px',
+                            border: '1px solid #ced4da',
+                            padding: '5px 10px',
                             cursor: 'pointer',
-                            borderRadius: '4px'
+                            borderRadius: '5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
                         }}
-                        onClick={() => setModalShow(true)}
                     >
-                        Create
+                        View Interested Candidates <span style={{
+                            backgroundColor: "#301c5B", borderRadius: 5, padding: '0px 2px', color: 'white', width: '15px',
+                            height: '20px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '12px'
+                        }}>1</span>
                     </button>
-                )}
-            </div>
-        </div>
+                    {/* {profile.profileLevel === 2 && (
+                        <button
+                            style={{
+                                backgroundColor: '#eee8fa',
+                                color: 'black',
+                                border: 'none',
+                                padding: '10px 20px',
+                                cursor: 'pointer',
+                                borderRadius: '4px'
+                            }}
+                            onClick={() => setModalShow(true)}
+                        >
+                            Create
+                        </button>
+                    )} */}
+                    {profile.profileLevel === 2 ? (
+                        <div>
+                            <Link
+                                to="/jobs/create"
+                            >
+                                <button
+                                    style={{
+                                        backgroundColor: '#eee8fa',
+                                        color: 'black',
+                                        border: 'none',
+                                        padding: '10px 20px',
+                                        cursor: 'pointer',
+                                        borderRadius: '4px'
+                                    }}>Create</button>
+                            </Link>
+                        </div>
+                    ) : null}
+                </div>
+            </div >
 
-        <MyVerticallyCenteredModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-        />
+            <MyVerticallyCenteredModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
 
 
-        {/* <div className="jobs-page" style={{ width: '100%' }}>
+            {/* <div className="jobs-page" style={{ width: '100%' }}>
             <div className="jobs-title">
                 <p>{title}</p>
                 <p>Discover, explore, and submit applications for job openings on the Alumni Portal.</p>
