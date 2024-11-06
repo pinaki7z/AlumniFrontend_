@@ -50,29 +50,40 @@ const CreateForum = () => {
   };
 
   return (
-    <div style={{ width: '60%' }}>
-      <h1 style={{ textAlign: 'center', padding: '30px 0px', fontWeight: '600', backgroundColor: '#174873', margin: '0', color: 'white' }}>Create New Forum</h1>
-      <div className='crt'>
-        <div className='crt-forum'>
-          <div>
-            <p style={{ marginTop: '20px', fontSize: '30px', fontWeight: '500' }}> Title*</p>
-            <input type='text' name='name' placeholder='Forum title' style={{ height: '50px', marginTop: '15px', width: '100%', borderRadius: '5px' }} value={newForum.title} onChange={handleTitleChange} required/>
-          </div>
-          <div>
-            <p style={{ fontSize: '30px', fontWeight: '500', margin: '15px 0px' }}>Type*</p>
-            <select value={newForum.type} onChange={handleTypeChange} required>
-              <option value="Public">Public</option>
-              <option value="Private">Private</option>
-            </select>
-          </div>
-          <div>
-            <p style={{ fontSize: '30px', fontWeight: '500', margin: '15px 0px' }}>Description</p>
-            <CKeditor value={editorValue} onChange={handleEditorChange} setNewForum={setNewForum} />
-          </div>
-          
-          <div className='button1'>
-            <button onClick={handleSave}>Save</button>
-          </div>
+    <div className="create-forum-container">
+      <h1 className="create-forum-title">Create New Forum</h1>
+      <div className="form-container">
+        <div className="form-group">
+          <label className="form-label">Title</label>
+          <input 
+            type='text' 
+            name='title' 
+            placeholder='Enter Title' 
+            className="form-input" 
+            value={newForum.title} 
+            onChange={handleTitleChange} 
+            required 
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Type</label>
+          <select 
+            value={newForum.type} 
+            onChange={handleTypeChange} 
+            className="form-input" 
+            required
+          >
+            <option value="Public">Public</option>
+            <option value="Private">Private</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label className="form-label">Description</label>
+          <CKeditor value={editorValue} onChange={handleEditorChange} setNewForum={setNewForum} />
+        </div>
+        <div className="form-buttons">
+          <button className="back-button" onClick={() => navigateTo("/forums")}>Back</button>
+          <button className="create-button" onClick={handleSave}>Create</button>
         </div>
       </div>
     </div>

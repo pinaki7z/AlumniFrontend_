@@ -15,3 +15,85 @@
     padding: 10px;
 
 }
+.notifications-container {
+    padding: 2% 5%;
+}
+
+.notification-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.notification-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.notification-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.notification-content {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+.notification-link {
+    text-decoration: none;
+    color: #174873;
+    font-weight: 500;
+}
+
+.notification-info {
+    font-size: 14px;
+    color: #888;
+    /* margin-top: 5px; */
+}
+
+.notification-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.accept-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #eee8fa; /* Light purple color */
+    color: #333;
+}
+
+.decline-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.accept-button:hover {
+    background-color: #a98de3; /* Darker shade of light purple */
+}
+
+.decline-button:hover {
+    background-color: #e0e0e0;
+}
+
+.no-notifications {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+}

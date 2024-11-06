@@ -838,7 +838,7 @@ function Events() {
             onHide={() => setSelectedEventDetails(null)}
             size="lg"
           >
-            <Modal.Header style={{ backgroundColor: '#f5dad2' }} closeButton>
+            <Modal.Header style={{ backgroundColor: '#a98de3' }} closeButton>
               <Modal.Title>Event Details</Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ backgroundColor: '#eaf6ff' }}>
@@ -856,7 +856,7 @@ function Events() {
                 </div>
                 <img src={selectedEventDetails.picture} style={{ height: '200px', width: '300px', marginLeft: 'auto' }} />
               </div>
-              <div style={{ display: 'flex', gap: '2vw' }}>
+              <div >
                 {/* <Button variant="success" onClick={addToGoogleCalendar}>
                   Add To Google Calendar
                 </Button> */}

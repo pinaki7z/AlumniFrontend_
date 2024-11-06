@@ -130,7 +130,7 @@ const JobPost = ({ userId, id, jobTitle, employmentType, title, titleS, descript
 
     return (
         <div className="donation-card">
-        <div className="donation-card-image">
+        <div className="donation-card-image1">
             {/* Placeholder for the image */}
             {attachments && attachments.map((attachment, index) => {
                     if (!attachment.endsWith('.pdf')) {

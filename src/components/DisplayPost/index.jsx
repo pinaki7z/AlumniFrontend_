@@ -183,7 +183,7 @@ const DisplayPost = ({ title, groups = [], loading, joined }) => {
           (group.groupType === 'Public' && group.members.some(member => member.userId === profile._id)) ||
           (group.groupType === 'Private' && group.members.some(member => member.userId === profile._id)) ||
           group.businessConnect === true ? (
-          <div style={{ width: '100%', height: '80%', border: '1px solid black',background: '#efeff0'
+          <div style={{ width: '100%', height: '80%', border: '1px solid black',background: '#eee8fa'
           }}>
             <Link to={`/groups/${group._id}`} style={{ textDecoration: 'none', color: 'black' }}>
               <div className='display-post-image' style={{ position: 'relative' }}>

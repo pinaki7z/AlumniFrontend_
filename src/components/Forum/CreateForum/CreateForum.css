@@ -20,9 +20,85 @@
     height: 5vh;
     margin: 50px 0px;
     border-radius: 5px;
-   background-color: #174873;
+    background-color: #174873;
    color: white;
     font-size: 20px;
     font-weight: 500;
     border: none;
 }
+.create-forum-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2% 5%;
+    /* background-color: #f8f9fa; */
+    /* padding: 20px; */
+    border-radius: 8px;
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .create-forum-title {
+    /* text-align: center; */
+    font-size: 30px;
+    /* font-weight:bold; */
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  .form-input {
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-self: center;
+  }
+  
+  .back-button, .create-button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .back-button {
+    background-color: #e0e0e0;
+    color: #000;
+  }
+  
+  .create-button {
+    background-color: #a98de3;
+    color: #000;
+    margin-left: 10px;
+  }
+  
+  .create-button:hover, .back-button:hover {
+    opacity: 0.9;
+  }

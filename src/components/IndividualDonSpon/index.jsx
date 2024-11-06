@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+    import { useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import backgroundPicture1 from '../../images/pexels-mohamed-abdelghaffar-771742.jpg';
@@ -74,45 +74,72 @@ const IndividualDonSpon = () => {
     }, []);
 
     const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString('en-US', options);
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.toLocaleString('en-US', { month: 'long' });
+        const year = date.getFullYear();
+
+        const getOrdinal = (n) => {
+            const s = ["th", "st", "nd", "rd"];
+            const v = n % 100;
+            return s[(v - 20) % 10] || s[v] || s[0];
+        };
+
+        return `${day}${getOrdinal(day)} ${month} ${year}`;
     };
 
     return (
-        <div style={{ height: '75vh', marginTop: '20px' }}>
-            {isLoading || donations === undefined ? (
+        <div className="individual-sponsorship-container">
+            {isLoading ? (
                 <p>Loading...</p>
             ) : (
-                <div style={{ height: '100%', width: '100%' }}>
-                    {donations.map((donation) => (
-                        <div className="ids-upper" key={donation._id}>
-                            <div className="ids-details" style={{ backgroundImage: `url(${donation.picturePath ? donation.picturePath : picture})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                                <div className="ids-user-details">
-                                    <p>
-                                        {donation.userName} <span style={{ marginLeft: '10px' }}>.</span> <span style={{ marginLeft: '10px' }}>{formatDate(donation.createdAt)}</span>
-                                    </p>
-                                </div>
+                donations.map((donation) => (
+                    <div key={donation._id} className="sponsorship-content">
+                        <h1 className="sponsorship-title">{donation.title || "Sponsorship Title"}</h1>
+                        <p className="sponsorship-date">
+                            Posted on {formatDate(donation.createdAt)}<br/> By {donation.userName || "Superadmin"}
+                        </p>
+                        <img
+                            src={donation.picturePath || picture}
+                            alt="Sponsorship"
+                            className="sponsorship-image"
+                        />
+                        {/* <div className="ids-amount">
+                            <div className="progress-bar">
+                                <div
+                                    className="progress-fill"
+                                    style={{
+                                        width: `${(donation.raisedAmount / donation.totalAmount) * 100}%`
+                                    }}
+                                ></div>
                             </div>
-                            <div className="ids-amount">
-                                <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Total Amount:-(₹) {donation.amount ? donation.amount : donation.sponsorshipAmount}</p>
-                                <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Name:- {donation.name ? donation.name : donation.nameOfOrganiser}</p>
-                                <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Contact Number:- {donation.phone ? donation.phone : donation.number}</p>
+                            <p className="amount-text">
+                                ₹ {donation.raisedAmount} raised of ₹ {donation.totalAmount}
+                            </p>
+                        </div> */}
+                        <p className="sponsorship-description">
+                            {donation.description || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
+                        </p>
+                        <div className="ids-amount">
+                                 <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Total Amount:-(₹) {donation.amount ? donation.amount : donation.sponsorshipAmount}</p>
+                                 <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Name:- {donation.name ? donation.name : donation.nameOfOrganiser}</p>
+                                 <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Contact Number:- {donation.phone ? donation.phone : donation.number}</p>
                                 <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Email:- {donation.email ? donation.email : donation.emailOfOrganiser}</p>
                                 {donation.businessPlan && <div style={{ display: 'flex', gap: '1vw', marginTop: '1rem' }}>
                                     <p style={{ fontWeight: '500', fontSize: '15px', marginBottom: '0px' }}>BusinessPlan: </p><a href={`${baseUrl}/uploads/${donation.businessPlan}`} target="_blank" rel="noopener noreferrer">{donation.businessPlan}</a>
-                                </div>}
+                               </div>}
                                 {donation.currentRevenue && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Current Revenue:-(₹) {donation.currentRevenue}</p>}
                                 {donation.targetMarket && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Target Market:- {donation.targetMarket}</p>}
-                                {donation.industry && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Industry:- {donation.industry}</p>}
+                               {donation.industry && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Industry:- {donation.industry}</p>}
                                 {donation.teamExperience && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Team Experience:- {donation.teamExperience}</p>}
-                                {donation.competitiveAdvantage && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Competitive Advantage:- {donation.competitiveAdvantage}</p>}
-                                {donation.eventDescription && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Event Description:- {donation.eventDescription}</p>}
-                                {donation.location && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Event Location:- {donation.location}</p>}
-                                {donation.expectedAttendees && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Expected Attendees:- {donation.expectedAttendees}</p>}
-                                {donation.sponsorshipBenefits && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Sponsorship Benefits:- {donation.sponsorshipBenefits}</p>}
-                                {profile._id !== donation.userId && (
+                                 {donation.competitiveAdvantage && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Competitive Advantage:- {donation.competitiveAdvantage}</p>}
+                                 {donation.eventDescription && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Event Description:- {donation.eventDescription}</p>}
+                                 {donation.location && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Event Location:- {donation.location}</p>}
+                                 {donation.expectedAttendees && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Expected Attendees:- {donation.expectedAttendees}</p>}
+                                 {donation.sponsorshipBenefits && <p style={{ marginTop: '1rem', marginBottom: '0rem', color: '#174873', fontSize: '15px', fontWeight: '500' }}>Sponsorship Benefits:- {donation.sponsorshipBenefits}</p>}
+                                 {profile._id !== donation.userId && (
                                     <button
-                                        style={{ width: '30%', padding: '10px', marginTop: '10px' }}
+                                        style={{ width: '30%', padding: '10px', marginTop: '10px', backgroundColor:"#eee8fa" }}
                                         onClick={() => window.open('https://razorpay.com/payment-link/plink_PA5q7Jm6wJENlt', '_blank')}
                                     >
                                        Donate
@@ -149,30 +176,11 @@ const IndividualDonSpon = () => {
                                         <button className="ids-amount-button" style={{backgroundColor: '#f44336', marginTop: '25px'}}>Donate</button>
                                     )} */}
                             </div>
-                        </div>
-                    ))}
-                    {/* {isLoading || donations === undefined ? (
-                        <div className="ids-lower">
-                            <p>Loading...</p>
-                        </div>
-                    ) : (
-                        donations.map((donation) => (
-                            <div className="ids-lower">
-                                <div className="ids-info">
-                                    <RiInformationFill style={{ color: '#174873', width: '25px', height: '25px' }} />
-                                    <p style={{
-                                        marginBottom: '0rem',
-                                        fontWeight: '600'
-                                    }}>Info</p>
-                                </div>
-                                <hr style={{ margin: '0.5rem' }} />
-                                <p style={{ paddingLeft: '15px', paddingBottom: '12px' }}>{donation.description}</p>
-                            </div>
-                        ))
-                    )} */}
-                </div>
+                    </div>
+                ))
             )}
         </div>
+       
     );
 
 

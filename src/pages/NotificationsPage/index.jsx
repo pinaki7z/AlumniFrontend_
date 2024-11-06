@@ -1,6 +1,6 @@
 import PageTitle from "../../components/PageTitle";
 import PageSubTitle from "../../components/PageSubTitle";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { IoIosNotifications } from "react-icons/io";
 import {NotificationsP} from "../../components/NotificationsP";
 import { NotificationsDeclined } from "../../components/NotificationsDeclined";
@@ -9,7 +9,20 @@ import { useSelector } from "react-redux";
 const NotificationsPage=()=>{
     const title = "Notifications";
     const icon = <IoIosNotifications style={{ color: '#174873' }} />;
-    const buttontext1 = 'All Notifications';
+    const location = useLocation(); // Get the current location
+
+    // Determine if the current tab is active
+    const isAllNotificationsActive = location.pathname === '/notifications';
+
+    const buttontext1 = (<>
+    All Notifications <span  className="notification-count" style={{backgroundColor: isAllNotificationsActive ? 'black' : 'gray',
+    color: 'white',
+    borderRadius: '20%',
+    padding: '1px 6px',
+    fontSize: '12px',
+    marginLeft: '5px',
+    display: 'inline-block',}}>3</span>
+    </>);
     let buttontext2 = '';
     const buttontext1Link = "/notifications";
     const buttontext2Link = "/notifications/declined";
@@ -19,7 +32,7 @@ const NotificationsPage=()=>{
     }
     return(
         <>
-        <div style={{ width: '100%', paddingTop: '20px' }}>
+        <div style={{ width: '100%', paddingTop: '20px', paddingLeft:'40px', paddingRight:'40px' }}>
       <Routes>
         <Route path="/" element={<div style={{padding: '0 5%'}}>
         <PageTitle title={title} icon={icon} />
@@ -39,7 +52,7 @@ const NotificationsPage=()=>{
             <Route path="/declined" element={<NotificationsDeclined />}/>
           )}
           {!(profile.profileLevel === 0 || profile.profileLevel === 1) && (
-            <Route path="/declined" element={<div>Wrong Route.Please Go Back</div>} />
+            <Route path="/declined" element={<div>Wrong Route. Please Go Back</div>} />
           )}
       </Routes>
       </div>

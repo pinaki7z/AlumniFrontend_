@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { FcApprove, FcDisapprove } from 'react-icons/fc';
+// import { FcApprove, FcDisapprove } from 'react-icons/fc';
 import Modal from 'react-bootstrap/Modal';
 import './notificationsP.css';
 import { Link } from 'react-router-dom';
@@ -201,108 +201,73 @@ export const NotificationsP = () => {
           setLoading(false);
         }
       };
+
+      const calculateTimeDifference = (createdAt) => {
+        const currentTime = new Date();
+        const notificationTime = new Date(createdAt);
+        const timeDiff = Math.floor((currentTime - notificationTime) / (1000 * 60 * 60)); // Difference in hours
+
+        if (timeDiff < 1) {
+            const timeDiffMinutes = Math.floor((currentTime - notificationTime) / (1000 * 60)); // Difference in minutes
+            return timeDiffMinutes > 1 ? `${timeDiffMinutes}m ago` : 'Just now';
+        } else if (timeDiff < 24) {
+            return `${timeDiff}h ago`;
+        } else {
+            const timeDiffDays = Math.floor(timeDiff / 24);
+            return `${timeDiffDays}d ago`;
+        }
+    };
+
       
 
     return (
         <div style={{ paddingTop: '20px' }}>
             <form onSubmit={handleAlumniSearch} style={{ display: 'flex', gap: '15px',padding: '0 5%' }}>
                 <input type="text" placeholder='Search for name' name='user' value={user} onChange={(e) => setUser(e.target.value)} style={{ width: '40%', borderRadius: '5px' }} />
-                <button type="submit" style={{ borderRadius: '5px' }}>Search</button>
+                <button type="submit" style={{ borderRadius: '5px', backgroundColor:"#eee8fa" }}>Search</button>
             </form>
             <div style={{padding: '2% 5%'}}>
                 {loading ? (
                     <l-line-spinner size="20" stroke="3" speed="1" color="black"></l-line-spinner>
                 ) : filteredNotifications.length ? (
-                    <table style={{ width: '100%' }}>
-                        {/* <thead>
-                            <tr>
-                                <th></th>
-                                <th style={{ color: 'mediumseagreen' }}>ACCEPT</th>
-                                <th style={{ color: 'orangered' }}>REJECT</th>
-                            </tr>
-                        </thead> */}
-                        <tbody style={{display: 'table-cell', paddingBottom: '50px'}}>
-                            {filteredNotifications.map((notification) => (
-                                <tr key={notification._id}>
-                                    <td className='request'>
-                                        {notification.ID ? (
-                                            <div>
-                                                <Link to={`/members/${notification.userId}`} style={{ textDecoration: 'underline', color: 'inherit' }}>
-                                                    {notification.requestedUserName}
-                                                </Link> has requested to validate. Click <span style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleImageClick(notification.ID)}>here</span> to view the identity.
-                                            </div>
-                                        ) : notification.businessVerification ? (
-                                            <div>
-                                                <Link to={`/members/${notification.userId}`} style={{ textDecoration: 'underline', color: 'inherit' }}>
-                                                    {notification.requestedUserName}
-                                                </Link> has requested to validate for Business Connect. Click <a href={`${baseUrl}/uploads/${notification.businessVerification}`} target="_blank" rel="noopener noreferrer">here</a> to view the document.
-                                            </div>
-                                        ) : notification.job !== undefined ? (
-                                            <><Link to={`/members/${notification.userId}`} style={{ textDecoration: 'underline', color: 'inherit' }}>
-                                                {notification.requestedUserName}
-                                            </Link> has requested to post a Job/Internship. Click {notification.job ? (
-                                                <Link to={`/jobs/${notification.jobId}/Jobs`} style={{ textDecoration: 'underline', color: 'inherit' }}>
-                                                    here
-                                                </Link>
-                                            ) : (
-                                                <Link to={`/internships/${notification.jobId}/Internships`} style={{ textDecoration: 'underline', color: 'inherit' }}>
-                                                    here
-                                                </Link>
-                                            )} to view the Job/Internship </>
-                                        )
-                                            : notification.commentId ? (
-                                                <>
-                                                    <Link to={`/members/${notification.userId}`} style={{ textDecoration: 'underline', color: 'inherit' }}>
-                                                        {notification.requestedUserName}</Link> has requested to unblock him/her from {notification.forumName} forum. The comment is : {notification.comment}.
-                                                </>
-                                            ) : (
-                                                <span>
-                                                    <Link to={`/members/${notification.userId}`} style={{ textDecoration: 'underline', color: 'inherit' }}>
-                                                        {notification.requestedUserName}
-                                                    </Link>
-                                                    &nbsp; has requested to join {notification.groupName ? `${notification.groupName} Group` : `${notification.forumName} forum`}
-                                                </span>
-                                            )
+                    filteredNotifications.map((notification) => (
+                        <div className="notification-item" key={notification._id}>
+                            <div className="notification-image">
+                                {/* Placeholder for user profile image */}
+                                <img src={notification.profileImage || "https://via.placeholder.com/50"} alt="Profile" />
+                            </div>
+                            <div className="notification-content">
+                                <p>
+                                    <Link to={`/members/${notification.userId}`} className="notification-link">
+                                        {notification.requestedUserName}
+                                    </Link> requested to join {notification.groupName || notification.forumName}. <br/>
 
+                                    <span className="notification-info">
+                                    {calculateTimeDifference(notification.createdAt)} | {notification.groupName ? 'Groups' : 'Jobs'}
+                                </span>
+                                </p>
+                                
+                                <div className="notification-buttons">
+                                    <button className="accept-button" onClick={() => handleAddMember(notification._id, notification.forumId || notification.groupId || notification.jobId || '', notification.userId, notification.job !== undefined ? 'Job' : (notification.ID ? 'ID' : (notification.forumId ? 'forum' : 'group')), false)}>
+                                        Accept
+                                    </button>
+                                    <button className="decline-button" onClick={() => {
+                                        if (notification.ID) {
+                                            handleAddMember(notification._id, '', notification.userId, 'ID', true);
+                                        } else if (notification.job !== undefined) {
+                                            handleAddMember(notification._id, notification.jobId, notification.userId, 'Job', true);
+                                        } else if (notification.commentId) {
+                                            handleComment(notification.commentId, notification.forumId, notification.userId, notification._id, deleteComment = true);
+                                        } else {
+                                            handleDeleteNotification(notification._id);
                                         }
-                                    </td>
-                                    <td className='accept'>
-                                        {notification.commentId ? (
-                                            <FcApprove
-                                                style={{ width: '35px', height: '35px', cursor: 'pointer' }}
-                                                onClick={() => handleComment(notification.commentId,notification.forumId,notification.userId,notification._id,deleteComment= false)}
-                                            />
-                                        ) : (
-                                            <FcApprove
-                                                style={{ width: '35px', height: '35px', cursor: 'pointer' }}
-                                                onClick={() => handleAddMember(notification._id, notification.forumId || notification.groupId || notification.jobId || '', notification.userId, notification.job !== undefined ? 'Job' : (notification.ID ? 'ID' : (notification.forumId ? 'forum' : 'group')), false)}
-                                            />
-                                        )}
-                                    </td>
-
-                                    <td className='reject'>
-                                        <FcDisapprove
-                                            style={{ width: '35px', height: '35px', cursor: 'pointer' }}
-                                            onClick={() => {
-                                                if (notification.ID) {
-                                                    handleAddMember(notification._id, '', notification.userId, 'ID', true);
-                                                } else if (notification.job !== undefined) {
-                                                    handleAddMember(notification._id, notification.jobId, notification.userId, 'Job', true);
-                                                }else if(notification.commentId){
-                                                    handleComment(notification.commentId,notification.forumId,notification.userId,notification._id,deleteComment= true)
-                                                }
-                                                else {
-                                                    handleDeleteNotification(notification._id);
-                                                }
-                                            }}
-                                        />
-
-
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                                    }}>
+                                        Decline
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ))
                 ) : (
                     <div style={{ paddingTop: '10px' }}>No Notifications</div>
                 )}

@@ -84,7 +84,7 @@ const Sponsorships = () => {
 
 
   return (
-    <div style={{ width: '100%', height: '120vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '2% 5% '  }}>
       <DonSpon title={title} icon={icon} />
       <Routes>
         <Route path="/" element={<PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} name='sponsorships' create={admin}/>} />

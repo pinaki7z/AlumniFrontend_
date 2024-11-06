@@ -12,7 +12,7 @@ const DisplayForum = ({ forumData, loading, admin }) => {
             <th>Title</th>
             <th>Description</th>
             <th>Type</th>
-            <th>Total Members</th>
+            <th>Members</th>
           </tr>
         </thead>
         <tbody>

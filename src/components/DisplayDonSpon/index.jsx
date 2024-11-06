@@ -30,8 +30,18 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
     }, [location.pathname]);
 
     const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString('en-US', options);
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.toLocaleString('en-US', { month: 'long' });
+        const year = date.getFullYear();
+    
+        const getOrdinal = (n) => {
+            const s = ["th", "st", "nd", "rd"];
+            const v = n % 100;
+            return s[(v - 20) % 10] || s[v] || s[0];
+        };
+    
+        return `${day}${getOrdinal(day)} ${month}, ${year}`;
     };
 
     const handleDelete = async (_id) => {
@@ -69,7 +79,7 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
                             <div className="donation-card-image">
                                 <img src={donation.picturePath? donation.picturePath : picture} alt="" className="src" />
                             </div>
-                            <div style={{ paddingLeft: '12px', height: '20%' }}>
+                            <div style={{ paddingLeft: '12px', paddingTop:'10px' }}>
                                 <Link to={`/${name}/${donation._id}`} style={{ textDecoration: 'none', color: 'black' }}>
                                     <button style={{ border: '1px', padding: '5px', backgroundColor: "white" }}>
                                         <div className="donation-card-title">
@@ -80,7 +90,7 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
                                 <div className="user-details">
                                     {/* <img src={donation.profilePic} alt="Profile Image" /> */}
                                     <p>
-                                        {donation.userName}<span style={{ marginLeft: '10px' }}>{formatDate(donation.createdAt)}</span>
+                                    {formatDate(donation.createdAt)}
                                     </p>
                                 </div>
                             </div>
