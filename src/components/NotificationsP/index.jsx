@@ -56,7 +56,7 @@ export const NotificationsP = () => {
                 }
 
             }
-            else if (type === 'group'){
+            else if (type === 'group') {
                 console.log('group')
                 const response = await axios.put(url, {
                     members: {
@@ -64,7 +64,7 @@ export const NotificationsP = () => {
                         profilePicture: profile.profilePicture,
                         userName: `${profile.firstName} ${profile.lastName}`,
                         profileLevel: profile.profileLevel
-                      },
+                    },
                     notificationId: notificationId,
                     toDelete
                 });
@@ -181,28 +181,28 @@ export const NotificationsP = () => {
         }
     };
 
-    const handleComment = async (commentId, forumId, userId, notificationId,deleteComment) => {
-        console.log('check',commentId, forumId, userId, notificationId,deleteComment)
+    const handleComment = async (commentId, forumId, userId, notificationId, deleteComment) => {
+        console.log('check', commentId, forumId, userId, notificationId, deleteComment)
         setLoading(true);
         try {
-          const response = await axios.put(`${baseUrl}/forums/${forumId}/removeBlock`, {
-            commentId,
-            userId,
-            notificationId,
-            deleteComment
-          });
- 
-          console.log("Comment block removed successfully:", response.data);
-          getRequest();
-          setLoading(false);
-        } catch (error) {
-        
-          console.error("Error removing comment block:", error);
-          setLoading(false);
-        }
-      };
+            const response = await axios.put(`${baseUrl}/forums/${forumId}/removeBlock`, {
+                commentId,
+                userId,
+                notificationId,
+                deleteComment
+            });
 
-      const calculateTimeDifference = (createdAt) => {
+            console.log("Comment block removed successfully:", response.data);
+            getRequest();
+            setLoading(false);
+        } catch (error) {
+
+            console.error("Error removing comment block:", error);
+            setLoading(false);
+        }
+    };
+
+    const calculateTimeDifference = (createdAt) => {
         const currentTime = new Date();
         const notificationTime = new Date(createdAt);
         const timeDiff = Math.floor((currentTime - notificationTime) / (1000 * 60 * 60)); // Difference in hours
@@ -218,15 +218,15 @@ export const NotificationsP = () => {
         }
     };
 
-      
+
 
     return (
         <div style={{ paddingTop: '20px' }}>
-            <form onSubmit={handleAlumniSearch} style={{ display: 'flex', gap: '15px',padding: '0 5%' }}>
+            <form onSubmit={handleAlumniSearch} style={{ display: 'flex', gap: '15px', padding: '0 5%' }}>
                 <input type="text" placeholder='Search for name' name='user' value={user} onChange={(e) => setUser(e.target.value)} style={{ width: '40%', borderRadius: '5px' }} />
-                <button type="submit" style={{ borderRadius: '5px', backgroundColor:"#eee8fa" }}>Search</button>
+                <button type="submit" style={{ borderRadius: '5px', backgroundColor: "#eee8fa" }}>Search</button>
             </form>
-            <div style={{padding: '2% 5%'}}>
+            <div style={{ padding: '2% 5%' }}>
                 {loading ? (
                     <l-line-spinner size="20" stroke="3" speed="1" color="black"></l-line-spinner>
                 ) : filteredNotifications.length ? (
@@ -238,15 +238,27 @@ export const NotificationsP = () => {
                             </div>
                             <div className="notification-content">
                                 <p>
-                                    <Link to={`/members/${notification.userId}`} className="notification-link">
-                                        {notification.requestedUserName}
-                                    </Link> requested to join {notification.groupName || notification.forumName}. <br/>
-
-                                    <span className="notification-info">
-                                    {calculateTimeDifference(notification.createdAt)} | {notification.groupName ? 'Groups' : 'Jobs'}
-                                </span>
+                                    {notification.link ? (
+                                        <span>
+                                            <Link to={`/members/${notification.userId}`} className="notification-link">
+                                                {notification.requestedUserName}
+                                            </Link>{" "}
+                                            has requested to add <a href={notification.link} target="_blank" rel="noopener noreferrer">{notification.link}</a> to the photo gallery.
+                                        </span>
+                                    ) : (
+                                        <span>
+                                            <Link to={`/members/${notification.userId}`} className="notification-link">
+                                                {notification.requestedUserName}
+                                            </Link>{" "}
+                                            requested to join {notification.groupName || notification.forumName}. <br />
+                                            <span className="notification-info">
+                                                {calculateTimeDifference(notification.createdAt)} | {notification.groupName ? 'Groups' : 'Jobs'}
+                                            </span>
+                                        </span>
+                                    )}
                                 </p>
-                                
+
+
                                 <div className="notification-buttons">
                                     <button className="accept-button" onClick={() => handleAddMember(notification._id, notification.forumId || notification.groupId || notification.jobId || '', notification.userId, notification.job !== undefined ? 'Job' : (notification.ID ? 'ID' : (notification.forumId ? 'forum' : 'group')), false)}>
                                         Accept

@@ -31,6 +31,7 @@ const Jobs = () => {
     const [buttontext5Link, setButtontext5Link] = useState('');
     const [buttontext4, setButtontext4] = useState('');
     const [buttontext5, setButtontext5] = useState('');
+    const [viewType, setViewType] = useState('grid');
     const [myJobs, setMyJobs] = useState([]);
     const [verifiedFilter, setVerifiedFilter] = useState('all');
     const profile = useSelector((state) => state.profile);
@@ -166,7 +167,13 @@ const Jobs = () => {
     console.log('filtered jobs and internships', filteredJobs)
     console.log('jobs and internships', jobs)
 
-
+    const JobPostListView = ({ job }) => (
+        <div key={job._id} className="job-list-view">
+            <h3>{job.title}</h3>
+            <p>Location: {job.location}</p>
+            <p>Salary: {job.salaryMin} - {job.salaryMax}</p>
+        </div>
+    );
 
 
     return (
@@ -183,12 +190,19 @@ const Jobs = () => {
                     }}
                 />
 
-                <div style={{ margin: '20px 0',zIndex: '1', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'flex-start'}}>
+                <div style={{ margin: '20px 0', zIndex: '1', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
                     <label>Filter by Verification: </label>
-                    <select value={verifiedFilter} onChange={handleVerifiedFilterChange} style={{backgroundColor: '#eee8fa',marginLeft:'10px',color: 'black',borderColor: '#ced4da', padding: '5px 10px', borderRadius:5}}>
+                    <select value={verifiedFilter} onChange={handleVerifiedFilterChange} style={{ backgroundColor: '#eee8fa', marginLeft: '10px', color: 'black', borderColor: '#ced4da', padding: '5px 10px', borderRadius: 5 }}>
                         <option value="all">All Jobs</option>
                         <option value="verified">Verified Jobs</option>
                         <option value="unverified">Unverified Jobs</option>
+                    </select>
+                </div>
+                <div style={{ margin: '20px 0', zIndex: '1', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+                    <label>View Type:</label>
+                    <select value={viewType} onChange={(e) => setViewType(e.target.value)} style={{ marginLeft: '10px' }}>
+                        <option value="grid">Grid</option>
+                        <option value="list">List</option>
                     </select>
                 </div>
                 <Routes>
@@ -297,7 +311,7 @@ const Jobs = () => {
                                                 searchQuery={searchQuery}
                                                 locationType={job.locationType}
                                                 company={job.company}
-                                               
+
                                             />
                                         </div>
                                     ))
@@ -316,13 +330,13 @@ const Jobs = () => {
                         </div>
                     </>
                     } />
-                    <Route path="/" element={<>
-                        <div className="job-poztt">
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '5vw', flexWrap: 'wrap', paddingTop: '20px' }}>
-                                {loading ? (
-                                    <div>Loading.....</div>
-                                ) : filteredJobs.length ? (
-                                    filteredJobs.map((job) => (
+                    <Route path="/" element={
+                        <div className="job-poztt" style={{ display: 'flex', flexDirection: viewType === 'grid' ? 'row' : 'column', gap: '5vw', flexWrap: 'wrap', paddingTop: '20px' }}>
+                            {loading ? (
+                                <div>Loading.....</div>
+                            ) : filteredJobs.length ? (
+                                filteredJobs.map((job) =>
+                                    viewType === 'grid' ? (
                                         <div key={job._id} className="job-post">
                                             <JobPost
                                                 userId={job.userId}
@@ -349,13 +363,15 @@ const Jobs = () => {
                                                 verified={job.verified}
                                             />
                                         </div>
-                                    ))
-                                ) : (
-                                    <div>No jobs posted</div>
-                                )}
-                            </div>
+                                    ) : (
+                                        <JobPostListView key={job._id} job={job} />
+                                    )
+                                )
+                            ) : (
+                                <div>No jobs posted</div>
+                            )}
                         </div>
-                    </>} />
+                    } />
                 </Routes>
             </div>
         </>

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import axios
 import { Search, Upload } from 'lucide-react';
-import { Modal, Button, Form } from 'react-bootstrap'; // Import Bootstrap components
+import { Modal, Button, Form } from 'react-bootstrap';
+import baseUrl from '../../config';
+import { useSelector } from 'react-redux';
 
 // Import demo images from src/images folder
 import image1 from '../../images/bhuUni (2).jpg';
@@ -26,6 +29,7 @@ const PhotoGallery = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [googleDriveLink, setGoogleDriveLink] = useState('');
+  const profile = useSelector((state) => state.profile);
 
   const openImageModal = (image) => {
     setSelectedImage(image);
@@ -40,12 +44,21 @@ const PhotoGallery = () => {
   const openUploadModal = () => setShowUploadModal(true);
   const closeUploadModal = () => setShowUploadModal(false);
 
-  const handleUploadSubmit = (e) => {
+  const handleUploadSubmit = async (e) => {
     e.preventDefault();
-    // Handle the upload logic here (e.g., validate the link, upload image, etc.)
-    console.log('Google Drive Link:', googleDriveLink);
-    setGoogleDriveLink('');
-    closeUploadModal();
+    try {
+      await axios.post(`${baseUrl}/uploadGoogleDrive`, {
+        link: googleDriveLink,
+        userId: profile._id,
+        department: profile.department,
+        requestedUserName: `${profile.firstName} ${profile.lastName}`,
+      });
+      console.log('Upload successful');
+      setGoogleDriveLink('');
+      closeUploadModal();
+    } catch (error) {
+      console.error('Error uploading link:', error);
+    }
   };
 
   if (isLoading) {
@@ -85,7 +98,7 @@ const PhotoGallery = () => {
           <div
             key={image.id}
             className={`col-6 col-md-4 ${index % 5 === 0 ? 'col-lg-6' : 'col-lg-3'}`}
-            onClick={() => openImageModal(image)} // Open modal on image click
+            onClick={() => openImageModal(image)}
             style={{ cursor: 'pointer' }}
           >
             <img
