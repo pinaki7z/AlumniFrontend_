@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Upload } from 'lucide-react';
+import { Modal, Button, Form } from 'react-bootstrap'; // Import Bootstrap components
 
 // Import demo images from src/images folder
 import image1 from '../../images/bhuUni (2).jpg';
@@ -21,6 +22,31 @@ const PhotoGallery = () => {
   const [images, setImages] = useState(demoImages);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [googleDriveLink, setGoogleDriveLink] = useState('');
+
+  const openImageModal = (image) => {
+    setSelectedImage(image);
+    setShowImageModal(true);
+  };
+
+  const closeImageModal = () => {
+    setShowImageModal(false);
+    setSelectedImage(null);
+  };
+
+  const openUploadModal = () => setShowUploadModal(true);
+  const closeUploadModal = () => setShowUploadModal(false);
+
+  const handleUploadSubmit = (e) => {
+    e.preventDefault();
+    // Handle the upload logic here (e.g., validate the link, upload image, etc.)
+    console.log('Google Drive Link:', googleDriveLink);
+    setGoogleDriveLink('');
+    closeUploadModal();
+  };
 
   if (isLoading) {
     return <div className="text-center mt-5">Loading...</div>;
@@ -48,7 +74,7 @@ const PhotoGallery = () => {
           </div>
         </div>
         <div className="col-md-6 text-md-end mt-3 mt-md-0">
-          <button className="btn btn-primary">
+          <button className="btn btn-primary" onClick={openUploadModal}>
             <Upload size={20} className="me-2" />
             Upload Photo
           </button>
@@ -59,6 +85,8 @@ const PhotoGallery = () => {
           <div
             key={image.id}
             className={`col-6 col-md-4 ${index % 5 === 0 ? 'col-lg-6' : 'col-lg-3'}`}
+            onClick={() => openImageModal(image)} // Open modal on image click
+            style={{ cursor: 'pointer' }}
           >
             <img
               src={image.url}
@@ -69,6 +97,51 @@ const PhotoGallery = () => {
           </div>
         ))}
       </div>
+
+      {/* Image Modal */}
+      <Modal show={showImageModal} onHide={closeImageModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedImage?.alt}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="d-flex justify-content-center">
+          {selectedImage && (
+            <img
+              src={selectedImage.url}
+              alt={selectedImage.alt}
+              className="img-fluid rounded"
+            />
+          )}
+        </Modal.Body>
+      </Modal>
+
+      {/* Upload Photo Modal */}
+      <Modal show={showUploadModal} onHide={closeUploadModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Upload Photo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleUploadSubmit}>
+            <Form.Group className="mb-3" controlId="googleDriveLink">
+              <Form.Label>Enter Google Drive Link</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Google Drive Link"
+                value={googleDriveLink}
+                onChange={(e) => setGoogleDriveLink(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <div className="d-flex justify-content-end">
+              <Button variant="secondary" onClick={closeUploadModal} className="me-2">
+                Close
+              </Button>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </div>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
