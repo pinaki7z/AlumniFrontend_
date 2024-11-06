@@ -15,7 +15,7 @@ import { CiLocationArrow1 } from "react-icons/ci";
 import { RiHomeSmileLine } from "react-icons/ri";
 import baseUrl from "../../config";
 
-const JobPost = ({ userId, id, jobTitle, employmentType, title, titleS, description, salaryMin, createdAt, picture, salaryMax, duration, jobType, questions, category, currency, attachments, appliedCandidates, searchQuery, type, locationType, company,verified }) => {
+
 const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, createdAt, picture, salaryMax, duration, jobType, questions, category, currency, attachments, appliedCandidates, searchQuery, type, locationType, company,verified,employmentType }) => {
     const profile = useSelector((state) => state.profile);
     const navigateTo = useNavigate();
