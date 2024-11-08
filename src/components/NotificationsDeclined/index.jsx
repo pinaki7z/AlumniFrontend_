@@ -127,7 +127,7 @@ export const NotificationsDeclined = () => {
 
   return (
     <div style={{paddingTop: '20px'}}>
-      <form onSubmit={handleAlumniSearch} style={{display: 'flex', gap: '15px',padding: '0 5%'}}>
+      <form onSubmit={handleAlumniSearch} style={{display: 'flex', gap: '15px'}}>
                 <input type="text" placeholder='Search for name' name='user' value={user} onChange={(e) => setUser(e.target.value)} style={{width: '40%', borderRadius: '5px'}}/>
                 <button type="submit" style={{borderRadius: '5px'}}>Search</button>
             </form>

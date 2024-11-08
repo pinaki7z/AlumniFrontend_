@@ -1,0 +1,54 @@
+.create-job-container {
+    padding: 2% 5%;
+    width: 80%;
+    /* max-width: 800px; */
+    /* margin: auto; */
+}
+
+.form-group-custom {
+    margin-bottom: 1.5rem;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.custom-dropdown1 .dropdown-toggle {
+    background-color: #a98de3 !important;
+    border-color: #a98de3 !important;
+    color: white !important; /* Ensures text is visible */
+    width: 100px;
+}
+
+.custom-dropdown1 .dropdown-menu {
+    background-color: #a98de3 !important;
+    color: white !important; /* Ensures text is visible */
+}
+
+input[type="file"] {
+    color: transparent; /* Hides default text */
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #a98de3; /* Light purple color */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #8f73b7; /* Slightly darker shade for hover effect */
+}
+
+.button-group Button{
+    background-color: #a98de3; 
+    border-color: #8f73b7;
+    width: 100px;
+}
+
+

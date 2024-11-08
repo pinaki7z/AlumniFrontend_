@@ -2,7 +2,7 @@
     text-align: center;
     /* background-image: url(../../images/pexels-tyler-lastovich-590179.jpg); */
     /* color: #4d63b2; */
-    font-weight: 600;
+    /* font-weight: 600; */
     height: 92vh;
     position: relative;
     width: 100%;
@@ -78,5 +78,13 @@
   padding: 0.5em;
   border-radius: 5px;
   border-color: black;
+}
+
+.rbc-ellipsis, .rbc-show-more, .rbc-row-segment .rbc-event-content, .rbc-event-label {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: #301c5B;
 }
   

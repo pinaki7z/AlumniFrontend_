@@ -795,7 +795,13 @@ function Events() {
 
   return (
     <div className="Events mx-auto px-4 py-8">
-      <h1 style={{ color: '#301c5B', fontWeight:600, marginBottom:40, }}>Event Calendar</h1>
+      <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
+              <h2 style={{ margin: '0' }}>Event Calendar</h2>
+              <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
+              Stay updated on upcoming events and opportunities to connect.
+              </p>
+          </div>
+      
       <div class="bg-white rounded-lg p-4 shadow-lg"   ref={calendarRef}>
         <MyVerticallyCenteredModal
           show={modalShow}
@@ -811,7 +817,7 @@ function Events() {
           events={allEvents}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: '60vh' }}
+          style={{ height: '60vh', fontWeight: '600' }}
           selectable
           onSelectEvent={handleEventClick}
         />

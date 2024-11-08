@@ -55,15 +55,18 @@ const Forum = () => {
 
   return (
     <>
-      <div className='forum' style={{ paddingTop: '20px' }}>
+      <div className='forum' style={{ width: '100%', padding: '2% 5%' }}>
         <div>
           {/* <PageTitle title='Forums' icon={icon} /> */}
-          <div>
-            <h1 style={{padding: '0px 5%'}}>Forums</h1>
+          <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
+              <h2 style={{ margin: '0' }}>Forums</h2>
+              <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
+              Engage in meaningful discussions and share insights with the community.
+              </p>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-around', padding: '25px 15px', paddingRight: '18px', alignItems: 'end' }}>
+          <div style={{ display: 'flex', paddingTop: '25px', justifyContent: 'space-between', width:'100%' }}>
             {/* <p style={{ margin: '0px', fontSize: '18px', fontWeight: '600', color: '#9c9b95' }}>Total Forums:  {loading ? 0 : totalForums}</p> */}
-            <div className="search" style={{ display: 'flex', width: '65%' }}>
+            <div className="search" style={{ display: 'flex', width: '75%' }}>
               <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                 <div style={{ position: 'relative', width: '100%' }}>
                   <input
@@ -105,7 +108,7 @@ const Forum = () => {
             </div>
 
           </div>
-          <div style={{ textAlign: 'right', paddingBottom: '20px', paddingRight: '5%' }}>
+          <div style={{ textAlign: 'right', paddingTop:'20px', paddingBottom: '20px' }}>
 
             <Link to="/forums/create">
               <button style={{ width: '126px' }}>Create</button>

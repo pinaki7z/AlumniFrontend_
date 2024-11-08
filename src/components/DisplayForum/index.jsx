@@ -5,7 +5,7 @@ import './displayForum.css';
 const DisplayForum = ({ forumData, loading, admin }) => {
   console.log('forumData', forumData);
   return (
-    <div className='table' style={{ width: '100%',padding: '0px 70px' }}>
+    <div className='table' style={{ width: '100%',padding: '0px 0px' }}>
       <table className='styled-table' style={{ width: '100%' }}>
         <thead>
           <tr style={{borderColor: 'snow'}}>

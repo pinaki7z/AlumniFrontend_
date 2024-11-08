@@ -35,8 +35,7 @@ const Jobs = () => {
     const [myJobs, setMyJobs] = useState([]);
     const [verifiedFilter, setVerifiedFilter] = useState('all');
     const profile = useSelector((state) => state.profile);
-    console.log('search query', searchQuery)
-
+    console.log('search query', searchQuery);
 
     const getData = async () => {
         try {
@@ -54,8 +53,7 @@ const Jobs = () => {
         }
     };
 
-    console.log('my jobs', myJobs)
-
+    console.log('my jobs', myJobs);
 
     useEffect(() => {
         getData();
@@ -74,12 +72,9 @@ const Jobs = () => {
         return true; // 'all' option, show all jobs
     };
 
-
     useEffect(() => {
-
-
         if (profile.profileLevel === 0 || profile.profileLevel === 1) {
-            console.log('profile')
+            console.log('profile');
         } else if (profile.profileLevel === 2) {
             setButtontext2('Starred');
             setButtontext3('Applied');
@@ -95,8 +90,7 @@ const Jobs = () => {
             setButtontext2Link('/jobs/starred');
             setButtontext3Link('/jobs/applied');
         }
-    }, [profile.profileLevel])
-
+    }, [profile.profileLevel]);
 
     const filteredJobs = jobs
         .filter(job => filterByVerified(job))
@@ -113,7 +107,6 @@ const Jobs = () => {
             return jobTitleMatch && jobTypeMatch && categoryMatch;
         });
 
-
     const filteredMyJobs = myJobs.filter(job => {
         const { title, employmentType, category } = searchQuery;
         console.log('search query inside the filtered jobs', searchQuery);
@@ -128,26 +121,20 @@ const Jobs = () => {
         return jobTitleMatch && jobTypeMatch && categoryMatch;
     });
 
-
     const filteredArchivedJobs = archivedJobs.filter(job => {
         const { title, employmentType, category } = searchQuery;
         const lowerCaseJobTitle = title ? title.toLowerCase() : '';
         const lowerCaseJobType = employmentType ? employmentType.toLowerCase() : '';
         const lowerCaseCategory = category ? category.toLowerCase() : '';
 
-
         if (employmentType && category) {
             return job.title.toLowerCase().includes(lowerCaseJobTitle) &&
                 job.employmentType.toLowerCase() === lowerCaseJobType &&
                 job.category.toLowerCase() === lowerCaseCategory;
-        }
-
-        else if (employmentType) {
+        } else if (employmentType) {
             return job.title.toLowerCase().includes(lowerCaseJobTitle) &&
                 job.employmentType.toLowerCase() === lowerCaseJobType;
-        }
-
-        else if (category) {
+        } else if (category) {
             return job.title.toLowerCase().includes(lowerCaseJobTitle) &&
                 job.category.toLowerCase() === lowerCaseCategory;
         }
@@ -155,17 +142,14 @@ const Jobs = () => {
         return job.title.toLowerCase().includes(lowerCaseJobTitle);
     });
 
-
-
     const handleDropdownSelect = (eventKey) => {
         if (eventKey === 'Internship') {
             setTitle('Internships');
         }
     };
 
-
-    console.log('filtered jobs and internships', filteredJobs)
-    console.log('jobs and internships', jobs)
+    console.log('filtered jobs and internships', filteredJobs);
+    console.log('jobs and internships', jobs);
 
     const JobPostListView = ({ job }) => (
         <div key={job._id} className="job-list-view">
@@ -175,10 +159,9 @@ const Jobs = () => {
         </div>
     );
 
-
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '2% 5% ' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '2% 5%' }}>
                 <IntJobs
                     title={title}
                     titleS={titleS}
@@ -233,9 +216,9 @@ const Jobs = () => {
                     } />
                 </Routes>
                 <Routes>
-                    <Route path="/archive" element={<>
+                    <Route path="/archive" element={
                         <div className="job-poztt">
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '5vw', flexWrap: 'wrap', paddingTop: '20px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '1vw', flexWrap: 'wrap', paddingTop: '20px' }}>
                                 {loading ? (
                                     <div>Loading.....</div>
                                 ) : filteredArchivedJobs.length ? (
@@ -271,19 +254,17 @@ const Jobs = () => {
                                 )}
                             </div>
                         </div>
-                    </>
                     } />
-                    <Route path="/starred" element={<>
+                    <Route path="/starred" element={
                         <div className="job-poztt">
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '5vw', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '1vw', flexWrap: 'wrap' }}>
                                 <StarredJobs searchQuery={searchQuery} />
                             </div>
                         </div>
-                    </>
                     } />
-                    <Route path="/myJobs" element={<>
+                    <Route path="/myJobs" element={
                         <div className="job-poztt">
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '5vw', flexWrap: 'wrap', paddingTop: '20px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '1vw', flexWrap: 'wrap', paddingTop: '20px' }}>
                                 {loading ? (
                                     <div>Loading.....</div>
                                 ) : filteredMyJobs.length ? (
@@ -311,7 +292,6 @@ const Jobs = () => {
                                                 searchQuery={searchQuery}
                                                 locationType={job.locationType}
                                                 company={job.company}
-
                                             />
                                         </div>
                                     ))
@@ -320,62 +300,62 @@ const Jobs = () => {
                                 )}
                             </div>
                         </div>
-                    </>
                     } />
-                    <Route path="/applied" element={<>
+                    <Route path="/applied" element={
                         <div className="job-poztt">
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '5vw', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '1vw', flexWrap: 'wrap' }}>
                                 <AppliedJobs searchQuery={searchQuery} />
                             </div>
                         </div>
-                    </>
                     } />
                     <Route path="/" element={
-                        <div className="job-poztt" style={{ display: 'flex', flexDirection: viewType === 'grid' ? 'row' : 'column', gap: '5vw', flexWrap: 'wrap', paddingTop: '20px' }}>
-                            {loading ? (
-                                <div>Loading.....</div>
-                            ) : filteredJobs.length ? (
-                                filteredJobs.map((job) =>
-                                    viewType === 'grid' ? (
-                                        <div key={job._id} className="job-post">
-                                            <JobPost
-                                                userId={job.userId}
-                                                id={job._id}
-                                                jobTitle={job.title}
-                                                employmentType={job.employmentType}
-                                                description={job.description}
-                                                salaryMin={job.salaryMin}
-                                                salaryMax={job.salaryMax}
-                                                picture={job.picture}
-                                                duration={job.duration}
-                                                jobType={job.jobType ? job.jobType : job.internshipType}
-                                                questions={job.questions}
-                                                category={job.category}
-                                                currency={job.currency}
-                                                createdAt={job.createdAt}
-                                                attachments={job.attachments}
-                                                title={title}
-                                                titleS={titleS}
-                                                type={job.type}
-                                                searchQuery={searchQuery}
-                                                locationType={job.locationType}
-                                                company={job.company}
-                                                verified={job.verified}
-                                            />
-                                        </div>
-                                    ) : (
-                                        <JobPostListView key={job._id} job={job} />
-                                    )
-                                )
-                            ) : (
-                                <div>No jobs posted</div>
-                            )}
+                        <div className="job-poztt">
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '1vw', flexWrap: 'wrap', paddingTop: '20px' }}>
+                                {loading ? (
+                                    <div>Loading.....</div>
+                                ) : filteredJobs.length ? (
+                                    filteredJobs.map((job) => (
+                                        viewType === 'grid' ? (
+                                            <div key={job._id} className="job-post">
+                                                <JobPost
+                                                    userId={job.userId}
+                                                    id={job._id}
+                                                    jobTitle={job.title}
+                                                    employmentType={job.employmentType}
+                                                    description={job.description}
+                                                    salaryMin={job.salaryMin}
+                                                    salaryMax={job.salaryMax}
+                                                    picture={job.picture}
+                                                    duration={job.duration}
+                                                    jobType={job.jobType ? job.jobType : job.internshipType}
+                                                    questions={job.questions}
+                                                    category={job.category}
+                                                    currency={job.currency}
+                                                    createdAt={job.createdAt}
+                                                    attachments={job.attachments}
+                                                    title={title}
+                                                    titleS={titleS}
+                                                    type={job.type}
+                                                    searchQuery={searchQuery}
+                                                    locationType={job.locationType}
+                                                    company={job.company}
+                                                    verified={job.verified}
+                                                />
+                                            </div>
+                                        ) : (
+                                            <JobPostListView key={job._id} job={job} />
+                                        )
+                                    ))
+                                ) : (
+                                    <div>No jobs posted</div>
+                                )}
+                            </div>
                         </div>
                     } />
                 </Routes>
             </div>
         </>
-    )
+    );
 }
 
 export default Jobs;

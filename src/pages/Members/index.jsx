@@ -193,7 +193,12 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
           paddingTop: '25px'
         }}
       >
-        <p style={{ fontWeight: '600', paddingBottom: '0px', color: '#3A3A3A', fontSize: '32px' }}>Members</p>
+        <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
+          <h2 style={{ margin: '0' }}>Members</h2>
+          <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
+          Explore profiles and expand your network with fellow members.
+          </p>
+        </div>
         <div style={{  alignItems: 'center' }}>
           <div className="search" style={{ display: 'flex', width: '75%', marginBottom:'10px' }}>
             <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>

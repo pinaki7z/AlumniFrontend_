@@ -70,8 +70,13 @@ const PhotoGallery = () => {
   }
 
   return (
-    <div className="container my-5">
-      <h1 className="mb-4">Photo Gallery</h1>
+    <div className="photoGallery" style={{width: '100%', padding: '2% 5%'}}>
+      <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
+              <h2 style={{ margin: '0' }}>Photo Gallery</h2>
+              <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
+              Relive memorable moments and explore highlights through our community’s captured moments.
+              </p>
+          </div>
       <div className="row mb-4">
         <div className="col-md-6">
           <div className="input-group">

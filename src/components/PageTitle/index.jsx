@@ -1,12 +1,12 @@
 import './pageTitle.css'
 const PageTitle = ({ title,icon }) => {
     return (
-        <div style={{width: '100%'}}>
-            <div className="PageTitle-header">
-                {/* {icon} */}
-                <h2>{title}</h2>
-            </div>
-        </div>
+        <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
+              <h2 style={{ margin: '0' }}>{title}</h2>
+              <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
+              Check your latest alerts and stay informed on community updates.
+              </p>
+          </div>
     )
 }
 

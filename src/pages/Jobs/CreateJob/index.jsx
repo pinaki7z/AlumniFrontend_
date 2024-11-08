@@ -12,6 +12,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Accordion from 'react-bootstrap/Accordion';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import Card from 'react-bootstrap/Card';
+import './CreateJob.css';
 
 lineSpinner.register();
 
@@ -231,12 +232,12 @@ export const CreateJob = () => {
     };
 
     return (
-        <div style={{ padding: '5% 5%' }}>
-            <h2>Create A Job</h2>
+        <div className="create-job-container">
+            <h2 style={{marginBottom:'30px'}}>Create A Job</h2>
             <Form encType="multipart/form-data">
                 <Row>
                     <Col>
-                        <Form.Group as={Col} >
+                        <Form.Group as={Col} className="form-group-custom">
                             <Form.Label htmlFor="job">Title*</Form.Label>
                             <Form.Control
                                 id="job"
@@ -250,7 +251,7 @@ export const CreateJob = () => {
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group as={Col} controlId="location">
+                        <Form.Group as={Col} controlId="location" className="form-group-custom">
                             <Form.Label>Location*</Form.Label>
                             <Form.Control
                                 type="text"
@@ -266,7 +267,7 @@ export const CreateJob = () => {
                     </Col>
                 </Row>
 
-                <Form.Group controlId="companyType">
+                <Form.Group controlId="companyType" className="form-group-custom">
                     <Form.Label>I am hiring for :-*</Form.Label>
                     <div>
                         <Form.Check
@@ -289,7 +290,7 @@ export const CreateJob = () => {
                 </Form.Group>
 
                 {/* Company name input */}
-                <Form.Group as={Col}>
+                <Form.Group as={Col} className="form-group-custom">
                     <Form.Label htmlFor="company">Company Name</Form.Label>
                     <Form.Control
                         id="company"
@@ -303,7 +304,7 @@ export const CreateJob = () => {
                 </Form.Group>
                 <Row>
                     <Col>
-                        <Form.Group controlId="salaryRange">
+                        <Form.Group controlId="salaryRange" className="form-group-custom">
                             <Form.Label>Salary Range</Form.Label>
                             <Form.Control
                                 type="text"
@@ -327,18 +328,19 @@ export const CreateJob = () => {
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group controlId="currency">
+                        <Form.Group controlId="currency" className="form-group-custom">
                             <Form.Label>Currency</Form.Label>
                             <DropdownButton
                                 id="createJob-currency-dropdown"
                                 title={internshipFormData.currency}
-                                style={{ marginTop: '0px' }}
+                                style={{ marginTop: '0px', }}
                                 onSelect={(eventKey) => {
                                     setInternshipFormData(prevFormData => ({
                                         ...prevFormData,
                                         currency: eventKey,
                                     }));
                                 }}
+                                className="custom-dropdown1"
                             >
                                 <div className="scrollable-dropdown">
                                     <Dropdown.Item eventKey="INR">INR</Dropdown.Item>
@@ -349,7 +351,7 @@ export const CreateJob = () => {
                                 </div>
                             </DropdownButton>
                         </Form.Group>
-                        <Form.Group controlId="wages">
+                        <Form.Group controlId="wages" className="form-group-custom">
                             <Form.Label style={{ marginBottom: '0px' }}>Wages</Form.Label>
                             <DropdownButton
                                 id="createJob-timings-dropdown"
@@ -361,6 +363,7 @@ export const CreateJob = () => {
                                         duration: eventKey,
                                     }));
                                 }}
+                                className="custom-dropdown1"
                             >
                                 <div className="scrollable-dropdown">
                                     <Dropdown.Item eventKey="per hour">per hour</Dropdown.Item>
@@ -372,7 +375,7 @@ export const CreateJob = () => {
                         </Form.Group>
                     </Col>
                 </Row>
-                <Form.Group controlId="job-internship">
+                <Form.Group controlId="job-internship" className="form-group-custom">
                     <Form.Check
                         type='checkbox'
                         id='job-checkbox'
@@ -391,7 +394,7 @@ export const CreateJob = () => {
                     />
                     {formError && <div className="text-danger">{formError}</div>}
                 </Form.Group>
-                <Form.Group controlId="employmentType">
+                <Form.Group controlId="employmentType" className="form-group-custom">
                     <Form.Label>Employment Type</Form.Label>
                     <DropdownButton
                         id="createEmployment-type-dropdown"
@@ -406,6 +409,7 @@ export const CreateJob = () => {
                                 employmentType: eventKey,
                             }));
                         }}
+                        className="custom-dropdown1"
                     >
                         <div className="scrollable-dropdown">
                             <Dropdown.Item eventKey="Full-time">Full-time</Dropdown.Item>
@@ -416,7 +420,7 @@ export const CreateJob = () => {
                     </DropdownButton>
                 </Form.Group>
                 {(internshipFormData.type === 'Internship' || internshipFormData.employmentType === 'Volunteer') && (
-                    <Form.Group controlId="internship-type">
+                    <Form.Group controlId="internship-type" className="form-group-custom">
                         <Form.Check
                             type='checkbox'
                             id='paid-checkbox'
@@ -435,7 +439,7 @@ export const CreateJob = () => {
                         />
                     </Form.Group>
                 )}
-                <Form.Group controlId="category">
+                <Form.Group controlId="category" className="form-group-custom">
                     <Form.Label>Category</Form.Label>
                     <DropdownButton
                         id="createJob-categories-dropdown"
@@ -446,6 +450,7 @@ export const CreateJob = () => {
                                 category: eventKey,
                             }));
                         }}
+                        className="custom-dropdown1"
                     >
                         <div className="scrollable-dropdown">
                             <Dropdown.Item eventKey="Other" >Other</Dropdown.Item>
@@ -455,7 +460,7 @@ export const CreateJob = () => {
                         </div>
                     </DropdownButton>
                 </Form.Group>
-                <Form.Group controlId="locationType">
+                <Form.Group controlId="locationType" className="form-group-custom">
                     <Form.Label>Location Type</Form.Label>
                     <div>
                         <Form.Check
@@ -481,7 +486,7 @@ export const CreateJob = () => {
                         />
                     </div>
                 </Form.Group>
-                <Accordion defaultActiveKey="0">
+                <Accordion defaultActiveKey="0" className="form-group-custom">
                     <Card>
                         <Card.Header>
                             <CustomToggle eventKey="1" style={{ padding: '10px' }}>Add a question</CustomToggle>
@@ -498,7 +503,7 @@ export const CreateJob = () => {
                         </Accordion.Collapse>
                     </Card>
                 </Accordion>
-                <Form.Group controlId="description">
+                <Form.Group controlId="description" className="form-group-custom">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         as="textarea"
@@ -509,16 +514,16 @@ export const CreateJob = () => {
                         onChange={handleInputChange}
                     />
                 </Form.Group>
-                <Form.Group controlId="coverImage">
+                <Form.Group controlId="coverImage" className="form-group-custom">
                     <Form.Label>Add cover image*</Form.Label>
                     <input className='form-control' type="file" onChange={handleCoverImageChange} accept=".jpg, .jpeg, .png, .pdf" required />
                 </Form.Group>
-                <Form.Group controlId="attachments">
+                <Form.Group controlId="attachments" className="form-group-custom">
                     <Form.Label>Add attachments*</Form.Label>
                     <input className='form-control' type="file" onChange={handleImageChange} multiple accept=".jpg, .jpeg, .png, .pdf" required />
                 </Form.Group>
             </Form>
-            <div style={{display: 'flex',justifyContent: 'end', gap: '20px'}}>
+            <div className="button-group">
                 <Button>Back</Button>
                 <Button onClick={handlePublish}>{loading ? 'Publishing...' : 'Publish'}</Button>
             </div>
