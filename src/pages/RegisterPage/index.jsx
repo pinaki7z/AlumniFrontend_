@@ -10,10 +10,12 @@ import logo from "../../images/bhu.png";
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import baseUrl from "../../config.js";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const RegisterPage = () => {
   const navigateTo = useNavigate();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  //const [captchaToken, setCaptchaToken] = useState(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -21,8 +23,13 @@ const RegisterPage = () => {
     password: '',
     confirmPassword: '',
     gender: '',
-    accept: false,
+    accept: false, 
+    captchaToken: null
   });
+
+  const handleReCaptcha = (token) => {
+    setFormData({ ...formData, captchaToken: token });
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -33,6 +40,11 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    if (!formData.captchaToken) {
+      toast.error("Please complete the CAPTCHA.");
+      setLoading(false);
+      return;
+    }
     try {
       console.log('formData', formData);
       const response = await axios.post(`${baseUrl}/alumni/register`, formData);
@@ -44,7 +56,7 @@ const RegisterPage = () => {
 
     } catch (error) {
       console.error('Registration failed!', error.response.data);
-      toast.error(error.response.data);
+      toast.error(error.response.data.error);
       setLoading(false);
 
     }
@@ -157,7 +169,7 @@ const RegisterPage = () => {
               <div className="last-name-field3">
                 <div className="gender">Gender</div>
                 <div className="gender1">
-                  <select name='department' id='department' style={{ fontSize: 'var(--input-text-title-size)', width: '100%', height: '100%', borderRadius: 'var(--br-9xs)', border: '1px solid var(--outline-box)', boxSizing: 'border-box', backgroundColor: 'var(--background-light)' }} onChange={handleChange} required>
+                  <select name='gender' id='gender' style={{ fontSize: 'var(--input-text-title-size)', width: '100%', height: '100%', borderRadius: 'var(--br-9xs)', border: '1px solid var(--outline-box)', boxSizing: 'border-box', backgroundColor: 'var(--background-light)' }} onChange={handleChange} required>
                     <option value='' disabled selected >Select Gender</option>
                     <option value='Male'>Male</option>
                     <option value='Female'>Female</option>
@@ -192,6 +204,12 @@ const RegisterPage = () => {
                   </select>
                 </div>
               </div>
+              <div>
+              <ReCAPTCHA
+                sitekey="6LdPzXgqAAAAACrakqqSjHvl4XIVyec6u1UimfSM"
+                onChange={handleReCaptcha}
+              />
+            </div>
               <div className="privacy-policy-link">
                 <div className="controls">
                   <div className="union-wrapper">

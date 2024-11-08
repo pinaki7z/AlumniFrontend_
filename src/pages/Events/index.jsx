@@ -204,8 +204,8 @@ function MyVerticallyCenteredModal(props) {
       centered
       className="modal-dialog-scrollable"
     >
-      <Modal.Header  className="border-0">
-        <Modal.Title id="contained-modal-title-vcenter" style={{fontWeight:700}}>
+      <Modal.Header className="border-0">
+        <Modal.Title id="contained-modal-title-vcenter" style={{ fontWeight: 700 }}>
           {props.isEditing ? "Edit Event" : "Add Event"}
         </Modal.Title>
         <button
@@ -229,8 +229,8 @@ function MyVerticallyCenteredModal(props) {
         style={{
           backgroundColor: "rgb(243, 244, 246)", // Equivalent to Tailwind's .bg-gray-100
           padding: "1rem",
-          margin:"15px",
-          borderRadius:5,
+          margin: "15px",
+          borderRadius: 5,
           maxHeight: "400px",
           overflowY: "auto",
           scrollbarWidth: "thin", // For Firefox
@@ -253,7 +253,7 @@ function MyVerticallyCenteredModal(props) {
           </div>
           <div className="row g-3">
             <div className="col-md-6">
-              <label className="form-label">Start Date</label><br/>
+              <label className="form-label">Start Date</label><br />
               <DatePicker
                 className="form-control"
                 selected={newEvent.start || new Date()} // Set to current date if not provided
@@ -263,7 +263,7 @@ function MyVerticallyCenteredModal(props) {
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">End Date</label><br/>
+              <label className="form-label">End Date</label><br />
               <DatePicker
                 className="form-control"
                 selected={newEvent.end || new Date()} // Set to current date if not provided
@@ -398,7 +398,7 @@ function MyVerticallyCenteredModal(props) {
             />
           </div>
 
-          
+
         </form>
       </Modal.Body>
       <Modal.Footer className="border-0">
@@ -411,24 +411,24 @@ function MyVerticallyCenteredModal(props) {
           />
           <label htmlFor="create-group" style={{ marginLeft: '0.5em' }}>Create a group with the same event title name</label>
         </div>
-         <Button
-            variant="light"
-            onClick={props.onHide}
-            style={{ backgroundColor: "#f1f1f1", color: "#000" }} // Custom styling for Cancel button
-          >
-                  Cancel
-                </Button>
-                <Button
-            variant="primary"
-            onClick={props.isEditing ? handleEditEvent : handleAddEvent}
-          >
+        <Button
+          variant="light"
+          onClick={props.onHide}
+          style={{ backgroundColor: "#f1f1f1", color: "#000" }} // Custom styling for Cancel button
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="primary"
+          onClick={props.isEditing ? handleEditEvent : handleAddEvent}
+        >
           {props.isEditing ? "Edit Event" : "Add Event"}
         </Button>
       </Modal.Footer>
     </Modal>
   );
-  
-  
+
+
 }
 
 
@@ -459,32 +459,32 @@ function Events() {
   const [loading, setLoading] = useState(false);
   const [detailsModalShow, setDetailsModalShow] = useState(false);
   const [attendanceStatus, setAttendanceStatus] = useState(null);
-  const [eventId, setEventId] = useState(null); 
-  const [attendanceLoading,setAttendanceLoading] = useState(false);
-  
-  
-  
+  const [eventId, setEventId] = useState(null);
+  const [attendanceLoading, setAttendanceLoading] = useState(false);
+
+
+
   useEffect(() => {
     if (selectedEventDetails) {
       setEventId(selectedEventDetails._id); // Set eventId
     }
   }, [selectedEventDetails]);
-  
+
   useEffect(() => {
     if (eventId) {
       checkAttendanceStatus(eventId); // Call checkAttendanceStatus only after eventId is set
     }
   }, [eventId]);
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   const handleAttendance = async (attendance, eventId) => {
     console.log('handling attendance')
     setAttendanceLoading(true);
-    console.log('event titlee', selectedEvent.title, attendance,eventId)
+    console.log('event titlee', selectedEvent.title, attendance, eventId)
     try {
       let body = {
         userId: profile._id,
@@ -612,20 +612,20 @@ function Events() {
           // If groupId is present, check if it's in profile.groupNames
           return profile.groupNames.includes(event.groupId);
         });
-  
+
         // Convert start and end dates to JavaScript Date objects
         const eventsWithDates = filteredEvents.map((event) => ({
           ...event,
           start: new Date(event.start),
           end: new Date(event.end),
         }));
-  
+
         // Add an id to each event
         const eventsWithIds = eventsWithDates.map((event, index) => ({
           ...event,
           id: index + 1,
         }));
-  
+
         // Set the filtered and processed events
         setAllEvents(eventsWithIds);
       })
@@ -633,15 +633,15 @@ function Events() {
         console.error("Error fetching events:", error);
       });
   };
-  
-  
+
+
 
   const checkAttendanceStatus = async () => {
     if (!eventId) {
       console.log('No eventId provided, skipping API call.');
       return; // Exit early if eventId is null or undefined
     }
-  
+
     console.log('eventId check', eventId);
     try {
       const response = await axios.get(`${baseUrl}/events/attendees/${eventId}`);
@@ -654,19 +654,19 @@ function Events() {
       toast.error(error.response?.data?.message || 'An error occurred.');
     }
   };
-  
+
 
   const determineAttendanceStatus = (attendees) => {
     if (attendees.willAttend.some(user => user.userId === profile._id)) {
-        setAttendanceStatus(0);
+      setAttendanceStatus(0);
     } else if (attendees.mightAttend.some(user => user.userId === profile._id)) {
-        setAttendanceStatus(1);
+      setAttendanceStatus(1);
     } else if (attendees.willNotAttend.some(user => user.userId === profile._id)) {
-        setAttendanceStatus(2);
+      setAttendanceStatus(2);
     } else {
-        setAttendanceStatus(null);
+      setAttendanceStatus(null);
     }
-};
+  };
 
 
 
@@ -796,13 +796,13 @@ function Events() {
   return (
     <div className="Events mx-auto px-4 py-8">
       <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
-              <h2 style={{ margin: '0' }}>Event Calendar</h2>
-              <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
-              Stay updated on upcoming events and opportunities to connect.
-              </p>
-          </div>
-      
-      <div class="bg-white rounded-lg p-4 shadow-lg"   ref={calendarRef}>
+        <h2 style={{ margin: '0' }}>Event Calendar</h2>
+        <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
+          Stay updated on upcoming events and opportunities to connect.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-lg p-4 shadow-lg" ref={calendarRef}>
         <MyVerticallyCenteredModal
           show={modalShow}
           isEditing={isEditing}
@@ -867,54 +867,63 @@ function Events() {
                   Add To Google Calendar
                 </Button> */}
                 <div>
-                  {
-                    selectedEventDetails.priceType === 'paid'
-                      ? <p>This is a paid event</p>
-                      : selectedEventDetails.priceType === 'free'
-                        ? <p>This is a free event</p>
-                        : null
-                  }
+                  {selectedEventDetails.priceType === 'paid' ? (
+                    <p>This is a paid event</p>
+                  ) : selectedEventDetails.priceType === 'free' ? (
+                    <p>This is a free event</p>
+                  ) : null}
 
-                  <ul style={{ paddingLeft: '0px' }}>
-                    <div
-                      className="percentage-bar-container"
-                      onClick={() => {
-                        if (selectedEventDetails.priceType === 'free') {
-                          handleAttendance(0, selectedEventDetails._id);
-                        } else if (selectedEventDetails.priceType === 'paid') {
-                          window.open("https://razorpay.com/payment-link/plink_PA5q7Jm6wJENlt", "_blank");
-                        }
-                      }}
-                    >
-                      I will attend {attendanceStatus === 0 && <span>✔</span>}
+                  <ul style={{ paddingLeft: '0px',display: 'flex',justifyContent: 'space-evenly' }}>
+                    <div className="percentage-bar-container">
+                      <label style={{display: 'flex', gap: '5px'}}>
+                        <input
+                          type="checkbox"
+                          checked={attendanceStatus === 0}
+                          onChange={() => {
+                            if (selectedEventDetails.priceType === 'free') {
+                              handleAttendance(0, selectedEventDetails._id);
+                            } else if (selectedEventDetails.priceType === 'paid') {
+                              window.open(
+                                "https://razorpay.com/payment-link/plink_PA5q7Jm6wJENlt",
+                                "_blank"
+                              );
+                            }
+                          }}
+                        />
+                        I will attend
+                      </label>
                     </div>
 
-                    <div
-                      className="percentage-bar-container"
-                      onClick={() => handleAttendance(1, selectedEventDetails._id)}
-                    >
-                      I might attend {attendanceStatus === 1 && <span>✔</span>}
+                    <div className="percentage-bar-container">
+                      <label style={{display: 'flex', gap: '5px'}}>
+                        <input
+                          type="checkbox"
+                          checked={attendanceStatus === 1}
+                          onChange={() => handleAttendance(1, selectedEventDetails._id)}
+                        />
+                        I might attend
+                      </label>
                     </div>
 
-                    <div
-                      className="percentage-bar-container"
-                      onClick={() => handleAttendance(2, selectedEventDetails._id)}
-                    >
-                      I will not attend {attendanceStatus === 2 && <span>✔</span>}
+                    <div className="percentage-bar-container">
+                      <label style={{display: 'flex', gap: '5px'}}>
+                        <input
+                          type="checkbox"
+                          checked={attendanceStatus === 2}
+                          onChange={() => handleAttendance(2, selectedEventDetails._id)}
+                        />
+                        I will not attend
+                      </label>
                     </div>
 
                     {attendanceLoading && (
                       <div>
-                        <l-line-spinner
-                          size="20"
-                          stroke="3"
-                          speed="1"
-                          color="black"
-                        ></l-line-spinner>
+                        <l-line-spinner size="20" stroke="3" speed="1" color="black"></l-line-spinner>
                       </div>
                     )}
                   </ul>
                 </div>
+
 
                 {(selectedEventDetails.userId === profile._id || profile.profileLevel === 0) && <div className="event-edit-delete">
 

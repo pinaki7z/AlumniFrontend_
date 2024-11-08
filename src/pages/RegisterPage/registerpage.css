@@ -38,7 +38,7 @@
   max-width: 100%;
 }
 .rectangle-group {
-  height: 960px;
+  height: 1050px;
   border-radius: var(--br-xs) var(--br-5xl) var(--br-5xl) var(--br-xs);
   background-color: #301C58;
   color: #FFFFFF;

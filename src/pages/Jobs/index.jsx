@@ -315,36 +315,36 @@ const Jobs = () => {
                                     <div>Loading.....</div>
                                 ) : filteredJobs.length ? (
                                     filteredJobs.map((job) => (
-                                        viewType === 'grid' ? (
-                                            <div key={job._id} className="job-post">
-                                                <JobPost
-                                                    userId={job.userId}
-                                                    id={job._id}
-                                                    jobTitle={job.title}
-                                                    employmentType={job.employmentType}
-                                                    description={job.description}
-                                                    salaryMin={job.salaryMin}
-                                                    salaryMax={job.salaryMax}
-                                                    picture={job.picture}
-                                                    duration={job.duration}
-                                                    jobType={job.jobType ? job.jobType : job.internshipType}
-                                                    questions={job.questions}
-                                                    category={job.category}
-                                                    currency={job.currency}
-                                                    createdAt={job.createdAt}
-                                                    attachments={job.attachments}
-                                                    title={title}
-                                                    titleS={titleS}
-                                                    type={job.type}
-                                                    searchQuery={searchQuery}
-                                                    locationType={job.locationType}
-                                                    company={job.company}
-                                                    verified={job.verified}
-                                                />
-                                            </div>
-                                        ) : (
-                                            <JobPostListView key={job._id} job={job} />
-                                        )
+                                        <div
+                                            key={job._id}
+                                            className="job-post"
+                                            style={{ width: viewType === 'grid' ? '30%' : '100%' }}
+                                        >
+                                            <JobPost
+                                                userId={job.userId}
+                                                id={job._id}
+                                                jobTitle={job.title}
+                                                employmentType={job.employmentType}
+                                                description={job.description}
+                                                salaryMin={job.salaryMin}
+                                                salaryMax={job.salaryMax}
+                                                picture={job.picture}
+                                                duration={job.duration}
+                                                jobType={job.jobType ? job.jobType : job.internshipType}
+                                                questions={job.questions}
+                                                category={job.category}
+                                                currency={job.currency}
+                                                createdAt={job.createdAt}
+                                                attachments={job.attachments}
+                                                title={title}
+                                                titleS={titleS}
+                                                type={job.type}
+                                                searchQuery={searchQuery}
+                                                locationType={job.locationType}
+                                                company={job.company}
+                                                verified={job.verified}
+                                            />
+                                        </div>
                                     ))
                                 ) : (
                                     <div>No jobs posted</div>

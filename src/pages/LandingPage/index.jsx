@@ -42,7 +42,7 @@ export default function LandingPage(handleLogin) {
                         <div style={{textAlign: 'center', marginBottom: '20px'}}>
                         <span className="lead mb-4" style={{background: '#eeeeee', width: '50%', fontWeight: '500'}}>Connect, engage, and stay updated with your alma mater</span>
                         </div>                        
-                        <Button size="lg" style={{ backgroundColor: '#301C58', color: 'white' }}>Join Our Community</Button>
+                        <Button size="lg" style={{ backgroundColor: '#301C58', color: 'white' }} onClick={() => navigate('/register')}>Join Our Community</Button>
                     </section>
 
                     <section id="history" className="mb-5">
@@ -86,7 +86,7 @@ export default function LandingPage(handleLogin) {
                                     <p>Phone: +91 542 2368888</p>
                                     <p>Address: Banaras Hindu University, Varanasi, Uttar Pradesh 221005, India</p>
                                 </address>
-                                <Form>
+                                {/* <Form>
                                     <Form.Group className="mb-3" controlId="formName">
                                         <Form.Label>Your Name</Form.Label>
                                         <Form.Control type="text" placeholder="Enter your name" />
@@ -106,7 +106,7 @@ export default function LandingPage(handleLogin) {
                                     <Button type="submit" style={{ backgroundColor: '#301C58', color: 'white' }}>
                                         Send Message
                                     </Button>
-                                </Form>
+                                </Form> */}
                             </Card.Body>
                         </Card>
                     </section>

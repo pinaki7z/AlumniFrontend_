@@ -130,37 +130,29 @@ const EventDisplay = ({ event }) => {
             return;
         }
     
-        // Create arrays for each category of attendees
-        const willAttendNames = attendees.willAttend.map(attendee => attendee.userName);
-        const mightAttendNames = attendees.mightAttend.map(attendee => attendee.userName);
-        const willNotAttendNames = attendees.willNotAttend.map(attendee => attendee.userName);
+        // Extract attendee names based on their attendance choice
+        const willAttendNames = attendees.willAttend.map(attendee => ({ 'Will Attend': attendee.userName }));
+        const mightAttendNames = attendees.mightAttend.map(attendee => ({ 'Might Attend': attendee.userName }));
+        const willNotAttendNames = attendees.willNotAttend.map(attendee => ({ 'Will Not Attend': attendee.userName }));
     
-        // Find the longest list for the rows count
-        const maxLength = Math.max(willAttendNames.length, mightAttendNames.length, willNotAttendNames.length);
+        // Create worksheets for each attendance choice
+        const willAttendSheet = XLSX.utils.json_to_sheet(willAttendNames, { header: ['Will Attend'] });
+        const mightAttendSheet = XLSX.utils.json_to_sheet(mightAttendNames, { header: ['Might Attend'] });
+        const willNotAttendSheet = XLSX.utils.json_to_sheet(willNotAttendNames, { header: ['Will Not Attend'] });
     
-        // Create a new array to hold rows with 3 columns for the Excel sheet
-        const rows = [];
-    
-        for (let i = 0; i < maxLength; i++) {
-            rows.push({
-                'Will Attend': willAttendNames[i] || '',  // If no attendee at this index, leave it empty
-                'Might Attend': mightAttendNames[i] || '',
-                'Will Not Attend': willNotAttendNames[i] || ''
-            });
-        }
-    
-        // Create the worksheet
-        const worksheet = XLSX.utils.json_to_sheet(rows, {header: ['Will Attend', 'Might Attend', 'Will Not Attend']});
-        
-        // Create a new workbook and append the worksheet
+        // Create a new workbook
         const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Attendees");
     
-        // Save the workbook to file
+        // Append sheets to the workbook
+        XLSX.utils.book_append_sheet(workbook, willAttendSheet, "Will Attend");
+        XLSX.utils.book_append_sheet(workbook, mightAttendSheet, "Might Attend");
+        XLSX.utils.book_append_sheet(workbook, willNotAttendSheet, "Will Not Attend");
+    
+        // Write the workbook to a file
         XLSX.writeFile(workbook, `${event.title}_Attendees.xlsx`);
     };
     
-    
+
 
     return (
         <>
@@ -175,10 +167,10 @@ const EventDisplay = ({ event }) => {
                     <span style={{ fontSize: '14px', fontWeight: '500', color: '#301C58' }}>{formatCreatedAt(event.createdAt)}</span>
                 </div>
                 {event.userId === profile._id && <IconButton className='delete-button' style={{ marginRight: '10px', marginLeft: 'auto' }}>
-                    <img src={postDelete} onClick={handleDeleteEvent}/>
+                    <img src={postDelete} onClick={handleDeleteEvent} />
                 </IconButton>}
             </div>
-            <div style={{ paddingTop: '20px'}}>
+            <div style={{ paddingTop: '20px' }}>
                 <p><span style={{ fontWeight: '500' }}>Title:</span>{event.title}</p>
                 <p><span style={{ fontWeight: '500' }}>Start Date:</span> {formatDate(event.start)}</p>
                 <p><span style={{ fontWeight: '500' }}>End Date:</span> {formatDate(event.end)}</p>
@@ -193,15 +185,48 @@ const EventDisplay = ({ event }) => {
             <div className="options-container">
                 {event.userId === profile._id && <div className='see-event-results' style={{ textAlign: 'right', cursor: 'pointer' }} onClick={handleOpen}>See event attendees</div>}
                 <div>
-                    <ul style={{ paddingLeft: '0px' }}>
-                        <div className="percentage-bar-container" onClick={() => handleAttendance(0, event._id)}>
-                            I will attend {attendanceStatus === 0 && <span>✔</span>}
+                    <ul style={{ paddingLeft: '0px',display: 'flex', justifyContent: 'space-evenly' }}>
+                        <div className="percentage-bar-container">
+                            <label style={{display: 'flex', gap: '5px'}}>
+                                <input
+                                    type="checkbox"
+                                    checked={attendanceStatus === 0}
+                                    onChange={() => {
+                                        if (event.priceType === 'free') {
+                                            handleAttendance(0, event._id);
+                                        } else if (event.priceType === 'paid') {
+                                            window.open(
+                                                "https://razorpay.com/payment-link/plink_PA5q7Jm6wJENlt",
+                                                "_blank"
+                                            );
+                                        }
+                                    }}
+                                />
+                                I will attend 
+                                {/* {attendanceStatus === 0 && <span>✔</span>} */}
+                            </label>
                         </div>
-                        <div className="percentage-bar-container" onClick={() => handleAttendance(1, event._id)}>
-                            I might attend {attendanceStatus === 1 && <span>✔</span>}
+                        <div className="percentage-bar-container">
+                            <label style={{display: 'flex', gap: '5px'}}>
+                                <input
+                                    type="checkbox"
+                                    checked={attendanceStatus === 1}
+                                    onChange={() => handleAttendance(1, event._id)}
+                                />
+                                I might attend 
+                                {/* {attendanceStatus === 1 && <span>✔</span>} */}
+                            </label>
                         </div>
                         <div className="percentage-bar-container" onClick={() => handleAttendance(2, event._id)}>
-                            I will not attend {attendanceStatus === 2 && <span>✔</span>}
+                            <label style={{display: 'flex', gap: '5px'}}>
+                                <input
+                                    type="checkbox"
+                                    checked={attendanceStatus === 2}
+                                    onChange={() => handleAttendance(2, event._id)}
+                                />
+                                I will not attend 
+                                {/* {attendanceStatus === 2 && <span>✔</span>} */}
+                            </label>
                         </div>
                         {loading && <div><l-line-spinner
                             size="20"
@@ -211,6 +236,102 @@ const EventDisplay = ({ event }) => {
                         ></l-line-spinner></div>}
                     </ul>
                 </div>
+
+
+
+
+
+
+
+
+                {/* <div>
+                    {selectedEventDetails.priceType === 'paid' ? (
+                        <p>This is a paid event</p>
+                    ) : selectedEventDetails.priceType === 'free' ? (
+                        <p>This is a free event</p>
+                    ) : null}
+
+                    <ul style={{ paddingLeft: '0px', display: 'flex', justifyContent: 'space-evenly' }}>
+                        <div className="percentage-bar-container">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={attendanceStatus === 0}
+                                    onChange={() => {
+                                        if (selectedEventDetails.priceType === 'free') {
+                                            handleAttendance(0, selectedEventDetails._id);
+                                        } else if (selectedEventDetails.priceType === 'paid') {
+                                            window.open(
+                                                "https://razorpay.com/payment-link/plink_PA5q7Jm6wJENlt",
+                                                "_blank"
+                                            );
+                                        }
+                                    }}
+                                />
+                                I will attend
+                            </label>
+                        </div>
+
+                        <div className="percentage-bar-container">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={attendanceStatus === 1}
+                                    onChange={() => handleAttendance(1, selectedEventDetails._id)}
+                                />
+                                I might attend
+                            </label>
+                        </div>
+
+                        <div className="percentage-bar-container">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={attendanceStatus === 2}
+                                    onChange={() => handleAttendance(2, selectedEventDetails._id)}
+                                />
+                                I will not attend
+                            </label>
+                        </div>
+
+                        {attendanceLoading && (
+                            <div>
+                                <l-line-spinner size="20" stroke="3" speed="1" color="black"></l-line-spinner>
+                            </div>
+                        )}
+                    </ul>
+                </div>
+
+ */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
 
             <Modal
@@ -221,7 +342,7 @@ const EventDisplay = ({ event }) => {
             >
                 <Box className='poll-modal-box'>
                     <h2 id="modal-title">Event Attendees</h2>
-                    <button className='excel-export-button' onClick={exportAttendeesToExcel} style={{backgroundColor: '#a98de3', padding: '10px', borderRadius: '6px', border: 'none',color: 'white'}}>
+                    <button className='excel-export-button' onClick={exportAttendeesToExcel} style={{ backgroundColor: '#a98de3', padding: '10px', borderRadius: '6px', border: 'none', color: 'white' }}>
                         Export as an Excel Sheet
                     </button>
                     <div className='voters-container'>
@@ -258,7 +379,7 @@ const EventDisplay = ({ event }) => {
                     </div>
 
                     {/* Add Export Button Inside Modal */}
-                    
+
                 </Box>
             </Modal>
         </>
