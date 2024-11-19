@@ -37,7 +37,7 @@ const NotificationsPage=()=>{
         <Route path="/" element={<div >
         <PageTitle title={title} icon={icon} />
         </div>} />
-        <Route path="/declined" element={<div style={{padding: '0 5%'}}><PageTitle title={title} icon={icon} /> </div>} />
+        <Route path="/declined" element={<div><PageTitle title={title} icon={icon} /> </div>} />
       </Routes>
       <Routes>
           <Route path="/" element={<PageSubTitle buttontext1={buttontext1} buttontext2={buttontext2} buttontext1Link={buttontext1Link} buttontext2Link={buttontext2Link} name='notifications' create={false}/>} />

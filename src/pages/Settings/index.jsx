@@ -182,7 +182,7 @@ const Settings = () => {
                         />
                     </Col>
                 </Row><br /><br /><br />
-                <Button type="submit" size="m" style={{backgroundColor: '#174873'}}>Change</Button>
+                <Button type="submit" size="m" style={{backgroundColor: '#301C5B'}}>Change</Button>
             </Form>
             <br /><br />
         </div>

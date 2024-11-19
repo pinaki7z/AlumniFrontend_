@@ -92,7 +92,7 @@ const PhotoGallery = () => {
           </div>
         </div>
         <div className="col-md-6 text-md-end mt-3 mt-md-0">
-          <button className="btn btn-primary" onClick={openUploadModal}>
+          <button className="btn btn-primary" onClick={openUploadModal} style={{backgroundColor:'#301C5B'}}>
             <Upload size={20} className="me-2" />
             Upload Photo
           </button>

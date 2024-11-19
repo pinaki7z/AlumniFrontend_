@@ -151,7 +151,7 @@ const Profilecard = ({ member, name, addButton, groupMembers, owner, deleteButto
           backgroundColor:"#eee8fa",
           WebkitBackgroundSize: "cover",
           position: 'relative',
-          height: '42vh',
+          height: '45vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

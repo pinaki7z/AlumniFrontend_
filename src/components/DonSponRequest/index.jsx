@@ -805,8 +805,8 @@ const DonSponRequest = ({ name, edit }) => {
                         {extraFields}
                         <div style={{ width: '100%'}}>
                         <div style={{ display: 'flex', width: name === 'member' ? '65%' : '100%', justifyContent: 'center', gap: '2rem' }}>
-                            <button style={{ display: 'flex', border: 'none', background: 'inherit', alignItems: 'center', color: '#666', width: '14%', gap: '0.5rem', justifyContent: 'center',border: '2px solid #a98de3', borderRadius: '8px' }}><Link to={`/${name}s`} style={{ textDecoration: 'none', color: 'black', display: 'flex', alignItems: 'center', color: 'rgb(102, 102, 102)', width: '100%', gap: '0.5rem', justifyContent: 'center' }}><p style={{ marginBottom: '0rem' }}>Back</p></Link></button>
-                            <button style={{ color: '#ffffff', backgroundColor: '#174873', borderColor: '#174873', borderRadius: '6px', width: '18%', height: '5vh' }} type="submit">{loading ? 'Creating...' : 'Create'}</button>
+                            <button style={{ display: 'flex', border: 'none', background: 'inherit', alignItems: 'center', color: '#666', width: '14%', gap: '0.5rem', justifyContent: 'center',border: '2px solid #301c5B', borderRadius: '8px' }}><Link to={`/${name}s`} style={{ textDecoration: 'none', color: 'black', display: 'flex', alignItems: 'center', color: 'rgb(102, 102, 102)', width: '100%', gap: '0.5rem', justifyContent: 'center' }}><p style={{ marginBottom: '0rem' }}>Back</p></Link></button>
+                            <button style={{ color: '#ffffff', backgroundColor: '#301c5B', borderColor: '#301c5B', borderRadius: '6px', width: '18%', height: '5vh' }} type="submit">{loading ? 'Creating...' : 'Create'}</button>
                             </div>                            
                         </div>
                     </form>
