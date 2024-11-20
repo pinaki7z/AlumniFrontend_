@@ -16,7 +16,7 @@ import { RiHomeSmileLine } from "react-icons/ri";
 import baseUrl from "../../config";
 
 
-const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, createdAt, picture, salaryMax, duration, jobType, questions, category, currency, attachments, appliedCandidates, searchQuery, type, locationType, company,verified,employmentType }) => {
+const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, createdAt, picture, salaryMax, duration, jobType, questions, category, currency, attachments, appliedCandidates, searchQuery, type, locationType, company, verified, employmentType }) => {
     const profile = useSelector((state) => state.profile);
     const navigateTo = useNavigate();
     const [menuVisible, setMenuVisible] = useState(false);
@@ -131,9 +131,9 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
 
     return (
         <div className="donation-card">
-        <div className="donation-card-image1">
-            {/* Placeholder for the image */}
-            {attachments && attachments.map((attachment, index) => {
+            <div className="donation-card-image1">
+                {/* Placeholder for the image */}
+                {attachments && attachments.map((attachment, index) => {
                     if (!attachment.endsWith('.pdf')) {
                         return (
                             <img
@@ -146,83 +146,85 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
                     }
                     return null;
                 })}
-        </div>
-        <div className="donation-card-title">
-            <div style={{fontSize:'15px', fontWeight:'500'}}>{verified ? 'verified' : 'unverified'}</div>
-            <h2>{jobTitle}</h2>
-            <div className="user-details">
-                <RiHomeSmileLine />
-                <p>{company}</p>
             </div>
-            <div className="user-details">
-                <GiMoneyStack />
-                <p>{salaryMin ? `₹${salaryMin} - ₹${salaryMax}` : 'Unpaid'}</p>
-            </div>
-            {locationType && <div className="user-details">
+            <div className="donation-card-title">
+                <div style={{ fontSize: '15px', fontWeight: '500' }}>{verified ? 'verified' : 'unverified'}</div>
+                <h2 onClick={handleClick} style={{ cursor: "pointer" }}>
+                    {jobTitle}
+                </h2>
+                <div className="user-details">
+                    <RiHomeSmileLine />
+                    <p>{company}</p>
+                </div>
+                <div className="user-details">
+                    <GiMoneyStack />
+                    <p>{salaryMin ? `₹${salaryMin} - ₹${salaryMax}` : 'Unpaid'}</p>
+                </div>
+                {locationType && <div className="user-details">
                     <CiLocationArrow1 />
                     <p>{Object.keys(locationType).find(key => locationType[key])}</p>
                 </div>}
-            <div className="user-details">
-                <AiFillGold />
-                <p>{category}</p>
+                <div className="user-details">
+                    <AiFillGold />
+                    <p>{category}</p>
+                </div>
+                <div className="user-details">
+                    <FaBriefcase />
+                    <p>{type}</p>
+                </div>
+                <div className="job-badges">
+                    <span className="badge">{employmentType}</span>
+                    <span className="badge">Urgent</span>
+                </div>
             </div>
-            <div className="user-details">
-                <FaBriefcase />
-                <p>{type}</p>
-            </div>
-            <div className="job-badges">
-                <span className="badge">{employmentType}</span>
-                <span className="badge">Urgent</span>
-            </div>
-        </div>
-        {appliedCandidates && appliedCandidates.map(candidate => {
-            if (candidate.userId === profile._id) {
-                return (
-                    <>
-                        {candidate.userId === profile._id && (
-                            <div style={{ fontSize: '15px', cursor: 'pointer', color: 'blueviolet', display: 'flex', gap: '10px' }}>
-                                {candidate.comment && <span
-                                    key={candidate.userId}
-                                    style={{ fontSize: '20px', cursor: 'pointer', color: 'black', display: 'flex', alignItems: 'center' }}
-                                    onClick={() => setShowModal(true)}
-                                >
-                                    <IoIosInformationCircle />
-                                </span>}
-                                {candidate.status}
-                            </div>
-                        )}
-                        {showModal && (
-                            <div className="block" style={{
-                                position: 'fixed', top: '50%',
-                                left: '50%', transform: 'translate(-50%, -50%)',
-                                zIndex: '999', color: 'black', fontWeight: '700', backgroundColor: '#f9f9f9', minWidth: '24vw', padding: '10px', border: 'solid 2px'
-                            }}>
-                                <div>
-                                    <span className="close" style={{ cursor: 'pointer' }} onClick={() => setShowModal(false)}>&times;</span>
-                                    <p style={{ textAlign: 'center', fontWeight: '400' }}>{candidate.comment}</p>
+            {appliedCandidates && appliedCandidates.map(candidate => {
+                if (candidate.userId === profile._id) {
+                    return (
+                        <>
+                            {candidate.userId === profile._id && (
+                                <div style={{ fontSize: '15px', cursor: 'pointer', color: 'blueviolet', display: 'flex', gap: '10px' }}>
+                                    {candidate.comment && <span
+                                        key={candidate.userId}
+                                        style={{ fontSize: '20px', cursor: 'pointer', color: 'black', display: 'flex', alignItems: 'center' }}
+                                        onClick={() => setShowModal(true)}
+                                    >
+                                        <IoIosInformationCircle />
+                                    </span>}
+                                    {candidate.status}
                                 </div>
-                            </div>
-                        )}
-                    </>
-                );
-            }
-            return null;
-        })}
-        {((profile.profileLevel === 0 || profile.profileLevel === 1) || userId === profile._id) && (
-            <div style={{ cursor: 'pointer', position: 'relative',fontWeight:'700', fontSize:'20px' }} onClick={() => setMenuVisible(!menuVisible)}>
-                &#8942;
-                {menuVisible && (
-                    <ul className="menu">
-                        <li style={{ listStyleType: 'none' }} onClick={() => setDeleteModalShow(true)}>Delete</li>
-                    </ul>
-                )}
-                <DeleteModal
-                    show={deleteModalShow}
-                    onHide={() => setDeleteModalShow(false)}
-                />
-            </div>
-        )}
-    </div>
+                            )}
+                            {showModal && (
+                                <div className="block" style={{
+                                    position: 'fixed', top: '50%',
+                                    left: '50%', transform: 'translate(-50%, -50%)',
+                                    zIndex: '999', color: 'black', fontWeight: '700', backgroundColor: '#f9f9f9', minWidth: '24vw', padding: '10px', border: 'solid 2px'
+                                }}>
+                                    <div>
+                                        <span className="close" style={{ cursor: 'pointer' }} onClick={() => setShowModal(false)}>&times;</span>
+                                        <p style={{ textAlign: 'center', fontWeight: '400' }}>{candidate.comment}</p>
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    );
+                }
+                return null;
+            })}
+            {((profile.profileLevel === 0 || profile.profileLevel === 1) || userId === profile._id) && (
+                <div style={{ cursor: 'pointer', position: 'relative', fontWeight: '700', fontSize: '20px' }} onClick={() => setMenuVisible(!menuVisible)}>
+                    &#8942;
+                    {menuVisible && (
+                        <ul className="menu">
+                            <li style={{ listStyleType: 'none' }} onClick={() => setDeleteModalShow(true)}>Delete</li>
+                        </ul>
+                    )}
+                    <DeleteModal
+                        show={deleteModalShow}
+                        onHide={() => setDeleteModalShow(false)}
+                    />
+                </div>
+            )}
+        </div>
     );
 }
 
