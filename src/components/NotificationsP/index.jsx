@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-// import { FcApprove, FcDisapprove } from 'react-icons/fc';
 import Modal from 'react-bootstrap/Modal';
 import './notificationsP.css';
 import { Link } from 'react-router-dom';
-import baseUrl from "../../config"
+import baseUrl from "../../config";
+import { toast } from "react-toastify";
 
 export const NotificationsP = () => {
     const [notificationList, setNotificationList] = useState([]);
@@ -17,6 +17,30 @@ export const NotificationsP = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [user, setUser] = useState('');
     let deleteComment;
+
+    // Function to handle adding link-specific notifications
+    const handleAddLink = async (notificationId, link) => {
+        console.log('Notification Link:', link);
+        setLoading(true);
+        try {
+            const response = await axios.post(`${baseUrl}/images/addLink`, {
+                notificationId,
+                link,
+                userId: profile._id,
+            });
+            if (response.status === 200) {
+                console.log('Link added successfully');
+                toast.success('Added to Photo Gallery')
+                setIsAdded(true);
+            } else {
+                console.error('Failed to add the link');
+            }
+            setLoading(false);
+        } catch (error) {
+            console.error('Error adding link:', error);
+            setLoading(false);
+        }
+    };
 
     const handleAddMember = async (notificationId, groupId, memberId, type, toDelete) => {
         console.log('notificationId, groupId, memberId, type, toDelete', notificationId, groupId, memberId, type, toDelete)
@@ -36,8 +60,6 @@ export const NotificationsP = () => {
             else {
                 throw new Error('Invalid type provided');
             }
-
-
 
             if (type === 'Job') {
                 console.log('deleting job')
@@ -129,7 +151,6 @@ export const NotificationsP = () => {
         }
     };
 
-
     useEffect(() => {
         getRequest();
     }, [isAdded]);
@@ -165,7 +186,6 @@ export const NotificationsP = () => {
     const filteredNotifications = isAdmin
         ? notificationList
         : notificationList.filter((notification) => notification.ownerId === profile._id);
-
 
     const handleAlumniSearch = async (e, userInput) => {
         e.preventDefault();
@@ -218,8 +238,6 @@ export const NotificationsP = () => {
         }
     };
 
-
-
     return (
         <div style={{ paddingTop: '20px' }}>
             <form onSubmit={handleAlumniSearch} style={{ display: 'flex', gap: '15px', }}>
@@ -233,7 +251,6 @@ export const NotificationsP = () => {
                     filteredNotifications.map((notification) => (
                         <div className="notification-item" key={notification._id}>
                             <div className="notification-image">
-                                {/* Placeholder for user profile image */}
                                 <img src={notification.profileImage || "https://via.placeholder.com/50"} alt="Profile" />
                             </div>
                             <div className="notification-content">
@@ -250,19 +267,36 @@ export const NotificationsP = () => {
                                             <Link to={`/members/${notification.userId}`} className="notification-link">
                                                 {notification.requestedUserName}
                                             </Link>{" "}
-                                            requested to join {notification.groupName || notification.forumName}. <br />
+                                            requested to join {notification.groupName || notification.forumName}.{" "}
+                                            {notification.ID ? (
+                                                <a
+                                                    href={notification.ID}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="notification-link"
+                                                >
+                                                    Click here to view the ID
+                                                </a>
+                                            ) : null}
+                                            <br />
                                             <span className="notification-info">
-                                                {calculateTimeDifference(notification.createdAt)} | {notification.groupName ? 'Groups' : 'Jobs'}
+                                                {calculateTimeDifference(notification.createdAt)} |{" "}
+                                                {notification.groupName ? "Groups" : "Jobs"}
                                             </span>
                                         </span>
                                     )}
                                 </p>
 
-
                                 <div className="notification-buttons">
-                                    <button className="accept-button" onClick={() => handleAddMember(notification._id, notification.forumId || notification.groupId || notification.jobId || '', notification.userId, notification.job !== undefined ? 'Job' : (notification.ID ? 'ID' : (notification.forumId ? 'forum' : 'group')), false)}>
-                                        Accept
-                                    </button>
+                                    {notification.link ? (
+                                        <button className="accept-button" onClick={() => handleAddLink(notification._id, notification.link)}>
+                                            Accept Link
+                                        </button>
+                                    ) : (
+                                        <button className="accept-button" onClick={() => handleAddMember(notification._id, notification.forumId || notification.groupId || notification.jobId || '', notification.userId, notification.job !== undefined ? 'Job' : (notification.ID ? 'ID' : (notification.forumId ? 'forum' : 'group')), false)}>
+                                            Accept
+                                        </button>
+                                    )}
                                     <button className="decline-button" onClick={() => {
                                         if (notification.ID) {
                                             handleAddMember(notification._id, '', notification.userId, 'ID', true);

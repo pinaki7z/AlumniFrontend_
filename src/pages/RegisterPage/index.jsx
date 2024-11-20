@@ -56,7 +56,7 @@ const RegisterPage = () => {
 
     } catch (error) {
       console.error('Registration failed!', error.response.data);
-      toast.error(error.response.data.error);
+      toast.error(error.response.data);
       setLoading(false);
 
     }

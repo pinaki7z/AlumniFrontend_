@@ -61,7 +61,10 @@ const EventDisplay = ({ event }) => {
                 userName: `${profile.firstName} ${profile.lastName}`,
                 profilePicture: profile.profilePicture,
                 attendance,
-                groupName: event.title
+                groupName: event.title,
+                department: profile.department,
+                graduatingYear: profile.graduatingYear,
+                classNo: profile.class
             };
 
             const response = await axios.put(
@@ -130,15 +133,25 @@ const EventDisplay = ({ event }) => {
             return;
         }
     
-        // Extract attendee names based on their attendance choice
-        const willAttendNames = attendees.willAttend.map(attendee => ({ 'Will Attend': attendee.userName }));
-        const mightAttendNames = attendees.mightAttend.map(attendee => ({ 'Might Attend': attendee.userName }));
-        const willNotAttendNames = attendees.willNotAttend.map(attendee => ({ 'Will Not Attend': attendee.userName }));
+        // Helper function to map user data
+        const mapAttendees = (attendeesList) => {
+            return attendeesList.map(attendee => ({
+                'Name': attendee.userName,
+                'Graduating Year': attendee.graduatingYear || 'N/A',  // Default to 'N/A' if not available
+                'Class': attendee.class || 'N/A',  // Default to 'N/A' if not available
+                'Department': attendee.department || 'N/A'  // Default to 'N/A' if not available
+            }));
+        };
+    
+        // Extract attendee details with the new columns
+        const willAttendNames = mapAttendees(attendees.willAttend);
+        const mightAttendNames = mapAttendees(attendees.mightAttend);
+        const willNotAttendNames = mapAttendees(attendees.willNotAttend);
     
         // Create worksheets for each attendance choice
-        const willAttendSheet = XLSX.utils.json_to_sheet(willAttendNames, { header: ['Will Attend'] });
-        const mightAttendSheet = XLSX.utils.json_to_sheet(mightAttendNames, { header: ['Might Attend'] });
-        const willNotAttendSheet = XLSX.utils.json_to_sheet(willNotAttendNames, { header: ['Will Not Attend'] });
+        const willAttendSheet = XLSX.utils.json_to_sheet(willAttendNames, { header: ['Name', 'Graduating Year', 'Class', 'Department'] });
+        const mightAttendSheet = XLSX.utils.json_to_sheet(mightAttendNames, { header: ['Name', 'Graduating Year', 'Class', 'Department'] });
+        const willNotAttendSheet = XLSX.utils.json_to_sheet(willNotAttendNames, { header: ['Name', 'Graduating Year', 'Class', 'Department'] });
     
         // Create a new workbook
         const workbook = XLSX.utils.book_new();
