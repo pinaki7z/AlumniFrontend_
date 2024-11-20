@@ -63,7 +63,7 @@ const TopBar = ({ handleLogout }) => {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
-                !notificationsOptionsRef.current.contains(event.target) &&
+                //!notificationsOptionsRef.current.contains(event.target) &&
                 !profileOptionsRef.current.contains(event.target) &&
                 !(event.target.closest('.notifications-card'))
             ) {
@@ -225,7 +225,8 @@ const TopBar = ({ handleLogout }) => {
                             <div className="messages-card">
                                 No New Messages
                             </div>
-                        )} <div ref={notificationsOptionsRef}>
+                        )} 
+                        {/* <div ref={notificationsOptionsRef}>
                             <FaBell style={{ cursor: 'pointer', color: '#301C58' }} onClick={() => {
                                 setShowProfileOptions(false);
                                 setShowMessages(false);
@@ -237,7 +238,7 @@ const TopBar = ({ handleLogout }) => {
 
                                 <Notifications />
                             </div>
-                        )}
+                        )} */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1vw', cursor: 'pointer'  }} ref={profileOptionsRef} 
                         onClick={() => {
                             console.log('clicked image')

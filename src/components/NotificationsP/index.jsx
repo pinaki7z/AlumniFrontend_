@@ -12,11 +12,13 @@ export const NotificationsP = () => {
     const profile = useSelector((state) => state.profile);
     const [loading, setLoading] = useState(false);
     const [isAdded, setIsAdded] = useState(false);
-    const isAdmin = profile.profileLevel === 0;
+    //const isAdmin = profile.profileLevel === 0;
+    const [isAdmin, setIsAdmin] = useState(false);
     const [showImagesModal, setShowImagesModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [user, setUser] = useState('');
     let deleteComment;
+
 
     // Function to handle adding link-specific notifications
     const handleAddLink = async (notificationId, link) => {
@@ -152,6 +154,7 @@ export const NotificationsP = () => {
     };
 
     useEffect(() => {
+        if(profile.profileLevel === 0) setIsAdmin(true);
         getRequest();
     }, [isAdded]);
 
