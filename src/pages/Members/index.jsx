@@ -12,6 +12,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import createMember from "../../images/create.svg";
 import { Link } from 'react-router-dom';
 import baseUrl from '../../config';
+import profileImage from "../../images/profileImage.png";
 
 const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
   const membersred = useSelector((state) => state.member.filter(member => member.profileLevel !== 0));
@@ -61,10 +62,18 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
           style={{ textDecoration: "none", color: "black" }}
         >
       <div className="list-view-item">
-        <p className="list-item-username">{member.firstName}</p>
-        <p className="list-item-username" style={{ fontSize: '14px', fontWeight: '300', fontFamily: 'Inter', color: '#3A3A3A' }}>{member.profileLevel === 1 ? 'ADMIN' : member.profileLevel === 2 ? 'ALUMNI' : member.profileLevel === 3 ? 'STUDENT' : 'SUPER ADMIN'}</p>
-        <p className="list-item-username">{member.graduatingYear}</p>
-        <p className="list-item-username">{member.class}</p>
+        <div style={{display:'flex', justifyContent:'flex-start'}}>
+          <div>
+            <img src={member.profilePicture} alt="" style={{ width: '100px', height:'100px', borderRadius:50 }}/>
+          </div>
+          <div style={{marginLeft:'20px'}}>
+            <p className="list-item-username">{member.firstName}</p>
+            <p className="list-item-username" style={{ fontSize: '14px', fontWeight: '300', fontFamily: 'Inter', color: '#3A3A3A' }}>{member.profileLevel === 1 ? 'ADMIN' : member.profileLevel === 2 ? 'ALUMNI' : member.profileLevel === 3 ? 'STUDENT' : 'SUPER ADMIN'}</p>
+            <p className="list-item-username">{member.graduatingYear}</p>
+            <p className="list-item-username">{member.class}</p>
+          </div>
+        </div>
+        
       </div>
       </Link>
     );

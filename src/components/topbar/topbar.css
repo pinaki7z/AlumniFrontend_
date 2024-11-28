@@ -59,7 +59,7 @@
 .profile-list{
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   position: relative;
   width: 33%;
 }

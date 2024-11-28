@@ -14,6 +14,7 @@ import { IoIosInformationCircle } from "react-icons/io";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { RiHomeSmileLine } from "react-icons/ri";
 import baseUrl from "../../config";
+import { BsPatchCheckFill } from "react-icons/bs";
 
 
 const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, createdAt, picture, salaryMax, duration, jobType, questions, category, currency, attachments, appliedCandidates, searchQuery, type, locationType, company, verified, employmentType }) => {
@@ -128,6 +129,7 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
             console.error('Error:', error);
         }
     }
+    
 
     return (
         <div className="donation-card">
@@ -148,9 +150,12 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
                 })}
             </div>
             <div className="donation-card-title">
-                <div style={{ fontSize: '15px', fontWeight: '500' }}>{verified ? 'verified' : 'unverified'}</div>
                 <h2 onClick={handleClick} style={{ cursor: "pointer" }}>
-                    {jobTitle}
+                    {jobTitle} &nbsp; {verified ? (
+                <BsPatchCheckFill size={20} color="green" />
+                ) : (
+                <span></span>
+                )}
                 </h2>
                 <div className="user-details">
                     <RiHomeSmileLine />

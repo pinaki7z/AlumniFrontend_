@@ -166,7 +166,7 @@ const Profilecard = ({ member, name, addButton, groupMembers, owner, deleteButto
           </button>
         )}
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-          <img src={profileImage} alt="" style={{ width: '150px' }} />
+          <img src={member.profilePicture} alt="" style={{ width: '150px', height:'150px' }} />
           {admin && deleteButton && !(profile.profileLevel === 1 && member.profileLevel === 1) && (
             <>{member.accountDeleted === true ? <MdOutlineRestore onClick={handleDelete} style={{ width: '25px', height: '25px', position: 'absolute', right: '15px', top: '10px', cursor: 'pointer' }} /> : <img src={delButton} onClick={handleDelete} style={{ position: 'absolute', right: '15px', top: '10px', backgroundColor: 'white', cursor: 'pointer' }} />}</>
           )}
