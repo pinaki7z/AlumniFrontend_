@@ -4,9 +4,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { GiMoneyStack } from 'react-icons/gi';
-import { FaCalendarAlt } from "react-icons/fa";
-import { FcBriefcase } from "react-icons/fc";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaLocationDot, FaTags } from 'react-icons/fa6';
+import { FcBriefcase } from 'react-icons/fc';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from "react";
@@ -91,12 +90,9 @@ const IndividualJobPost = () => {
         const [applyLoading, setApplyLoading] = useState(false);
 
         useEffect(() => {
-            if (jobs.questions && Array.isArray(jobs.questions)) {
-              setQuestions(jobs.questions);
-              setAnswers(jobs.questions.map(question => ({ question: question, answer: '' })));
-            }
-          }, [props.jobs]);
-          
+            setQuestions(jobs.questions);
+            setAnswers(jobs.questions.map(question => ({ question: question, answer: '' })));
+        }, [props.jobs]);
 
         const handleNameChange = (e) => {
             setName(e.target.value);
@@ -139,12 +135,10 @@ const IndividualJobPost = () => {
                         props.onHide();
                     } else {
                         console.error('Failed to submit application');
-                        setApplyLoading(false);
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    setApplyLoading(false);
                 });
         };
 
@@ -471,96 +465,54 @@ const IndividualJobPost = () => {
 
 
     return (
-        <div className="job-post-container">
-      <div className="job-post-header">
-        <img
-          src={jobs.coverImage || coverImage}
-          alt="Job Cover"
-          className="job-post-cover"
-        />
-      </div>
-      <div className="job-post-content">
-        <div className="job-post-details">
-          <h1 className="job-title">{jobs.title || "Job Title"}</h1>
-          <p className="company-name">{jobs.company || "Company Name"}</p>
-          <div className="job-description">
-            <h2>Job Description</h2>
-            <p>{jobs.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}</p>
-          </div>
-          <div className="job-responsibilities">
-            <h2>Responsibilities</h2>
-            <p>
-              {jobs.responsibilities || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
-            </p>
-          </div>
-          <div className="job-qualifications">
-            <h2>Qualifications</h2>
-            <p>{jobs.qualifications || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}</p>
-          </div>
-        </div>
-        <div className="job-overview">
-            <div style={{backgroundColor: "#f4f4f4", borderRadius: "10px",
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",  }}> 
+        <div key={jobs._id} style={{ width: '55%', display: 'flex', justifyContent: 'center' }}>
+            {loading ? (<div>Loading..</div>) :
+                (
+                    <div className="ijp-card-container" style={{ backgroundColor: '#f9f9f9' }}>
+                        <div className="ijp-card">
+                            <div className="ijp-image" style={{ backgroundImage: jobs.coverImage ? `url(${jobs.coverImage})` : `url(${coverImage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                            </div>
+                            {/* <img src={profile.profilePicture} alt="Profile Image" style={{
+                                width: '70px',
+                                height: '70px',
+                                borderRadius: '50%',
+                                marginRight: '10px'
+                            }} /> */}
+                            <div className="ijp-title">
+                                <p>{jobs.title}</p>
+                            </div>
+                            {/* <div className="ijp-user-details">
 
-            
-            <h2>Job Overview</h2>
-            <div style={{padding:'15px'}}>
-            <ul>
-                <li>
-                    <div>
-                    <FaCalendarAlt />
-                    </div>               
-                    <div>
-                    <span className="key">Date Posted</span>
-                    <span className="value">{jobs.datePosted || "N/A"}</span>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div>
-                    <FaCalendarAlt />
-                    </div>
-                    
-                    <div>
-                    <span className="key">Apply By</span>
-                    <span className="value">{jobs.applyBy || "N/A"}</span>
-                    </div>
-            
-                </li>
-                <li>
-                    <div>
-                    <FaMapMarkerAlt />
-                    </div>
-                    
-                    <div>
-                    <span className="key">Location</span>
-                    <span className="value">{jobs.location || "N/A"}</span>
-                    </div>
-                
-                </li>
-                <li>
-                    <div>
-                    <FcBriefcase />
-                    </div>
-                    
-                    <div>
-                    <span className="key">Category</span>
-                    <span className="value">{jobs.category || "N/A"}</span>
-                    </div>
-                
-                </li>
-                <li>
-                    <div>
-                    <GiMoneyStack />
-                    </div>
-                    <div>
-                    <span className="key">Salary</span>
-                    <span className="value">{jobs.salary || "N/A"}</span>
-                    </div>
-                
-                </li>
-            </ul>
-            <div className="ijp-candidates-button">
+                                <p>{profile.firstName} </p>
+
+                            </div> */}
+                            <div className="ijp-location-bar">
+                                <div className="ijp-location">
+                                    <RiHomeSmileLine />
+                                    <p>{jobs.company}</p>
+                                </div>
+                                <div className="ijp-location">
+                                    <FaLocationDot />
+                                    <p>{jobs.location}</p>
+                                </div>
+                                {jobs.employmentType && (
+                                    <div className="ijp-jobType">
+                                        <FcBriefcase />
+                                        <p>{jobs.employmentType}</p>
+                                    </div>
+                                )}
+
+                                {/* <div className="ijp-category">
+                                    <FaTags />
+                                    <p>{jobs.category}</p>
+                                </div> */}
+                                {jobs.locationType && <div className="ijp-jobType">
+                                    <CiLocationArrow1 />
+                                    <p style={{ marginBottom: '0px' }}>{Object.keys(jobs.locationType).find(key => jobs.locationType[key])}</p>
+
+                                </div>}
+                            </div>
+                            <div className="ijp-candidates-button">
                                 {jobs.userId === profile._id ? (
                                     <>
                                         {viewCandidatesButton}
@@ -587,13 +539,68 @@ const IndividualJobPost = () => {
                                     )
                                 )}
                             </div>
+
                             <CandidatesModal />
-            </div>
-            </div>
+
+                            <div className="ijp-desc-salary">
+                                <div className="ijp-user-details">
+                                    {jobs.salaryMin !== null || jobs.salaryMax !== null ? (
+                                        <>
+                                            <div className="ijp-minimum">
+                                                <p>Minimum</p>
+                                                <p>{jobs.salaryMin + jobs.currency}</p>
+                                            </div>
+                                            <div className="ijp-maximum">
+                                                <p>Maximum</p>
+                                                <p>{jobs.salaryMax + jobs.currency}</p>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <p style={{ fontSize: '15px', fontWeight: '600' }}>Unpaid</p>
+                                    )}
+                                </div>
+                                <div className="ijp-description">
+                                    <p style={{ fontWeight: '500' }}>JOB DESCRIPTION:-</p>
+                                    {jobs.attachments.map((attachment, index) => {
+                                        if (attachment.endsWith('.pdf')) {
+                                            return (
+                                                <a
+                                                    key={index}
+                                                    href={`${baseUrl}/uploads/${attachment}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    style={{ display: 'block', marginBottom: '10px' }}
+                                                >
+                                                    {attachment}
+                                                </a>
+                                            );
+                                        }
+                                        return null;
+                                    })}
+                                    {jobs.description && <p style={{ fontWeight: '500' }}>SKILLS REQUIRED:-</p>}
+                                    <p >{jobs.description}</p>
+                                </div>
+                                <div className="ijp-images">
+                                    <p style={{ fontWeight: '600' }}>OTHER DETAILS:-</p>
+                                    <div className="image-grid">
+                                        {renderImages()}
+                                    </div>
+
+                                </div>
+                                {/* <div className="ijp-questions" style={{ paddingTop: '20px' }}>
+                                    {jobs.questions.length !== 0 && <p style={{ fontWeight: '600' }}>QUESTIONS:</p>}
+                                    {jobs.questions.map((question, index) => (
+                                        <div key={index}>
+                                            <p>{question}</p>
+                                        </div>
+                                    ))}
+                                </div> */}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            <ImagesModal />
         </div>
-      </div>
-      {/* <ApplyModal show={modalShow} onHide={() => setModalShow(false)} /> */}
-    </div>
     )
 
 

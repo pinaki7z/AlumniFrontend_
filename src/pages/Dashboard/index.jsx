@@ -34,6 +34,8 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import PhotoGallery from "../PhotoGallery/index.jsx";
 import { CreateJob } from "../Jobs/CreateJob/index.jsx";
+import { InterestedJobCandidates } from "../Jobs/InterestedJobCandidates/index.jsx";
+import NewsDetails from "../News/NewsDetails.jsx";
 const Dashboard = ({ handleLogout }) => {
 
   const location = useLocation();
@@ -112,6 +114,7 @@ const Dashboard = ({ handleLogout }) => {
               path="/jobs/create"
               element={<CreateJob />}
             />
+            <Route path="/jobs/candidates" element={<InterestedJobCandidates />} />
             {/* <Route path="/internships/*" element={<Internships />} /> */}
             <Route path="/settings/*" element={<Settings />} />
             <Route path="/jobs/:_id/:title" element={<IndividualJobPost />} />
@@ -160,7 +163,9 @@ const Dashboard = ({ handleLogout }) => {
                 {/* <SideWidgets /> */}
               </div>
             }
+            
             />
+            <Route path="/news/:id/*" element={<NewsDetails />} />
           </Routes>
           <div className="chatbox-container" style={{position: 'fixed', right: '0', bottom: '0', width: '300px', backgroundColor: 'white'}}>
             <Chatbox />
