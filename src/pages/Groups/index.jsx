@@ -19,12 +19,12 @@ const Groups = () => {
   const profile = useSelector((state) => state.profile);
   const title = "Groups";
   const icon = <BsGridFill style={{ color: '#174873' }} />
-  const buttontext1 = 'My Groups';
-  const buttontext2 = 'Suggested Groups';
-  const buttontext3 = 'Joined Groups';
-  const buttontext1Link = "/groups";
-  const buttontext2Link = "/groups/suggested-groups";
-  const buttontext3Link = `/groups/${profile._id}/joined-groups`;
+  const buttontext1 = 'Suggested Groups';
+  const buttontext2 = 'Joined Groups';
+  const buttontext3 = '';
+  const buttontext1Link = "/groups/suggested-groups";
+  const buttontext2Link = `/groups/${profile._id}/joined-groups`;
+  const buttontext3Link = ``;
 
 
   let admin;

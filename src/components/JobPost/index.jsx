@@ -129,33 +129,36 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
             console.error('Error:', error);
         }
     }
-    
+
 
     return (
-        <div className="donation-card">
+        <div className="donation-card" onClick={handleClick} style={{ cursor: "pointer" }}>
             <div className="donation-card-image1">
                 {/* Placeholder for the image */}
+                {console.log('attachments', attachments, jobTitle)}
                 {attachments && attachments.map((attachment, index) => {
                     if (!attachment.endsWith('.pdf')) {
                         return (
                             <img
                                 key={index}
-                                src={attachment}
+                                src={`${baseUrl}/uploads/${attachment}`}
                                 alt=""
                                 className="src"
+                                style={{width: '100%', height: '100%'}}
                             />
+
                         );
                     }
                     return null;
                 })}
             </div>
             <div className="donation-card-title">
-                <h2 onClick={handleClick} style={{ cursor: "pointer" }}>
+                <h2>
                     {jobTitle} &nbsp; {verified ? (
-                <BsPatchCheckFill size={20} color="green" />
-                ) : (
-                <span></span>
-                )}
+                        <BsPatchCheckFill size={20} color="green" />
+                    ) : (
+                        <span></span>
+                    )}
                 </h2>
                 <div className="user-details">
                     <RiHomeSmileLine />

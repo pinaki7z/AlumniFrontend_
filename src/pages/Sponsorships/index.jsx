@@ -18,7 +18,7 @@ const Sponsorships = () => {
   const title = 'Sponsorships';
   const icon = <GoSponsorTiers />;
   const buttontext1 = 'Browse Sponsorships';
-  const buttontext2 = 'My Sponsorship Requests';
+  const buttontext2 = '';
   const buttontext1Link = "/sponsorships";
   const buttontext2Link = "/sponsorships/my-sponsorship-requests";
   const [donations, setDonations] = useState([]);
@@ -33,6 +33,9 @@ const Sponsorships = () => {
   let admin;
   if (profile.profileLevel === 3) {
     admin = true;
+  }
+  if (profile.profileLevel === 3) {
+    buttontext2 = 'My Sponsorship Requests';
   }
 
 

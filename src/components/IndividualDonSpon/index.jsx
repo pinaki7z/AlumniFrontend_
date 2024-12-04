@@ -95,7 +95,7 @@ const IndividualDonSpon = () => {
             ) : (
                 donations.map((donation) => (
                     <div key={donation._id} className="sponsorship-content">
-                        <h1 className="sponsorship-title">{donation.title || "Sponsorship Title"}</h1>
+                        <h1 className="sponsorship-title">{donation.industry || "Sponsorship Title"}</h1>
                         <p className="sponsorship-date">
                             Posted on {formatDate(donation.createdAt)}<br/> By {donation.userName || "Superadmin"}
                         </p>

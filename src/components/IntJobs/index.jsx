@@ -708,7 +708,7 @@ const IntJobs = (props) => {
 
                 {/* Buttons */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <button
+                    {/* <button
                         style={{
                             backgroundColor: '#eee8fa',
                             border: '1px solid #ced4da',
@@ -728,7 +728,7 @@ const IntJobs = (props) => {
                             justifyContent: 'center',
                             fontSize: '12px'
                         }}>1</span>
-                    </button>
+                    </button> */}
                     {/* {profile.profileLevel === 2 && (
                         <button
                             style={{

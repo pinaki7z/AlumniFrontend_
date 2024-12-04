@@ -1,3 +1,23 @@
 .container-div-bg{
     background-image: url(../../images/background.jpg);
 }
+.nav-tab {
+    color: white;
+    margin-right: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.nav-tab:hover {
+    background-color: #45298a;
+    color: #ffffff;
+}
+
+.active-tab {
+    background-color: #45298a;
+    font-weight: bold;
+    color: #ffffff;
+}

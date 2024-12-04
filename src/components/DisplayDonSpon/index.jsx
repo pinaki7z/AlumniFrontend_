@@ -19,7 +19,7 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
     const [edit, setEdit] = useState(false);
     const navigateTo = useNavigate();
     const [displayCount, setDisplayCount] = useState(2);
-    console.log('sponsorships',donations)
+    console.log('sponsorships', donations)
 
     useEffect(() => {
         if (location.pathname === '/donations/my-donation-requests' || location.pathname === '/sponsorships/my-sponsorship-requests') {
@@ -34,13 +34,13 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
         const day = date.getDate();
         const month = date.toLocaleString('en-US', { month: 'long' });
         const year = date.getFullYear();
-    
+
         const getOrdinal = (n) => {
             const s = ["th", "st", "nd", "rd"];
             const v = n % 100;
             return s[(v - 20) % 10] || s[v] || s[0];
         };
-    
+
         return `${day}${getOrdinal(day)} ${month}, ${year}`;
     };
 
@@ -75,41 +75,42 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
             <div className="donSpon-container">
                 {donations !== undefined && donations.length > 0 ? (
                     donations.map((donation) => (
-                        <div key={donation._id} className='donSpon-card'>
-                            <div className="donation-card-image">
-                                <img src={donation.picturePath? donation.picturePath : picture} alt="" className="src" />
-                            </div>
-                            <div style={{ paddingLeft: '12px', paddingTop:'10px' }}>
-                                <Link to={`/${name}/${donation._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                        <Link to={`/${name}/${donation._id}`} style={{ textDecoration: 'none', color: 'black',width: '48%' }}>
+                            <div key={donation._id} className='donSpon-card'>
+                                <div className="donation-card-image">
+                                    <img src={donation.picturePath ? donation.picturePath : picture} alt="" className="src" />
+                                </div>
+                                <div style={{ paddingLeft: '12px', paddingTop: '10px' }}>
+
                                     <button style={{ border: '1px', padding: '5px', backgroundColor: "white" }}>
                                         <div className="donation-card-title">
-                                            <h2>{donation.name? donation.name : donation.nameOfOrganiser}</h2>
+                                            <h2>{donation.name ? donation.name : donation.nameOfOrganiser}</h2>
                                         </div>
                                     </button>
-                                </Link>
-                                <div className="user-details">
-                                    {/* <img src={donation.profilePic} alt="Profile Image" /> */}
-                                    <p>
-                                    {formatDate(donation.createdAt)}
-                                    </p>
-                                </div>
-                            </div>
-                            {edit ? (
-                                <div className="edit-delete-buttons">
-                                    <Link to={`/${name}/edit/${donation._id}`} style={{width: 'calc(50% - 18px)'}}>
-                                    <button style={{width: '100%'}}>Edit</button>
-                                    </Link>
-                                    <button onClick={() => handleDelete(donation._id)} style={{backgroundColor: 'rgb(244 67 54 / 20%)', color: '#f44336'}}>Delete</button>
-                                </div>
-                            ) : (
-                                <div className="donation-card-bar">
-                                    <div className="donation-amount">
-                                        <span style={{ fontSize: '15px',fontWeight: '500' }}>Total amount:-</span>
-                                        <span id="raised-amount" style={{ fontSize: '15px' }}>
-                                            {donation.amount? donation.amount : donation.sponsorshipAmount}
-                                        </span>
+
+                                    <div className="user-details">
+                                        {/* <img src={donation.profilePic} alt="Profile Image" /> */}
+                                        <p>
+                                            {formatDate(donation.createdAt)}
+                                        </p>
                                     </div>
-                                    {/* <div className='ids-bar'>
+                                </div>
+                                {edit ? (
+                                    <div className="edit-delete-buttons">
+                                        <Link to={`/${name}/edit/${donation._id}`} style={{ width: 'calc(50% - 18px)' }}>
+                                            <button style={{ width: '100%' }}>Edit</button>
+                                        </Link>
+                                        <button onClick={() => handleDelete(donation._id)} style={{ backgroundColor: 'rgb(244 67 54 / 20%)', color: '#f44336' }}>Delete</button>
+                                    </div>
+                                ) : (
+                                    <div className="donation-card-bar">
+                                        <div className="donation-amount">
+                                            <span style={{ fontSize: '15px', fontWeight: '500' }}>Total amount:-</span>
+                                            <span id="raised-amount" style={{ fontSize: '15px' }}>
+                                                {donation.amount ? donation.amount : donation.sponsorshipAmount}
+                                            </span>
+                                        </div>
+                                        {/* <div className='ids-bar'>
                                         <div
                                             className='ids-fill-bar'
                                             style={{
@@ -118,33 +119,34 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
                                             }}
                                         ></div>
                                     </div> */}
-                                    {/* <div className="donation-target">
+                                        {/* <div className="donation-target">
                                         <span style={{ fontSize: '15px' }}>of Rs </span>
                                         <span id="target-amount" style={{ fontSize: '15px' }}>{donation.totalAmount}</span>
                                     </div> */}
-                                </div>
-                            )}
-                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </Link>
                     ))
                 ) : loading ? (
-                    <div style={{display: 'flex', width: '100%', height: '50vh', alignItems: 'center', justifyContent: 'center'}}>
-                    <l-line-spinner
-                      size="40"
-                      stroke="3"
-                      speed="1" 
-                      color="black" 
-                    ></l-line-spinner></div>
+                    <div style={{ display: 'flex', width: '100%', height: '50vh', alignItems: 'center', justifyContent: 'center' }}>
+                        <l-line-spinner
+                            size="40"
+                            stroke="3"
+                            speed="1"
+                            color="black"
+                        ></l-line-spinner></div>
                 ) : (
                     <div>No {name}</div>
                 )}
             </div>
             {isLoading && (
                 <div style={{ textAlign: 'center' }}> <l-line-spinner
-                size="25"
-                stroke="3"
-                speed="1" 
-                color="black" 
-              ></l-line-spinner></div>
+                    size="25"
+                    stroke="3"
+                    speed="1"
+                    color="black"
+                ></l-line-spinner></div>
             )}
             {page < totalDonations / limit && (
                 <div style={{ textAlign: 'center' }}>

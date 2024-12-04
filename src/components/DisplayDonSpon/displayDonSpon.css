@@ -4,10 +4,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 15px;
+  gap: 20px;
 }
 
 .donSpon-card {
-  width: 48% !important;
+  width: 100%;
   height:100%;
   padding-bottom: 20px;
   background-color: white !important;
@@ -44,14 +45,14 @@
 
 .donation-card-image {
   width: 100% !important; /* Ensure the image doesn't exceed the card's width */
-  height: 40% !important; /* Ensure the image doesn't exceed the card's height */
+  height: 70%; /* Ensure the image doesn't exceed the card's height */
   overflow: hidden;
   border-radius: inherit;
 }
 
 .donation-card-image img {
   width: 100%;
-  height: 40% !important; /* Ensure the image fills the card's height */
+  height: 100%; /* Ensure the image fills the card's height */
   object-fit: cover;
   border-radius: inherit;
 }

@@ -58,23 +58,23 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
   const ListViewItem = ({ member }) => {
     return (
       <Link
-          to={`/members/${member._id}`}
-          style={{ textDecoration: "none", color: "black" }}
-        >
-      <div className="list-view-item">
-        <div style={{display:'flex', justifyContent:'flex-start'}}>
-          <div>
-            <img src={member.profilePicture} alt="" style={{ width: '100px', height:'100px', borderRadius:50 }}/>
+        to={`/members/${member._id}`}
+        style={{ textDecoration: "none", color: "black" }}
+      >
+        <div className="list-view-item">
+          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <div>
+              <img src={member.profilePicture} alt="" style={{ width: '100px', height: '100px', borderRadius: 50 }} />
+            </div>
+            <div style={{ marginLeft: '20px' }}>
+              <p className="list-item-username">{member.firstName}</p>
+              <p className="list-item-username" style={{ fontSize: '14px', fontWeight: '300', fontFamily: 'Inter', color: '#3A3A3A' }}>{member.profileLevel === 1 ? 'ADMIN' : member.profileLevel === 2 ? 'ALUMNI' : member.profileLevel === 3 ? 'STUDENT' : 'SUPER ADMIN'}</p>
+              <p className="list-item-username">{member.graduatingYear}</p>
+              <p className="list-item-username">{member.class}</p>
+            </div>
           </div>
-          <div style={{marginLeft:'20px'}}>
-            <p className="list-item-username">{member.firstName}</p>
-            <p className="list-item-username" style={{ fontSize: '14px', fontWeight: '300', fontFamily: 'Inter', color: '#3A3A3A' }}>{member.profileLevel === 1 ? 'ADMIN' : member.profileLevel === 2 ? 'ALUMNI' : member.profileLevel === 3 ? 'STUDENT' : 'SUPER ADMIN'}</p>
-            <p className="list-item-username">{member.graduatingYear}</p>
-            <p className="list-item-username">{member.class}</p>
-          </div>
+
         </div>
-        
-      </div>
       </Link>
     );
   };
@@ -103,7 +103,7 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
   }, []);
 
   useEffect(() => {
-    console.log('members red',membersred)
+    console.log('members red', membersred)
     let filteredMembers = membersred;
 
     // Apply search filter
@@ -117,9 +117,9 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
     // Apply memberRole filter
     if (memberRole) {
       const roleMapping = {
-        "1": 1, 
-        "2": 2, 
-        "3": 3  
+        "1": 1,
+        "2": 2,
+        "3": 3
       };
       filteredMembers = filteredMembers.filter(
         (member) => member.profileLevel === roleMapping[memberRole]
@@ -177,7 +177,7 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
   };
 
   const handleMemberRoleChange = (e) => {
-    setMemberRole(e.target.value); 
+    setMemberRole(e.target.value);
   };
 
   const handleGraduatingYearChange = (e) => {
@@ -205,11 +205,11 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
         <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
           <h2 style={{ margin: '0' }}>Members</h2>
           <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
-          Explore profiles and expand your network with fellow members.
+            Explore profiles and expand your network with fellow members.
           </p>
         </div>
-        <div style={{  alignItems: 'center' }}>
-          <div className="search" style={{ display: 'flex', width: '75%', marginBottom:'10px' }}>
+        <div style={{ alignItems: 'center' }}>
+          <div className="search" style={{ display: 'flex', width: '75%', marginBottom: '10px' }}>
             <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
               <div style={{ position: 'relative', width: '100%' }}>
                 <input
@@ -240,41 +240,41 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
               </div>
             </form>
           </div>
-          
+
           {/* New Filters */}
-          <div style={{ display:'flex', justifyContent:'flex-start',alignItems: 'center' }}>
-          <select className='select-dropdown' value={memberRole} onChange={handleMemberRoleChange}>
-            <option value="">All Members</option>
-            <option value="1">Admin</option>
-            <option value="2">Alumni</option>
-            <option value="3">Current Student</option>
-          </select>
+          <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+            <select className='select-dropdown' value={memberRole} onChange={handleMemberRoleChange}>
+              <option value="">All Members</option>
+              <option value="1">Admin</option>
+              <option value="2">Alumni</option>
+              <option value="3">Current Student</option>
+            </select>
 
-          <select className='select-dropdown' style={{marginLeft:'10px'}} value={graduatingYear} onChange={handleGraduatingYearChange}>
-            <option value="">All Graduating Years</option>
-            {generateYears().map(year => (
-              <option key={year} value={year}>{year}</option>
-            ))}
-          </select>
+            <select className='select-dropdown' style={{ marginLeft: '10px' }} value={graduatingYear} onChange={handleGraduatingYearChange}>
+              <option value="">All Graduating Years</option>
+              {generateYears().map(year => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
 
-          <select className='select-dropdown' style={{marginLeft:'10px'}} value={department} onChange={handleDepartmentChange}>
-            <option value="">All Departments</option>
-            <option value="Agricultural">Agricultural</option>
-            <option value="Gastroenterology">Gastroenterology</option>
-            <option value="Neurosurgery">Neurosurgery</option>
-            <option value="Human Languages">Human Languages</option>
-          </select>
+            <select className='select-dropdown' style={{ marginLeft: '10px' }} value={department} onChange={handleDepartmentChange}>
+              <option value="">All Departments</option>
+              <option value="Agricultural">Agricultural</option>
+              <option value="Gastroenterology">Gastroenterology</option>
+              <option value="Neurosurgery">Neurosurgery</option>
+              <option value="Human Languages">Human Languages</option>
+            </select>
 
-          <select className='select-dropdown' style={{marginLeft:'10px'}} value={batch} onChange={handleBatchChange}>
-            <option value="">All Batches</option>
-            {generateBatches().map(batch => (
-              <option key={batch} value={batch}>{batch}</option>
-            ))}
-          </select>
+            <select className='select-dropdown' style={{ marginLeft: '10px' }} value={batch} onChange={handleBatchChange}>
+              <option value="">All Batches</option>
+              {generateBatches().map(batch => (
+                <option key={batch} value={batch}>{batch}</option>
+              ))}
+            </select>
           </div>
 
         </div>
-        <div style={{paddingTop: '20px'}}>
+        <div style={{ paddingTop: '20px' }}>
           <button onClick={() => setViewMode('grid')} className="toggle-button">
             Grid View
           </button>
@@ -289,11 +289,24 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
           <>
             {viewMode === 'grid' ? (
               <div className="pro grid-view">
-                <Link to={`/members/create`} style={{ textDecoration: 'none', color: 'black' }}>
-                  <div style={{ border: '2px dotted #a98de3', borderRadius: '8px', width: '17vw', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <img src={createMember} alt="" />
-                  </div>
-                </Link>
+                {(profile.profileLevel === 0 || profile.profileLevel === 1) && (
+                  <Link to={`/members/create`} style={{ textDecoration: 'none', color: 'black' }}>
+                    <div
+                      style={{
+                        border: '2px dotted #a98de3',
+                        borderRadius: '8px',
+                        width: '17vw',
+                        height: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <img src={createMember} alt="" />
+                    </div>
+                  </Link>
+                )}
+
                 {displayedMembers.map((member) => (
                   <Profilecard
                     key={member._id}

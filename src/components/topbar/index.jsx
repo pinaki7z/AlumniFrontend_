@@ -225,7 +225,7 @@ const TopBar = ({ handleLogout }) => {
                             <div className="messages-card">
                                 No New Messages
                             </div>
-                        )} 
+                        )}
                         {/* <div ref={notificationsOptionsRef}>
                             <FaBell style={{ cursor: 'pointer', color: '#301C58' }} onClick={() => {
                                 setShowProfileOptions(false);
@@ -239,20 +239,24 @@ const TopBar = ({ handleLogout }) => {
                                 <Notifications />
                             </div>
                         )} */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1vw', cursor: 'pointer'  }} ref={profileOptionsRef} 
-                        onClick={() => {
-                            console.log('clicked image')
-                            setShowMessages(false);
-                            setShowNotifications(false);
-                            setShowProfileOptions(!showProfileOptions);
-                        }} >
-                            <img src={profile.profilePicture ? profile.profilePicture : profilePic} alt='profile-pic' width='40px' height='40px' style={{ borderRadius: '50%'}} />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1vw', cursor: 'pointer' }} ref={profileOptionsRef}
+                            onClick={() => {
+                                console.log('clicked image')
+                                setShowMessages(false);
+                                setShowNotifications(false);
+                                setShowProfileOptions(!showProfileOptions);
+                            }} >
+                            <img src={profile.profilePicture ? profile.profilePicture : profilePic} alt='profile-pic' width='40px' height='40px' style={{ borderRadius: '50%' }} />
                             <p style={{ marginBottom: '0px', color: '#3A3A3A', fontWeight: '600', fontSize: '20px', lineHeight: '24.2px' }}>{profile.firstName}</p>
                         </div>
                         {showProfileOptions && (
                             <ul className="profile-options" >
                                 <a href="/profile" style={{ textDecoration: 'none', color: 'black' }}><li>Profile</li></a>
-                                <a href="/settings" style={{ textDecoration: 'none', color: 'black' }}><li>Settings</li></a>
+                                {(profile.profileLevel === 0 || profile.profileLevel === 1) && (
+                                    <a href="/settings" style={{ textDecoration: 'none', color: 'black' }}>
+                                        <li>Settings</li>
+                                    </a>
+                                )}
                                 <li onClick={logout} style={{ cursor: 'pointer' }}><p>Log out</p></li>
                             </ul>
                         )}

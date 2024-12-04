@@ -822,20 +822,21 @@ function Events() {
           onSelectEvent={handleEventClick}
         />
 
-        <Button
-          className="add-event-button"
-          variant="primary"
-          onClick={() => setModalShow(true)}
-          style={{
-            borderRadius: '50%',
-            width: '60px',
-            height: '60px',
-            position: 'absolute',
-            backgroundColor: '#301c5B'
-          }}
-        >
-          <FaCalendarPlus />
-        </Button>
+        {(profile.profileLevel === 0 || profile.profileLevel === 1) && (
+          <Button
+            className="add-event-button"
+            variant="primary"
+            onClick={() => setModalShow(true)}
+            style={{
+              borderRadius: '50%',
+              width: '60px',
+              height: '60px',
+              position: 'absolute',
+              backgroundColor: '#301c5B'
+            }}
+          >
+            <FaCalendarPlus />
+          </Button>)}
 
 
         {selectedEventDetails && (
@@ -873,9 +874,9 @@ function Events() {
                     <p>This is a free event</p>
                   ) : null}
 
-                  <ul style={{ paddingLeft: '0px',display: 'flex',justifyContent: 'space-evenly' }}>
+                  <ul style={{ paddingLeft: '0px', display: 'flex', justifyContent: 'space-evenly' }}>
                     <div className="percentage-bar-container">
-                      <label style={{display: 'flex', gap: '5px'}}>
+                      <label style={{ display: 'flex', gap: '5px' }}>
                         <input
                           type="checkbox"
                           checked={attendanceStatus === 0}
@@ -895,7 +896,7 @@ function Events() {
                     </div>
 
                     <div className="percentage-bar-container">
-                      <label style={{display: 'flex', gap: '5px'}}>
+                      <label style={{ display: 'flex', gap: '5px' }}>
                         <input
                           type="checkbox"
                           checked={attendanceStatus === 1}
@@ -906,7 +907,7 @@ function Events() {
                     </div>
 
                     <div className="percentage-bar-container">
-                      <label style={{display: 'flex', gap: '5px'}}>
+                      <label style={{ display: 'flex', gap: '5px' }}>
                         <input
                           type="checkbox"
                           checked={attendanceStatus === 2}
