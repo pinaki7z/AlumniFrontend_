@@ -21,3 +21,43 @@
     font-weight: bold;
     color: #ffffff;
 }
+
+.content-overlay {
+    background-color: rgba(48, 28, 88, 0.8); /* Semi-transparent background */
+    color: white; /* Text color for better contrast */
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.content-overlay h2 {
+    color: #f9e79f; /* Optional: Highlight headings */
+}
+
+.content-overlay p, .content-overlay address {
+    color: white;
+    line-height: 1.6; /* Improve readability */
+}
+
+#history, #about, #contact {
+    position: relative;
+    z-index: 1;
+}
+
+.container-div-bg {
+    background-image: url('../../images/background.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.container-div-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Overlay on the entire page for dimming */
+    z-index: 0;
+}

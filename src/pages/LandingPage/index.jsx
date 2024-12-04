@@ -12,7 +12,7 @@ export default function LandingPage(handleLogin) {
         switch (activeTab) {
             case "history":
                 return (
-                    <section id="history" className="py-5">
+                    <section id="history" className="py-5 content-overlay">
                         <h2>History</h2>
                         <p>
                             Mahamana Malaviya Mission ( 1978–2014)
@@ -48,7 +48,7 @@ export default function LandingPage(handleLogin) {
                 );
             case "about":
                 return (
-                    <section id="about" className="py-5">
+                    <section id="about" className="py-5 content-overlay">
                         <h2>About Us</h2>
                         <p>
                             The BHU Alumni Portal is a platform dedicated to connecting and engaging alumni from Banaras Hindu University. Our mission is to foster a strong, global network of BHU graduates, facilitating collaboration, mentorship, and lifelong learning. Through this portal, we aim to keep our alumni informed about university developments, organize events, and provide opportunities for giving back to the institution.
@@ -57,7 +57,7 @@ export default function LandingPage(handleLogin) {
                 );
             case "contact":
                 return (
-                    <section id="contact" className="py-5">
+                    <section id="contact" className="py-5 content-overlay">
                         <h2>Contact Us</h2>
                         <address>
                             <p>Email: alumni@bhu.ac.in</p>
@@ -68,7 +68,7 @@ export default function LandingPage(handleLogin) {
                 );
             default:
                 return (
-                    <section id="hero" className="text-center py-5">
+                    <section id="hero" className="text-center py-5 content-overlay">
                         <img src={bhu} alt="" width="300px" height="100px" />
                         <h1 className="display-4 fw-bold mb-3">Welcome to BHU Alumni Portal</h1>
                         <p className="lead mb-4" style={{ fontWeight: '500' }}>
@@ -86,7 +86,7 @@ export default function LandingPage(handleLogin) {
         <div className="d-flex flex-column min-vh-100 container-div-bg">
             {/* Navbar */}
             <Navbar expand="lg" className="py-3" style={{ backgroundColor: '#301C58', color: 'white' }}>
-                <Container>
+                <Container style={{paddingTop: '30px'}}>
                     <Navbar.Brand href="#" style={{ color: 'white' }}>
                         BHU Alumni Portal
                     </Navbar.Brand>
