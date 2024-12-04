@@ -149,15 +149,9 @@ const Dashboard = ({ handleLogout }) => {
                   flexDirection: 'column',
                   width: '100%',
                   padding: '2% 5%',
-                  // display: "flex",
-                  // gap: "2vw",
-                  // // marginLeft: "40px",
-                  // paddingTop: "20px",
-                  // width: "100%",
-                  // justifyContent: 'center'
                 }}
               >
-                <div style={{ width: "80%" }}>
+                <div>
                   <News />
                 </div>
                 {/* <SideWidgets /> */}

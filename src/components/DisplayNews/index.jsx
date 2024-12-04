@@ -97,11 +97,11 @@ export const DisplayNews = ({ userId, postId, description, createdAt, picturePat
                     <div className="news-card-content">
                         <div className="news-card-header">
                             <h3 className="news-title">News Headline</h3>
-                            <span style={{ color: 'gray', fontSize: '14px' }}>
+                            <span style={{ color: 'gray', fontSize: '14px', fontWeight:'600' }}>
                                 Posted on {formatDate(createdAt)}
                             </span>
                             <br />
-                            <span style={{ color: 'gray' }}>By SuperAdmin</span>
+                            <span style={{ color: 'gray', fontWeight:'600' }}>By SuperAdmin</span>
                         </div>
                         <p className="news-description">{description}</p>
                         <button className="read-more" onClick={handleReadMore}>
