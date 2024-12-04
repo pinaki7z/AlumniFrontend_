@@ -4,7 +4,7 @@ import './NewsDetails.css';
 
 const NewsDetails = () => {
     const location = useLocation();
-    const { userId, postId, description, createdAt, picturePath, videoPath, department, onDeletePost } = location.state;
+    const { userId, postId, description, title, createdAt, picturePath, videoPath, department, onDeletePost } = location.state;
 
     const formatDate = (dateString) => {
         const dateParts = dateString.split(" ");
@@ -33,7 +33,7 @@ const NewsDetails = () => {
     return (
         <div className="news-details">
             <div className="news-card-header">
-                            <h1 className="news-title">News Headline</h1>
+                            <h1 className="news-title">{title? title : 'News Headline'}</h1>
                             <span style={{ color: 'gray', fontSize: '14px', fontWeight:'600' }}>
                                 Posted on {formatDate(createdAt)}
                             </span>
@@ -60,7 +60,7 @@ const NewsDetails = () => {
                     <img src={dummyImage} alt="Dummy News" />
                 )}
             </div>
-            <p className="news-description">{description || dummyDescription}</p>
+            <p className="individual-news-description">{description || dummyDescription}</p>
         </div>
     );
 };

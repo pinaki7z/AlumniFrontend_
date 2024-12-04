@@ -34,3 +34,12 @@
     line-height: 1.6;
     color: #333;
 }
+
+.news-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Limit to 4 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Ensure text wraps within the container */
+}

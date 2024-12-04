@@ -11,14 +11,13 @@ import baseUrl from "../../config";
 import newsImage from "../../images/d-group.jpg";
 import { FaArrowCircleRight } from 'react-icons/fa';
 
-export const DisplayNews = ({ userId, postId, description, createdAt, picturePath, videoPath, department, onDeletePost }) => {
+export const DisplayNews = ({ userId, postId, title,description, createdAt, picturePath, videoPath, department, onDeletePost }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const videoRef = useRef(null);
     const profile = useSelector((state) => state.profile);
     const [loading, setLoading] = useState(false);
     const isUserDepartment = profile.department === 'All' || profile.department === department || department === 'All';
-    const navigate = useNavigate(); // Initialize useNavigate
-
+    const navigate = useNavigate(); 
     let admin;
     if (profile.profileLevel === 0) {
         admin = true;
@@ -82,6 +81,7 @@ export const DisplayNews = ({ userId, postId, description, createdAt, picturePat
                 picturePath,
                 videoPath,
                 department,
+                title
                 //onDeletePost
             }
         }); // Pass props through state
@@ -96,7 +96,7 @@ export const DisplayNews = ({ userId, postId, description, createdAt, picturePat
                     </div>
                     <div className="news-card-content">
                         <div className="news-card-header">
-                            <h3 className="news-title">News Headline</h3>
+                            <h3 className="news-title">{title? title : 'News Headline'}</h3>
                             <span style={{ color: 'gray', fontSize: '14px', fontWeight:'600' }}>
                                 Posted on {formatDate(createdAt)}
                             </span>

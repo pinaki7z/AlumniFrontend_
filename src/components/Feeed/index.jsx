@@ -246,6 +246,7 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
                   picturePath={post.picturePath}
                   videoPath={post.videoPath}
                   department={post.department}
+                  title={post.title}
                   onDeletePost={() => handleDeletePost(post._id)}
                 />
               </div>
