@@ -44,7 +44,7 @@ export const SearchedResults = () => {
   console.log('search results component', searchResults)
 
   return (
-    <div style={{ paddingTop: '30px', width: '60%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ padding: '5% 5%', width: '60%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
       {loading && <l-line-spinner
         size="40"
@@ -55,7 +55,7 @@ export const SearchedResults = () => {
       {!loading && searchResults && (
         <>
           {searchResults.alumni && searchResults.alumni.length !== 0 && (
-            <div style={{ width: '100%',padding: '10px 0px' }}>
+            <div style={{ width: '100%' }}>
               <h3>Members</h3>
               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', rowGap: '20px ' }}>
                 {searchResults.alumni.map((item, index) => (
@@ -94,7 +94,7 @@ export const SearchedResults = () => {
                   <JobPost
                     userId={item.userId}
                     id={item._id}
-                    jobTitle={item.internshipTitle}
+                    jobTitle={item.title}
                     description={item.description}
                     salaryMin={item.salaryMin}
                     salaryMax={item.salaryMax}
@@ -105,6 +105,7 @@ export const SearchedResults = () => {
                     category={item.category}
                     currency={item.currency}
                     createdAt={item.createdAt}
+                    type={item.type}
                     attachments={item.attachments}
                     title='Internships'
                     titleS='internship'
@@ -123,7 +124,8 @@ export const SearchedResults = () => {
                     <JobPost
                       userId={item.userId}
                       id={item._id}
-                      jobTitle={item.jobTitle}
+                      jobTitle={item.title}
+                      company={item.company}
                       description={item.description}
                       salaryMin={item.salaryMin}
                       salaryMax={item.salaryMax}
@@ -133,6 +135,7 @@ export const SearchedResults = () => {
                       questions={item.questions}
                       category={item.category}
                       currency={item.currency}
+                      type={item.type}
                       createdAt={item.createdAt}
                       attachments={item.attachments}
                       title='Jobs'

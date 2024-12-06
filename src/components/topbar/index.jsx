@@ -115,7 +115,7 @@ const TopBar = ({ handleLogout }) => {
             // }
             // const data = await response.json();
             navigateTo(`/?search=${encodeURIComponent(searchText)}`);
-            // setSearchResults(data);
+            //setSearchResults(data);
             setSearchLoading(false);
         } catch (error) {
 

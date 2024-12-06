@@ -61,3 +61,25 @@
     /* background: rgba(0, 0, 0, 0.3);  */
     z-index: 0;
 }
+
+.patron-table {
+    font-size: 0.9rem;
+  }
+  
+  .patron-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .patron-table td, .patron-table th {
+    padding: 0.5rem;
+    vertical-align: top;
+  }
+  
+  @media (max-width: 768px) {
+    .patron-table {
+      font-size: 0.8rem;
+    }
+  }
+  
