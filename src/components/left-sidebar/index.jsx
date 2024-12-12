@@ -45,7 +45,7 @@ const LeftSidebar = () => {
     }, []);
 
     return (
-        <div style={{ width: '20%', backgroundColor: '#301C58', height: '100vh', position: 'fixed' }}>
+        <div style={{ width: '20%', backgroundColor: '#301C58', height: '100vh', position: 'fixed', zIndex: '999' }}>
             <div style={{ textAlign: 'center', marginTop: '3em' }}>
                 <Link to="/" style={{ textDecoration: 'none' }}>
                     <img src={bhu} alt="" width="230px" height="75px" style={{ borderRadius: '8px', cursor: 'pointer' }} />
@@ -89,7 +89,7 @@ const LeftSidebar = () => {
                             </Link>
                         </li>
                     )}
-
+       
                 </ul>
             </div>
         </div>

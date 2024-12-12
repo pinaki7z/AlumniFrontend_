@@ -94,14 +94,18 @@
     flex-wrap: wrap;
     gap: 60px;
   }
+  .first-name-field-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 @media screen and (max-width: 975px) {
   .bhu-alumni-association-container {
     font-size: 29px;
   }
   .rectangle-group {
-    padding-top: var(--padding-184xl);
-    padding-bottom: var(--padding-184xl);
+    padding-top: var(--padding-101xl);
+    padding-bottom: var(--padding-101xl);
     box-sizing: border-box;
   }
 }
@@ -109,14 +113,26 @@
   .rectangle-parent {
     gap: 30px;
   }
+  .first-name-field-wrapper  
+  .last-name-field, .last-name-field1, .last-name-field2, .last-name-field3, .last-name-field4, .last-name-field5 {
+    width: 100%; /* Ensure full width for fields */
+    margin-bottom: 20px !important;
+  }
+  .input {
+    flex-direction: row;
+    z-index: 1;
+    font-size: var(--label-size);
+    color: var(--black-60);
+    margin-bottom: 20px !important;
+  }
 }
 @media screen and (max-width: 450px) {
   .bhu-alumni-association-container {
     font-size: 22px;
   }
   .rectangle-group {
-    padding-top: var(--padding-113xl);
-    padding-bottom: var(--padding-113xl);
+    padding-top: var(--padding-101xl);
+    padding-bottom: var(--padding-101xl);
     box-sizing: border-box;
   }
 }

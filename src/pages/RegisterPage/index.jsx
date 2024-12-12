@@ -90,36 +90,43 @@ const RegisterPage = () => {
             <h1 className="create-an-account">Create an account</h1>
             <span style={{fontSize:"15px"}}>(All fields are mandatory)</span>
             <div className="last-name-field-parent">
-              <div className="last-name-field">First Name</div>
-              <div className="input">
-                <div className="input1">
-                  <div className="field">
-                    <input
-                      className="register-email-address"
-                      placeholder="Enter First Name"
-                      type="text"
-                      style={{ width: '100%' }}
-                      name='firstName' id='firstName' onChange={handleChange} required
-                    />
+              <div className="last-name-field">
+                <div className="firstName">First Name</div>
+                <div className="input">
+                  <div className="input1">
+                    <div className="field">
+                      <input
+                        className="register-email-address"
+                        placeholder="Enter First Name"
+                        type="text"
+                        style={{ width: '100%' }}
+                        name='firstName' id='firstName' onChange={handleChange} required
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="last-name-field">Last Name</div>
-              <div className="input">
-                <div className="input1">
-                  <div className="field">
-                    <input
-                      className="register-email-address"
-                      placeholder="Enter Last Name"
-                      type="text"
-                      style={{ width: '100%' }}
-                      name='lastName' id='lastName' onChange={handleChange} required
-                    />
+              
+              <div className="last-name-field">
+                <div className="lastName">Last Name</div>
+                <div className="input">
+                  <div className="input1">
+                    <div className="field">
+                      <input
+                        className="register-email-address"
+                        placeholder="Enter Last Name"
+                        type="text"
+                        style={{ width: '100%' }}
+                        name='lastName' id='lastName' onChange={handleChange} required
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="last-name-field">E-mail</div>
-              <div className="input">
+              
+              <div className="last-name-field">
+                <div className="email">E-mail</div>
+                <div className="input">
                 <div className="input1">
                   <div className="field">
                     <input
@@ -132,7 +139,9 @@ const RegisterPage = () => {
                   </div>
                 </div>
 
+                </div>
               </div>
+              
               <div className="last-name-field1">
                 <div className="password">Password</div>
                 <div className="input2">

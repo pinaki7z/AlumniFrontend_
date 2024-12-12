@@ -1185,7 +1185,7 @@ export default function LandingPage(handleLogin) {
             default:
                 return (
                     <section id="hero" className="text-center py-5 content-overlay">
-                        <img src={bhu} alt="" width="300px" height="100px" />
+                        <img src={bhu} alt="" className="img-fluid mb-4" />
                         <h1 className="display-4 fw-bold mb-3">Welcome to BHU Alumni Portal</h1>
                         <p className="lead mb-4" style={{ fontWeight: '500' }}>
                             Connect, engage, and stay updated with your alma mater.
@@ -1206,38 +1206,43 @@ export default function LandingPage(handleLogin) {
                     <Navbar.Brand href="#" style={{ color: 'white' }}>
                         BHU Alumni Portal
                     </Navbar.Brand>
-                    <Nav className="me-auto">
-                        <Nav.Link
-                            className={`nav-tab ${activeTab === "hero" ? "active-tab" : ""}`}
-                            onClick={() => setActiveTab("hero")}
-                        >
-                            Home
-                        </Nav.Link>
-                        <Nav.Link
-                            className={`nav-tab ${activeTab === "history" ? "active-tab" : ""}`}
-                            onClick={() => setActiveTab("history")}
-                        >
-                            History
-                        </Nav.Link>
-                        <Nav.Link
-                            className={`nav-tab ${activeTab === "about" ? "active-tab" : ""}`}
-                            onClick={() => setActiveTab("about")}
-                        >
-                            About Us
-                        </Nav.Link>
-                        <Nav.Link
-                            className={`nav-tab ${activeTab === "contact" ? "active-tab" : ""}`}
-                            onClick={() => setActiveTab("contact")}
-                        >
-                            Contact Us
-                        </Nav.Link>
-                    </Nav>
-                    <div>
-                        <Button variant="outline-light" className="me-2" onClick={() => navigate('/login')}>
-                            Login
-                        </Button>
-                        <Button variant="light" onClick={() => navigate('/register')}>Sign Up</Button>
-                    </div>
+                    <Navbar.Toggle aria-controls="navbar-nav" style={{ color: 'white', borderColor: 'white' }}  className="custom-navbar-toggle" />
+                    <Navbar.Collapse id="navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link
+                                className={`nav-tab ${activeTab === "hero" ? "active-tab" : ""}`}
+                                onClick={() => setActiveTab("hero")}
+                            >
+                                Home
+                            </Nav.Link>
+                            <Nav.Link
+                                className={`nav-tab ${activeTab === "history" ? "active-tab" : ""}`}
+                                onClick={() => setActiveTab("history")}
+                            >
+                                History
+                            </Nav.Link>
+                            <Nav.Link
+                                className={`nav-tab ${activeTab === "about" ? "active-tab" : ""}`}
+                                onClick={() => setActiveTab("about")}
+                            >
+                                About Us
+                            </Nav.Link>
+                            <Nav.Link
+                                className={`nav-tab ${activeTab === "contact" ? "active-tab" : ""}`}
+                                onClick={() => setActiveTab("contact")}
+                            >
+                                Contact Us
+                            </Nav.Link>
+                        </Nav>
+                        <div className="d-flex flex-wrap justify-content-center">
+                            <Button variant="outline-light" className="me-2 mb-2" onClick={() => navigate('/login')}>
+                                Login
+                            </Button>
+                            <Button variant="light" className="mb-2" onClick={() => navigate('/register')}>
+                                Sign Up
+                            </Button>
+                        </div>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
 
