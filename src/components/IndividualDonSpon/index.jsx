@@ -101,7 +101,7 @@ const IndividualDonSpon = () => {
                         </p>
                         <img
                             src={donation.picturePath || picture}
-                            alt="Sponsorship"
+                            alt={location.pathname.includes('/sponsorships') ? 'sponsorship image' : 'donation image'} 
                             className="sponsorship-image"
                         />
                         {/* <div className="ids-amount">
