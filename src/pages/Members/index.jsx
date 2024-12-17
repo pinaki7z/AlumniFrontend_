@@ -203,7 +203,7 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
         }}
       >
         <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
-          <h2 style={{ margin: '0' }}>Members</h2>
+          <h2 style={{ margin: '0', color: 'white' }}>Members</h2>
           <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
             Explore profiles and expand your network with fellow members.
           </p>
@@ -274,14 +274,14 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
           </div>
 
         </div>
-        <div style={{ paddingTop: '20px' }}>
+        {/* <div style={{ paddingTop: '20px' }}>
           <button onClick={() => setViewMode('grid')} className="toggle-button">
             Grid View
           </button>
           <button onClick={() => setViewMode('list')} className="toggle-button">
             List View
           </button>
-        </div>
+        </div> */}
       </div>
 
       <Routes>

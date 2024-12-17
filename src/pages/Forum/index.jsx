@@ -73,7 +73,7 @@ const Forum = () => {
             marginBottom: '10px',
             backgroundColor: '#a98de3'
           }}>
-            <h2 style={{ margin: '0' }}>Forums</h2>
+            <h2 style={{ margin: '0', color: 'white' }}>Forums</h2>
             <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
               Engage in meaningful discussions and share insights with the community.
             </p>

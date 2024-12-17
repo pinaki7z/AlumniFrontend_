@@ -120,7 +120,7 @@ const PhotoGallery = () => {
                     backgroundColor: "#a98de3",
                 }}
             >
-                <h2 style={{ margin: "0" }}>Photo Gallery</h2>
+                <h2 style={{ margin: "0", color: 'white' }}>Photo Gallery</h2>
                 <p style={{ marginTop: "10px", fontSize: "15px", color: "black" }}>
                     Relive memorable moments and explore highlights through our community’s captured moments.
                 </p>
