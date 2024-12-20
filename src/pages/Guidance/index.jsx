@@ -7,19 +7,19 @@ const alumniData = [
     {
         name: "Arjun Kumar Sharma",
         title: "Software Engineer",
-        description: "John graduated in 2015 and has been working in the tech industry for over 6 years. He specializes in web development and is passionate about mentoring students.",
+        description: "Arjun graduated in 2015 and has been working in the tech industry for over 6 years. He specializes in web development and is passionate about mentoring students.",
         image: "https://via.placeholder.com/150",
     },
     {
         name: "Rohan Rajesh Reddy",
         title: "Data Scientist",
-        description: "Jane graduated in 2018 and has experience in data analysis and machine learning. She loves helping students navigate their career paths.",
+        description: "Rohan graduated in 2018 and has experience in data analysis and machine learning. He loves helping students navigate their career paths.",
         image: "https://via.placeholder.com/150",
     },
     {
         name: "Vikram Anand Joshi",
         title: "Product Manager",
-        description: "Michael graduated in 2016 and has worked in various startups. He is eager to share his insights on product development and management.",
+        description: "Vikram graduated in 2016 and has worked in various startups. He is eager to share his insights on product development and management.",
         image: "https://via.placeholder.com/150",
     },
 ];
