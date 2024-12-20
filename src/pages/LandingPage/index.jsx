@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import './landingPage.css';
-import bhu from "../../images/bhu.png";
+import bhu from "../../images/1.jpg";
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function LandingPage(handleLogin) {
@@ -1182,11 +1182,138 @@ export default function LandingPage(handleLogin) {
                         </div>
                     </section>
                 );
+            case "hall of fame":
+                return (
+                    <section id="hall-of-fame" className="py-5 content-overlay">
+                        <h2>Hall of Fame</h2>
+                        <div class="alumni">
+                            <div class="alumnus">
+                                <h3>Bharat Ratna Mahamana Pt. Madan Mohan Malaviya</h3>
+                                <p><strong>Field:</strong> Education, Politics</p>
+                                <p><strong>Achievements:</strong> Founder of Banaras Hindu University, prominent leader in the Indian independence movement.</p>
+                            </div>
+
+                            <div class="alumnus">
+                                <h3>Dr. Rajendra Prasad</h3>
+                                <p><strong>Field:</strong> Politics</p>
+                                <p><strong>Achievements:</strong> First President of India, key figure in the Indian independence movement.</p>
+                            </div>
+
+                            <div class="alumnus">
+                                <h3>Dr. S. Radhakrishnan</h3>
+                                <p><strong>Field:</strong> Education, Politics</p>
+                                <p><strong>Achievements:</strong> Second President of India, renowned philosopher, and educator.</p>
+                            </div>
+
+                            <div class="alumnus">
+                                <h3>Dr. A.P.J. Abdul Kalam</h3>
+                                <p><strong>Field:</strong> Science, Politics</p>
+                                <p><strong>Achievements:</strong> 11th President of India, aerospace scientist, and author.</p>
+                            </div>
+
+                            <div class="alumnus">
+                                <h3>Shri Lal Bahadur Shastri</h3>
+                                <p><strong>Field:</strong> Politics</p>
+                                <p><strong>Achievements:</strong> Second Prime Minister of India, known for the slogan "Jai Jawan Jai Kisan".</p>
+                            </div>
+                        </div>
+                    </section>
+                );
+            case "directory":
+                return (
+                    <section className="whos-who-section py-5 content-overlay">
+                        <div className="row">
+                            <div className="col-md-4 mb-3">
+                                <div className="card-who p-3">
+                                    <h4 className="card-who-title">President</h4>
+                                    <p className="card-who-text"><strong>Name:</strong> Dr. Swarnlata Saraf</p>
+                                    <p className="card-who-text"><strong>Contact:</strong> swarnlata_saraf@rediffmail.com</p>
+                                </div>
+                            </div>
+                            <div className="col-md-4 mb-3">
+                                <div className="card-who p-3">
+                                    <h4 className="card-who-title">General Secretary</h4>
+                                    <p className="card-who-text"><strong>Name:</strong> Dr. Manwendra Kumar Tripathi</p>
+                                    <p className="card-who-text"><strong>Contact:</strong> mktripathi.mme@nitr.ac.in</p>
+                                </div>
+                            </div>
+                            <div className="col-md-4 mb-3">
+                                <div className="card-who p-3">
+                                    <h4 className="card-who-title">Treasurer</h4>
+                                    <p className="card-who-text"><strong>Name:</strong> Dr. Shiva Parihar</p>
+                                    <p className="card-who-text"><strong>Contact:</strong> shivaparihar@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                );
+                case "benefits":
+                return (
+                    <section className="benefits-section py-5 content-overlay">
+                    <div className="benefits-container">
+                      <h2 className="text-center mb-4">Benefits</h2>
+                      
+                      <div className="row">
+                        {/* Benefits for Students */}
+                        <div className="col-md-3 mb-4">
+                          <div className="benefits-card p-3">
+                            <h4>Benefits for Students</h4>
+                            <ul>
+                              <li>Access to career development resources and job opportunities.</li>
+                              <li>Networking with alumni for mentorship and guidance.</li>
+                              <li>Exclusive workshops, webinars, and events for skill development.</li>
+                              <li>Stay connected with the university community for collaborations.</li>
+                            </ul>
+                          </div>
+                        </div>
+              
+                        {/* Benefits for Alumni */}
+                        <div className="col-md-3 mb-4">
+                          <div className="benefits-card p-3">
+                            <h4>Benefits for Alumni</h4>
+                            <ul>
+                              <li>Reconnect with old classmates and expand your professional network.</li>
+                              <li>Opportunities to give back through mentoring or donating.</li>
+                              <li>Access to alumni-exclusive events, reunions, and social gatherings.</li>
+                              <li>Stay updated on university news, developments, and events.</li>
+                            </ul>
+                          </div>
+                        </div>
+              
+                        {/* Benefits for Faculty */}
+                        <div className="col-md-3 mb-4">
+                          <div className="benefits-card p-3">
+                            <h4>Benefits for Faculty</h4>
+                            <ul>
+                              <li>Collaboration opportunities with alumni on research and projects.</li>
+                              <li>Access to funding opportunities and grants through alumni connections.</li>
+                              <li>Increased visibility for academic contributions through alumni portal.</li>
+                              <li>Networking with fellow faculty members and industry experts.</li>
+                            </ul>
+                          </div>
+                        </div>
+              
+                        {/* Benefits for Department Heads */}
+                        <div className="col-md-3 mb-4">
+                          <div className="benefits-card p-3">
+                            <h4>Benefits for Department Heads</h4>
+                            <ul>
+                              <li>Build partnerships with alumni to strengthen department programs.</li>
+                              <li>Facilitate alumni involvement in curriculum development and guest lectures.</li>
+                              <li>Access to potential donors and sponsors for department initiatives.</li>
+                              <li>Enhance the department's reputation and reach through alumni success stories.</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                );
             default:
                 return (
                     <section id="hero" className="text-center py-5 content-overlay">
                         <img src={bhu} alt="" width="300px" height="100px" />
-                        <h1 className="display-4 fw-bold mb-3">Welcome to BHU Alumni Portal</h1>
+                        <h1 className="display-4 fw-bold mb-3">Welcome to BHU Community</h1>
                         <p className="lead mb-4" style={{ fontWeight: '500' }}>
                             Connect, engage, and stay updated with your alma mater.
                         </p>
@@ -1230,6 +1357,24 @@ export default function LandingPage(handleLogin) {
                             onClick={() => setActiveTab("contact")}
                         >
                             Contact Us
+                        </Nav.Link>
+                        <Nav.Link
+                            className={`nav-tab ${activeTab === "hall of fame" ? "active-tab" : ""}`}
+                            onClick={() => setActiveTab("hall of fame")}
+                        >
+                            Hall Of Fame
+                        </Nav.Link>
+                        <Nav.Link
+                            className={`nav-tab ${activeTab === "directory" ? "active-tab" : ""}`}
+                            onClick={() => setActiveTab("directory")}
+                        >
+                            Directory of Notables
+                        </Nav.Link>
+                        <Nav.Link
+                            className={`nav-tab ${activeTab === "benefits" ? "active-tab" : ""}`}
+                            onClick={() => setActiveTab("benefits")}
+                        >
+                            Benefits
                         </Nav.Link>
                     </Nav>
                     <div>

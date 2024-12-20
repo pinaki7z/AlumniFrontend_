@@ -27,6 +27,7 @@ import { Followers } from "../../components/Followers/index.jsx";
 import IndividualGroup from "../../components/Groups/IndividualGroup/index.jsx";
 import Chat from "../../pages/Chat";
 import { WorkExperience } from "../../components/WorkExperience/index.jsx";
+import Guidance from "../Guidance/index.jsx";
 import { Archive } from "../Jobs/Archive/index.jsx";
 import DonSponRequest from "../../components/DonSponRequest/index.jsx";
 import { SearchedResults } from "../../components/SearchedResults";
@@ -36,6 +37,10 @@ import PhotoGallery from "../PhotoGallery/index.jsx";
 import { CreateJob } from "../Jobs/CreateJob/index.jsx";
 import { InterestedJobCandidates } from "../Jobs/InterestedJobCandidates/index.jsx";
 import NewsDetails from "../News/NewsDetails.jsx";
+import { Drawer, IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
+import "./Dashboard.css"
 const Dashboard = ({ handleLogout }) => {
 
   const location = useLocation();
@@ -43,6 +48,18 @@ const Dashboard = ({ handleLogout }) => {
   const searchQuery = searchParams.get('search');
   const navigate = useNavigate();
   const profile = useSelector((state) => state.profile);
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
 
   useEffect(() => {
     if (profile.accountDeleted === true || (profile.expirationDate && new Date(profile.expirationDate) < new Date())) {
@@ -53,15 +70,19 @@ const Dashboard = ({ handleLogout }) => {
   return (
     <>
       {/* <TopBar handleLogout={handleLogout} /> */}
-      <div
+      <div className="d-flex flex-row h-100 w-100 overflow-hidden"
         style={{
           width: "100%",
           display: "flex",
           flexDirection: "row",
         }}
       >
-        <LeftSidebar />
-        <div style={{ marginLeft: '20%', width: '80%' }}>
+        <div className="d-none d-lg-block border-end border-secondary">
+          <LeftSidebar />
+        </div>
+
+
+        <div className="top-bar-resp">
           <TopBar handleLogout={handleLogout} />
           <Routes>
 
@@ -78,17 +99,11 @@ const Dashboard = ({ handleLogout }) => {
               <Route
                 path="/*"
                 element={
-                  <div
-                    style={{
-                      display: 'flex',
-                      width: '100%',
-                    }}
-                  >
-
-                    <div style={{ width: '100%', gap: '2vw', display: 'flex', paddingLeft: '35px' }}>
-                      <div style={{ width: '65%' }}>
-                        <SocialMediaPost showCreatePost={true} />
-                      </div>
+                  <div className="row g-4 p-2">
+                    <div className="col-md-8 feed-resp">
+                      <SocialMediaPost showCreatePost={true} />
+                    </div>
+                    <div className="col-md-4 d-none d-lg-block">
                       <SideWidgets />
                     </div>
                   </div>
@@ -96,11 +111,12 @@ const Dashboard = ({ handleLogout }) => {
               />
             )}
             <Route path="/donations/*" element={<Donations />} />
+            <Route path="/guidance/*" element={<Guidance />} />
             <Route path="/photo-gallery/*" element={<PhotoGallery />} />
             <Route path="/sponsorships/*" element={<Sponsorships />} />
-            <Route path="/members/*" element={<div style={{ width: '100%',padding: '0% 5%'}}><Members showHeading={true} /></div>} />
+            <Route path="/members/*" element={<div style={{ width: '100%', padding: '0% 5%' }}><Members showHeading={true} /></div>} />
             <Route path="/members/create" element={
-              <div style={{ width: '100%',padding: '5%' }}>
+              <div style={{ width: '100%', padding: '5%' }}>
                 <DonSponRequest name='member' />
               </div>
             } />
@@ -157,13 +173,42 @@ const Dashboard = ({ handleLogout }) => {
                 {/* <SideWidgets /> */}
               </div>
             }
-            
+
             />
             <Route path="/news/:id/*" element={<NewsDetails />} />
           </Routes>
-          <div className="chatbox-container" style={{position: 'fixed', right: '0', bottom: '0', width: '300px', backgroundColor: 'white'}}>
+          <div className="chatbox-container" style={{ position: 'fixed', right: '0', bottom: '0', width: '300px', backgroundColor: 'white' }}>
             <Chatbox />
           </div>
+        </div>
+        <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)} >
+          <div
+            role="presentation"
+            onClick={toggleDrawer(false)}
+            onKeyDown={toggleDrawer(false)}
+          >
+            <LeftSidebar />
+          </div>
+        </Drawer>
+
+        {/* Hamburger Menu for Mobile */}
+        <div className="d-lg-none position-fixed start-0 top-0" style={{ zIndex: 50 }}>
+          <IconButton onClick={toggleDrawer(true)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              fill="currentColor"
+              class="bi bi-list"
+              viewBox="0 0 16 16"
+              className="text-[#004C8A]"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+              />
+            </svg>
+          </IconButton>
         </div>
       </div>
     </>
