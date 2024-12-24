@@ -26,12 +26,12 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
+.guidance-h {
     font-size: 2.5rem;
     font-weight: bold;
 }
 
-p {
+.guidance-p {
     font-size: 1.2rem;
     color: #555;
 }

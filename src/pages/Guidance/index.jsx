@@ -27,8 +27,8 @@ const alumniData = [
 const GuidancePage = () => {
     return (
         <Container fluid className="p-4 bg-light">
-            <h1 className="text-center mb-4">Guidance from Alumni</h1>
-            <p className="text-center mb-5">
+            <h1 className="guidance-h text-center mb-4">Guidance from Alumni</h1>
+            <p className="guidance-p text-center mb-5">
                 Welcome to the Guidance Page! Here, current students can connect with alumni for advice and mentorship.
             </p>
             <Row>
