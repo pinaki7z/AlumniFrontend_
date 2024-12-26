@@ -1,5 +1,92 @@
+.card-who-title{
+  color: #f9e79f;
+}
+
+.benefits-section {
+    background-color: #f4f7fb; /* Light background color */
+    padding: 50px 0;
+  }
+  
+  .benefits-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+  
+  /* Card Styling */
+  .benefits-card {
+    border: 1px solid #e0e0e0; /* Light border around the benefits-card */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 25px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .benefits-card h4 {
+    font-size: 1.6rem;
+    color: #007bff; /* Blue color for the heading */
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .benefits-card ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .benefits-card ul li {
+    font-size: 1.1rem;
+    color: #6c757d; /* Grey text color */
+    margin-bottom: 10px;
+  }
+  
+  /* Hover Effect on benefits-cards */
+  .benefits-card:hover {
+    transform: translateY(-10px); /* Slight lift effect */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+  }
+  
+  .benefits-card ul li:before {
+    content: "• "; /* Bullet points */
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  /* Container and Grid System */
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+.whos-who-section h2 {
+    font-size: 2rem;
+    color: #301C58;
+    text-transform: uppercase;
+  }
+  
+  .benefits-card-who {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .benefits-card-who-title {
+    color: #f9e79f;
+    font-weight: bold;
+  }
+  
+  .benefits-card-who-text {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+
 .container-div-bg{
-    background-image: url(../../images/background.jpg);
+    background-image: url(../../images/2.jpg);
 }
 .nav-tab {
     color: white;
@@ -45,7 +132,7 @@
 }
 
 .container-div-bg {
-    background-image: url('../../images/background.jpg'); /* Replace with your background image */
+    background-image: url('../../images/2.jpg'); /* Replace with your background image */
     background-size: cover;
     background-position: center;
     position: relative;

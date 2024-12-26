@@ -134,3 +134,12 @@
     border: none;
     font-size: 14px;
 }
+.spon-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical; /* Set box orientation */
+  overflow: hidden; /* Hide overflowed text */
+  text-overflow: ellipsis; /* Add ellipsis */
+  line-height: 1.5; /* Adjust line height for better spacing */
+  max-height: 4.5em; /* 3 lines * 1.5em = 4.5em */
+}

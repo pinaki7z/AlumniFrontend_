@@ -88,11 +88,12 @@ const DisplayDonSpon = ({ donations, name, updateDonations, totalDonations, page
                                         </div>
                                     </button>
 
-                                    <div className="user-details">
+                                    <div className="user-details" style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
                                         {/* <img src={donation.profilePic} alt="Profile Image" /> */}
                                         <p>
                                             {formatDate(donation.createdAt)}
                                         </p>
+                                        <p className='spon-description'>{donation.eventDescription}</p>
                                     </div>
                                 </div>
                                 {edit ? (

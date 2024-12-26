@@ -38,7 +38,7 @@ const Groups = () => {
   return (
     <div style={{ width: '100%', padding: '2% 5%' }}>
       <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
-          <h2 style={{ margin: '0' }}>Groups</h2>
+          <h2 style={{ margin: '0', color: 'white' }}>Groups</h2>
           <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
           Connect with like-minded individuals in focused community groups.
           </p>

@@ -609,7 +609,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
         </div>
         <div className={`img-job-vide ${isExpanded ? 'expanded' : ''}`}>
           <label style={{ border: '1px solid #a98de3' ,color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', display: 'flex', alignItems: 'center', justifyContent: 'center',fontSize: '15px', gap: '5px',width: '18%' }}>
-          <img src={gallery} alt="" srcset="" />Image
+          <img src={gallery} alt="" srcset=""/><p className="d-none d-lg-block" style={{marginBottom: '0px'}}>Image</p>
             <input
               type='file'
               accept='image/*'
@@ -618,11 +618,11 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
               multiple
             />
           </label>
-          <button style={{ backgroundColor: 'white', color: 'black', padding: '5px 10px', marginLeft: '0px', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '15px', width: '18%', borderRadius: '3em',border: '1px solid #a98de3'  }} onClick={() => setShowPollModal(true)}><img src={poll} alt="" srcset="" />Poll</button>
+          <button style={{ backgroundColor: 'white', color: 'black', padding: '5px 10px', marginLeft: '0px', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '15px', width: '18%', borderRadius: '3em',border: '1px solid #a98de3'  }} onClick={() => setShowPollModal(true)}><img src={poll} alt="" srcset="" /><p className="d-none d-lg-block" style={{marginBottom: '0px'}}>Poll</p></button>
   
 
           <label style={{ border: '1px solid #a98de3' , color: 'black', padding: '5px 10px', cursor: 'pointer', borderRadius: '3em', fontSize: '15px',display: 'flex', alignItems: 'center', justifyContent: 'center',width: '18%', gap: '5px' }}>
-          <img src={video} alt="" srcset="" />Video
+          <img src={video} alt="" srcset="" /><p className="d-none d-lg-block" style={{marginBottom: '0px'}}>Video</p>
             <input
               type='file'
               accept='video/*'

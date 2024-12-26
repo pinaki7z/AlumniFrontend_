@@ -44,3 +44,19 @@
   .sideBar li:hover .dashboard-icon {
     color: #F8F8FF;
   }
+
+  .side-bar-resp{
+    width: 20%;
+    background-color: #301C58;
+    height: 100vh;
+    position: fixed;
+  }
+
+  @media (max-width: 480px) {
+    .side-bar-resp{
+      width: 80%;
+      background-color: #301C58;
+      height: 100vh;
+      position: fixed;
+    }
+  }

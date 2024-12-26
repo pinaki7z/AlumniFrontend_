@@ -82,7 +82,7 @@ const Donations = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '2% 5%' }}>
-      <DonSpon title="Business Connect" icon={icon} />
+      <DonSpon title="Business Connect" icon={icon}/>
 
       {/* Create Button */}
       {admin && (
