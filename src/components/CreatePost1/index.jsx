@@ -592,7 +592,7 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
   return (
     <div className={`social-media-post ${isExpanded ? 'expanded' : ''}`}>
       <div className={`overlay ${isExpanded ? 'expanded' : ''}`} onClick={handleInputClick}></div>
-      <div className={`card ${isExpanded ? 'expanded' : ''}`} style={{ border: 'none',paddingTop: '50px' }}>
+      <div className={`cardd ${isExpanded ? 'expanded' : ''}`} style={{ border: 'none',paddingTop: '50px' }}>
         <div className="card-header" style={{ backgroundColor: 'white',borderBottom: 'none',padding: '0px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <img src={profile.profilePicture || picture} alt='Profile' width='75px' height='75px' style={{ borderRadius: '50%' }} />
@@ -638,7 +638,9 @@ const CreatePost1 = ({ name, onNewPost, entityType }) => {
                 float: 'right', color: '#ffffff',
                 backgroundColor: '#a98de3',
                 borderColor: '#174873',
-                fontSize: '16px'
+                fontSize: '16px',
+                padding:'10px',
+                width:'100px',
               }}>Post</button>
             </div>
         </div>

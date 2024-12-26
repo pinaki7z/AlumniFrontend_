@@ -32,7 +32,7 @@
     display: flex;
     gap: 17px;
 }
-.select-dropdown {
+.select-dropdownn {
     background-color: 
     #eee8fa; 
     padding: 8px;
@@ -42,7 +42,7 @@
     font-size: 16px; /* increase font size */
   }
   
-  .select-dropdown::after {
+  .select-dropdownn::after {
     font-size: 28px; 
     position: absolute;
     top: 50%;
@@ -57,6 +57,15 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+  }
+
+  /* Profile card */
+.card {
+    width: 17vw; /* Default width for larger screens */
+    margin: 0;
+    min-height: auto;
+    background-color: #eee8fa; /* Background for visibility */
+    border-radius: 8px;
   }
   
   /* For list view */
@@ -97,4 +106,94 @@
   .toggle-button:hover {
     background-color: #60399c;
   }
+  
+  .filters-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px; /* Slightly smaller gap for very small devices */
+  }
+
+/* Keep all existing styles exactly as they are, only add these media queries at the end of the file */
+
+@media (max-width: 768px) {
+  .pro {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  .member form input {
+      max-width: 100%;
+  }
+
+ /* Stack dropdowns vertically */
+ .select-dropdownn {
+    display: block; /* Ensure block display for full width */
+    width: 100%; /* Make each dropdown full width */
+    margin-bottom: 15px; /* Add spacing between dropdowns */
+  }
+
+  .filters-container {
+    display: flex;
+    flex-direction: column; /* Stack all filters vertically */
+    gap: 15px; /* Add gap between dropdowns */
+  }
+
+  /* Adjust grid view for mobile */
+  .grid-view {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  /* Make cards larger on mobile */
+  .card {
+      width: 100%;
+      min-height: auto;
+      margin: 0;
+  }
+
+  /* Adjust buttons for mobile */
+  .toggle-button {
+      width: 100%;
+      margin-bottom: 10px;
+      margin-right: 0;
+  }
+
+  /* Make search bar full width */
+  .member form {
+      width: 100%;
+  }
+}
+
+/* Additional breakpoint for very small devices */
+@media (max-width: 480px) {
+  .member h1 {
+      font-size: 24px;
+  }
+
+  .member form input {
+      font-size: 14px;
+  }
+
+  .select-dropdownn {
+    font-size: 14px; /* Adjust font size */
+    margin-bottom: 10px; /* Reduce spacing between dropdowns */
+  }
+
+  .filters-container {
+    gap: 10px; /* Slightly smaller gap for very small devices */
+  }
+  .grid-view {
+    gap: 15px; /* Reduce gap for smaller screens */
+  }
+
+  .card {
+    width: 100%;
+    font-size: 14px; /* Adjust font size if necessary */
+  }
+}
+
+
        

@@ -242,22 +242,24 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
           </div>
 
           {/* New Filters */}
-          <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <select className='select-dropdown' value={memberRole} onChange={handleMemberRoleChange}>
+          <div className="filters-container">
+            <select className="select-dropdownn" value={memberRole} onChange={handleMemberRoleChange}>
               <option value="">All Members</option>
               <option value="1">Admin</option>
               <option value="2">Alumni</option>
               <option value="3">Current Student</option>
             </select>
 
-            <select className='select-dropdown' style={{ marginLeft: '10px' }} value={graduatingYear} onChange={handleGraduatingYearChange}>
+            <select className="select-dropdownn" value={graduatingYear} onChange={handleGraduatingYearChange}>
               <option value="">All Graduating Years</option>
-              {generateYears().map(year => (
-                <option key={year} value={year}>{year}</option>
+              {generateYears().map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
               ))}
             </select>
 
-            <select className='select-dropdown' style={{ marginLeft: '10px' }} value={department} onChange={handleDepartmentChange}>
+            <select className="select-dropdownn" value={department} onChange={handleDepartmentChange}>
               <option value="">All Departments</option>
               <option value="Agricultural">Agricultural</option>
               <option value="Gastroenterology">Gastroenterology</option>
@@ -265,10 +267,12 @@ const Members = ({ addButton, groupMembers, owner, deleteButton }) => {
               <option value="Human Languages">Human Languages</option>
             </select>
 
-            <select className='select-dropdown' style={{ marginLeft: '10px' }} value={batch} onChange={handleBatchChange}>
+            <select className="select-dropdownn" value={batch} onChange={handleBatchChange}>
               <option value="">All Batches</option>
-              {generateBatches().map(batch => (
-                <option key={batch} value={batch}>{batch}</option>
+              {generateBatches().map((batch) => (
+                <option key={batch} value={batch}>
+                  {batch}
+                </option>
               ))}
             </select>
           </div>

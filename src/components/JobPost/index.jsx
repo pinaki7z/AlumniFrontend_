@@ -144,7 +144,7 @@ const JobPost = ({ userId, id, jobTitle, title, titleS, description, salaryMin, 
                                 src={`${baseUrl}/uploads/${attachment}`}
                                 alt=""
                                 className="src"
-                                style={{width: '100%', height: '100%'}}
+                                style={{width: '100%', height: '100%', objectFit:"cover"}}
                             />
 
                         );

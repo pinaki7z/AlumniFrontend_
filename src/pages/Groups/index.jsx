@@ -1,3 +1,4 @@
+import "./Groups.css";
 import PageTitle from "../../components/PageTitle";
 import PageSubTitle from "../../components/PageSubTitle";
 import { BsGridFill } from 'react-icons/bs';
@@ -14,7 +15,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { AddMembers } from "../../components/Groups/AddMembers";
 import GroupMembers from "../../components/Groups/GroupMembers";
 
-
 const Groups = () => {
   const profile = useSelector((state) => state.profile);
   const title = "Groups";
@@ -26,157 +26,94 @@ const Groups = () => {
   const buttontext2Link = `/groups/${profile._id}/joined-groups`;
   const buttontext3Link = ``;
 
-
   let admin;
   if (profile.profileLevel === 0 || profile.profileLevel === 1) {
     admin = true;
   }
 
-
-
-
   return (
-    <div style={{ width: '100%', padding: '2% 5%' }}>
-      <div style={{ textAlign: 'left', padding: '20px', borderRadius: '10px', marginBottom: '10px', backgroundColor: '#a98de3' }}>
-          <h2 style={{ margin: '0', color: 'white' }}>Groups</h2>
-          <p style={{ marginTop: '10px', fontSize: '15px', color: 'black' }}>
-          Connect with like-minded individuals in focused community groups.
-          </p>
+    <div className="groups-container">
+      <div className="groups-header">
+        <h2>Groups</h2>
+        <p>Connect with like-minded individuals in focused community groups.</p>
       </div>
       <Routes>
         <Route path="/" element={
           <>
-            {/* <PageTitle title={title} icon={icon} /> */}
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div className="search" style={{ display: 'flex', width: '75%' }}>
-                <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                  <div style={{ position: 'relative', width: '100%' }}>
-                    <input
-                      type="search"
-                      name="search"
-                      id="search"
-                      placeholder="Search for groups"
-                      //value={searchQuery}
-                      //onChange={(e) => setSearchQuery(e.target.value)}
-                      style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #301C58', backgroundColor: 'white' }}
-                    />
-                    <button
-                      type="submit"
-                      style={{
-                        position: 'absolute',
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: 'white',
-                        border: 'none',
-                        padding: '5px',
-                        color: 'white',
-                        cursor: 'pointer'
-                      }}
-                    >
-
-                      <IoSearchSharp style={{ color: '#301C58', width: '25px', height: '25px' }} />
-                    </button>
-                  </div>
-
+            <div className="search-container">
+              <div className="search">
+                <form className="search-form">
+                  <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Search for groups"
+                  />
+                  <button type="submit">
+                    <IoSearchSharp />
+                  </button>
                 </form>
               </div>
-              <select className='select-dropdown'>
-                <option value="">All Groups</option>
-                <option value="Public">Public</option>
-                <option value="Pr">Private</option>
-              </select>
+              <div className="dropdown-container">
+                <select className='select-dropdown'>
+                  <option value="">All Groups</option>
+                  <option value="Public">Public</option>
+                  <option value="Private">Private</option>
+                </select>
+              </div>
             </div>
           </>
         } />
         <Route path="/:_id/*" element={<IndividualGroup />} />
         <Route path="/suggested-groups" element={
           <>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div className="search" style={{ display: 'flex', width: '75%' }}>
-                <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                  <div style={{ position: 'relative', width: '100%' }}>
-                    <input
-                      type="search"
-                      name="search"
-                      id="search"
-                      placeholder="Search for groups"
-                      //value={searchQuery}
-                      //onChange={(e) => setSearchQuery(e.target.value)}
-                      style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #301C58', backgroundColor: 'white' }}
-                    />
-                    <button
-                      type="submit"
-                      style={{
-                        position: 'absolute',
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: 'white',
-                        border: 'none',
-                        padding: '5px',
-                        color: 'white',
-                        cursor: 'pointer'
-                      }}
-                    >
-
-                      <IoSearchSharp style={{ color: '#301C58', width: '25px', height: '25px' }} />
-                    </button>
-                  </div>
-
+            <div className="search-container">
+              <div className="search">
+                <form className="search-form">
+                  <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Search for groups"
+                  />
+                  <button type="submit">
+                    <IoSearchSharp />
+                  </button>
                 </form>
               </div>
-              <select className='select-dropdown'>
-                <option value="">All Groups</option>
-                <option value="Public">Public</option>
-                <option value="Private">Private</option>
-              </select>
+              <div className="dropdown-container">
+                <select className='select-dropdown'>
+                  <option value="">All Groups</option>
+                  <option value="Public">Public</option>
+                  <option value="Private">Private</option>
+                </select>
+              </div>
             </div>
           </>
-        }
-        />
+        } />
         <Route path="/:id/joined-groups" element={
           <>
-            {/* <PageTitle title={title} icon={icon} /> */}
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div className="search" style={{ display: 'flex', width: '75%' }}>
-                <form style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                  <div style={{ position: 'relative', width: '100%' }}>
-                    <input
-                      type="search"
-                      name="search"
-                      id="search"
-                      placeholder="Search for groups"
-                      //value={searchQuery}
-                      //onChange={(e) => setSearchQuery(e.target.value)}
-                      style={{ width: '100%', padding: '10px 40px 10px 10px', border: '1px solid #301C58', backgroundColor: 'white' }}
-                    />
-                    <button
-                      type="submit"
-                      style={{
-                        position: 'absolute',
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        backgroundColor: 'white',
-                        border: 'none',
-                        padding: '5px',
-                        color: 'white',
-                        cursor: 'pointer'
-                      }}
-                    >
-
-                      <IoSearchSharp style={{ color: '#301C58', width: '25px', height: '25px' }} />
-                    </button>
-                  </div>
-
+            <div className="search-container">
+              <div className="search">
+                <form className="search-form">
+                  <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Search for groups"
+                  />
+                  <button type="submit">
+                    <IoSearchSharp />
+                  </button>
                 </form>
               </div>
-              <select className='select-dropdown'>
-                <option value="">All Groups</option>
-                <option value="Public">Public</option>
-                <option value="Private">Private</option>
-              </select>
+              <div className="dropdown-container">
+                <select className='select-dropdown'>
+                  <option value="">All Groups</option>
+                  <option value="Public">Public</option>
+                  <option value="Private">Private</option>
+                </select>
+              </div>
             </div>
           </>
         } />
@@ -186,18 +123,17 @@ const Groups = () => {
           </>
         } />
         <Route path="/edit/:_id" element={<></>} />
-        {/* <Route path="/:id/add" element={
+        <Route path="/:id/add" element={
           <>
             <GroupMembers />
           </>
-        } /> */}
+        } />
       </Routes>
       <Routes>
         {admin ? (
-          <Route path="/" element={<div style={{ marginTop: '25px' }}>
+          <Route path="/" element={<div className="create-button-container">
             <Link to={`/groups/create`} style={{ textDecoration: 'none', color: 'black' }}>
-              <button style={{ padding: '8px 32px', borderRadius: '8px', border: 'none',background: '#301C58',color: '#ffffff'
- }}>
+              <button className="create-button">
                 Create
               </button>
             </Link>
@@ -205,16 +141,6 @@ const Groups = () => {
         ) : (
           <Route path="/" element={<></>} />
         )}
-        {/* {admin ? (
-          <Route path="/suggested-groups" element={<>Create</>} />
-        ) : (
-          <Route path="/suggested-groups" element={<></>} />
-        )}
-      {admin ? (
-          <Route path="/:id/joined-groups" element={<>Create</>} />
-        ) : (
-          <Route path="/:id/joined-groups" element={<></>} />
-        )} */}
       </Routes>
       <Routes>
         {admin ? (
@@ -241,7 +167,6 @@ const Groups = () => {
         ) : (
           <Route path="/suggested-groups" element={<SuggestedGroups />} />
         )}
-        {/* <Route path="/suggested-groups" element={<SuggestedGroups />} /> */}
         <Route path="/:id/joined-groups" element={<JoinedGroups />} />
         {admin ? (
           <Route path="/" element={<AllGroups />} />
@@ -250,7 +175,7 @@ const Groups = () => {
         )}
       </Routes>
     </div>
-  )
-}
+  );
+};
 
 export default Groups;

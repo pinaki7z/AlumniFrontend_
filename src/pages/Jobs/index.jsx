@@ -161,6 +161,25 @@ const Jobs = () => {
 
     return (
         <>
+            <style>{`
+                .job-posts-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1vw;
+                    justify-content: space-between;
+                }
+
+                .job-post {
+                    width: 30%;
+                }
+
+                @media (max-width: 768px) {
+                    .job-post {
+                        width: 100%;
+                    }
+                }
+            `}</style>
+            
             <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '2% 5%' }}>
                 <IntJobs
                     title={title}
@@ -318,7 +337,7 @@ const Jobs = () => {
                                         <div
                                             key={job._id}
                                             className="job-post"
-                                            style={{ width: viewType === 'grid' ? '30%' : '100%' }}
+                                           
                                         >
                                             <JobPost
                                                 userId={job.userId}

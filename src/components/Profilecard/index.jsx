@@ -146,7 +146,7 @@ const Profilecard = ({ member, name, addButton, groupMembers, owner, deleteButto
       <div
         className="card"
         style={{
-          width: "17vw",
+          // width: "17vw",
           backgroundPosition: "center",
           backgroundColor:"#eee8fa",
           WebkitBackgroundSize: "cover",

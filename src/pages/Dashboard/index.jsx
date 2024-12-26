@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import LeftSidebar from "../../components/left-sidebar";
 import TopBar from "../../components/topbar";
@@ -9,18 +8,19 @@ import Donations from "../Donations";
 import Sponsorships from "../Sponsorships";
 import Settings from "../Settings";
 import ProfilePage from "../ProfilePage";
-import Members from "../Members";
-import Profile from "../Profile";
+import Members from '../Members';
+import Profile from '../Profile';
 import Events from "../Events";
 import Jobs from "../Jobs";
 import LandingPage from "../LandingPage/index.jsx";
 import IndividualJobPost from "../Jobs/IndividualJobPost.jsx";
+import Internships from "../Internships";
 import NotificationsPage from "../NotificationsPage";
 import News from "../News/index.jsx";
 import Forum from "../Forum";
 import CreateForum from "../../components/Forum/CreateForum";
 import IForum from "../../components/Forum/IForum";
-import Chatbox from "../../components/Chatbox";
+import Chatbox from "../../components/Chatbox"
 import { ProfileSettings } from "../ProfilePage/ProfileSettings/index.jsx";
 import { Following } from "../../components/Following/index.jsx";
 import { Followers } from "../../components/Followers/index.jsx";
@@ -108,13 +108,16 @@ const Dashboard = ({ handleLogout }) => {
 
           {/* Routes */}
           <Routes>
+
             <Route path="/groups/*" element={<Groups />} />
+            {/* <Route path="/groups/:_id/*" element={<IndividualGroup />} /> */}
             {searchQuery && (
               <Route
                 path="/*"
                 element={<SearchedResults searchQuery={searchQuery} />}
               />
             )}
+            {/* Route for displaying <SocialMedia /> when search query is not present */}
             {!searchQuery && (
               <Route
                 path="/*"
@@ -144,7 +147,17 @@ const Dashboard = ({ handleLogout }) => {
             <Route path="/profile/*" element={<ProfilePage />} />
             <Route path="/notifications/*" element={<NotificationsPage />} />
             <Route path="/events/*" element={<Events />} />
+            {/* <Route path="/chat/*" element={<Chat />} /> */}
             <Route path="/jobs/*" element={<Jobs />} />
+            <Route
+              path="/jobs/create"
+              element={<CreateJob />}
+            />
+            <Route path="/jobs/candidates" element={<InterestedJobCandidates />} />
+            {/* <Route path="/internships/*" element={<Internships />} /> */}
+            <Route path="/settings/*" element={<Settings />} />
+            <Route path="/jobs/:_id/:title" element={<IndividualJobPost />} />
+            <Route path="/internships/:_id/:title" element={<IndividualJobPost />} />
             <Route path="/forums/*" element={<Forum />} />
             <Route path="/forums/create" element={<CreateForum />} />
             <Route path="/forums/:id/*" element={<IForum />} />

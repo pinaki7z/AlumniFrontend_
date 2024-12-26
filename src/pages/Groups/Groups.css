@@ -1,48 +1,28 @@
-.forum{
+/* Groups.css */
+.groups-container {
     width: 100%;
-    height: 100%;
-}
-/* .forum div input{
-    margin-right: 20px;
-    padding: 5px 24px 5px 45px;
-    border-radius: 25px;
-    font-size: 20px;
-    border:none;
-} */
-#tb{
-    width: 96%;
-    padding: 20px;
-    border: none;
+    padding: 2% 5%;
+  }
+  
+  .groups-header {
     text-align: left;
-    border: solid rgb(195, 191, 191);
+    padding: 20px;
     border-radius: 10px;
-}
-#tb th{
- font-size: 16px;
- font-weight: 600;
- background-color: #efeff0;
- border: none;
- height: 6vh;
- color: #3A3A3A;
- padding: 0px 50px;
- text-align: center;
-} 
-#tb td{
-    border: none;
-    height: 14vh;
-    padding: 0px 50px; 
-    border-bottom:1px solid rgb(195, 191, 191);
-    text-align: center;
-}
-.forum button{
-    border-radius: 8px;
-    background-color: #301C58;
-    color: #F8F8FF;
-    padding: 10px 20px;
-    font-weight: 600;
-    border: none;
-} 
-.search-container {
+    margin-bottom: 10px;
+    background-color: #a98de3;
+  }
+  
+  .groups-header h2 {
+    margin: 0;
+  }
+  
+  .groups-header p {
+    margin-top: 10px;
+    font-size: 15px;
+    color: black;
+  }
+  
+  .search-container {
     display: flex;
     gap: 15px;
     align-items: center;
@@ -101,6 +81,35 @@
     background-color: #eee8fa;
     border-radius: 4px;
   }
+  
+  .create-button-container {
+    margin-top: 25px;
+  }
+  
+  .create-button {
+    padding: 8px 32px;
+    border-radius: 8px;
+    border: none;
+    background: #301C58 !important;
+    color: #ffffff !important;
+  }
+  
+  /* Group Cards */
+  .group-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .group-card {
+    flex: 1 1 calc(33.33% - 20px); /* Three cards per row for larger screens */
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
   /* Responsive styles */
   @media (max-width: 768px) {
     .search-container {
@@ -116,9 +125,9 @@
     .dropdown-container {
       align-self: auto;
     }
+  
+    .group-card {
+      flex: 1 1 100%; /* Full width for smaller screens */
+    }
   }
-/* .forum button:hover{
-background-color:azure;
-color:#174873;
-font-weight: 600;
-} */
+  

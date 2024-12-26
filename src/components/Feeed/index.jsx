@@ -173,8 +173,8 @@ function Feed({ photoUrl, username, showCreatePost, entityId, entityType, showDe
     <div className='feed'>
       {showCreatePost && <CreatePost1 photoUrl={photoUrl} username={username} onNewPost={handleNewPost} entityType={entityType} />}
       {showCreateButton &&
-        <div style={{width: '100%'}}>
-          <button style={{fontFamily: 'Inter', fontWeight: '500', fontSize: '18px',backgroundColor:'#eee8fa',padding: '20px',borderRadius: '8px', border: 'none',height: '0vh', width: '10%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px'}}>
+        <div style={{alignSelf:'flex-start'}}>
+          <button style={{fontFamily: 'Inter', fontWeight: '500', fontSize: '18px',backgroundColor:'#301C5B', color:'white', padding: '20px',borderRadius: '8px', border: 'none',height: '0vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px'}}>
             Create
           </button>
         </div>}
