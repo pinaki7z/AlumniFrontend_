@@ -1225,23 +1225,23 @@ export default function LandingPage(handleLogin) {
                         <div className="row">
                             <div className="col-md-4 mb-3">
                                 <div className="card-who p-3">
-                                    <h4 className="card-who-title">President</h4>
-                                    <p className="card-who-text"><strong>Name:</strong> Dr. Swarnlata Saraf</p>
-                                    <p className="card-who-text"><strong>Contact:</strong> swarnlata_saraf@rediffmail.com</p>
+                                    <h4 className="card-who-title">Vice-Chancellor</h4>
+                                    <p className="card-who-text"><strong>Name:</strong> Sudhir K. Jain</p>
+                                    {/* <p className="card-who-text"><strong>Contact:</strong> swarnlata_saraf@rediffmail.com</p> */}
                                 </div>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <div className="card-who p-3">
                                     <h4 className="card-who-title">General Secretary</h4>
-                                    <p className="card-who-text"><strong>Name:</strong> Dr. Manwendra Kumar Tripathi</p>
-                                    <p className="card-who-text"><strong>Contact:</strong> mktripathi.mme@nitr.ac.in</p>
+                                    <p className="card-who-text"><strong>Name:</strong> Prof. Mrituanjay D. Pandey</p>
+                                    {/* <p className="card-who-text"><strong>Contact:</strong> mktripathi.mme@nitr.ac.in</p> */}
                                 </div>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <div className="card-who p-3">
                                     <h4 className="card-who-title">Treasurer</h4>
-                                    <p className="card-who-text"><strong>Name:</strong> Dr. Shiva Parihar</p>
-                                    <p className="card-who-text"><strong>Contact:</strong> shivaparihar@gmail.com</p>
+                                    <p className="card-who-text"><strong>Name:</strong> Shri Kedar Tiwari</p>
+                                    {/* <p className="card-who-text"><strong>Contact:</strong> shivaparihar@gmail.com</p> */}
                                 </div>
                             </div>
                         </div>
