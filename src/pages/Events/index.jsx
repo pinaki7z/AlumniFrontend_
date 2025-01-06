@@ -461,24 +461,42 @@ function Events() {
   const [attendanceStatus, setAttendanceStatus] = useState(null);
   const [eventId, setEventId] = useState(null);
   const [attendanceLoading, setAttendanceLoading] = useState(false);
-
+  const [viewType, setViewType] = useState('calendar');
+  const [locations, setLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
 
   useEffect(() => {
     if (selectedEventDetails) {
-      setEventId(selectedEventDetails._id); // Set eventId
+      setEventId(selectedEventDetails._id);
     }
   }, [selectedEventDetails]);
 
   useEffect(() => {
+    // Filter events based on selected location
+    if (selectedLocation) {
+      const filtered = allEvents.filter(event => event.location === selectedLocation);
+      setAllEvents(filtered);
+      fetchEvents();
+    } else {
+      setFilteredEvents(allEvents);
+      fetchEvents();
+    }
+  }, [selectedLocation, allEvents]);
+
+
+  useEffect(() => {
     if (eventId) {
-      checkAttendanceStatus(eventId); // Call checkAttendanceStatus only after eventId is set
+      checkAttendanceStatus(eventId);
     }
   }, [eventId]);
 
 
 
-
+  const toggleView = () => {
+    setViewType((prevType) => (prevType === 'calendar' ? 'list' : 'calendar'));
+  };
 
 
   const handleAttendance = async (attendance, eventId) => {
@@ -516,14 +534,6 @@ function Events() {
     }
   };
 
-  // const gapi = window.gapi;
-  // const google = window.google;
-
-  // const CLIENT_ID = '221910855256-3ra04lqbdb4elusir5clvsail6ldum53.apps.googleusercontent.com';
-  // const API_KEY = 'AIzaSyCduY-X8qZOq43I8zwsHlf2WWZ1ewDjpdc';
-  // const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
-  // const SCOPES = "https://www.googleapis.com/auth/calendar";
-  // const SCOPES = 'https://www.googleapis.com/auth/calendar.readonly';
 
 
 
@@ -628,6 +638,8 @@ function Events() {
 
         // Set the filtered and processed events
         setAllEvents(eventsWithIds);
+        const uniqueLocations = [...new Set(data.map(event => event.location))];
+        setLocations(uniqueLocations);
       })
       .catch((error) => {
         console.error("Error fetching events:", error);
@@ -716,67 +728,6 @@ function Events() {
       .catch((error) => console.error('Error deleting event:', error));
 
   };
-  const addToGoogleCalendar = () => {
-    console.log('handle add to google calendar')
-
-    // gapi.load('client:auth2', () => {
-    //   console.log('loaded client')
-
-    //   gapi.client.init({
-    //     apiKey: API_KEY,
-    //     clientId: CLIENT_ID,
-    //     discoveryDocs: DISCOVERY_DOC,
-    //     scope: SCOPES,
-    //   })
-
-    //   gapi.client.load('calendar', 'v3', () => console.log('bam!'))
-
-    //   gapi.auth2.getAuthInstance().signIn()
-    //   .then(() => {
-
-    //     var event = {
-    //       'summary': 'Awesome Event!',
-    //       'location': '800 Howard St., San Francisco, CA 94103',
-    //       'description': 'Really great refreshments',
-    //       'start': {
-    //         'dateTime': '2024-02-15T09:00:00-07:00',
-    //         'timeZone': 'America/Los_Angeles'
-    //       },
-    //       'end': {
-    //         'dateTime': '2020-06-28T17:00:00-07:00',
-    //         'timeZone': 'America/Los_Angeles'
-    //       },
-    //       'recurrence': [
-    //         'RRULE:FREQ=DAILY;COUNT=2'
-    //       ],
-    //       'attendees': [
-    //         {'email': 'lpage@example.com'},
-    //         {'email': 'sbrin@example.com'}
-    //       ],
-    //       'reminders': {
-    //         'useDefault': false,
-    //         'overrides': [
-    //           {'method': 'email', 'minutes': 24 * 60},
-    //           {'method': 'popup', 'minutes': 10}
-    //         ]
-    //       }
-    //     }
-
-    //     var request = gapi.client.calendar.events.insert({
-    //       'calendarId': 'primary',
-    //       'resource': event,
-    //     })
-
-    //     request.execute(event => {
-    //       console.log(event)
-    //       window.open(event.htmlLink)
-    //     })
-
-
-
-    //   })
-    // })
-  }
 
 
   const [open, setOpen] = useState(false);
@@ -802,6 +753,21 @@ function Events() {
         </p>
       </div>
 
+      <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+        <Button onClick={toggleView} style={{ marginBottom: '20px' }}>
+          Switch to {viewType === 'calendar' ? 'List View' : 'Calendar View'}
+        </Button>
+
+        <select onChange={(e) => setSelectedLocation(e.target.value)} value={selectedLocation} style={{ marginBottom: '20px' }}>
+          <option value="">All Locations</option>
+          {locations.map((location, index) => (
+            <option key={index} value={location}>{location}</option>
+          ))}
+        </select>
+      </div>
+
+
+
       <div class="bg-white rounded-lg p-4 shadow-lg" ref={calendarRef}>
         <MyVerticallyCenteredModal
           show={modalShow}
@@ -812,7 +778,7 @@ function Events() {
             setSelectedEventDetails(null);
           }}
         />
-        <Calendar
+        {/* <Calendar
           localizer={localizer}
           events={allEvents}
           startAccessor="start"
@@ -836,7 +802,46 @@ function Events() {
             }}
           >
             <FaCalendarPlus />
-          </Button>)}
+          </Button>)} */}
+
+        {viewType === 'calendar' ? (
+          <>
+            <Calendar
+              localizer={localizer}
+              events={allEvents}
+              startAccessor="start"
+              endAccessor="end"
+              style={{ height: '60vh', fontWeight: '600' }}
+              selectable
+              onSelectEvent={handleEventClick}
+            />
+            {(profile.profileLevel === 0 || profile.profileLevel === 1) && (
+              <Button
+                className="add-event-button"
+                variant="primary"
+                onClick={() => setModalShow(true)}
+                style={{
+                  borderRadius: '50%',
+                  width: '60px',
+                  height: '60px',
+                  position: 'absolute',
+                  backgroundColor: '#301c5B'
+                }}
+              >
+                <FaCalendarPlus />
+              </Button>)}
+          </>
+        ) : (
+          <div className="event-list">
+            {allEvents.map(event => (
+              <div key={event._id} className="event-item" onClick={() => handleEventClick(event)} style={{ cursor: 'pointer' }}>
+                <h3>{event.title}</h3>
+                <p>{formatDate(event.start)} - {formatDate(event.end)}</p>
+                <p>{event.startTime} - {event.endTime}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
 
         {selectedEventDetails && (
