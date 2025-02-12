@@ -45,6 +45,12 @@ const RegisterPage = () => {
       setLoading(false);
       return;
     }
+
+    if (!formData.accept) {
+      toast.error("You must accept the terms and conditions to register.");
+      setLoading(false);
+      return;
+    }
     try {
       console.log('formData', formData);
       const response = await axios.post(`${baseUrl}/alumni/register`, formData);
@@ -213,15 +219,17 @@ const RegisterPage = () => {
               <div className="privacy-policy-link">
                 <div className="controls">
                   <div className="union-wrapper">
-                    <img
-                      className="union-icon"
-                      loading="lazy"
-                      alt=""
-                      src="/union.svg"
+                  <input
+                      type="checkbox"
+                      name="accept"
+                      id="accept"
+                      checked={formData.accept}
+                      onChange={handleChange}
+                      required
                     />
                   </div>
                 </div>
-                <div className="by-creating-your">
+                <div className="by-creating-your" htmlFor="accept">
                   By creating your account, you agree to our
                 </div>
                 <div className="privacy-policy">Privacy Policy</div>

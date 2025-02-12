@@ -22,6 +22,7 @@ const LoginPage = ({ handleLogin }) => {
   const [captchaToken, setCaptchaToken] = useState(null);
   const profile = useSelector((state) => state.profile);
   const backgroundImageUrl = `${process.env.REACT_APP_URL}/images/background.jpg`;
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -150,7 +151,7 @@ const LoginPage = ({ handleLogin }) => {
                       <input
                         className="email-address1"
                         placeholder="Password"
-                        type="password"
+                        type={passwordVisible ? "text" : "password"}
                         style={{ width: '80%' }}
                         value={password} onChange={(e) => setPassword(e.target.value)}
                       />
@@ -159,8 +160,10 @@ const LoginPage = ({ handleLogin }) => {
                   </div>
                   <img
                     className="password-visible-icon"
-                    alt=""
+                    alt="Toggle Password Visibility"
                     src="/password-visible.svg"
+                    onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility on click
+                    style={{ cursor: 'pointer' }} // Change cursor to pointer
                   />
                 </div>
                 <div className="remember-this-device-forgot">
